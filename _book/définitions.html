@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Définitions | Interactions et modification d’effet en Epidémiologie</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Définitions | Interactions et modification d’effet en Epidémiologie" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Définitions | Interactions et modification d’effet en Epidémiologie" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="CERPOP, INSERM, EQUITY Team" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="démarche-pratique.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Interactions</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#quand-étudier-les-interactions"><i class="fa fa-check"></i><b>2.1</b> Quand étudier les interactions ?</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction.html"><a href="introduction.html#prediction-versus-causation"><i class="fa fa-check"></i><b>2.1.1</b> <em>Prediction</em> versus <em>causation</em></a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction.html"><a href="introduction.html#types-dobjectifs"><i class="fa fa-check"></i><b>2.1.2</b> Types d’objectifs</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="définitions.html"><a href="définitions.html"><i class="fa fa-check"></i><b>3</b> Définitions</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="définitions.html"><a href="définitions.html#interaction-vs-modification-deffets"><i class="fa fa-check"></i><b>3.1</b> Interaction vs modification d’effets</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="définitions.html"><a href="définitions.html#notations"><i class="fa fa-check"></i><b>3.1.1</b> Notations</a></li>
+<li class="chapter" data-level="3.1.2" data-path="définitions.html"><a href="définitions.html#mesures-deffets"><i class="fa fa-check"></i><b>3.1.2</b> Mesures d’effets</a></li>
+<li class="chapter" data-level="3.1.3" data-path="définitions.html"><a href="définitions.html#modification-deffets"><i class="fa fa-check"></i><b>3.1.3</b> Modification d’effets</a></li>
+<li class="chapter" data-level="3.1.4" data-path="définitions.html"><a href="définitions.html#interaction"><i class="fa fa-check"></i><b>3.1.4</b> Interaction</a></li>
+<li class="chapter" data-level="3.1.5" data-path="définitions.html"><a href="définitions.html#synthèse"><i class="fa fa-check"></i><b>3.1.5</b> Synthèse</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="définitions.html"><a href="définitions.html#la-question-des-échelles"><i class="fa fa-check"></i><b>3.2</b> La question des échelles</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="définitions.html"><a href="définitions.html#les-2-échelles"><i class="fa fa-check"></i><b>3.2.1</b> Les 2 échelles</a></li>
+<li class="chapter" data-level="3.2.2" data-path="définitions.html"><a href="définitions.html#le-continuum"><i class="fa fa-check"></i><b>3.2.2</b> Le continuum</a></li>
+<li class="chapter" data-level="3.2.3" data-path="définitions.html"><a href="définitions.html#synthèse-1"><i class="fa fa-check"></i><b>3.2.3</b> Synthèse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="démarche-pratique.html"><a href="démarche-pratique.html"><i class="fa fa-check"></i><b>4</b> Démarche pratique</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="démarche-pratique.html"><a href="démarche-pratique.html#analyse"><i class="fa fa-check"></i><b>4.1</b> Analyse</a></li>
+<li class="chapter" data-level="4.2" data-path="démarche-pratique.html"><a href="démarche-pratique.html#présentation-des-résultats"><i class="fa fa-check"></i><b>4.2</b> Présentation des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html"><i class="fa fa-check"></i><b>5</b> Pour aller plus loin…</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#interaction-et-médiation"><i class="fa fa-check"></i><b>5.1</b> Interaction et médiation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>6</b> Références</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Interactions et modification d’effet en Epidémiologie</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="définitions" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Définitions<a href="définitions.html#définitions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="interaction-vs-modification-deffets" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Interaction vs modification d’effets<a href="définitions.html#interaction-vs-modification-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="notations" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Notations<a href="définitions.html#notations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On note :</p>
+<ul>
+<li>1 outcome : <span class="math inline">\(\small Y\)</span>,</li>
+<li>2 expositions : <span class="math inline">\(\small X1\)</span> et <span class="math inline">\(\small X2\)</span></li>
+</ul>
+<p>La probabilité de l’outcome dans chaque strate définie par les 2 expositions :</p>
+<ul>
+<li><span class="math inline">\(\small pij = P(Y = 1|X1 = i,X2 = j)\)</span></li>
+</ul>
+<blockquote>
+<ins>
+Exemple
+</ins>
+<p>On a deux exposition par exemple <span class="math inline">\(\small X1\)</span>, le tabagisme actif à 20 ans, et <span class="math inline">\(\small X2\)</span>, le fait d’avoir vécu un évènement traumatique pendant l’enfance. L’outcome <span class="math inline">\(\small Y\)</span> est binaire et représente le fait d’avoir au moins une pathologie chronique à 60 ans <span class="math inline">\(\small Y=1\)</span> ou aucune <span class="math inline">\(\small Y=0\)</span>.</p>
+<p>On décrit (données fictives) :</p>
+<p><img src="Image1.png" /></p>
+<p>La probabilité d’avoir au moins une pathologie chronique à 60 ans quand on n’a pas vécu d’événement traumatique pendant l’enfance et pas fumé 20 ans est de 10%, tandis qu’elle est de 90% quand on a vécu un événement traumatique et fumé.</p>
+</blockquote>
+</div>
+<div id="mesures-deffets" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Mesures d’effets<a href="définitions.html#mesures-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les <strong>différences de risques</strong> (effets additifs) :</p>
+<ul>
+<li>de l’outcome de chaque strate : <span class="math inline">\(\small DRij = pij-p00\)</span></li>
+<li>de l’outcome dans une strate : <span class="math inline">\(\small DRi0 = pi0-p00\)</span> et <span class="math inline">\(\small DRi1 = pi1- p01\)</span></li>
+</ul>
+<blockquote>
+<ins>
+Exemple
+</ins>
+<p>Différences de risques pour l’exemple 1</p>
+<ul>
+<li><span class="math inline">\(\small DR(X1=1 \cap X2=1) = 0,9 - 0,1 = +0.8\)</span></li>
+<li><span class="math inline">\(\small DR (X1=1 | X2=0) = 0,2 - 0,1 = +0.1\)</span></li>
+<li><span class="math inline">\(\small DR (X1=1 | X2=1) = 0,9 - 0,4 = +0,5\)</span></li>
+</ul>
+<p>Le fait d’être doublement exposé par rapport à pas du tout augmente le risque de 80%. Parmi les personnes n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 augmente le risque de 10%, alors que parmi les personnes ayant vécu un événement traumatique, il est augmenté de 50%.</p>
+</blockquote>
+<p>Les <strong>risques relatifs</strong> (effets multiplicatifs) :</p>
+<ul>
+<li>de l’outcome de chaque strate : <span class="math inline">\(\small RRij = pij/p00\)</span></li>
+<li>de l’outcome dans une strate : <span class="math inline">\(\small RRi0 = pi0/p00\)</span> et <span class="math inline">\(\small RRi1 = pi1/p01\)</span></li>
+</ul>
+<blockquote>
+<ins>
+Exemple
+</ins>
+<p>Risques relatifs pour l’exemple 1</p>
+<ul>
+<li><span class="math inline">\(\small RR(X1=1 \cap X2=1) = 0,9/0,1 = ×9\)</span></li>
+<li><span class="math inline">\(\small RR(X1=1 | X2=0) = 0,2/0,1 = ×2\)</span></li>
+<li><span class="math inline">\(\small RR(X1=1 | X2=1) = 0,9/0,4 =×2,25\)</span></li>
+</ul>
+<p>Le risque quand on est doublement exposé par rapport à pas du tout est multiplié par 9. Parmi les personnes n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 multiplie le risque par 2, alors que parmi les personnes ayant vécu un événement traumatique, il est multiplié par 2,25.</p>
+</blockquote>
+</div>
+<div id="modification-deffets" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Modification d’effets<a href="définitions.html#modification-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La question est d’identifier si l’effet du traitement ou de l’exposition est différent dans différents groupes de patients ayant des caractéristiques différentes (estimer l’effet d’une exposition séparément en fonction d’une autre variable) <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">3</a>]</span>. En comparaison avec un essai d’intervention : il y a 1 seule intervention mais l’analyse est stratifiée = <span class="math inline">\(\small do(X1)\)</span> dans chaque groupe de <span class="math inline">\(\small X2\)</span>. En observationnel, on ajustera sur les facteurs de confusion de <span class="math inline">\(\small X1 \rightarrow Y\)</span></p>
+<p>L’effet causal qui nous intéresse est donc celui de <span class="math inline">\(\small X1\)</span> mais pas celui de <span class="math inline">\(\small X2\)</span>. On ne fait pas d’hypothèse sur les mécanismes de la modification d’effet, qui peut être causale, de façon directe ou indirecte, ou pas du tout (par proxy ou cause commune) <span class="citation">[<a href="#ref-vanderweele_four_2007" role="doc-biblioref">4</a>]</span>.</p>
+<p>Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc.</p>
+<p>On a une modification de l’effet de X1 par X2 si l’effet de X1 est différent dans chaque strate définie par X2:</p>
+<ul>
+<li>en additif : <span class="math inline">\(\small DR(X1=1 | X2=0) ≠ DR(X1=1 | X2=1)\)</span>
+<ul>
+<li>soit <span class="math inline">\(\small p10 -p00 ≠ p11- p01\)</span><br />
+</li>
+</ul></li>
+<li>en multiplicatif : <span class="math inline">\(\small RR(X1=1 | X2=0) ≠ RR(X1=1 | X2=1)\)</span>
+<ul>
+<li>soit <span class="math inline">\(\small p10/p00 ≠ p11/p01\)</span></li>
+</ul></li>
+</ul>
+<blockquote>
+<ins>
+Exemple
+</ins>
+<p>Modification d’effet dans l’exemple 1</p>
+<ul>
+<li>en additif : <span class="math inline">\(\small DR (X1=1 | X2=0) = 0,2 - 0,1 = +0.1 ≠ DR (X1=1 | X2=1) = 0,9 - 0,4 = +0,5\)</span></li>
+<li>en multiplicatif : <span class="math inline">\(\small RR(X1=1 | X2=0) = 0,2/0,1 = ×2 ≠ RR(X1=1 | X2=1) = 0,9/0,4 =×2,25\)</span></li>
+</ul>
+<p>Ici l’effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l’échelle additive et multiplicative. On peut donc dire que le fait d’avoir vécu une adversité modifie l’effet du tabac. Attention, on fait l’hypothèse de l’absence de facteurs de confusion, ce qui est en réalité peu probable.</p>
+</blockquote>
+</div>
+<div id="interaction" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> Interaction<a href="définitions.html#interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoints de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l’effet conjoint est supérieur à l’effet de la somme des individuels. Il y a une interaction antagoniste lorsque l’effet conjoint est inférieur à la somme des effets individuels <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">3</a>]</span>. En comparaison avec RCT : il y a plusieurs interventions selon le nombre de combinaison =&gt; <span class="math inline">\(\small do(X1, X2)\)</span>.</p>
+<p>On a une interaction si</p>
+<ul>
+<li>en additif : <span class="math inline">\(\small DR(X1=1 \cap X2=1) ≠ DR(X1=1|X2=0)+DR(X2=1|X1=0)\)</span>
+<ul>
+<li><span class="math inline">\(\small p11-p00 ≠( p10- p00)+(p01- p00 )\)</span></li>
+<li><span class="math inline">\(\small p11 ≠ (p10+p01)- p00\)</span></li>
+</ul></li>
+<li>en multiplicatif <span class="math inline">\(\small RR(X1=1 \cap X2=1)≠RR(X1=1 | X2=0)+RR(X2=1 | X1=0)\)</span>
+<ul>
+<li><span class="math inline">\(\small p11/p00 ≠ p10/ p00+p01/p00\)</span></li>
+<li><span class="math inline">\(\small p11 ≠ (p10*p01)/ p00\)</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="synthèse" class="section level3 hasAnchor" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> Synthèse<a href="définitions.html#synthèse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="la-question-des-échelles" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> La question des échelles<a href="définitions.html#la-question-des-échelles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="les-2-échelles" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Les 2 échelles<a href="définitions.html#les-2-échelles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="le-continuum" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Le continuum<a href="définitions.html#le-continuum" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="synthèse-1" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Synthèse<a href="définitions.html#synthèse-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il semble y avoir un consensus pour privilégier l’échelle additive, plus appropriée pour évaluer l’utilité, même si en pratique l’échelle multiplicative est plus utilisée en raison de l’utilisation des modèles logistiques <span class="citation">[<a href="#ref-knol_recommendations_2012" role="doc-biblioref">5</a>]</span>.</p>
+<p>Idéalement, les interactions devraient être reportées sur les 2 échelles <span class="citation">[<a href="#ref-knol_recommendations_2012" role="doc-biblioref">5</a>]</span> <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</p>
+
+</div>
+</div>
+</div>
+<h3> Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-vanderweele_tutorial_2014" class="csl-entry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">VanderWeele TJ, Knol MJ. A <span>Tutorial</span> on <span>Interaction</span>. Epidemiologic Methods 2014;3:33–72. <a href="https://doi.org/10.1515/em-2013-0005">https://doi.org/10.1515/em-2013-0005</a>.</div>
+</div>
+<div id="ref-corraini_effect_2017" class="csl-entry">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Corraini P, Olsen M, Pedersen L, Dekkers OM, Vandenbroucke JP. Effect modification, interaction and mediation: An overview of theoretical insights for clinical investigators. Clinical Epidemiology 2017;9:331–8. <a href="https://doi.org/10.2147/CLEP.S129728">https://doi.org/10.2147/CLEP.S129728</a>.</div>
+</div>
+<div id="ref-vanderweele_four_2007" class="csl-entry">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">VanderWeele TJ, Robins JM. Four types of effect modification: A classification based on directed acyclic graphs. Epidemiology (Cambridge, Mass) 2007;18:561–8. <a href="https://doi.org/10.1097/EDE.0b013e318127181b">https://doi.org/10.1097/EDE.0b013e318127181b</a>.</div>
+</div>
+<div id="ref-knol_recommendations_2012" class="csl-entry">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. International Journal of Epidemiology 2012;41:514–20. <a href="https://doi.org/10.1093/ije/dyr218">https://doi.org/10.1093/ije/dyr218</a>.</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="démarche-pratique.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-definitions.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

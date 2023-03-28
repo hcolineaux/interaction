@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Introduction et définitions | Interactions et modification d’effet en Epidémiologie</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Introduction et définitions | Interactions et modification d’effet en Epidémiologie" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction et définitions | Interactions et modification d’effet en Epidémiologie" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="CERPOP, INSERM, EQUITY Team" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="définition.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Interactions</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
+<li class="chapter" data-level="2" data-path="introduction-et-définitions.html"><a href="introduction-et-définitions.html"><i class="fa fa-check"></i><b>2</b> Introduction et définitions</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-et-définitions.html"><a href="introduction-et-définitions.html#quand-étudier-les-interactions"><i class="fa fa-check"></i><b>2.1</b> Quand étudier les interactions ?</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-et-définitions.html"><a href="introduction-et-définitions.html#prediction-versus-causation"><i class="fa fa-check"></i><b>2.1.1</b> <em>Prediction</em> versus <em>causation</em></a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-et-définitions.html"><a href="introduction-et-définitions.html#types-dobjectifs"><i class="fa fa-check"></i><b>2.1.2</b> Types d’objectifs</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="définition.html"><a href="définition.html"><i class="fa fa-check"></i><b>3</b> Définition</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="définition.html"><a href="définition.html#interaction-vs-modification-deffets"><i class="fa fa-check"></i><b>3.1</b> Interaction vs modification d’effets</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="définition.html"><a href="définition.html#notations"><i class="fa fa-check"></i><b>3.1.1</b> Notations</a></li>
+<li class="chapter" data-level="3.1.2" data-path="définition.html"><a href="définition.html#mesures-deffets"><i class="fa fa-check"></i><b>3.1.2</b> Mesures d’effets</a></li>
+<li class="chapter" data-level="3.1.3" data-path="définition.html"><a href="définition.html#modification-deffets"><i class="fa fa-check"></i><b>3.1.3</b> Modification d’effets</a></li>
+<li class="chapter" data-level="3.1.4" data-path="définition.html"><a href="définition.html#interaction"><i class="fa fa-check"></i><b>3.1.4</b> Interaction</a></li>
+<li class="chapter" data-level="3.1.5" data-path="définition.html"><a href="définition.html#synthèse"><i class="fa fa-check"></i><b>3.1.5</b> Synthèse</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="définition.html"><a href="définition.html#la-question-des-échelles"><i class="fa fa-check"></i><b>3.2</b> La question des échelles</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="définition.html"><a href="définition.html#les-2-échelles"><i class="fa fa-check"></i><b>3.2.1</b> Les 2 échelles</a></li>
+<li class="chapter" data-level="3.2.2" data-path="définition.html"><a href="définition.html#le-continuum"><i class="fa fa-check"></i><b>3.2.2</b> Le continuum</a></li>
+<li class="chapter" data-level="3.2.3" data-path="définition.html"><a href="définition.html#synthèse-1"><i class="fa fa-check"></i><b>3.2.3</b> Synthèse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="démarche-pratique.html"><a href="démarche-pratique.html"><i class="fa fa-check"></i><b>4</b> Démarche pratique</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="démarche-pratique.html"><a href="démarche-pratique.html#analyse"><i class="fa fa-check"></i><b>4.1</b> Analyse</a></li>
+<li class="chapter" data-level="4.2" data-path="démarche-pratique.html"><a href="démarche-pratique.html#présentation-des-résultats"><i class="fa fa-check"></i><b>4.2</b> Présentation des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html"><i class="fa fa-check"></i><b>5</b> Pour aller plus loin…</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#interaction-et-médiation"><i class="fa fa-check"></i><b>5.1</b> Interaction et médiation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Interactions et modification d’effet en Epidémiologie</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-et-définitions" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Introduction et définitions<a href="introduction-et-définitions.html#introduction-et-définitions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Comment telle prédisposition génétique et telle exposition environnementale inter-agissent-elles ? L’effet de tel traitement varie-t-il selon les circonstances ? Selon les caractéristiques du patient ? Cette intervention peut-elle être bénéfique pour un groupe social et délétère pour un autre ?</p>
+<p>De nombreuses questions épidémiologiques sont relatives à des mécanismes d’interactions ou de modification d’effets. Pourtant, étudier ces mécanismes restent encore complexe aujourd’hui sur le plan méthodologique : quelle démarche adopter ? sur quelle échelle mesurer cette interaction ? comment interpréter les coefficients ? et cetera.</p>
+<p>Ce document propose une démarche progressive et appliquée pour explorer ces questions.</p>
+<div id="quand-étudier-les-interactions" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Quand étudier les interactions ?<a href="introduction-et-définitions.html#quand-étudier-les-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prediction-versus-causation" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> <em>Prediction</em> versus <em>causation</em><a href="introduction-et-définitions.html#prediction-versus-causation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Faire un rappel <span class="citation">[<a href="#ref-hernan2019second" role="doc-biblioref">1</a>]</span></p>
+<p>Quand etudier les interactions/modifications d’effets :</p>
+<ul>
+<li><strong>Démarche prédictive</strong> : Si ça améliore la précision de l’estimation <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> (Modèles plus flexibles).</li>
+<li><strong>Démarche explicative/étiologique</strong> : si ça répond à l’objectif</li>
+</ul>
+</div>
+<div id="types-dobjectifs" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Types d’objectifs<a href="introduction-et-définitions.html#types-dobjectifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans une démarche explicative, les objectifs pouvant nécessiter l’étude de l’interaction/modification d’effet sont <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<ul>
+<li><strong>Cibler des sous-groupes</strong>. Par exemple, identifier des sous-groupes pour lesquels l’intervention aura le plus d’effet afin de pouvoir cibler l’intervention en cas de ressources limitées, ou s’assurer que l’intervention est bénéfice pour tous les groupes et pas délétères pour certains groupes.</li>
+<li><strong>Explorer les mécanismes d’un effet</strong>. Par exemple, en cas d’intervention qui n’a d’effet qu’en présence ou absence d’une caractéristiques particulière (définition mécanistique de l’interaction) ou seulement conjointement à une autre intervention.</li>
+<li><strong>Etudier l’effet d’une intervention pour éliminer une partie de l’effet d’une exposition non modifiable</strong>. Par exemple, quelle part de l’effet du niveau d’éducation des parents sur la mortalité disparaitrait si on intervenait sur le tabagisme à l’adolescence ?</li>
+</ul>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-hernan2019second" class="csl-entry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Hernán MA, Hsu J, Healy B. A second chance to get causal inference right: A classification of data science tasks. Chance 2019;32:42–9.</div>
+</div>
+<div id="ref-vanderweele_tutorial_2014" class="csl-entry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">VanderWeele TJ, Knol MJ. A <span>Tutorial</span> on <span>Interaction</span>. Epidemiologic Methods 2014;3:33–72. <a href="https://doi.org/10.1515/em-2013-0005">https://doi.org/10.1515/em-2013-0005</a>.</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="définition.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
