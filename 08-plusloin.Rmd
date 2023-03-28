@@ -1,0 +1,22 @@
+
+# Pour aller plus loin...
+
+## Ajouter de la complexité
+
+A1 et A2 sont rarement indépendants. Scénario plus probable :
+
+> ![](Image11.png){width=50%}
+
+
+## Interaction avec confusion intermédiaire
+
+
+
+
+## Interaction et médiation
+
+
+@vanderweele_three-way_2013 
+
+@vanderweele_unification_2014
+

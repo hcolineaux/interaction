@@ -1,0 +1,25 @@
+
+
+# Présentation des résultats
+
+Les recommandation de Knol et al. @knol_recommendations_2012 sont :
+
+## Modification d’effet
+
+-	Présenter les risques relatifs (RR), les OR ou les différences de risque (RD) avec les IC pour chaque strate de A1 et de A2 avec une seule catégorie de référence (éventuellement prise comme la strate présentant le plus faible risque de Y).
+-	Présenter les RR, OR ou RD avec les IC pour A1 dans les strates de A2.
+-	Présenter les mesures de la modification de l'effet sur des échelles additives (par exemple, RERI) et multiplicatives avec les IC.
+-	Énumérez les facteurs de confusion pour lesquels la relation entre A1 et Y a été ajustée. 
+
+## Interaction
+
+-	Présenter les risques relatifs (RR), les OR ou les différences de risque (RD) avec les IC pour chaque strate de A1 et de A2 avec une seule catégorie de référence (éventuellement prise comme la strate présentant le plus faible risque de Y).
+-	Présenter les RR, OR ou RD avec les IC de l'effet de A1 sur Y dans les strates de A2 et de A2 sur Y dans les strates de A1.
+-	Présenter les mesures de la modification de l'effet sur des échelles additives (par exemple, RERI) et multiplicatives avec les IC.
+-	Énumérez les facteurs de confusion pour lesquels la relation entre A1 et Y et la relation entre A2 et Y ont été ajustées.
+
+## Proposition
+
+- Présenter les effets marginaux ou les proportions dans chaque strate
+- présenter les effets dans chaque strate dans une échelle multiplicative et additive
+

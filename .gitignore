@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+_bookdown_files
+rsconnect
+Interaction_book.Rproj
+_book
+.Rdata
+.httr-oauth
+.DS_Store
