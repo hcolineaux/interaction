@@ -2,6 +2,15 @@
 
 # Simulations
 
+
+
+Pour la description des différents types d'estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires):
+
+> ![](img/Image10.png){width=50%}
+
+
+Le code ayant permis de simuler les données est le suivant :
+
 <script type="text/javascript">
 
 // toggle visibility of R source blocks in R Markdown output
@@ -27,10 +36,6 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 
 </script>
 
-
-On simule des données selon le DAG suivant (toutes les variables sont binaires):
-
-> ![](img/Image10.png){width=50%}
 
 
 ```{r simul, results ='hide'}
@@ -107,7 +112,10 @@ generate.data <- function(N, b =  param.causal.model()) {
 
 ```
 
-Au final, on a comme P(Y==1) dans chaque catégorie : 
+
+Au final, les probabilités de l'outcome P(Y=1), dans chaque catégorie sont : 
+
+
 ```{r pop, echo=FALSE, warning=FALSE, message=FALSE}
 library(kableExtra)
 library(finalfit)
@@ -134,6 +142,9 @@ t %>%
 ```
 
 # A partir de modèles de régression
+
+<span style="color: red;">partie à compléter</span>
+
 
 
 ## Multiplicatif (régression logistique)

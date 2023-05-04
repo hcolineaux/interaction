@@ -238,18 +238,20 @@ div.csl-indent {
 <li class="chapter" data-level="11.3" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#proposition"><i class="fa fa-check"></i><b>11.3</b> Proposition</a></li>
 </ul></li>
 <li class="part"><span><b>III En pratique</b></span></li>
-<li class="chapter" data-level="12" data-path="steps.html"><a href="steps.html"><i class="fa fa-check"></i><b>12</b> Steps</a></li>
+<li class="chapter" data-level="12" data-path="proposition-détapes.html"><a href="proposition-détapes.html"><i class="fa fa-check"></i><b>12</b> Proposition d’étapes</a></li>
 <li class="chapter" data-level="13" data-path="exemple-1---y-binaire.html"><a href="exemple-1---y-binaire.html"><i class="fa fa-check"></i><b>13</b> Exemple 1 - Y binaire</a></li>
 <li class="chapter" data-level="14" data-path="exemple-2---y-quantitatif.html"><a href="exemple-2---y-quantitatif.html"><i class="fa fa-check"></i><b>14</b> Exemple 2 - Y quantitatif</a></li>
+<li class="chapter" data-level="15" data-path="exemple-3---y-multinomial.html"><a href="exemple-3---y-multinomial.html"><i class="fa fa-check"></i><b>15</b> Exemple 3 - Y multinomial</a></li>
+<li class="chapter" data-level="16" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html"><i class="fa fa-check"></i><b>16</b> Exemple 4 - X quantitatif</a></li>
 <li class="part"><span><b>IV Conclusion</b></span></li>
-<li class="chapter" data-level="15" data-path="synthèse-générale.html"><a href="synthèse-générale.html"><i class="fa fa-check"></i><b>15</b> Synthèse générale</a></li>
-<li class="chapter" data-level="16" data-path="pour-aller-plus-loin-1.html"><a href="pour-aller-plus-loin-1.html"><i class="fa fa-check"></i><b>16</b> Pour aller plus loin…</a>
+<li class="chapter" data-level="17" data-path="synthèse-générale.html"><a href="synthèse-générale.html"><i class="fa fa-check"></i><b>17</b> Synthèse générale</a></li>
+<li class="chapter" data-level="18" data-path="pour-aller-plus-loin-1.html"><a href="pour-aller-plus-loin-1.html"><i class="fa fa-check"></i><b>18</b> Pour aller plus loin…</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="pour-aller-plus-loin-1.html"><a href="pour-aller-plus-loin-1.html#ajouter-de-la-complexité"><i class="fa fa-check"></i><b>16.1</b> Ajouter de la complexité</a></li>
-<li class="chapter" data-level="16.2" data-path="pour-aller-plus-loin-1.html"><a href="pour-aller-plus-loin-1.html#interaction-avec-confusion-intermédiaire"><i class="fa fa-check"></i><b>16.2</b> Interaction avec confusion intermédiaire</a></li>
-<li class="chapter" data-level="16.3" data-path="pour-aller-plus-loin-1.html"><a href="pour-aller-plus-loin-1.html#interaction-et-médiation"><i class="fa fa-check"></i><b>16.3</b> Interaction et médiation</a></li>
+<li class="chapter" data-level="18.1" data-path="pour-aller-plus-loin-1.html"><a href="pour-aller-plus-loin-1.html#ajouter-de-la-complexité"><i class="fa fa-check"></i><b>18.1</b> Ajouter de la complexité</a></li>
+<li class="chapter" data-level="18.2" data-path="pour-aller-plus-loin-1.html"><a href="pour-aller-plus-loin-1.html#interaction-avec-confusion-intermédiaire"><i class="fa fa-check"></i><b>18.2</b> Interaction avec confusion intermédiaire</a></li>
+<li class="chapter" data-level="18.3" data-path="pour-aller-plus-loin-1.html"><a href="pour-aller-plus-loin-1.html#interaction-et-médiation"><i class="fa fa-check"></i><b>18.3</b> Interaction et médiation</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>17</b> Références</a></li>
+<li class="chapter" data-level="19" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>19</b> Références</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -272,6 +274,11 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="simulations" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Simulations<a href="simulations.html#simulations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Pour la description des différents types d’estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires):</p>
+<blockquote>
+<p><img src="img/Image10.png" style="width:50.0%" /></p>
+</blockquote>
+<p>Le code ayant permis de simuler les données est le suivant :</p>
 <script type="text/javascript">
 
 // toggle visibility of R source blocks in R Markdown output
@@ -296,10 +303,6 @@ function toggle_R() {
 document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id="myButton1" style="position: static; top: 1%; left: 2%; z-index: 200"></input>')
 
 </script>
-<p>On simule des données selon le DAG suivant (toutes les variables sont binaires):</p>
-<blockquote>
-<p><img src="img/Image10.png" style="width:50.0%" /></p>
-</blockquote>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="simulations.html#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
 <span id="cb1-2"><a href="simulations.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="simulations.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  param.causal.model <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">p_L1 =</span> <span class="fl">0.50</span>, </span>
@@ -369,7 +372,7 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 <span id="cb1-67"><a href="simulations.html#cb1-67" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">generate.data</span>(<span class="at">N =</span> <span class="dv">10000</span>, <span class="at">b =</span> b)</span>
 <span id="cb1-68"><a href="simulations.html#cb1-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(df)</span>
 <span id="cb1-69"><a href="simulations.html#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="fu">table</span>(df<span class="sc">$</span>Y, df<span class="sc">$</span>A1, df<span class="sc">$</span>A2, <span class="at">deparse.level =</span> <span class="dv">2</span>))</span></code></pre></div>
-Au final, on a comme P(Y==1) dans chaque catégorie :
+<p>Au final, les probabilités de l’outcome P(Y=1), dans chaque catégorie sont :</p>
 <table class="table" style="font-size: 9px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>

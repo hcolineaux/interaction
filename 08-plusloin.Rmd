@@ -22,7 +22,7 @@ Concernant les paramètres,
 
 A1 et A2 sont rarement indépendants. Scénario plus probable :
 
-> ![](Image11.png){width=50%}
+> ![](img\Image11.png){width=50%}
 
 
 ## Interaction avec confusion intermédiaire
