@@ -2,8 +2,6 @@
 
 # Simulations
 
-
-
 Pour la description des différents types d'estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires):
 
 > ![](img/Image10.png){width=50%}

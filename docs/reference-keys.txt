@@ -23,6 +23,7 @@ excès-de-risque-à-partir-des-rr-reri
 autres
 proportion-attribuable-ap
 simulations
+section
 a-partir-de-modèles-de-régression
 régression-logistique
 régression-lineaire
