@@ -146,7 +146,7 @@ t %>%
 Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.
 
 
-## Multiplicatif (régression logistique)
+## Régression logistique
 
 Lorsque l'on étudie un outcome binaire, on utilise souvent les modèles de régression logistique.  
 
@@ -173,8 +173,11 @@ L'interaction multiplicative peut donc être estimée par $\small IM = exp(1.786
 
 On aurait aussi pu décrire cette interaction à partir de l'effet d'A2 dans chaque strate de A1.
 
+On peut explorer l'interaction sur l'échelle additive en estimant le RERI par $\small RERI \approx OR_{11} - OR_{10} - OR_{01} + 1 =$ `r round(exp(1.786+1.786) - exp(1.786) - exp(0.753) + 1,3)`, soit $\small OR(A1|A2=0) - OR(A1|A2=1)$. Ici l'interaction est significative. 
 
-En résumé (le package finalfit permet de sortir les résulats proprement) : 
+
+
+En résumé (le package `finalfit` permet de sortir les résultats proprement) : 
 
 ```{r reg_log, echo = TRUE, warning=FALSE, message=FALSE}
 
@@ -190,7 +193,7 @@ df_f %>%
   finalfit(dependent, explanatory)-> t
 
 cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"), 
-      DR = t[c(12,14,13),6]) %>%
+      OR = t[c(12,14,13),6]) %>%
   as.data.frame %>% 
       kbl() %>%
       kable_classic() 
@@ -200,7 +203,7 @@ cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"),
 
 Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.
 
-## Additif (régression lineaire)
+## Régression lineaire
 
 Même si l'outcome binaire, on peut en théorie utiliser un modèle de régression linéaire et explorer les effets sur une échelle additive. Si l'outcome est quantitatif, on utilise aussi, en général, les modèles de régression linéaire.  
 

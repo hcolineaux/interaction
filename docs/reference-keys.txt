@@ -24,8 +24,8 @@ autres
 proportion-attribuable-ap
 simulations
 a-partir-de-modèles-de-régression
-multiplicatif-régression-logistique
-additif-régression-lineaire
+régression-logistique
+régression-lineaire
 pour-aller-plus-loin
 estimation-par-g-computation
 estimation-par-modèle-structurel-marginal
