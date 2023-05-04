@@ -1,3 +1,4 @@
+# (PART) Conclusion {-}
 
 # Synthèse générale 
 
@@ -21,7 +22,11 @@ Concernant les paramètres,
 
 A1 et A2 sont rarement indépendants. Scénario plus probable :
 
+<<<<<<< HEAD
 > ![](img/Image11.png){width=50%}
+=======
+> ![](img\Image11.png){width=50%}
+>>>>>>> e225b751959377b69a975cacad5b91fa4793254f
 
 
 ## Interaction avec confusion intermédiaire

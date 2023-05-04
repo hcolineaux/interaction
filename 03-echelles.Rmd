@@ -7,9 +7,9 @@
 
 Une façon simple de mesurer l'interaction est de mesurer à quel point l'effet conjoint de deux facteurs est différents de la somme de leurs effets individuels @vanderweele_tutorial_2014 :
 
-- $\small DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))$
-- $\small (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]$
-- soit $\small p_{11} - p_{10} - p_{01} + p_{00}$
+- $\small AI = DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))$
+- $\small AI = (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]$
+- soit $\small AI =p_{11} - p_{10} - p_{01} + p_{00}$
 
 > <ins>Exemple</ins>
 Mesure de l'interaction dans l'exemple 1
@@ -28,9 +28,9 @@ Mesure de l'interaction dans l'exemple 1
 
 En cas d'outcome binaire, c'est souvent le RR ou l'OR qui est utilisé pour mesurer les effets. La mesure de l'interaction sur une échelle multiplicative serait donc  @vanderweele_tutorial_2014 :
 
-- $\small \frac{RR11}{RR10 \times RR01}$
-- soit $\small \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}$
-- soit $\small \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}$
+- $\small MI = \frac{RR_{11}}{RR_{10} \times RR_{01}}$
+- soit $\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}$
+- soit $\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}$
 
 
 > <ins>Exemple</ins>
@@ -121,6 +121,8 @@ Idéalement, les interactions devraient cependant être reportées sur les 2 éc
 
 # Types de paramètres 
 
+Plusieurs paramètres peuvent être utilisés pour décrire une interaction, sur l'échelle additive ou multiplicative. 
+
 ## Avec les différences de risques (DR)
 
 On a déjà défini un paramètre d'interaction sur l'échelle additive (AI) à partir des différences d'effets @vanderweele_tutorial_2014 :
@@ -145,7 +147,7 @@ Un paramètre d'interaction sur l'echelle multiplicative (MI_{OR}) peut être es
 
 - $\small MI_{OR} = \frac{OR_{11}}{OR_{10} \times OR_{01}}$ 
 
-En général, la mesure $MI_{OR}$ et $MI_{RR}$ seront proches si l'outcome est rare @vanderweele_tutorial_2014. 
+En général, la mesure $\small MI_{OR}$ et $\small MI_{RR}$ seront proches si l'outcome est rare @vanderweele_tutorial_2014. 
 
 ## Excès de risque à partir des RR (RERI) 
 

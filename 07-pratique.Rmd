@@ -1,7 +1,7 @@
 # (PART) En pratique {-}
 
 
-# Steps
+# Proposition d'étapes
 
 1. formuler l'objectif
     - predictif ou explicatif
@@ -33,7 +33,11 @@ Ici on s'intéresse donc à deux modifications d'effet.
 
 Le DAG (sans les médiateurs) était : 
 
+<<<<<<< HEAD
 > ![](img/Image13.png){width=30%}
+=======
+> ![](img\Image13.png){width=30%}
+>>>>>>> e225b751959377b69a975cacad5b91fa4793254f
 
 Les estimands étaient définis sur l'échelle additive par : 
 
@@ -46,4 +50,8 @@ Les effets ont été estimés par g-computation (*standardisation*).
 
 
 **3. Résultats**
+
+# Exemple 3 - Y multinomial
+
+# Exemple 4 - X quantitatif
 
