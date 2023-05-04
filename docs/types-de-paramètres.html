@@ -237,13 +237,14 @@ div.csl-indent {
 <li class="chapter" data-level="10.2" data-path="en-pratique.html"><a href="en-pratique.html#exemple-1---y-binaire"><i class="fa fa-check"></i><b>10.2</b> Exemple 1 - Y binaire</a></li>
 <li class="chapter" data-level="10.3" data-path="en-pratique.html"><a href="en-pratique.html#exemple-2---y-quantitatif"><i class="fa fa-check"></i><b>10.3</b> Exemple 2 - Y quantitatif</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html"><i class="fa fa-check"></i><b>11</b> Pour aller plus loin…</a>
+<li class="chapter" data-level="11" data-path="synthèse-générale.html"><a href="synthèse-générale.html"><i class="fa fa-check"></i><b>11</b> Synthèse générale</a></li>
+<li class="chapter" data-level="12" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html"><i class="fa fa-check"></i><b>12</b> Pour aller plus loin…</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#ajouter-de-la-complexité"><i class="fa fa-check"></i><b>11.1</b> Ajouter de la complexité</a></li>
-<li class="chapter" data-level="11.2" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#interaction-avec-confusion-intermédiaire"><i class="fa fa-check"></i><b>11.2</b> Interaction avec confusion intermédiaire</a></li>
-<li class="chapter" data-level="11.3" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#interaction-et-médiation"><i class="fa fa-check"></i><b>11.3</b> Interaction et médiation</a></li>
+<li class="chapter" data-level="12.1" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#ajouter-de-la-complexité"><i class="fa fa-check"></i><b>12.1</b> Ajouter de la complexité</a></li>
+<li class="chapter" data-level="12.2" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#interaction-avec-confusion-intermédiaire"><i class="fa fa-check"></i><b>12.2</b> Interaction avec confusion intermédiaire</a></li>
+<li class="chapter" data-level="12.3" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#interaction-et-médiation"><i class="fa fa-check"></i><b>12.3</b> Interaction et médiation</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>12</b> Références</a></li>
+<li class="chapter" data-level="13" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>13</b> Références</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -268,9 +269,21 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 6</span> Types de paramètres<a href="types-de-paramètres.html#types-de-paramètres" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="avec-les-différences-de-risques-dr" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Avec les différences de risques (DR)<a href="types-de-paramètres.html#avec-les-différences-de-risques-dr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On a déjà défini un paramètre d’interaction sur l’échelle additive (AI) à partir des différences d’effets <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<ul>
+<li><span class="math inline">\(AI = \small DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))\)</span></li>
+<li><span class="math inline">\(AI = \small (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]\)</span></li>
+<li>soit <span class="math inline">\(AI =\small p_{11} - p_{10} - p_{01} + p_{00}\)</span></li>
+</ul>
 </div>
 <div id="avec-les-risques-relatifs-rr" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Avec les risques relatifs (RR)<a href="types-de-paramètres.html#avec-les-risques-relatifs-rr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On a aussi défini un paramètre d’interaction sur l’échelle multiplicative (MI) à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<ul>
+<li><span class="math inline">\(\small \frac{RR11}{RR10 \times RR01}\)</span></li>
+<li>soit <span class="math inline">\(\small \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}\)</span></li>
+<li>soit <span class="math inline">\(\small \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}\)</span></li>
+</ul>
 </div>
 <div id="avec-les-odds-ration-or" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Avec les Odds Ration (OR)<a href="types-de-paramètres.html#avec-les-odds-ration-or" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -281,6 +294,12 @@ div.csl-indent {
 <div id="autres" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Autres<a href="types-de-paramètres.html#autres" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
+</div>
+</div>
+<h3> Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-vanderweele_tutorial_2014" class="csl-entry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">VanderWeele TJ, Knol MJ. A <span>Tutorial</span> on <span>Interaction</span>. Epidemiologic Methods 2014;3:33–72. <a href="https://doi.org/10.1515/em-2013-0005">https://doi.org/10.1515/em-2013-0005</a>.</div>
 </div>
 </div>
             </section>

@@ -123,7 +123,19 @@ Idéalement, les interactions devraient cependant être reportées sur les 2 éc
 
 ## Avec les différences de risques (DR)
 
+On a déjà défini un paramètre d'interaction sur l'échelle additive (AI) à partir des différences d'effets @vanderweele_tutorial_2014 :
+
+- $AI = \small DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))$
+- $AI = \small (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]$
+- soit $AI =\small p_{11} - p_{10} - p_{01} + p_{00}$
+
 ## Avec les risques relatifs (RR)
+
+On a aussi défini un paramètre d'interaction sur l'échelle multiplicative (MI) à partir des risques relatifs @vanderweele_tutorial_2014 :
+
+- $\small \frac{RR11}{RR10 \times RR01}$
+- soit $\small \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}$
+- soit $\small \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}$
 
 ## Avec les Odds Ration (OR) 
 

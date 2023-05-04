@@ -41,6 +41,7 @@ en-pratique
 steps
 exemple-1---y-binaire
 exemple-2---y-quantitatif
+synthèse-générale
 pour-aller-plus-loin
 ajouter-de-la-complexité
 interaction-avec-confusion-intermédiaire
