@@ -21,6 +21,7 @@ avec-les-risques-relatifs-rr
 avec-les-odds-ration-or
 excès-de-risque-à-partir-des-rr-reri
 autres
+proportion-attribuable-ap
 estimations
 simulations
 estimation-par-régression

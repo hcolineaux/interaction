@@ -133,7 +133,7 @@ On a déjà défini un paramètre d'interaction sur l'échelle additive (AI) à 
 
 On a aussi défini un paramètre d'interaction sur l'échelle multiplicative (MI) à partir des risques relatifs @vanderweele_tutorial_2014 :
 
-- $\small MI = small \frac{RR11}{RR10 \times RR01}$
+- $\small MI = \frac{RR_{11}}{RR_{10} \times RR_{01}}$
 - soit $\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}$
 - soit $\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}$
 
@@ -143,22 +143,55 @@ Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mes
 
 Un paramètre d'interaction sur l'echelle multiplicative (MI_{OR}) peut être estimé à partir de ces OR @vanderweele_tutorial_2014 :
 
-- $\small MI_{OR} = \frac{OR11}{RR10 \times OR01}$ 
+- $\small MI_{OR} = \frac{OR_{11}}{OR_{10} \times OR_{01}}$ 
 
-En général, la mesure MI_{OR} et MI_{RR} seront proches si l'outcome est rare @vanderweele_tutorial_2014. 
+En général, la mesure $MI_{OR}$ et $MI_{RR}$ seront proches si l'outcome est rare @vanderweele_tutorial_2014. 
 
 ## Excès de risque à partir des RR (RERI) 
 
-Lorsque seulement les risques relatifs sont donnés mais que l'on souhaite évaluer l'interaction sur l'échelle additive, l'excès de risque du à l'interaction (RERI) peut être estimé à partir des risques relatifs @vanderweele_tutorial_2014 : 
+Lorsque seulement les risques relatifs sont donnés mais que l'on souhaite évaluer l'interaction sur l'échelle additive, "l'excès de risque du à l'interaction" (RERI) ou "interaction contrast ratio" (ICR), peut être estimé à partir des risques relatifs @vanderweele_tutorial_2014 : 
 
-- $\small RERI = RR11 - RR10 - RR01 + 1$
+- $\small RERI = RR_{11} - RR_{10} - RR_{01} + 1$
 
+Il faut noter que, bien que le RERI donne la direction direction (positive, négative ou nulle) de l'interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l'ampleur de l'interaction additive, à moins de connaître au moins $\small p_{00}$.
 
-+ RERI(OR)
+Si l'on a seulement l'OR et que l'outcome est rare, les OR peuvent approximé les RR, on a donc :
+
+- $\small RERI_{OR} = OR_{11} - OR_{10} - OR_{01} + 1 \approx RERI_{RR}$
 
 ## Autres 
 
-- Synergie index 
-- attributable proportion
+D'autres paramètres ont aussi été proposé @vanderweele_tutorial_2014, tels que : 
 
+### Le "Synergie index" (SI) {-} 
+
+Il s'agit d'un paramètre explorant l'interaction additive :
+
+- $\small S = \frac{RR_{11} - 1}{(RR_{10} - 1) + (RR_{01}-1)}$.
+
+Il mesure à quel point le rapport de risque joint dépasse 1, et si cette mesure est supérieure à la somme de "à quel point" les rapports de risque de chaque exposition dépasse 1. 
+
+Si le dénominateur est positif: 
+
+- si S > 1, alors $\small RERI_{RR}$ > 0 
+- si S < 1, alors $\small RERI_{RR}$ < 0 
+
+L'interprétation de l'indice de synergie devient difficile dans les cas où l'effet de l'une des expositions est négatif et que le dénominateur de S est donc inférieur à 1.
+
+
+### Proportion attribuable (AP)
+
+
+Il s'agit aussi d'un paramètre explorant l'interaction additive :
+
+- $\small AP = \frac{RR_{11} - RR_{10} - RR_{01} + 1}{RR_{11}}$.
+
+Ce paramètre mesure la proportion du risque dans le groupe doublement exposé qui est due à l'interaction. 
+
+L'AP est en lien avec le $\small RERI_{RR}$ :
+
+- AP > 0 si et seulement si $\small RERI_{RR}$ > 0 
+- AP < 0 si et seulement si $\small RERI_{RR}$ < 0. 
+
+En fait $\small AP = \frac{RERI_{RR}}{RR_{11}-1}$.
 

@@ -205,7 +205,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.2" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#avec-les-risques-relatifs-rr"><i class="fa fa-check"></i><b>6.2</b> Avec les risques relatifs (RR)</a></li>
 <li class="chapter" data-level="6.3" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#avec-les-odds-ration-or"><i class="fa fa-check"></i><b>6.3</b> Avec les Odds Ration (OR)</a></li>
 <li class="chapter" data-level="6.4" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#excès-de-risque-à-partir-des-rr-reri"><i class="fa fa-check"></i><b>6.4</b> Excès de risque à partir des RR (RERI)</a></li>
-<li class="chapter" data-level="6.5" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#autres"><i class="fa fa-check"></i><b>6.5</b> Autres</a></li>
+<li class="chapter" data-level="6.5" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#autres"><i class="fa fa-check"></i><b>6.5</b> Autres</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#le-synergie-index-si"><i class="fa fa-check"></i>Le “Synergie index” (SI)</a></li>
+<li class="chapter" data-level="6.5.1" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#proportion-attribuable-ap"><i class="fa fa-check"></i><b>6.5.1</b> Proportion attribuable (AP)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="estimations.html"><a href="estimations.html"><i class="fa fa-check"></i><b>7</b> Estimations</a>
 <ul>
@@ -280,7 +284,7 @@ div.csl-indent {
 <h2><span class="header-section-number">6.2</span> Avec les risques relatifs (RR)<a href="types-de-paramètres.html#avec-les-risques-relatifs-rr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On a aussi défini un paramètre d’interaction sur l’échelle multiplicative (MI) à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
 <ul>
-<li><span class="math inline">\(\small MI = small \frac{RR11}{RR10 \times RR01}\)</span></li>
+<li><span class="math inline">\(\small MI = \frac{RR_{11}}{RR_{10} \times RR_{01}}\)</span></li>
 <li>soit <span class="math inline">\(\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}\)</span></li>
 <li>soit <span class="math inline">\(\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}\)</span></li>
 </ul>
@@ -290,25 +294,54 @@ div.csl-indent {
 <p>Souvent en épidémiologie, lorsque l’outcome Y est binaire, les effets sont mesurés par des odds ratio estimé à partir de modèle de régression logistique.</p>
 <p>Un paramètre d’interaction sur l’echelle multiplicative (MI_{OR}) peut être estimé à partir de ces OR <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
 <ul>
-<li><span class="math inline">\(\small MI_{OR} = \frac{OR11}{RR10 \times OR01}\)</span></li>
+<li><span class="math inline">\(\small MI_{OR} = \frac{OR_{11}}{OR_{10} \times OR_{01}}\)</span></li>
 </ul>
-<p>En général, la mesure MI_{OR} et MI_{RR} seront proches si l’outcome est rare <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</p>
+<p>En général, la mesure <span class="math inline">\(MI_{OR}\)</span> et <span class="math inline">\(MI_{RR}\)</span> seront proches si l’outcome est rare <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</p>
 </div>
 <div id="excès-de-risque-à-partir-des-rr-reri" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Excès de risque à partir des RR (RERI)<a href="types-de-paramètres.html#excès-de-risque-à-partir-des-rr-reri" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Lorsque seulement les risques relatifs sont donnés mais que l’on souhaite évaluer l’interaction sur l’échelle additive, l’excès de risque du à l’interaction (RERI) peut être estimé à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<p>Lorsque seulement les risques relatifs sont donnés mais que l’on souhaite évaluer l’interaction sur l’échelle additive, “l’excès de risque du à l’interaction” (RERI) ou “interaction contrast ratio” (ICR), peut être estimé à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
 <ul>
-<li><p><span class="math inline">\(\small RERI = RR11 - RR10 - RR01 + 1\)</span></p></li>
-<li><p>RERI(OR)</p></li>
+<li><span class="math inline">\(\small RERI = RR_{11} - RR_{10} - RR_{01} + 1\)</span></li>
+</ul>
+<p>Il faut noter que, bien que le RERI donne la direction direction (positive, négative ou nulle) de l’interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l’ampleur de l’interaction additive, à moins de connaître au moins <span class="math inline">\(\small p_{00}\)</span>.</p>
+<p>Si l’on a seulement l’OR et que l’outcome est rare, les OR peuvent approximé les RR, on a donc :</p>
+<ul>
+<li><span class="math inline">\(\small RERI_{OR} = OR_{11} - OR_{10} - OR_{01} + 1 \approx RERI_{RR}\)</span></li>
 </ul>
 </div>
 <div id="autres" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Autres<a href="types-de-paramètres.html#autres" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>D’autres paramètres ont aussi été proposé <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>, tels que :</p>
+<div id="le-synergie-index-si" class="section level3 unnumbered hasAnchor">
+<h3>Le “Synergie index” (SI)<a href="types-de-paramètres.html#le-synergie-index-si" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il s’agit d’un paramètre explorant l’interaction additive :</p>
 <ul>
-<li>Synergie index</li>
-<li>attributable proportion</li>
+<li><span class="math inline">\(\small S = \frac{RR_{11} - 1}{(RR_{10} - 1) + (RR_{01}-1)}\)</span>.</li>
 </ul>
+<p>Il mesure à quel point le rapport de risque joint dépasse 1, et si cette mesure est supérieure à la somme de “à quel point” les rapports de risque de chaque exposition dépasse 1.</p>
+<p>Si le dénominateur est positif:</p>
+<ul>
+<li>si S &gt; 1, alors <span class="math inline">\(\small RERI_{RR}\)</span> &gt; 0</li>
+<li>si S &lt; 1, alors <span class="math inline">\(\small RERI_{RR}\)</span> &lt; 0</li>
+</ul>
+<p>L’interprétation de l’indice de synergie devient difficile dans les cas où l’effet de l’une des expositions est négatif et que le dénominateur de S est donc inférieur à 1.</p>
+</div>
+<div id="proportion-attribuable-ap" class="section level3 hasAnchor" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Proportion attribuable (AP)<a href="types-de-paramètres.html#proportion-attribuable-ap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il s’agit aussi d’un paramètre explorant l’interaction additive :</p>
+<ul>
+<li><span class="math inline">\(\small AP = \frac{RR_{11} - RR_{10} - RR_{01} + 1}{RR_{11}}\)</span>.</li>
+</ul>
+<p>Ce paramètre mesure la proportion du risque dans le groupe doublement exposé qui est due à l’interaction.</p>
+<p>L’AP est en lien avec le <span class="math inline">\(\small RERI_{RR}\)</span> :</p>
+<ul>
+<li>AP &gt; 0 si et seulement si <span class="math inline">\(\small RERI_{RR}\)</span> &gt; 0</li>
+<li>AP &lt; 0 si et seulement si <span class="math inline">\(\small RERI_{RR}\)</span> &lt; 0.</li>
+</ul>
+<p>En fait <span class="math inline">\(\small AP = \frac{RERI_{RR}}{RR_{11}-1}\)</span>.</p>
 
+</div>
 </div>
 </div>
 <h3> Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
