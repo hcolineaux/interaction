@@ -14,30 +14,31 @@ github-repo: rstudio/bookdown-demo
 
 # Présentation
 
-Document de synthèse du GT "Interaction" 
+Ce document a été rédigé en tant que document de synthèse du travail du groupe "Interaction" de l'équipe EQUITY, CERPOP. 
+Ce travail a consisté en une revue de la littérature et en une application détaillée des méthodes sur des analyses illustratives, dans un but d'auto-formation et pédagogique.
 
-En cours de rédaction [work in progress]
-
-![](Image0.png){width=0%}
-
+![](img/Image0.png){width=0%}
 
 
 
-<ins> Participant.e.s </ins>
 
-- Hélène COLINEAUX,  
-- Léna BONIN, 
-- Grégory GUERNEC, 
-- Camille JOANNES, 
-- Benoit LEPAGE, 
+<ins> Les participant.e.s du groupe de travail sont : </ins>
+
+- Hélène COLINEAUX  
+- Léna BONIN
+- Camille JOANNES 
+- Benoit LEPAGE 
 - Lola NEUFCOURT 
- 
+- Ainhoa UGARTECHE
 
 
 
 
 [Licence]:https://creativecommons.org/licenses/by-nc-sa/4.0/
-![](by-nc-sa.png){width=10%}
+
+![](img/by-nc-sa.png){width=10%}
+
+
 
 The online version of this book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][Licence]. 
 
