@@ -166,7 +166,7 @@ La différence se joue plutôt sur :
 
 Il existe des cas où l'identification d'une interaction ou d'une modification d'effet ne conduira pas à la même démarche et donc au même résultat @vanderweele_distinction_2009. Prenons le DAG suivant : 
 
-> ![](Image12.png){width=30%}
+> ![](img/Image12.png){width=30%}
 
 Dans ce cas, il n'y a pas d’interaction entre A1 et A2, car si on intervient sur les 2 ($\small do(A1, A2)$), il n'y a plus de chemin entre A2 et Y. Il peut par contre y avoir une modification de l'effet $\small A1 \rightarrow Y$ par A2 ($\small do(A1)$). Dans ce cas, pour estimer cet effet, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3.
 

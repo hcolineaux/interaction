@@ -31,7 +31,7 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 
 On simule des données selon le DAG suivant (toutes les variables sont binaires):
 
-> ![](Image10.png){width=50%}
+> ![](img\Image10.png){width=50%}
 
 
 ```{r simul, results ='hide'}
@@ -1511,12 +1511,12 @@ out.int.table <- function(int.r = int.r) {
 ```{r t_tmle, echo=FALSE, warning=FALSE, message=FALSE}
 ### TMLE
 table.tmle <- out.int.table(summary.tmle$int.r)
-
-library(kableExtra)
-kbl(table.tmle$out.table,
-    caption = "Interaction effects estimated by TMLE") %>%
-  kable_classic() %>%
-  footnote(general = table.tmle$interaction.effects)
+table.tmle
+# library(kableExtra)
+# kbl(table.tmle$out.table,
+#     caption = "Interaction effects estimated by TMLE") %>%
+#   kable_classic() %>%
+#   footnote(general = table.tmle$interaction.effects)
 ```
 
 
@@ -1526,10 +1526,11 @@ kbl(table.tmle$out.table,
 
 ### IPTW
 table.iptw <- out.int.table(summary.iptw$int.r)
-kbl(table.iptw$out.table,
-    caption = "Interaction effects estimated by IPTW") %>%
-  kable_classic() %>%
-  footnote(general = table.iptw$interaction.effects)
+table.iptw
+# kbl(table.iptw$out.table,
+#     caption = "Interaction effects estimated by IPTW") %>%
+#   kable_classic() %>%
+#   footnote(general = table.iptw$interaction.effects)
 
 ```
 
@@ -1539,10 +1540,11 @@ kbl(table.iptw$out.table,
 ```{r t_ggcomp, echo=FALSE, warning=FALSE, message=FALSE}
 ### G-COMP
 table.gcomp <- out.int.table(summary.gcomp$int.r)
-kbl(table.gcomp$out.table,
-    caption = "Interaction effects estimated by G-computation") %>%
-  kable_classic() %>%
-  footnote(general = table.gcomp$interaction.effects)
+table.gcomp
+# kbl(table.gcomp$out.table,
+#     caption = "Interaction effects estimated by G-computation") %>%
+#   kable_classic() %>%
+#   footnote(general = table.gcomp$interaction.effects)
 
 ```
 

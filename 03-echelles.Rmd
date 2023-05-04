@@ -76,8 +76,8 @@ Dans un article de 2019 @vanderweele_interaction_2019, Vanderweele décrit le co
 
 Par exemple, avec deux expositions ayant un effet positif (qui augmentent le risque) sur l'outcome en l'absence de l'autre exposition, lorsque l'effet joint est très important, l'interaction est positive sur les 2 échelles. Mais lorsque la taille de l'effet joint diminue, l'interaction multiplicative devient négative alors que l'interaction additive reste positive. Puis, lorsque la taille de l'effet joint diminue encore, l'interaction devient négative sur les deux échelles.
 
-> ![](Image6.png){width=100%}
-> ![](Image7.png){width=100%}
+> ![](img/Image6.png){width=100%}
+> ![](img/Image7.png){width=100%}
 
 
 ### Interaction pure et qualitative {-}

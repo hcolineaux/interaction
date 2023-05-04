@@ -33,7 +33,7 @@ Ici on s'intéresse donc à deux modifications d'effet.
 
 Le DAG (sans les médiateurs) était : 
 
-> ![](Image13.png){width=30%}
+> ![](img/Image13.png){width=30%}
 
 Les estimands étaient définis sur l'échelle additive par : 
 

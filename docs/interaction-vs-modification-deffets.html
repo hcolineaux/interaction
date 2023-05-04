@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Interaction vs modification d’effets | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Interaction vs modification d’effets | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -367,7 +367,7 @@ Exemple
 </ul>
 <p>Il existe des cas où l’identification d’une interaction ou d’une modification d’effet ne conduira pas à la même démarche et donc au même résultat <span class="citation">[<a href="#ref-vanderweele_distinction_2009" role="doc-biblioref">5</a>]</span>. Prenons le DAG suivant :</p>
 <blockquote>
-<p><img src="Image12.png" style="width:30.0%" /></p>
+<p><img src="img/Image12.png" style="width:30.0%" /></p>
 </blockquote>
 <p>Dans ce cas, il n’y a pas d’interaction entre A1 et A2, car si on intervient sur les 2 (<span class="math inline">\(\small do(A1, A2)\)</span>), il n’y a plus de chemin entre A2 et Y. Il peut par contre y avoir une modification de l’effet <span class="math inline">\(\small A1 \rightarrow Y\)</span> par A2 (<span class="math inline">\(\small do(A1)\)</span>). Dans ce cas, pour estimer cet effet, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3.</p>
 
