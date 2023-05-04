@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Interaction vs modification d’effets | Interactions et modifications d’effet   en Epidémiologie</title>
+  <title>Chapter 3 Notations | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Interaction vs modification d’effets | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta property="og:title" content="Chapter 3 Notations | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Interaction vs modification d’effets | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta name="twitter:title" content="Chapter 3 Notations | Interactions et modifications d’effet   en Epidémiologie" />
   
   <meta name="twitter:description" content="." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="notations.html"/>
-<link rel="next" href="la-question-des-échelles.html"/>
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="interaction-vs-modification-deffets.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -193,120 +193,74 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="interaction-vs-modification-deffets" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Interaction vs modification d’effets<a href="interaction-vs-modification-deffets.html#interaction-vs-modification-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="modification-deffets" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Modification d’effets<a href="interaction-vs-modification-deffets.html#modification-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La question de la modification d’effet consiste à d’identifier si l’effet du traitement ou de l’exposition est différent dans différents groupes de patients ayant des caractéristiques différentes (estimer l’effet d’une exposition séparément en fonction d’une autre variable) <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">1</a>]</span>.</p>
-<p>Si l’on compare avec un essai d’intervention, c’est comme s’il y avait 1 seule intervention mais que l’analyse est stratifiée sur V. On analyse donc l’effet du scénario <span class="math inline">\(\small do(X)\)</span> dans chaque groupe de <span class="math inline">\(\small V\)</span>.</p>
-<p>En observationnel, l’effet causal qui nous intéresse est donc celui de <span class="math inline">\(\small X\)</span> mais pas celui de <span class="math inline">\(\small V\)</span>.
-On ajustera sur les facteurs de confusion de <span class="math inline">\(\small X \rightarrow Y\)</span>.</p>
-<p>On ne fait pas d’hypothèse sur les mécanismes de la modification d’effet, qui peut être causale, de façon directe ou indirecte, ou pas du tout (par proxy ou cause commune) <span class="citation">[<a href="#ref-vanderweele_four_2007" role="doc-biblioref">2</a>]</span>.</p>
-<blockquote>
-<p>Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc.</p>
-</blockquote>
-<p>On a une modification de l’effet de X par V si l’effet de X est différent dans chaque strate définie par V:</p>
+<div id="notations" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Notations<a href="notations.html#notations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="variables-et-probabilités" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Variables et probabilités<a href="notations.html#variables-et-probabilités" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On note :</p>
 <ul>
-<li>en additif : <span class="math inline">\(\small DR(X | V=0) ≠ DR(X | V=1)\)</span>
+<li>un outcome : <span class="math inline">\(\small Y\)</span>,</li>
+<li>deux expositions : <span class="math inline">\(\small X\)</span> et <span class="math inline">\(\small V\)</span></li>
+</ul>
+<p>La probabilité de l’outcome Y dans chaque strate définie par les 2 expositions est notée :</p>
 <ul>
-<li>soit <span class="math inline">\(\small p10 -p00 ≠ p11- p01\)</span><br />
-</li>
-</ul></li>
-<li>en multiplicatif : <span class="math inline">\(\small RR(X | V=0) ≠ RR(X | V=1)\)</span>
-<ul>
-<li>soit <span class="math inline">\(\small p10/p00 ≠ p11/p01\)</span></li>
-</ul></li>
+<li><span class="math inline">\(\small p_{xv} = P(Y = 1|X = x,V = v)\)</span></li>
 </ul>
 <blockquote>
 <ins>
 Exemple
 </ins>
-<p>Modification d’effet dans l’exemple 1</p>
-<p>En additif :</p>
-<ul>
-<li>effet quand V=0 : <span class="math inline">\(\small DR (X | V=0) = 0,2 - 0,1 = +0,1\)</span></li>
-<li>effet quand V=1 : <span class="math inline">\(\small DR (X | V=1) = 0,9 - 0,4 = +0,5\)</span></li>
-<li>donc <span class="math inline">\(\small DR (X | V=0) ≠ DR (X | V=1)\)</span></li>
-</ul>
-<p>En multiplicatif :</p>
-<ul>
-<li>effet quand V=0 : <span class="math inline">\(\small RR(X | V=0) = 0,2/0,1 = ×2\)</span></li>
-<li>effet quand V=1 : <span class="math inline">\(\small RR(X | V=1) = 0,9/0,4 =×2,25\)</span></li>
-<li>donc <span class="math inline">\(\small RR(X | V=0) ≠ RR(X | V=1)\)</span></li>
-</ul>
-<p>Ici l’effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l’échelle additive et multiplicative. On peut donc dire que le fait d’avoir vécu un événement traumatique modifie l’effet du tabac. Attention, on fait l’hypothèse de l’absence de facteurs de confusion entre le tabagisme et l’outcome, ce qui est en réalité peu probable.</p>
+<p>On a deux exposition <span class="math inline">\(\small X\)</span>, le tabagisme actif à 20 ans, et <span class="math inline">\(\small V\)</span>, le fait d’avoir vécu un évènement traumatique pendant l’enfance. L’outcome <span class="math inline">\(\small Y\)</span> est binaire et représente le fait d’avoir au moins une pathologie chronique à 60 ans <span class="math inline">\(\small Y=1\)</span> ou aucune <span class="math inline">\(\small Y=0\)</span>.</p>
+<p>On décrit (données complètement fictives) :</p>
+<p><img src="img/Image1.png" style="width:40.0%" /></p>
+<p>Interprétation : La probabilité d’avoir au moins une pathologie chronique à 60 ans quand on n’a pas vécu d’événement traumatique pendant l’enfance et pas fumé à 20 ans est de 10%, tandis qu’elle est de 90% quand on a vécu un événement traumatique et fumé.</p>
 </blockquote>
 </div>
-<div id="interaction" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Interaction<a href="interaction-vs-modification-deffets.html#interaction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoints de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l’effet conjoint est supérieur à l’effet de la somme des individuels. Il y a une interaction antagoniste lorsque l’effet conjoint est inférieur à la somme des effets individuels <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">1</a>]</span>.</p>
-<p>Si l’on compare avec un essai d’intervention, c’est comme s’il y a plusieurs interventions selon le nombre de combinaison. On analyse donc l’effet du scénario <span class="math inline">\(\small do(X1, X2)\)</span>. Ici l’effet causal d’interêt est vraiment l’effet conjoint des deux variables.</p>
-<p>Dans un schéma observationnel, l’effet causal qui nous intéresse est donc celui de <span class="math inline">\(\small X*V\)</span>. On ajustera sur les facteurs de confusion de <span class="math inline">\(\small X1.X2 \rightarrow Y\)</span>.
-On fait l’hypothèse que les mécanismes de l’effet conjoint de X et V sont causaux.</p>
-<p>On a une interaction si :</p>
+<div id="mesures-deffets" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Mesures d’effets<a href="notations.html#mesures-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>L’effet d’une variable <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> peut être mesuré sur deux échelles : additive (différence de risque/probabilité) ou multiplicative (rapport de risque/probabilité).</p>
+<div id="concernant-les-différences-de-risques-dr-effets-additifs" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Concernant les différences de risques (DR, effets additifs)<a href="notations.html#concernant-les-différences-de-risques-dr-effets-additifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On a donc :</p>
 <ul>
-<li>en additif : <span class="math inline">\(\small DR(X \cap V) ≠ DR(X| V=0) + DR(V| X=0)\)</span>
-<ul>
-<li><span class="math inline">\(\small p11-p00 ≠( p10- p00)+(p01- p00 )\)</span></li>
-<li><span class="math inline">\(\small p11 ≠ (p10+p01)- p00\)</span></li>
-</ul></li>
-<li>en multiplicatif <span class="math inline">\(\small RR(X \cap V) ≠ RR(X| V=0) + RR(V| X=0)\)</span>
-<ul>
-<li><span class="math inline">\(\small p11/p00 ≠ p10/p00 + p01/p00\)</span></li>
-<li><span class="math inline">\(\small p11 ≠ (p10*p01)/ p00\)</span></li>
-</ul></li>
+<li>L’effet d’un X binaire sur Y est : <span class="math inline">\(\small DR(X) = P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0\)</span></li>
+<li>L’effet conjoint de X et V est : <span class="math inline">\(\small DR(X,V) = p11-p00\)</span></li>
+<li>L’effet de X sur Y dans chaque strate de V est : <span class="math inline">\(\small DR(X|V=0) = p10-p00\)</span> et <span class="math inline">\(\small DR(X|V=1) = p11-p01\)</span></li>
 </ul>
 <blockquote>
 <ins>
 Exemple
 </ins>
-<p>Interaction dans l’exemple 1</p>
-<p>En additif :</p>
+<p>Différences de risques pour l’exemple 1</p>
 <ul>
-<li>effet joint : <span class="math inline">\(\small DR(X \cap V) = 0,9 - 0,1 = +0.8\)</span></li>
-<li>somme des effets individuel : <span class="math inline">\(\small DR(X| V=0) + DR(V| X=0) = +0,1 +0,3 = +0,4\)</span></li>
-<li>donc <span class="math inline">\(\small DR(X \cap V) ≠ DR(X| V=0) + DR(V| X=0)\)</span></li>
+<li><span class="math inline">\(\small DR(X \cap V) = p11-p00 = 0,9 - 0,1 = +0.8\)</span></li>
+<li><span class="math inline">\(\small DR (X | V=0) = p10-p00 = 0,2 - 0,1 = +0.1\)</span></li>
+<li><span class="math inline">\(\small DR (X | V=1) = p11-p01 = 0,9 - 0,4 = +0,5\)</span></li>
 </ul>
-<p>En multiplicatif :</p>
-<ul>
-<li>effet joint : <span class="math inline">\(\small RR(X \cap V) = 0,9/0,1 = \times 9\)</span></li>
-<li>produit des effets individuel : <span class="math inline">\(\small RR(X | V=0) \times RR(V | X=0) = 2 \times 4 = \times 8\)</span></li>
-<li>donc <span class="math inline">\(\small DR(X \cap V) ≠ DR(X| V=0) \times DR(V| X=0)\)</span></li>
-</ul>
-<p>Ici l’effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions.</p>
+<p>Le fait d’être doublement exposé par rapport à pas du tout augmente le risque de +80%. Parmi les personnes n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 augmente le risque de +10%, alors que parmi les personnes ayant vécu un événement traumatique, il est augmenté de +50%.</p>
 </blockquote>
 </div>
-<div id="synthèse" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Synthèse<a href="interaction-vs-modification-deffets.html#synthèse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Mathématiquement, les formulations sont équivalentes :</p>
+<div id="concernant-les-rapports-de-risque-effets-multiplicatifs." class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Concernant, les rapports de risque (effets multiplicatifs).<a href="notations.html#concernant-les-rapports-de-risque-effets-multiplicatifs." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>on peut notamment utiliser les <strong>risques relatifs</strong> (RR). On donc :</p>
 <ul>
-<li>échelle additive: <span class="math inline">\(\small p10 -p00 ≠ p11- p01 ⇔ p11 ≠(p10+p01)- p00\)</span></li>
-<li>échelle multiplicative : <span class="math inline">\(\small p10/p00 ≠ p11/p01⇔ p11 ≠(p1*p01)/ p00\)</span></li>
+<li>L’effet d’un X binaire sur Y est : <span class="math inline">\(\small RR(X) = P(Y = 1|X = 1) / P(Y = 1|X = 0) = p_1 / p_0\)</span></li>
+<li>L’effet conjoint de X et V est : <span class="math inline">\(\small RR(X,V) = p11/p00\)</span></li>
+<li>L’effet de X sur Y dans chaque strate de V est : <span class="math inline">\(\small RR(X|V=0) = p10/p00\)</span> et <span class="math inline">\(\small RR(X|V=1) = p11/p01\)</span></li>
 </ul>
-<p>La différence se joue plutôt sur :</p>
-<ul>
-<li>la façon dont la question est posée (effet de X selon V ou effet conjoint de X et V),</li>
-<li>sur les hypothèses causales formulées (scénarii <span class="math inline">\(\small do(X)\)</span> ou <span class="math inline">\(\small do(X,V)\)</span>)</li>
-<li>et donc sur les sets de facteurs de confusion à considérer (seulement sur <span class="math inline">\(\small X \rightarrow Y\)</span> ou <span class="math inline">\(\small X.V \rightarrow Y\)</span>).</li>
-</ul>
-<p>Il existe des cas où l’identification d’une interaction ou d’une modification d’effet ne conduira pas à la même démarche et donc au même résultat <span class="citation">[<a href="#ref-vanderweele_distinction_2009" role="doc-biblioref">3</a>]</span>. Prenons le DAG suivant :</p>
 <blockquote>
-<p><img src="Image12.png" style="width:30.0%" /></p>
+<ins>
+Exemple
+</ins>
+<p>Risques relatifs pour l’exemple 1</p>
+<ul>
+<li><span class="math inline">\(\small RR(X \cap V) = 0,9/0,1 = ×9\)</span></li>
+<li><span class="math inline">\(\small RR(X | V=0) = 0,2/0,1 = ×2\)</span></li>
+<li><span class="math inline">\(\small RR(X | V=1) = 0,9/0,4 =×2,25\)</span></li>
+</ul>
+<p>Le risque quand on est doublement exposé par rapport à pas du tout est multiplié par 9. Parmi les personnes n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 multiplie le risque par 2, alors que parmi les personnes ayant vécu un événement traumatique, il est multiplié par 2,25.</p>
 </blockquote>
-<p>Dans ce cas, il n’y a pas d’interaction entre A1 et A2, car si on intervient sur les 2 (<span class="math inline">\(\small do(A1, A2)\)</span>), il n’y a plus de chemin entre A2 et Y. Il peut par contre y avoir une modification de l’effet <span class="math inline">\(\small A1 \rightarrow Y\)</span> par A2 (<span class="math inline">\(\small do(A1)\)</span>). Dans ce cas, pour estimer cet effet, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3.</p>
-
 </div>
-</div>
-<h3> Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-corraini_effect_2017" class="csl-entry">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Corraini P, Olsen M, Pedersen L, Dekkers OM, Vandenbroucke JP. Effect modification, interaction and mediation: An overview of theoretical insights for clinical investigators. Clinical Epidemiology 2017;9:331–8. <a href="https://doi.org/10.2147/CLEP.S129728">https://doi.org/10.2147/CLEP.S129728</a>.</div>
-</div>
-<div id="ref-vanderweele_four_2007" class="csl-entry">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">VanderWeele TJ, Robins JM. Four types of effect modification: A classification based on directed acyclic graphs. Epidemiology (Cambridge, Mass) 2007;18:561–8. <a href="https://doi.org/10.1097/EDE.0b013e318127181b">https://doi.org/10.1097/EDE.0b013e318127181b</a>.</div>
-</div>
-<div id="ref-vanderweele_distinction_2009" class="csl-entry">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">VanderWeele TJ. On the distinction between interaction and effect modification. Epidemiology (Cambridge, Mass) 2009;20:863–71. <a href="https://doi.org/10.1097/EDE.0b013e3181ba333c">https://doi.org/10.1097/EDE.0b013e3181ba333c</a>.</div>
 </div>
 </div>
             </section>
@@ -314,8 +268,8 @@ Exemple
           </div>
         </div>
       </div>
-<a href="notations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="la-question-des-échelles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interaction-vs-modification-deffets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

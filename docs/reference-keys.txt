@@ -43,3 +43,7 @@ ajouter-de-la-complexité
 interaction-avec-confusion-intermédiaire
 interaction-et-médiation
 références
+variables-et-probabilités
+concernant-les-différences-de-risques-dr-effets-additifs
+concernant-les-rapports-de-risque-on-peut-notamment-utiliser-les-risques-relatifs-rreffets-multiplicatifs.
+concernant-les-rapports-de-risque-effets-multiplicatifs.
