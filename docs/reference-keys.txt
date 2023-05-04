@@ -38,7 +38,6 @@ présentation-des-résultats
 modification-deffet
 interaction-1
 proposition
-en-pratique
 steps
 exemple-1---y-binaire
 exemple-2---y-quantitatif

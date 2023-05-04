@@ -1,7 +1,7 @@
-# En pratique
+# (PART) En pratique {-}
 
 
-## Steps
+# Steps
 
 1. formuler l'objectif
     - predictif ou explicatif
@@ -18,10 +18,10 @@
     - MSM
 
 
-## Exemple 1 - Y binaire
+# Exemple 1 - Y binaire
 
 
-## Exemple 2 - Y quantitatif
+# Exemple 2 - Y quantitatif
 
 **1. Objectifs**
 
