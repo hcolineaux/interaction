@@ -2,8 +2,6 @@
 
 # Simulations
 
-
-
 Pour la description des différents types d'estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires):
 
 > ![](img/Image10.png){width=50%}
@@ -252,7 +250,7 @@ cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"), OR = t[c(12,14,13),6]) %>%
 ```
 
 
-# Pour aller plus loin
+# Analyses confirmatoires
 
 <script type="text/javascript">
 
