@@ -125,21 +125,40 @@ Idéalement, les interactions devraient cependant être reportées sur les 2 éc
 
 On a déjà défini un paramètre d'interaction sur l'échelle additive (AI) à partir des différences d'effets @vanderweele_tutorial_2014 :
 
-- $AI = \small DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))$
-- $AI = \small (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]$
-- soit $AI =\small p_{11} - p_{10} - p_{01} + p_{00}$
+- $\small AI = DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))$
+- $\small AI = (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]$
+- soit $\small AI =p_{11} - p_{10} - p_{01} + p_{00}$
 
 ## Avec les risques relatifs (RR)
 
 On a aussi défini un paramètre d'interaction sur l'échelle multiplicative (MI) à partir des risques relatifs @vanderweele_tutorial_2014 :
 
-- $\small \frac{RR11}{RR10 \times RR01}$
-- soit $\small \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}$
-- soit $\small \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}$
+- $\small MI = small \frac{RR11}{RR10 \times RR01}$
+- soit $\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}$
+- soit $\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}$
 
 ## Avec les Odds Ration (OR) 
 
-## RERI 
+Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mesurés par des odds ratio estimé à partir de modèle de régression logistique.
+
+Un paramètre d'interaction sur l'echelle multiplicative (MI_{OR}) peut être estimé à partir de ces OR @vanderweele_tutorial_2014 :
+
+- $\small MI_{OR} = \frac{OR11}{RR10 \times OR01}$ 
+
+En général, la mesure MI_{OR} et MI_{RR} seront proches si l'outcome est rare @vanderweele_tutorial_2014. 
+
+## Excès de risque à partir des RR (RERI) 
+
+Lorsque seulement les risques relatifs sont donnés mais que l'on souhaite évaluer l'interaction sur l'échelle additive, l'excès de risque du à l'interaction (RERI) peut être estimé à partir des risques relatifs @vanderweele_tutorial_2014 : 
+
+- $\small RERI = RR11 - RR10 - RR01 + 1$
+
+
++ RERI(OR)
 
 ## Autres 
+
+- Synergie index 
+- attributable proportion
+
 

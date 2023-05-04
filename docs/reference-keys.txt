@@ -19,7 +19,7 @@ types-de-paramètres
 avec-les-différences-de-risques-dr
 avec-les-risques-relatifs-rr
 avec-les-odds-ration-or
-reri
+excès-de-risque-à-partir-des-rr-reri
 autres
 estimations
 simulations

@@ -204,7 +204,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.1" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#avec-les-différences-de-risques-dr"><i class="fa fa-check"></i><b>6.1</b> Avec les différences de risques (DR)</a></li>
 <li class="chapter" data-level="6.2" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#avec-les-risques-relatifs-rr"><i class="fa fa-check"></i><b>6.2</b> Avec les risques relatifs (RR)</a></li>
 <li class="chapter" data-level="6.3" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#avec-les-odds-ration-or"><i class="fa fa-check"></i><b>6.3</b> Avec les Odds Ration (OR)</a></li>
-<li class="chapter" data-level="6.4" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#reri"><i class="fa fa-check"></i><b>6.4</b> RERI</a></li>
+<li class="chapter" data-level="6.4" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#excès-de-risque-à-partir-des-rr-reri"><i class="fa fa-check"></i><b>6.4</b> Excès de risque à partir des RR (RERI)</a></li>
 <li class="chapter" data-level="6.5" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#autres"><i class="fa fa-check"></i><b>6.5</b> Autres</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="estimations.html"><a href="estimations.html"><i class="fa fa-check"></i><b>7</b> Estimations</a>
@@ -271,28 +271,43 @@ div.csl-indent {
 <h2><span class="header-section-number">6.1</span> Avec les différences de risques (DR)<a href="types-de-paramètres.html#avec-les-différences-de-risques-dr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On a déjà défini un paramètre d’interaction sur l’échelle additive (AI) à partir des différences d’effets <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
 <ul>
-<li><span class="math inline">\(AI = \small DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))\)</span></li>
-<li><span class="math inline">\(AI = \small (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]\)</span></li>
-<li>soit <span class="math inline">\(AI =\small p_{11} - p_{10} - p_{01} + p_{00}\)</span></li>
+<li><span class="math inline">\(\small AI = DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))\)</span></li>
+<li><span class="math inline">\(\small AI = (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]\)</span></li>
+<li>soit <span class="math inline">\(\small AI =p_{11} - p_{10} - p_{01} + p_{00}\)</span></li>
 </ul>
 </div>
 <div id="avec-les-risques-relatifs-rr" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Avec les risques relatifs (RR)<a href="types-de-paramètres.html#avec-les-risques-relatifs-rr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On a aussi défini un paramètre d’interaction sur l’échelle multiplicative (MI) à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
 <ul>
-<li><span class="math inline">\(\small \frac{RR11}{RR10 \times RR01}\)</span></li>
-<li>soit <span class="math inline">\(\small \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}\)</span></li>
-<li>soit <span class="math inline">\(\small \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}\)</span></li>
+<li><span class="math inline">\(\small MI = small \frac{RR11}{RR10 \times RR01}\)</span></li>
+<li>soit <span class="math inline">\(\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}\)</span></li>
+<li>soit <span class="math inline">\(\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}\)</span></li>
 </ul>
 </div>
 <div id="avec-les-odds-ration-or" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Avec les Odds Ration (OR)<a href="types-de-paramètres.html#avec-les-odds-ration-or" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Souvent en épidémiologie, lorsque l’outcome Y est binaire, les effets sont mesurés par des odds ratio estimé à partir de modèle de régression logistique.</p>
+<p>Un paramètre d’interaction sur l’echelle multiplicative (MI_{OR}) peut être estimé à partir de ces OR <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<ul>
+<li><span class="math inline">\(\small MI_{OR} = \frac{OR11}{RR10 \times OR01}\)</span></li>
+</ul>
+<p>En général, la mesure MI_{OR} et MI_{RR} seront proches si l’outcome est rare <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</p>
 </div>
-<div id="reri" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> RERI<a href="types-de-paramètres.html#reri" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="excès-de-risque-à-partir-des-rr-reri" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Excès de risque à partir des RR (RERI)<a href="types-de-paramètres.html#excès-de-risque-à-partir-des-rr-reri" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lorsque seulement les risques relatifs sont donnés mais que l’on souhaite évaluer l’interaction sur l’échelle additive, l’excès de risque du à l’interaction (RERI) peut être estimé à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<ul>
+<li><p><span class="math inline">\(\small RERI = RR11 - RR10 - RR01 + 1\)</span></p></li>
+<li><p>RERI(OR)</p></li>
+</ul>
 </div>
 <div id="autres" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Autres<a href="types-de-paramètres.html#autres" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Synergie index</li>
+<li>attributable proportion</li>
+</ul>
 
 </div>
 </div>
