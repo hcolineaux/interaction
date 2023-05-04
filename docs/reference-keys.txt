@@ -4,12 +4,14 @@ quand-étudier-les-interactions
 prediction-versus-causalité
 types-dobjectifs
 les-points-les-plus-importants
-interaction-vs-modification-deffets
 notations
+variables-et-probabilités
 mesures-deffets
+concernant-les-différences-de-risques-dr-effets-additifs
+concernant-les-rapports-de-risque-effets-multiplicatifs.
+interaction-vs-modification-deffets
 modification-deffets
 interaction
-conséquences-pour-lestimation
 synthèse
 la-question-des-échelles
 mesures-des-interactions
@@ -43,7 +45,3 @@ ajouter-de-la-complexité
 interaction-avec-confusion-intermédiaire
 interaction-et-médiation
 références
-variables-et-probabilités
-concernant-les-différences-de-risques-dr-effets-additifs
-concernant-les-rapports-de-risque-on-peut-notamment-utiliser-les-risques-relatifs-rreffets-multiplicatifs.
-concernant-les-rapports-de-risque-effets-multiplicatifs.
