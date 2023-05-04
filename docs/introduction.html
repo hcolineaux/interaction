@@ -279,13 +279,13 @@ div.csl-indent {
 <p>Selon le type d’objectif, la démarche d’analyse et les enjeux méthodologiques ne vont pas être les mêmes. Si l’objectif est prédictif, la démarche va être centrée sur la <em>prédiction de l’outcome</em>, à partir de covariables sélectionnées afin d’optimiser la précision de l’estimation, tout en prenant en compte leur disponibilité en pratique et la parcimonie du modèle.</p>
 <p>Dans une démarche explicative, ou <em>étiologique</em>, au contraire, la démarche va être centré sur l’<em>estimation d’un effet causal</em>, en prenant en compte les covariables en fonction de leur rôle vis-à-vis de l’effet d’intérêt (facteurs de confusion, colliders, médiateurs…).</p>
 <p>En épidémiologie, à l’exception des cas où l’on souhaite développer un test ou score diagnostic ou pronostic, les objectifs sont le plus souvent explicatifs. On cherche en effet, la plupart du temps, à identifier des liens de cause à effet, afin de pouvoir agir sur les causes pour modifier les effets.</p>
-<p>Finalement, pour répondre à la question “quand doit-on prendre en compte les interactions”, il est d’abord nécessaire d’identifier dans quel type de démarche l’on s’inscrit :</p>
+<p>Finalement, pour répondre à la question “quand doit-on prendre en compte les interactions ?”, il est d’abord nécessaire d’identifier dans quel type de démarche l’on s’inscrit :</p>
 <ul>
 <li><strong>Démarche prédictive</strong> : on ajoutera alors les interactions dans le modèle de prédiction, pour le rendre plus <em>flexible</em>, si cela améliore la précision de l’estimation <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</li>
 <li><strong>Démarche explicative/étiologique</strong> : on étudiera les interactions ou modifications d’effet, si cela répond directement à l’objectif. Par exemple :
 <ul>
 <li>Si l’objectif est du type “l’effet de X sur Y varie-t-il en fonction de V ?”, on prendra en compte l’interactions entre X et V.</li>
-<li>Les objectifs qui nécessitent la prise en compte de l’interaction peuvent aussi être du type : “Quel est l’effet conjoint de X et V sur Y ?” ou “Quel part de l’effet de X sur Y disparaît quand V est modifié ?”</li>
+<li>Les objectifs qui nécessitent la prise en compte de l’interaction peuvent aussi être du type : “Quel est l’effet conjoint de X et V sur Y ?” ou “Quel part de l’effet de X sur Y disparaît quand V est modifié ?”, etc.</li>
 <li>Par contre, si l’objectif est simplement d’estimer l’effet de X sur Y, ou l’effet médié par M, la prise en compte des interactions entre X et des covariables (facteurs de confusion ou médiateurs) n’est pas indispensable. C’est l’effet “moyen” qui sera estimé. Des termes d’interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l’estimation (enjeu d’optimisation du modèle).</li>
 </ul></li>
 </ul>
@@ -303,7 +303,7 @@ div.csl-indent {
 </div>
 <div id="les-points-les-plus-importants" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Les points les plus importants<a href="introduction.html#les-points-les-plus-importants" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La première étape importantes consiste à <strong>définir précisément l’objectif</strong> :</p>
+<p>La première étape importante consiste à <strong>définir précisément l’objectif</strong> :</p>
 <ul>
 <li>L’objectif est-il de type descriptif, prédictif ou explicatif ?</li>
 <li>Si l’on est dans une démarche explicative, d’inférence causale, est-ce que la mesure d’un effet d’interaction est nécessaire pour y répondre ? (identifier précisément l’effet que l’on cherche à estimer, ou <em>estimand</em>).</li>

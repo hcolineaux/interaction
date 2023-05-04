@@ -22,12 +22,12 @@ Dans une démarche explicative, ou *étiologique*, au contraire, la démarche va
 
 En épidémiologie, à l'exception des cas où l'on souhaite développer un test ou score diagnostic ou pronostic, les objectifs sont le plus souvent explicatifs. On cherche en effet, la plupart du temps, à identifier des liens de cause à effet, afin de pouvoir agir sur les causes pour modifier les effets.
 
-Finalement, pour répondre à la question "quand doit-on prendre en compte les interactions", il est d'abord nécessaire d'identifier dans quel type de démarche l'on s’inscrit :
+Finalement, pour répondre à la question "quand doit-on prendre en compte les interactions ?", il est d'abord nécessaire d'identifier dans quel type de démarche l'on s’inscrit :
 
 - **Démarche prédictive** : on ajoutera alors les interactions dans le modèle de prédiction, pour le rendre plus *flexible*, si cela améliore la précision de l'estimation @vanderweele_tutorial_2014.
 - **Démarche explicative/étiologique** : on étudiera les interactions ou modifications d'effet, si cela répond directement à l'objectif. Par exemple :
   + Si l'objectif est du type "l'effet de X sur Y varie-t-il en fonction de V ?", on prendra en compte l'interactions entre X et V.
-  + Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : "Quel est l'effet conjoint de X et V sur Y ?" ou "Quel part de l'effet de X sur Y disparaît quand V est modifié ?"
+  + Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : "Quel est l'effet conjoint de X et V sur Y ?" ou "Quel part de l'effet de X sur Y disparaît quand V est modifié ?", etc.
   + Par contre, si l'objectif est simplement d'estimer l'effet de X sur Y, ou l'effet médié par M, la prise en compte des interactions entre X et des covariables (facteurs de confusion ou médiateurs) n'est pas indispensable. C'est l'effet "moyen" qui sera estimé. Des termes d’interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l'estimation (enjeu d'optimisation du modèle).
 
 
@@ -43,7 +43,7 @@ Les objectifs pouvant nécessiter l’étude de l’interaction/modification d�
 
 ## Les points les plus importants 
 
-La première étape importantes consiste à **définir précisément l'objectif** : 
+La première étape importante consiste à **définir précisément l'objectif** : 
 
 - L'objectif est-il de type descriptif, prédictif ou explicatif ? 
 - Si l'on est dans une démarche explicative, d'inférence causale, est-ce que la mesure d'un effet d’interaction est nécessaire pour y répondre ? (identifier précisément l'effet que l'on cherche à estimer, ou *estimand*).

@@ -295,7 +295,10 @@ Exemple
 <h3>Concernant les différences de risques (DR, effets additifs)<a href="notations.html#concernant-les-différences-de-risques-dr-effets-additifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>On a donc :</p>
 <ul>
-<li>L’effet d’un X binaire sur Y est : <span class="math inline">\(\small DR(X) = P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0\)</span></li>
+<li>L’effet d’un X binaire sur Y est : <span class="math inline">\(\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))\)</span>
+<ul>
+<li>qu’on peut estimer, si les conditions d’identifiabilité sont réunies, par <span class="math inline">\(\small P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0\)</span></li>
+</ul></li>
 <li>L’effet conjoint de X et V est : <span class="math inline">\(\small DR(X,V) = p_{11}-p_{00}\)</span></li>
 <li>L’effet de X sur Y dans chaque strate de V est : <span class="math inline">\(\small DR(X|V=0) = p_{10}-p_{00}\)</span> et <span class="math inline">\(\small DR(X|V=1) = p_{11}-p_{01}\)</span></li>
 </ul>
@@ -316,7 +319,10 @@ Exemple
 <h3>Concernant, les rapports de risque (effets multiplicatifs)<a href="notations.html#concernant-les-rapports-de-risque-effets-multiplicatifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>on peut notamment utiliser les <strong>risques relatifs</strong> (RR). On donc :</p>
 <ul>
-<li>L’effet d’un X binaire sur Y est : <span class="math inline">\(\small RR(X) = P(Y = 1|X = 1) / P(Y = 1|X = 0) = p_1 / p_0\)</span></li>
+<li>L’effet d’un X binaire sur Y est : <span class="math inline">\(\small RR(X) = P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))\)</span>
+<ul>
+<li>qu’on peut estimer, si les conditions d’identifiabilité sont réunies, par <span class="math inline">\(\small P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))= p_1 / p_0\)</span></li>
+</ul></li>
 <li>L’effet conjoint de X et V est : <span class="math inline">\(\small RR(X,V) = p_{11}/p_{00}\)</span></li>
 <li>L’effet de X sur Y dans chaque strate de V est : <span class="math inline">\(\small RR(X|V=0) = p_{10}/p_{00}\)</span> et <span class="math inline">\(\small RR(X|V=1) =p_{11}/p_{01}\)</span></li>
 </ul>

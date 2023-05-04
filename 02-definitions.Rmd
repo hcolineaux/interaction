@@ -32,7 +32,8 @@ L'effet d'une variable $\small X$ sur $\small Y$ peut être mesuré sur deux éc
 
 On a donc :
 
--	L'effet d'un X binaire sur Y est : $\small DR(X) = P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0$
+-	L'effet d'un X binaire sur Y est : $\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))$ 
+    + qu'on peut estimer, si les conditions d'identifiabilité sont réunies, par $\small  P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0$
 -	L'effet conjoint de X et V est : $\small DR(X,V) = p_{11}-p_{00}$ 
 - L'effet de X sur Y dans chaque strate de V est : $\small DR(X|V=0) = p_{10}-p_{00}$ et $\small DR(X|V=1) = p_{11}-p_{01}$
 
@@ -50,7 +51,8 @@ Différences de risques pour l'exemple 1
 
 on peut notamment utiliser les **risques relatifs** (RR). On  donc :
 
--	L'effet d'un X binaire sur Y est : $\small RR(X) = P(Y = 1|X = 1) / P(Y = 1|X = 0) = p_1 / p_0$
+-	L'effet d'un X binaire sur Y est : $\small RR(X) = P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))$ 
+    + qu'on peut estimer, si les conditions d'identifiabilité sont réunies, par $\small P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))= p_1 / p_0$
 -	L'effet conjoint de X et V est : $\small RR(X,V) = p_{11}/p_{00}$ 
 - L'effet de X sur Y dans chaque strate de V est : $\small RR(X|V=0) = p_{10}/p_{00}$ et $\small RR(X|V=1) =p_{11}/p_{01}$
 
