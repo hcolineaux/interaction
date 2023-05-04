@@ -151,11 +151,12 @@ t %>%
 
 # A partir de modèles de régression
 
+Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.
 
 
-## Multiplicatif (régression logistique)
+## Régression logistique
 
-Lorsque l'on étudie un outcome binaire, on utilise souvent les modèles de régression logistique  
+Lorsque l'on étudie un outcome binaire, on utilise souvent les modèles de régression logistique.  
 
 
 ```{r reg_log_sum, echo = FALSE, warning=FALSE, message=FALSE}
@@ -176,12 +177,15 @@ Le coefficient `as.factor(A1)1` correspond à l'effet de A1 dans la catégorie d
 
 Le coefficient `as.factor(A1)1:as.factor(A2)1` correspond à la différence d'effet de A1 quand on passe dans l'autre catégorie de A2. L'effet de A1 dans la catégorie A2=1 est donc $\small OR = exp(1.756+1.786) =$ `r round(exp(1.756+1.786),3)`.
 
-L'interaction multiplicative peut donc être estimée par $\small IM = exp(1.786) =$ `r round(exp(1.786),3)`, soit $\small OR(A1|A2=0) - OR(A1|A2=1)$
+L'interaction multiplicative peut donc être estimée par $\small IM = exp(1.786) =$ `r round(exp(1.786),3)`, soit $\small OR(A1|A2=0) - OR(A1|A2=1)$. Ici l'interaction est significative. 
 
 On aurait aussi pu décrire cette interaction à partir de l'effet d'A2 dans chaque strate de A1.
 
+On peut explorer l'interaction sur l'échelle additive en estimant le RERI par $\small RERI \approx OR_{11} - OR_{10} - OR_{01} + 1 =$ `r round(exp(1.786+1.786) - exp(1.786) - exp(0.753) + 1,3)`, soit $\small OR(A1|A2=0) - OR(A1|A2=1)$. Ici l'interaction est significative. 
 
-En résumé : 
+
+
+En résumé (le package `finalfit` permet de sortir les résultats proprement) : 
 
 ```{r reg_log, echo = TRUE, warning=FALSE, message=FALSE}
 
@@ -196,7 +200,8 @@ dependent = "Y"
 df_f %>%
   finalfit(dependent, explanatory)-> t
 
-cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"), DR = t[c(12,14,13),6]) %>%
+cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"), 
+      OR = t[c(12,14,13),6]) %>%
   as.data.frame %>% 
       kbl() %>%
       kable_classic() 
@@ -206,13 +211,28 @@ cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"), DR = t[c(12,14,13),6]) %>%
 
 Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.
 
-## Additif (régression lineaire)
+## Régression lineaire
+
+Même si l'outcome binaire, on peut en théorie utiliser un modèle de régression linéaire et explorer les effets sur une échelle additive. Si l'outcome est quantitatif, on utilise aussi, en général, les modèles de régression linéaire.  
+
+
+```{r reg_lm_sum, echo = FALSE, warning=FALSE, message=FALSE}
+
+summary(lm(data = df,
+        Y ~ as.factor(A1)+
+                as.factor(A2)+
+                as.factor(A1)*as.factor(A2)+ 
+                as.factor(L1)+
+                as.factor(L2)+ 
+                as.factor(L3)))
+
+```
+
 
 <span style="color: red;">partie à compléter </span>
 
 ```{r reg_lm, echo=FALSE, warning=FALSE, message=FALSE}
 
-#explanatory = c("age.factor*sex.factor", "obstruct.factor", "perfor.factor")
 explanatory = c("as.factor(A1)",
                 "as.factor(A2)",
                 "as.factor(A1)*as.factor(A2)", 

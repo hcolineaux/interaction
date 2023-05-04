@@ -216,8 +216,8 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>7</b> Simulations</a></li>
 <li class="chapter" data-level="8" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html"><i class="fa fa-check"></i><b>8</b> A partir de modèles de régression</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#multiplicatif-régression-logistique"><i class="fa fa-check"></i><b>8.1</b> Multiplicatif (régression logistique)</a></li>
-<li class="chapter" data-level="8.2" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#additif-régression-lineaire"><i class="fa fa-check"></i><b>8.2</b> Additif (régression lineaire)</a></li>
+<li class="chapter" data-level="8.1" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#régression-logistique"><i class="fa fa-check"></i><b>8.1</b> Régression logistique</a></li>
+<li class="chapter" data-level="8.2" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#régression-lineaire"><i class="fa fa-check"></i><b>8.2</b> Régression lineaire</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html"><i class="fa fa-check"></i><b>9</b> Pour aller plus loin</a>
 <ul>
@@ -274,9 +274,10 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="a-partir-de-modèles-de-régression" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">Chapter 8</span> A partir de modèles de régression<a href="a-partir-de-modèles-de-régression.html#a-partir-de-modèles-de-régression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="multiplicatif-régression-logistique" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Multiplicatif (régression logistique)<a href="a-partir-de-modèles-de-régression.html#multiplicatif-régression-logistique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Lorsque l’on étudie un outcome binaire, on utilise souvent les modèles de régression logistique</p>
+<p>Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.</p>
+<div id="régression-logistique" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Régression logistique<a href="a-partir-de-modèles-de-régression.html#régression-logistique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lorsque l’on étudie un outcome binaire, on utilise souvent les modèles de régression logistique.</p>
 <pre><code>## 
 ## Call:
 ## glm(formula = Y ~ as.factor(A1) + as.factor(A2) + as.factor(A1) * 
@@ -308,9 +309,10 @@ div.csl-indent {
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>Le coefficient <code>as.factor(A1)1</code> correspond à l’effet de A1 dans la catégorie de référence de A2, soit <span class="math inline">\(\small OR = exp(1.756) =\)</span> 5.789.</p>
 <p>Le coefficient <code>as.factor(A1)1:as.factor(A2)1</code> correspond à la différence d’effet de A1 quand on passe dans l’autre catégorie de A2. L’effet de A1 dans la catégorie A2=1 est donc <span class="math inline">\(\small OR = exp(1.756+1.786) =\)</span> 34.536.</p>
-<p>L’interaction multiplicative peut donc être estimée par <span class="math inline">\(\small IM = exp(1.786) =\)</span> 5.966, soit <span class="math inline">\(\small OR(A1|A2=0) - OR(A1|A2=1)\)</span></p>
+<p>L’interaction multiplicative peut donc être estimée par <span class="math inline">\(\small IM = exp(1.786) =\)</span> 5.966, soit <span class="math inline">\(\small OR(A1|A2=0) - OR(A1|A2=1)\)</span>. Ici l’interaction est significative.</p>
 <p>On aurait aussi pu décrire cette interaction à partir de l’effet d’A2 dans chaque strate de A1.</p>
-<p>En résumé :</p>
+<p>On peut explorer l’interaction sur l’échelle additive en estimant le RERI par <span class="math inline">\(\small RERI \approx OR_{11} - OR_{10} - OR_{01} + 1 =\)</span> 28.499, soit <span class="math inline">\(\small OR(A1|A2=0) - OR(A1|A2=1)\)</span>. Ici l’interaction est significative.</p>
+<p>En résumé (le package <code>finalfit</code> permet de sortir les résultats proprement) :</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="a-partir-de-modèles-de-régression.html#cb3-1" aria-hidden="true" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
 <span id="cb3-2"><a href="a-partir-de-modèles-de-régression.html#cb3-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
 <span id="cb3-3"><a href="a-partir-de-modèles-de-régression.html#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
@@ -322,10 +324,11 @@ div.csl-indent {
 <span id="cb3-9"><a href="a-partir-de-modèles-de-régression.html#cb3-9" aria-hidden="true" tabindex="-1"></a>df_f <span class="sc">%&gt;%</span></span>
 <span id="cb3-10"><a href="a-partir-de-modèles-de-régression.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
 <span id="cb3-11"><a href="a-partir-de-modèles-de-régression.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="a-partir-de-modèles-de-régression.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), <span class="at">DR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb3-13"><a href="a-partir-de-modèles-de-régression.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
-<span id="cb3-14"><a href="a-partir-de-modèles-de-régression.html#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb3-15"><a href="a-partir-de-modèles-de-régression.html#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
+<span id="cb3-12"><a href="a-partir-de-modèles-de-régression.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), </span>
+<span id="cb3-13"><a href="a-partir-de-modèles-de-régression.html#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="a-partir-de-modèles-de-régression.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb3-15"><a href="a-partir-de-modèles-de-régression.html#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="a-partir-de-modèles-de-régression.html#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -333,7 +336,7 @@ div.csl-indent {
 names
 </th>
 <th style="text-align:left;">
-DR
+OR
 </th>
 </tr>
 </thead>
@@ -366,8 +369,34 @@ Interaction
 </table>
 <p>Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.</p>
 </div>
-<div id="additif-régression-lineaire" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Additif (régression lineaire)<a href="a-partir-de-modèles-de-régression.html#additif-régression-lineaire" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="régression-lineaire" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Régression lineaire<a href="a-partir-de-modèles-de-régression.html#régression-lineaire" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Même si l’outcome binaire, on peut en théorie utiliser un modèle de régression linéaire et explorer les effets sur une échelle additive. Si l’outcome est quantitatif, on utilise aussi, en général, les modèles de régression linéaire.</p>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ as.factor(A1) + as.factor(A2) + as.factor(A1) * 
+##     as.factor(A2) + as.factor(L1) + as.factor(L2) + as.factor(L3), 
+##     data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.93110 -0.19602 -0.10494 -0.08426  0.91574 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                    0.103835   0.008146  12.746  &lt; 2e-16 ***
+## as.factor(A1)1                 0.300796   0.011592  25.948  &lt; 2e-16 ***
+## as.factor(A2)1                 0.092280   0.008671  10.642  &lt; 2e-16 ***
+## as.factor(L1)1                 0.020677   0.007495   2.759  0.00581 ** 
+## as.factor(L2)1                 0.019476   0.009410   2.070  0.03851 *  
+## as.factor(L3)1                -0.019574   0.008085  -2.421  0.01549 *  
+## as.factor(A1)1:as.factor(A2)1  0.394034   0.017854  22.070  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3615 on 9993 degrees of freedom
+## Multiple R-squared:  0.2856, Adjusted R-squared:  0.2852 
+## F-statistic: 665.8 on 6 and 9993 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span style="color: red;">partie à compléter </span></p>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
