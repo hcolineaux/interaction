@@ -143,15 +143,40 @@ t %>%
 
 # A partir de modèles de régression
 
-<span style="color: red;">partie à compléter</span>
-
 
 
 ## Multiplicatif (régression logistique)
 
-```{r reg_log, echo=FALSE, warning=FALSE, message=FALSE}
+Lorsque l'on étudie un outcome binaire, on utilise souvent les modèles de régression logistique  
 
-#explanatory = c("age.factor*sex.factor", "obstruct.factor", "perfor.factor")
+
+```{r reg_log_sum, echo = FALSE, warning=FALSE, message=FALSE}
+
+df_f <- df %>%  mutate(Y = factor(Y))
+
+
+summary(glm(data = df_f,
+        Y ~ as.factor(A1)+
+                as.factor(A2)+
+                as.factor(A1)*as.factor(A2)+ 
+                as.factor(L1)+
+                as.factor(L2)+ 
+                as.factor(L3), family = binomial))
+
+```
+Le coefficient `as.factor(A1)1` correspond à l'effet de A1 dans la catégorie de référence de A2, soit $\small OR = exp(1.756) =$ `r round(exp(1.756),3)`.
+
+Le coefficient `as.factor(A1)1:as.factor(A2)1` correspond à la différence d'effet de A1 quand on passe dans l'autre catégorie de A2. L'effet de A1 dans la catégorie A2=1 est donc $\small OR = exp(1.756+1.786) =$ `r round(exp(1.756+1.786),3)`.
+
+L'interaction multiplicative peut donc être estimée par $\small IM = exp(1.786) =$ `r round(exp(1.786),3)`, soit $\small OR(A1|A2=0) - OR(A1|A2=1)$
+
+On aurait aussi pu décrire cette interaction à partir de l'effet d'A2 dans chaque strate de A1.
+
+
+En résumé : 
+
+```{r reg_log, echo = TRUE, warning=FALSE, message=FALSE}
+
 explanatory = c("as.factor(A1)",
                 "as.factor(A2)",
                 "as.factor(A1)*as.factor(A2)", 
@@ -160,9 +185,6 @@ explanatory = c("as.factor(A1)",
                 "as.factor(L3)")
 dependent = "Y"
 
-
- df_f <- df %>%  mutate(Y = factor(Y))
- 
 df_f %>%
   finalfit(dependent, explanatory)-> t
 
@@ -171,11 +193,14 @@ cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"), DR = t[c(12,14,13),6]) %>%
       kbl() %>%
       kable_classic() 
 
-
 ```
+
+
 Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.
 
 ## Additif (régression lineaire)
+
+<span style="color: red;">partie à compléter </span>
 
 ```{r reg_lm, echo=FALSE, warning=FALSE, message=FALSE}
 
