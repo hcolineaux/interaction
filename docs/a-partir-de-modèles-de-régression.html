@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 Exemple 1 - Y binaire | Interactions et modifications d’effet   en Epidémiologie</title>
+  <title>Chapter 8 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 Exemple 1 - Y binaire | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta property="og:title" content="Chapter 8 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 Exemple 1 - Y binaire | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta name="twitter:title" content="Chapter 8 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie" />
   
   <meta name="twitter:description" content="." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="steps.html"/>
-<link rel="next" href="exemple-2---y-quantitatif.html"/>
+<link rel="prev" href="simulations.html"/>
+<link rel="next" href="pour-aller-plus-loin.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -270,16 +270,99 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exemple-1---y-binaire" class="section level1 hasAnchor" number="13">
-<h1><span class="header-section-number">Chapter 13</span> Exemple 1 - Y binaire<a href="exemple-1---y-binaire.html#exemple-1---y-binaire" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="a-partir-de-modèles-de-régression" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> A partir de modèles de régression<a href="a-partir-de-modèles-de-régression.html#a-partir-de-modèles-de-régression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="multiplicatif-régression-logistique" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Multiplicatif (régression logistique)<a href="a-partir-de-modèles-de-régression.html#multiplicatif-régression-logistique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+names
+</th>
+<th style="text-align:left;">
+DR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A1|A2=0
+</td>
+<td style="text-align:left;">
+5.79 (4.99-6.72, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A2|A1=0
+</td>
+<td style="text-align:left;">
+2.12 (1.86-2.43, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interaction
+</td>
+<td style="text-align:left;">
+5.96 (4.54-7.90, p&lt;0.001)
+</td>
+</tr>
+</tbody>
+</table>
+<p>Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.</p>
+</div>
+<div id="additif-régression-lineaire" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Additif (régression lineaire)<a href="a-partir-de-modèles-de-régression.html#additif-régression-lineaire" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+names
+</th>
+<th style="text-align:left;">
+OR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A1|A2=0
+</td>
+<td style="text-align:left;">
+0.30 (0.28 to 0.32, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A2|A1=0
+</td>
+<td style="text-align:left;">
+0.09 (0.08 to 0.11, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interaction
+</td>
+<td style="text-align:left;">
+0.39 (0.36 to 0.43, p&lt;0.001)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="steps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="exemple-2---y-quantitatif.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simulations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pour-aller-plus-loin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -310,7 +393,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-pratique.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-estimation.Rmd",
 "text": "Edit"
 },
 "history": {

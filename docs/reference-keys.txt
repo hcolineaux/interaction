@@ -22,11 +22,11 @@ avec-les-odds-ration-or
 excès-de-risque-à-partir-des-rr-reri
 autres
 proportion-attribuable-ap
-estimations
 simulations
-estimation-par-régression
+a-partir-de-modèles-de-régression
 multiplicatif-régression-logistique
 additif-régression-lineaire
+pour-aller-plus-loin
 estimation-par-g-computation
 estimation-par-modèle-structurel-marginal
 estimation-avec-tmle
@@ -42,7 +42,7 @@ steps
 exemple-1---y-binaire
 exemple-2---y-quantitatif
 synthèse-générale
-pour-aller-plus-loin
+pour-aller-plus-loin-1
 ajouter-de-la-complexité
 interaction-avec-confusion-intermédiaire
 interaction-et-médiation
