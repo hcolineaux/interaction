@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Introduction | Interactions et modifications d’effet   en Epidémiologie</title>
+  <title>Chapter 6 Types de paramètres | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Introduction | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta property="og:title" content="Chapter 6 Types de paramètres | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Introduction | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta name="twitter:title" content="Chapter 6 Types de paramètres | Interactions et modifications d’effet   en Epidémiologie" />
   
   <meta name="twitter:description" content="." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="notations.html"/>
+<link rel="prev" href="la-question-des-échelles.html"/>
+<link rel="next" href="estimations.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -264,66 +264,23 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Comment telle prédisposition génétique et telle exposition environnementale <em>inter-agissent</em>-elles ? L’effet de tel traitement varie-t-il selon les circonstances ? Selon les caractéristiques du patient ? Telle intervention peut-elle être bénéfique pour un groupe social et délétère pour un autre ?</p>
-<p>De nombreuses questions épidémiologiques impliquent des mécanismes d’interactions ou de modifications d’effet. Pourtant, étudier ces mécanismes restent encore complexe aujourd’hui sur le plan méthodologique : quelle démarche adopter ? sur quelle échelle mesurer cette interaction ? comment interpréter les coefficients ? et cetera.</p>
-<p>Dans ce document, nous proposons une synthèse de la littérature et une démarche progressive et appliquée pour explorer ces questions.</p>
-<div id="quand-étudier-les-interactions" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Quand étudier les interactions ?<a href="introduction.html#quand-étudier-les-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="prediction-versus-causalité" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> <em>Prediction</em> versus <em>causalité</em><a href="introduction.html#prediction-versus-causalité" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>La science des données cherche à répondre à 3 types d’objectifs <span class="citation">[<a href="#ref-hernan2019second" role="doc-biblioref">1</a>]</span> :</p>
-<p><img src="img/threetask.png" style="width:100.0%" /></p>
-<p>Selon le type d’objectif, la démarche d’analyse et les enjeux méthodologiques ne vont pas être les mêmes. Si l’objectif est prédictif, la démarche va être centrée sur la <em>prédiction de l’outcome</em>, à partir de covariables sélectionnées afin d’optimiser la précision de l’estimation, tout en prenant en compte leur disponibilité en pratique et la parcimonie du modèle.</p>
-<p>Dans une démarche explicative, ou <em>étiologique</em>, au contraire, la démarche va être centré sur l’<em>estimation d’un effet causal</em>, en prenant en compte les covariables en fonction de leur rôle vis-à-vis de l’effet d’intérêt (facteurs de confusion, colliders, médiateurs…).</p>
-<p>En épidémiologie, à l’exception des cas où l’on souhaite développer un test ou score diagnostic ou pronostic, les objectifs sont le plus souvent explicatifs. On cherche en effet, la plupart du temps, à identifier des liens de cause à effet, afin de pouvoir agir sur les causes pour modifier les effets.</p>
-<p>Finalement, pour répondre à la question “quand doit-on prendre en compte les interactions”, il est d’abord nécessaire d’identifier dans quel type de démarche l’on s’inscrit :</p>
-<ul>
-<li><strong>Démarche prédictive</strong> : on ajoutera alors les interactions dans le modèle de prédiction, pour le rendre plus <em>flexible</em>, si cela améliore la précision de l’estimation <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</li>
-<li><strong>Démarche explicative/étiologique</strong> : on étudiera les interactions ou modifications d’effet, si cela répond directement à l’objectif. Par exemple :
-<ul>
-<li>Si l’objectif est du type “l’effet de X sur Y varie-t-il en fonction de V ?”, on prendra en compte l’interactions entre X et V.</li>
-<li>Les objectifs qui nécessitent la prise en compte de l’interaction peuvent aussi être du type : “Quel est l’effet conjoint de X et V sur Y ?” ou “Quel part de l’effet de X sur Y disparaît quand V est modifié ?”</li>
-<li>Par contre, si l’objectif est simplement d’estimer l’effet de X sur Y, ou l’effet médié par M, la prise en compte des interactions entre X et des covariables (facteurs de confusion ou médiateurs) n’est pas indispensable. C’est l’effet “moyen” qui sera estimé. Des termes d’interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l’estimation (enjeu d’optimisation du modèle).</li>
-</ul></li>
-</ul>
+<div id="types-de-paramètres" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Types de paramètres<a href="types-de-paramètres.html#types-de-paramètres" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="avec-les-différences-de-risques-dr" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Avec les différences de risques (DR)<a href="types-de-paramètres.html#avec-les-différences-de-risques-dr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="types-dobjectifs" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Types d’objectifs<a href="introduction.html#types-dobjectifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Dans ce document, nous nous intéresserons principalement aux interactions et modifications d’effet dans une démarche étiologique/ explicative.</p>
-<p>Les objectifs pouvant nécessiter l’étude de l’interaction/modification d’effet sont <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
-<ul>
-<li><strong>Cibler des sous-groupes</strong>. Par exemple, identifier des sous-groupes pour lesquels l’intervention aura le plus d’effet afin de pouvoir cibler l’intervention en cas de ressources limitées, ou s’assurer que l’intervention est bénéfice pour tous les groupes et pas délétères pour certains groupes.</li>
-<li><strong>Explorer les mécanismes d’un effet</strong>. Par exemple, en cas d’intervention qui n’a d’effet qu’en présence ou absence d’une caractéristiques particulière (définition mécanistique de l’interaction) ou seulement conjointement à une autre intervention.</li>
-<li><strong>Etudier l’effet d’une intervention pour éliminer une partie de l’effet d’une exposition non modifiable</strong>. Par exemple, quelle part de l’effet du niveau d’éducation des parents sur la mortalité disparaîtrait si on intervenait sur le tabagisme à l’adolescence ?</li>
-</ul>
+<div id="avec-les-risques-relatifs-rr" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Avec les risques relatifs (RR)<a href="types-de-paramètres.html#avec-les-risques-relatifs-rr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
+<div id="avec-les-odds-ration-or" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Avec les Odds Ration (OR)<a href="types-de-paramètres.html#avec-les-odds-ration-or" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="les-points-les-plus-importants" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Les points les plus importants<a href="introduction.html#les-points-les-plus-importants" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La première étape importantes consiste à <strong>définir précisément l’objectif</strong> :</p>
-<ul>
-<li>L’objectif est-il de type descriptif, prédictif ou explicatif ?</li>
-<li>Si l’on est dans une démarche explicative, d’inférence causale, est-ce que la mesure d’un effet d’interaction est nécessaire pour y répondre ? (identifier précisément l’effet que l’on cherche à estimer, ou <em>estimand</em>).</li>
-</ul>
-<p>Ensuite, de <strong>nombreuses questions</strong> se posent pour réaliser une analyse d’interaction, auxquelles nous tentons de répondre dans ce document :</p>
-<ul>
-<li>S’agit-il d’une interaction ou une modification d’effet ?</li>
-<li>Sur quelle échelle la mesure-t-on ? Un effet d’interaction peut en effet être défini sur une échelle multiplicative ou additive, et les résultats entre ces échelles peuvent être contradictoires.</li>
-<li>Comment estimer cette interaction ? Quels paramètres présenter et comment les interpréter ?</li>
-<li>Comment la représenter graphiquement ?</li>
-</ul>
+<div id="reri" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> RERI<a href="types-de-paramètres.html#reri" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="autres" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Autres<a href="types-de-paramètres.html#autres" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
-</div>
-</div>
-<h3> Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-hernan2019second" class="csl-entry">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Hernán MA, Hsu J, Healy B. A second chance to get causal inference right: A classification of data science tasks. Chance 2019;32:42–9.</div>
-</div>
-<div id="ref-vanderweele_tutorial_2014" class="csl-entry">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">VanderWeele TJ, Knol MJ. A <span>Tutorial</span> on <span>Interaction</span>. Epidemiologic Methods 2014;3:33–72. <a href="https://doi.org/10.1515/em-2013-0005">https://doi.org/10.1515/em-2013-0005</a>.</div>
 </div>
 </div>
             </section>
@@ -331,8 +288,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="notations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="la-question-des-échelles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -363,7 +320,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-echelles.Rmd",
 "text": "Edit"
 },
 "history": {

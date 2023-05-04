@@ -5,78 +5,97 @@
 
 ### Echelle additive {-}
 
-Une façon simple de mesurer l'interaction est de mesurer à quel point l'effet conjoint de 2 facteurs est différents de la somme de leurs effets individuels @vanderweele_tutorial_2014 :
+Une façon simple de mesurer l'interaction est de mesurer à quel point l'effet conjoint de deux facteurs est différents de la somme de leurs effets individuels @vanderweele_tutorial_2014 :
 
-- $\small (p11 - p00) - [(p10 - p00) + (p01 - p00)]$
-- soit $\small p11 - p10 - p01 + p00$
+- $\small DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))$
+- $\small (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]$
+- soit $\small p_{11} - p_{10} - p_{01} + p_{00}$
 
 > <ins>Exemple</ins>
-Mesure de l'nteraction dans l'exemple 1
+Mesure de l'interaction dans l'exemple 1
 >
-$\small DR(X1=1 \cap X2=1) - DR(X1=1|X2=0) + DR(X2=1|X1=0) = 0.8 - 0,4 = +0,4$
+- $\small DR(X\cap V) - (DR(X|V=0) + DR(V|X=0)) = 0.8 - (0,3 + 0,1)  = +0,4$
+- soit $\small p_{11} - p_{10} - p_{01} + p_{00} = 0,9 - 0,4 - 0,2 + 0,1 = +0,4$
+- ou $\small (p_{11} - p_{01}) - (p_{10} - p_{00}) = (0,9 - 0,2) - (0,4 - 0,1) = 0,7 - 0,3 = +0,4$
+- ou $\small (p_{11} - p_{10}) - (p_{01} - p_{00}) = (0,9 - 0,4) - (0,2 - 0,1) = 0,5 - 0,1 = +0,4$
 >
-> ou :
+> soit :
 >
-> ![](Image2.png){width=50%}
+> ![](img\Image2.png){width=65%}
 
 
 ### Echelle multiplicative {-}
 
 En cas d'outcome binaire, c'est souvent le RR ou l'OR qui est utilisé pour mesurer les effets. La mesure de l'interaction sur une échelle multiplicative serait donc  @vanderweele_tutorial_2014 :
 
-- $\small RR11 / RR10.RR01$
-- soit $\small (p11 / p00) / [(p10 / p00) + (p01 / p00)]$
-- soit $\small p11.p00 / p10.p01$
+- $\small \frac{RR11}{RR10 \times RR01}$
+- soit $\small \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}$
+- soit $\small \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}$
 
 
 > <ins>Exemple</ins>
 Mesure de l'nteraction dans l'exemple 1
 >
--	en multiplicatif : $\small RR(X1=1 \cap X2=1) /  RR(X1=1 | X2=0)*RR(X2=1|X1=0) = 9/8 = 1,1$
->
+-	$\small \frac{RR(X\cap V)}{RR(X| V=0)*RR(V|X=0)} = 9/(4 \times 2) = \times 1,1$
+- soit $\small\frac{p_{11} / p_{00}}{(p_{10} + p_{01}) / p_{00}} = \frac{0,9 / 0,1}{(0,4 \times 0,2) / 0,1} = \times 1,1$
+- ou $\small \frac{p_{11} / p_{01}}{p_{10} / p_{00}} = \frac{0,9 / 0,2}{0,4 / 0,1} = \times 4,5 / \times 4 = \times 1,1$
+- ou $\small \frac{p_{11} / p_{10}}{p_{01} / p_{00}} = \frac{0,9 / 0,4}{0,2 / 0,1} = \times 2,25 - \times 2 = \times 1,1$
+
 > ou :
 >
-> ![](Image3.png){width=50%}
+> ![](img\Image3.png){width=65%}
 
-## Cohérence entre les deux échelles
+## Lien entre les deux échelles
+
+### Un apparent paradoxe {-}
 
 Mesurer l'interaction sur une seule échelle peut être trompeur @mathur2018r. On peut fréquemment observer une interaction positive dans une échelle (par exemple $\small p11 - p10 - p01 + p00 > 0$) et négative dans l'autre (par exemple $\small p11.p00 / p10.p01 <1$).
 
 > <ins>Exemple</ins>
 >
-> ![](Image4.png){width=90%}
+> Dans cet exemple (on a juste modifié la probabilité $p_{11}$, on observe une interaction additive positive (l'effet de X augmente de +20% quand V=1 par rapport à V=0) mais une interaction multiplicative négative (l'effet de X est multiplié par 0,9 - donc diminue - quand V=1 par rapport à V=0).
+>
+> ![](img/Image4.png){width=90%}
 
-Il a même été démontré que si on n'observe pas d'interaction sur une échelle, alors on en observera obligatoirement sur l'autre échelle @vanderweele_tutorial_2014. 
+Il a même été démontré que si on n'observe pas d'interaction sur une échelle, alors on en observera obligatoirement sur l'autre échelle... @vanderweele_tutorial_2014. 
 
 > <ins>Exemple</ins>
+> 
+> Dans cet exemple, il n'y a pas d'interaction multiplicative (effet de X identique quelque soit V), mais sur l'echelle additive, on observe une interaction positive. 
 >
-> ![](Image5.png){width=90%}
+> ![](img\Image5.png){width=90%}
 >
-> et 
+> et dans cet autre exemple, il n'y a pas d'interaction additive (effet de X identique quelque soit V), mais sur l'echelle multiplicative, on observe une interaction négative. 
 >
-> ![](Image5b.png){width=90%}
+> ![](img\Image5b.png){width=90%}
 
 
-## Le continuum
+### Le continuum {-}
 
-Dans un article de 2019 @vanderweele_interaction_2019, Vanderweele décrit le continuum existant entre les 2 échelles. Par exemple, avec deux expositions ayant un effet positif (augmente le risque) sur l'outcome en l'absence de l'autre exposition, lorsque l'effet joint est très important, l'interaction est positive sur les 2 échelles. Lorsque la taille de l'effet joint diminue, l'interaction multiplication devient négative alors que l'interaction additive reste positive. Puis l'interaction devient négative sur les deux échelles.
+Dans un article de 2019 @vanderweele_interaction_2019, Vanderweele décrit le continuum existant entre les 2 échelles. 
+
+Par exemple, avec deux expositions ayant un effet positif (qui augmentent le risque) sur l'outcome en l'absence de l'autre exposition, lorsque l'effet joint est très important, l'interaction est positive sur les 2 échelles. Mais lorsque la taille de l'effet joint diminue, l'interaction multiplicative devient négative alors que l'interaction additive reste positive. Puis, lorsque la taille de l'effet joint diminue encore, l'interaction devient négative sur les deux échelles.
 
 > ![](Image6.png){width=100%}
 > ![](Image7.png){width=100%}
 
 
-## Interaction pure et qualitative
+### Interaction pure et qualitative {-}
 
-Deux cas particuliers d'interaction peuvent être retrouvées :
+Dans ce continuum, deux cas particuliers d'interaction peuvent être retrouvées :
 
--	**Interaction pure** de X1 en fonction de X2, si X1 n’a un effet que dans une strate de X2. Par exemple, $\small p10 = p00$ et $\small p11 ≠ p01$
+-	**Interaction pure** de X en fonction de V, si X n’a un effet que dans une strate de V. Par exemple, $\small p_{10} = p_{00}$ et $\small p_{11} ≠ p_{01}$
 
-> ![](Image8.png){width=100%}
+> Par exemple ici, V a un effet si X=0 mais pas si X=1 :
+>
+> ![](img\Image8.png){width=90%}
 
 
 -	**Interaction qualitative** de X1 en fonction de X2, , si l’effet de X1 dans une strate de X2 va dans la direction opposée de l’autre strate de X2 
 
-> ![](Image9.png){width=100%}
+> Par exemple ici, V a un effet positif si X=0 mais négatif si X=1 :
+>
+> ![](img\Image9.png){width=90%}
 
 
 ## Synthèse
@@ -84,21 +103,31 @@ Quelle échelle choisir pour mesurer un effet d'interaction ?
 
 Même si en pratique l’échelle multiplicative est plus utilisée en raison de l’utilisation des modèles logistiques @knol_recommendations_2012, il semble y avoir un consensus pour privilégier l’échelle additive, plus appropriée pour évaluer l’utilité en santé publique @vanderweele_tutorial_2014 @knol_recommendations_2012.  
 
-En effet si on reprend l'exemple ci dessous :
+> Si on reprend l'exemple ci dessous :
+>
+> ![](img\Image4.png){width=90%}
+>
+> X représente un traitement dont on ne dispose que de 100 doses et Y un outcome de santé favorable (guérison). 
+> Il faut choisir si on donne 100 doses au groupe V = 0 ou au groupe V = 1. 
+>
+> Si on donne 100 doses au groupe V = 0, 30 personnes seront guéries grace au traitement (30 personnes de plus que l'évolution naturelle, X=0) contre 50 personnes si on les donne au groupe V = 1. 
+> Donc il est préférable d'allouer les doses au groupe V=1. 
+>
+> Pourtant si on avait réfléchi à partir de l'échelle multiplicative, on aurait choisi le groupe V=0 car l'effet du traitement est de RR=4 dans le groupe V = 0 et RR=3,5 dans le groupe v = 1...
 
-> ![](Image4.png){width=90%}
-
-Si X1 représente un traitement dont on ne dispose que de 100 doses et Y un outcome de santé favorable (guérison). Il faut choisir si on donne 100 doses au groupe X2 = 0 ou X2= 1. Si on donne 100 doses au groupe X2 = 0, on aura 30 personnes guéries grace au traitement (30 personnes de plus que l'évolution naturelle) contre 50 personnes si on les donne au groupe X2 = 1. Donc il est préférable d'allouer les doses au groupe X2=1. Pourtant si on avait réfléchi à partir de l'échelle multiplicative, effet du traitement aurait été de RR=4 dans le groupe X2 = 0 et RR=3,5 dans le groupe X2 = 1. 
-
-On peut donc conclure à un effet multiplicatif plus fort d'un traitement dans un groupe alors qu'en terme d'utilité (nombre de personnes favorablement impactées), l'échelle additive nous conduira à choisir l'autre groupe.
+On peut donc conclure à un effet multiplicatif plus fort d'un traitement dans un groupe alors qu'en terme d'utilité (nombre de personnes favorablement impactées), l'échelle additive nous conduirait à choisir l'autre groupe...
 
 Idéalement, les interactions devraient cependant être reportées sur les 2 échelles @knol_recommendations_2012 @vanderweele_tutorial_2014.
 
-## Mesures alternatives
+# Types de paramètres 
 
-### Avec les OR {-}
+## Avec les différences de risques (DR)
 
-### RERI {-}
+## Avec les risques relatifs (RR)
 
-### Autres {-}
+## Avec les Odds Ration (OR) 
+
+## RERI 
+
+## Autres 
 
