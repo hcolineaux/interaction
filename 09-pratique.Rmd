@@ -15,8 +15,8 @@ output:
 2. **Stratégies et méthodes** 
     - Poser les hypothèses sur un DAG ou schéma conceptuel
     - Identifier le ou les estimand(s), c'est-à-dire l'effet ou le paramètre que l'on va chercher à estimer pour répondre à l'objectif, par exemple : 
-        + effet conjoint de X et V sur Y, sur l'échelle multiplicative = $\small OR_{X=1,V=1}$
-        + effet de X sur Y dans chaque strate de Y, sur l'échelle additive = $\small DR_{X=1|V=0}$ et $\small DR_{X=1|V=1}$
+        + effet conjoint de X et V sur Y, sur l'échelle multiplicative = $\small OR_{X,V}$
+        + effet de X sur Y dans chaque strate de Y, sur l'échelle additive = $\small DR_{X|V=0}$ et $\small DR_{X|V=1}$
         + effet d'interaction sur l'échelle additive et multiplicative AI et MI 
     - Elaborer l'estimateur, notamment : 
         + quelles est(sont) l'exposition(s) d'intérêt ? 
@@ -28,7 +28,7 @@ output:
         + le Y moyen ou la proportion de Y = 1
         + pour chaque catégorie de X et V
 4. **Analyses exploratoires**
-    - Analyses stratifiées : 
+    - Analyses stratifiées 
         + pour une analyse de modification d'effet, 
         + il est possible en exploratoire, d'estimer l'effet de X sur Y
         + de façon stratifiée sur V (on découpe la population)
@@ -90,7 +90,7 @@ Ces modèles Q(S, D) vont comprendre 2 variables : le sexe et la défavorisation
 
 ### 3.Analyse descriptive {-}
 
-Dans cette population, il y avait 51,4% d'hommes et 60,5% de personnes ayant été précocement défavorisées.
+Dans cette population (N=17 272), il y avait 51,4% d'hommes et 60,5% de personnes ayant été précocement défavorisées.
 
 On peut commencer par décrire les moyennes de cholestérol dans chaque catégorie de sexe et de défavorisation sociale :
 

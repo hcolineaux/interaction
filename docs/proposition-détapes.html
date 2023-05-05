@@ -295,8 +295,8 @@ div.csl-indent {
 <li>Poser les hypothèses sur un DAG ou schéma conceptuel</li>
 <li>Identifier le ou les estimand(s), c’est-à-dire l’effet ou le paramètre que l’on va chercher à estimer pour répondre à l’objectif, par exemple :
 <ul>
-<li>effet conjoint de X et V sur Y, sur l’échelle multiplicative = <span class="math inline">\(\small OR_{X=1,V=1}\)</span></li>
-<li>effet de X sur Y dans chaque strate de Y, sur l’échelle additive = <span class="math inline">\(\small DR_{X=1|V=0}\)</span> et <span class="math inline">\(\small DR_{X=1|V=1}\)</span></li>
+<li>effet conjoint de X et V sur Y, sur l’échelle multiplicative = <span class="math inline">\(\small OR_{X,V}\)</span></li>
+<li>effet de X sur Y dans chaque strate de Y, sur l’échelle additive = <span class="math inline">\(\small DR_{X|V=0}\)</span> et <span class="math inline">\(\small DR_{X|V=1}\)</span></li>
 <li>effet d’interaction sur l’échelle additive et multiplicative AI et MI</li>
 </ul></li>
 <li>Elaborer l’estimateur, notamment :
@@ -317,7 +317,7 @@ div.csl-indent {
 </ul></li>
 <li><strong>Analyses exploratoires</strong>
 <ul>
-<li>Analyses stratifiées :
+<li>Analyses stratifiées
 <ul>
 <li>pour une analyse de modification d’effet,</li>
 <li>il est possible en exploratoire, d’estimer l’effet de X sur Y</li>
