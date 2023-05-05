@@ -19,11 +19,11 @@ On a aussi défini un paramètre d'interaction sur l'échelle multiplicative (MI
 - soit $\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}$
 - soit $\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}$
 
-## Avec les Odds Ration (OR) 
+## Avec les Odds Ratio (OR) 
 
 Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mesurés par des odds ratio estimé à partir de modèle de régression logistique.
 
-Un paramètre d'interaction sur l'echelle multiplicative (MI_{OR}) peut être estimé à partir de ces OR @vanderweele_tutorial_2014 :
+Un paramètre d'interaction sur l'echelle multiplicative ($MI_{OR}$) peut être estimé à partir de ces OR @vanderweele_tutorial_2014 :
 
 - $\small MI_{OR} = \frac{OR_{11}}{OR_{10} \times OR_{01}}$ 
 
