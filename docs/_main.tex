@@ -1132,8 +1132,8 @@ A1
 
 0.90 (0.30)
 
-\hypertarget{reg}{%
-\chapter{A partir de modèles de régression}\label{reg}}
+\hypertarget{regression}{%
+\chapter{A partir de modèles de régression}\label{regression}}
 
 Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.
 
@@ -2596,9 +2596,9 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
     \begin{itemize}
     \tightlist
     \item
-      effet conjoint de X et V sur Y, sur l'échelle multiplicative = \(OR_{X=1,V=1}\)
+      effet conjoint de X et V sur Y, sur l'échelle multiplicative = \(\small OR_{X=1,V=1}\)
     \item
-      effet de X sur Y dans chaque strate de Y, sur l'échelle additive = \(DR_{X=1|V=0}\) et \(DR_{X=1|V=1}\)
+      effet de X sur Y dans chaque strate de Y, sur l'échelle additive = \(\small DR_{X=1|V=0}\) et \(\small DR_{X=1|V=1}\)
     \item
       effet d'interaction sur l'échelle additive et multiplicative AI et MI
     \end{itemize}
@@ -2664,7 +2664,7 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
     \item
       les différents paramètres peuvent être déduits des résultats du modèle
     \item
-      voir Chapitre \ref{reg}
+      voir Chapitre \ref{regression}
     \end{itemize}
   \item
     Marges/ Effets prédits
@@ -2712,8 +2712,8 @@ Dans cette étude \citet{colineaux2023explaining}, on s'est intéressé à :
 La démarche ici est explicative : on cherche à comprendre des mécanismes causaux.
 
 A partir de la formulation des objectifs, on pourrait dire qu'on s'intéresse ici plutot à deux modifications d'effet.
-On va donc devoir à la fois agir sur le sexe \(do(S)\) et sur la défavorisation sociale \(do(D)\).
-Donc la démarche, en fait, sera plutôt une analyse d'interaction \(do(S,D)\)
+On va donc devoir à la fois agir sur le sexe \(\small do(S)\) et sur la défavorisation sociale \(\small do(D)\).
+Donc la démarche, en fait, sera plutôt une analyse d'interaction \(\small do(S,D)\)
 
 \hypertarget{stratuxe9gies-et-muxe9thodes}{%
 \subsection*{2. Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes}}
@@ -2838,7 +2838,7 @@ On peut en déduire (échelle additive) que :
   \item
     Quand on est une femme : \(\small DR(D|S=0) = +0.126\)
   \item
-    Quand on est une homme : \(\small DR(D|S=1) = 0.126 - 0.095 =\) 0.031
+    Quand on est une homme : \(\small DR(D|S=1) = 0.126 - 0.095 =\) +0.031
   \end{itemize}
 \item
   L'effet d'être un homme et défavorisé
@@ -2848,7 +2848,7 @@ On peut en déduire (échelle additive) que :
   \item
     plutot que femme et favorisé est
   \item
-    \(\small DR(D,S) = 0.326 + 0.126 - 0.095 =\) -0.2
+    \(\small DR(D,S) = 0.326 + 0.126 - 0.095 =\) +0.357
   \end{itemize}
 \item
   \textbf{L'effet d'interaction/modification d'effet} est : \(\small AI = -0.095\)

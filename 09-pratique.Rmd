@@ -15,8 +15,8 @@ output:
 2. **Stratégies et méthodes** 
     - Poser les hypothèses sur un DAG ou schéma conceptuel
     - Identifier le ou les estimand(s), c'est-à-dire l'effet ou le paramètre que l'on va chercher à estimer pour répondre à l'objectif, par exemple : 
-        + effet conjoint de X et V sur Y, sur l'échelle multiplicative = $OR_{X=1,V=1}$
-        + effet de X sur Y dans chaque strate de Y, sur l'échelle additive = $DR_{X=1|V=0}$ et $DR_{X=1|V=1}$
+        + effet conjoint de X et V sur Y, sur l'échelle multiplicative = $\small OR_{X=1,V=1}$
+        + effet de X sur Y dans chaque strate de Y, sur l'échelle additive = $\small DR_{X=1|V=0}$ et $\small DR_{X=1|V=1}$
         + effet d'interaction sur l'échelle additive et multiplicative AI et MI 
     - Elaborer l'estimateur, notamment : 
         + quelles est(sont) l'exposition(s) d'intérêt ? 
@@ -37,7 +37,7 @@ output:
         + un modèle dans la population totale peut être utilisé
         + avec un terme d'interaction entre X et V
         + les différents paramètres peuvent être déduits des résultats du modèle
-        + voir Chapitre \@ref(reg)
+        + voir Chapitre \@ref(regression)
     - Marges/ Effets prédits
         + .
 5. **Analyses confirmatoires**, voir Chapitre \@ref(conf)
@@ -61,8 +61,8 @@ Dans cette étude @colineaux2023explaining, on s'est intéressé à :
 La démarche ici est explicative : on cherche à comprendre des mécanismes causaux.
  
 A partir de la formulation des objectifs, on pourrait dire qu'on s'intéresse ici plutot à deux modifications d'effet. 
-On va donc devoir à la fois agir sur le sexe $do(S)$ et sur la défavorisation sociale $do(D)$.
-Donc la démarche, en fait, sera plutôt une analyse d'interaction $do(S,D)$
+On va donc devoir à la fois agir sur le sexe $\small do(S)$ et sur la défavorisation sociale $\small do(D)$.
+Donc la démarche, en fait, sera plutôt une analyse d'interaction $\small do(S,D)$
 
 ### 2. Stratégies et méthodes {-}
 
@@ -144,10 +144,10 @@ On peut en déduire (échelle additive) que :
     + Quand on est défavorisé : $\small DR(S|D=1) = 0.326 - 0.095 =$ +`r round(0.326 - 0.095,3)`
 - L'effet de la défavorisation est : 
     + Quand on est une femme : $\small DR(D|S=0) = +0.126$
-    + Quand on est une homme : $\small DR(D|S=1) = 0.126 - 0.095 =$ `r round(0.126 - 0.095,3)`
+    + Quand on est une homme : $\small DR(D|S=1) = 0.126 - 0.095 =$ +`r round(0.126 - 0.095,3)`
 - L'effet d'être un homme et défavorisé 
     + plutot que femme et favorisé est 
-    + $\small DR(D,S) = 0.326 + 0.126 - 0.095 =$ `r round(-0.326 + 0.031 + 0.095,3)`
+    + $\small DR(D,S) = 0.326 + 0.126 - 0.095 =$ +`r round(0.326 + 0.126 - 0.095,3)`
 - **L'effet d'interaction/modification d'effet** est :  $\small AI = -0.095$
 
 On pourrait aussi déduire :

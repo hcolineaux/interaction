@@ -223,10 +223,10 @@ div.csl-indent {
 <li class="chapter" data-level="7.2" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#proposition"><i class="fa fa-check"></i><b>7.2</b> Proposition</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a></li>
-<li class="chapter" data-level="9" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>9</b> A partir de modèles de régression</a>
+<li class="chapter" data-level="9" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>9</b> A partir de modèles de régression</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="reg.html"><a href="reg.html#régression-logistique"><i class="fa fa-check"></i><b>9.1</b> Régression logistique</a></li>
-<li class="chapter" data-level="9.2" data-path="reg.html"><a href="reg.html#régression-lineaire"><i class="fa fa-check"></i><b>9.2</b> Régression lineaire</a></li>
+<li class="chapter" data-level="9.1" data-path="regression.html"><a href="regression.html#régression-logistique"><i class="fa fa-check"></i><b>9.1</b> Régression logistique</a></li>
+<li class="chapter" data-level="9.2" data-path="regression.html"><a href="regression.html#régression-lineaire"><i class="fa fa-check"></i><b>9.2</b> Régression lineaire</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="conf.html"><a href="conf.html"><i class="fa fa-check"></i><b>10</b> Analyses confirmatoires</a>
 <ul>
@@ -293,8 +293,8 @@ div.csl-indent {
 </ul>
 <p>La démarche ici est explicative : on cherche à comprendre des mécanismes causaux.</p>
 <p>A partir de la formulation des objectifs, on pourrait dire qu’on s’intéresse ici plutot à deux modifications d’effet.
-On va donc devoir à la fois agir sur le sexe <span class="math inline">\(do(S)\)</span> et sur la défavorisation sociale <span class="math inline">\(do(D)\)</span>.
-Donc la démarche, en fait, sera plutôt une analyse d’interaction <span class="math inline">\(do(S,D)\)</span></p>
+On va donc devoir à la fois agir sur le sexe <span class="math inline">\(\small do(S)\)</span> et sur la défavorisation sociale <span class="math inline">\(\small do(D)\)</span>.
+Donc la démarche, en fait, sera plutôt une analyse d’interaction <span class="math inline">\(\small do(S,D)\)</span></p>
 </div>
 <div id="stratégies-et-méthodes" class="section level3 unnumbered hasAnchor">
 <h3>2. Stratégies et méthodes<a href="exemple-2---y-quantitatif.html#stratégies-et-méthodes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -422,12 +422,12 @@ Oui
 <li>L’effet de la défavorisation est :
 <ul>
 <li>Quand on est une femme : <span class="math inline">\(\small DR(D|S=0) = +0.126\)</span></li>
-<li>Quand on est une homme : <span class="math inline">\(\small DR(D|S=1) = 0.126 - 0.095 =\)</span> 0.031</li>
+<li>Quand on est une homme : <span class="math inline">\(\small DR(D|S=1) = 0.126 - 0.095 =\)</span> +0.031</li>
 </ul></li>
 <li>L’effet d’être un homme et défavorisé
 <ul>
 <li>plutot que femme et favorisé est</li>
-<li><span class="math inline">\(\small DR(D,S) = 0.326 + 0.126 - 0.095 =\)</span> -0.2</li>
+<li><span class="math inline">\(\small DR(D,S) = 0.326 + 0.126 - 0.095 =\)</span> +0.357</li>
 </ul></li>
 <li><strong>L’effet d’interaction/modification d’effet</strong> est : <span class="math inline">\(\small AI = -0.095\)</span></li>
 </ul>
