@@ -2,14 +2,16 @@
 title: "Interactions et modifications d'effet <br> en Epidémiologie"
 author: "CERPOP, INSERM, EQUITY Team"
 date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
-site: bookdown::bookdown_site
+output: pdf_document
 documentclass: book
 bibliography: reference.bib
 csl: vancouver.csl
 description: |
   .
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: "rstudio/bookdown-demo"
+site: bookdown::bookdown_site
+always_allow_html: true
 ---
 
 # Présentation

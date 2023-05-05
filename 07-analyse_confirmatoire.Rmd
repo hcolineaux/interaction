@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 # Analyses confirmatoires {#conf}
 
@@ -71,7 +76,7 @@ generate.data <- function(N, b =  param.causal.model()) {
 
 ## Estimation par G-computation 
 
-Il s'agit d'une "G-methods" aussi appelée "standardisation" par Hernàn. Le principe est le suivant :
+Il s'agit d'une "G-methods" aussi appelée "standardisation" par Hernàn @hernan2020causal. Le principe est le suivant :
 
 <script type="text/javascript">
 
@@ -1303,7 +1308,8 @@ interaction.gcomp <- int.ltmleMSM(data = df,
 
 Au final, on a (présentation selon recommandation Knol et al. @knol_recommendations_2012):
 
-```{r t_tab, echo=FALSE, warning=FALSE, message=FALSE}
+```{r t_tab, echo=FALSE, message=FALSE, warning=FALSE}
+
 ### 4) Mise en forme sous forme de table, selon les recommandations Knol et al.
 # avec la fonction out.int.table()
 ################################################################################
@@ -1464,7 +1470,7 @@ out.int.table <- function(int.r = int.r) {
 ```
 
 
-### TMLE
+### TMLE {-}
 
 ```{r t_tmle, echo=FALSE, warning=FALSE, message=FALSE}
 ### TMLE
@@ -1478,7 +1484,7 @@ table.tmle
 ```
 
 
-### IPTW
+### IPTW {-}
 
 ```{r t_iptw, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -1493,7 +1499,7 @@ table.iptw
 ```
 
 
-### G-computation
+### G-computation {-}
 
 ```{r t_ggcomp, echo=FALSE, warning=FALSE, message=FALSE}
 ### G-COMP

@@ -33,9 +33,6 @@ conf
 estimation-par-g-computation
 estimation-par-modèle-structurel-marginal
 estimation-avec-tmle
-tmle
-iptw
-g-computation
 représentations-graphiques
 proposition-détapes
 exemple-1---y-binaire
