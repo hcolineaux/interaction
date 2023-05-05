@@ -1,0 +1,283 @@
+
+
+# Simulations
+
+Pour la description des différents types d'estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires):
+
+> ![](img/Image10.png){width=50%}
+
+
+Le code ayant permis de simuler les données est le suivant :
+
+<script type="text/javascript">
+
+// toggle visibility of R source blocks in R Markdown output
+function toggle_R() {
+  var x = document.getElementsByClassName('r');
+  if (x.length == 0) return;
+  function toggle_vis(o) {
+    var d = o.style.display;
+    o.style.display = (d == 'block' || d == '') ? 'none':'block';
+  }
+
+  for (i = 0; i < x.length; i++) {
+    var y = x[i];
+    if (y.tagName.toLowerCase() === 'pre') toggle_vis(y);
+  }
+
+    var elem = document.getElementById("myButton1");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+}
+
+document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id="myButton1" style="position: static; top: 1%; left: 2%; z-index: 200"></input>')
+
+</script>
+
+
+
+```{r simul, results ='hide', cache = TRUE}
+  rm(list=ls())
+
+  param.causal.model <- function(p_L1 = 0.50, 
+                                 p_L2 = 0.20, 
+                                 p_L3 = 0.70,       # baseline confounders
+                                 b_A1 = 0.10, 
+                                 b_L1_A1 = 0.15, 
+                                 b_L2_A1 = 0.25, # modèle de A1
+                                 b_A2 = 0.15, 
+                                 b_L1_A2 = 0.20, 
+                                 b_L3_A2 = 0.20, # modèle de A2
+                                 b_Y = 0.10,      # modèle de Y
+                                 b_L1_Y = 0.02,
+                                 b_L2_Y = 0.02,
+                                 b_L3_Y = -0.02,
+                                 b_A1_Y = 0.3,
+                                 b_A2_Y = 0.1,
+                                 b_A1A2_Y = 0.4 ) { # <- effet d'interaction Delta)
+
+  # coefficients pour simuler l'exposition
+  # exposition A1  # vérif
+  try(if(b_A1 + b_L1_A1 + b_L1_A1 > 1) 
+    stop("la somme des coefficient du modèle A1 dépasse 100%"))
+  
+  # exposition A2  # vérif
+  try(if(b_A2 + b_L1_A2 + b_L3_A2 > 1) 
+    stop("la somme des coefficients du modèle A2 dépasse 100%"))
+  
+  # coefficients pour simuler l'outcome, vérif
+  try(if(b_Y + b_L1_Y + b_L2_Y + b_L3_Y + b_A1_Y + b_A2_Y + b_A1A2_Y > 1) 
+    stop("la somme des coefficients du modèle Y dépasse 100%"))
+  try(if(b_Y + b_L1_Y + b_L2_Y + b_L3_Y + b_A1_Y + b_A2_Y + b_A1A2_Y < 0) 
+    stop("la somme des coefficients du modèle Y est inférieure à 0%"))
+  
+  coef <- list(c(p_L1 = p_L1, p_L2 = p_L2, p_L3 = p_L3),
+               c(b_A1 = b_A1, b_L1_A1 = b_L1_A1, b_L2_A1 = b_L2_A1),
+               c(b_A2 = b_A2, b_L1_A2 = b_L1_A2, b_L3_A2 = b_L3_A2),
+               c(b_Y = b_Y, b_L1_Y = b_L1_Y, b_L2_Y = b_L2_Y, b_L3_Y = b_L3_Y,
+                 b_A1_Y = b_A1_Y, b_A2_Y = b_A2_Y, b_A1A2_Y = b_A1A2_Y))
+  return(coef)
+}
+
+generate.data <- function(N, b =  param.causal.model()) {
+  
+  L1 <- rbinom(N, size = 1, prob = b[[1]]["p_L1"]) 
+  L2 <- rbinom(N, size = 1, prob = b[[1]]["p_L2"])
+  L3 <- rbinom(N, size = 1, prob = b[[1]]["p_L3"])
+  A1 <- rbinom(N, size = 1, prob = b[[2]]["b_A1"] + 
+                 (b[[2]]["b_L1_A1"] * L1) + (b[[2]]["b_L2_A1"] * L2))
+  A2 <- rbinom(N, size = 1, prob = b[[3]]["b_A2"] + 
+                 (b[[3]]["b_L1_A2"] * L1) + (b[[3]]["b_L3_A2"] * L3))
+  Y <- rbinom(N, size = 1, prob = (b[[4]]["b_Y"] + 
+                                     (b[[4]]["b_L1_Y"] * L1) + 
+                                     (b[[4]]["b_L2_Y"] * L2) +
+                                     (b[[4]]["b_L3_Y"] * L3) +  
+                                     (b[[4]]["b_A1_Y"] * A1) + 
+                                     (b[[4]]["b_A2_Y"] * A2) + 
+                                     (b[[4]]["b_A1A2_Y"] * A1 * A2)) )
+  data.sim <- data.frame(L1, L2, L3, A1, A2, Y)
+  return(data.sim)
+}
+
+#### On simule une base de données
+  set.seed(12345)
+  # b =  param.causal.model(b_A1A2_Y = -0.45)
+  b = param.causal.model()
+  df <- generate.data(N = 10000, b = b)
+  summary(df)
+  prop.table(table(df$Y, df$A1, df$A2, deparse.level = 2))
+
+
+```
+
+
+Au final, les probabilités de l'outcome P(Y=1), dans chaque catégorie sont : 
+
+
+```{r pop, echo=FALSE, warning=FALSE, message=FALSE}
+library(kableExtra)
+library(finalfit)
+library(dplyr)
+#explanatory = c("age.factor*sex.factor", "obstruct.factor", "perfor.factor")
+explanatory = c("A1")
+dependent = "Y"
+df %>%
+  group_by(!!! syms("A2")) %>% 
+  group_modify(~ summary_factorlist(.x, dependent, explanatory, digits = c(2,2,2,2,2))) %>%
+  ff_stratify_helper(df) -> t
+
+t %>%  
+  select(-4) %>% 
+   kable(row.names=FALSE,
+       booktabs = T,
+       linesep = "",
+       align=c("l", "r", "l", "r", "r")) -> t9
+
+  kable_styling(t9, font_size = 9, 
+                latex_options = "hold_position") 
+
+
+```
+
+# A partir de modèles de régression
+
+Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.
+
+
+## Régression logistique
+
+Lorsque l'on étudie un outcome binaire, on utilise souvent les modèles de régression logistique.  
+
+
+```{r reg_log_sum, echo = FALSE, warning=FALSE, message=FALSE, cache = TRUE}
+
+df_f <- df %>%  mutate(Y = factor(Y))
+
+
+summary(glm(data = df_f,
+        Y ~ as.factor(A1)+
+                as.factor(A2)+
+                as.factor(A1)*as.factor(A2)+ 
+                as.factor(L1)+
+                as.factor(L2)+ 
+                as.factor(L3), family = binomial))
+
+```
+
+A partir de cette sortie, on peut extraire : 
+
+- **A1|A2=0** 
+    + à partir du coefficient `as.factor(A1)1` 
+    + qui correspond à l'effet de A1 dans la catégorie de référence de A2, 
+    + soit $\small OR_{A1|A2=0} = exp(1.756) =$ `r round(exp(1.756),3)`.
+- **A1|A2=1** 
+    + à partir du coefficient `as.factor(A1)1:as.factor(A2)1`, 
+    + qui correspond à la différence d'effet de A1 quand on passe dans l'autre catégorie de A2. 
+    + L'effet de A1 dans la catégorie A2=1 est donc 
+    + $\small OR_{A1|A2=1} = exp(1.756+1.786) =$ `r round(exp(1.756+1.786),3)`.
+- **L'interaction multiplicative (IM)** 
+    + peut être estimée à partir du coefficient `as.factor(A1)1:as.factor(A2)1`
+    + par $\small IM = exp(1.786) =$ `r round(exp(1.786),3)`, 
+    + qu'on peut retrouver en faisant $\small OR_{A1|A2=1}/ OR_{A1|A2=0}$.
+    + Ici l'interaction est significative (p-value >0.05). 
+- **A2|A1=0** et **A2|A1=1** 
+    + On aurait aussi pu décrire l'interaction à partir de l'effet d'A2 dans chaque strate de A1 
+    + à partir de `as.factor(A2)1` et `as.factor(A1)1:as.factor(A2)1`, 
+    + avec : $\small OR_{A2|A1=0} = exp(0.753) =$ `r round(exp(0.753),3)` 
+    + et $\small OR_{A2|A1=1} = exp(0.753+1.786) =$ `r round(exp(0.753+1.786),3)`
+- **L'interaction additive** 
+    + On peut explorer l'interaction sur l'échelle additive en estimant le RERI par 
+    + $\small RERI \approx OR_{11} - OR_{10} - OR_{01} + 1 =$ 
+    + $\small OR_{A1,A2} - OR_{A1|A2=0} - OR_{A2|A1=0} + 1 =$ 
+    + $\small exp(1.786+0.753+1.786) - exp(1.786) - exp(0.753) + 1 =$ `r round(exp(1.786+0.753+1.786) - exp(1.786) - exp(0.753) + 1,3)`. 
+
+
+En résumé, (le package `finalfit` permet de sortir quelques résultats proprement) : 
+
+```{r reg_log, echo = TRUE, warning=FALSE, message=FALSE}
+
+explanatory = c("as.factor(A1)",
+                "as.factor(A2)",
+                "as.factor(A1)*as.factor(A2)", 
+                "as.factor(L1)",
+                "as.factor(L2)", 
+                "as.factor(L3)")
+dependent = "Y"
+
+df_f %>%
+  finalfit(dependent, explanatory)-> t
+
+# le tableau t entier peut être imprimé, mais ici je sélectionne seulement les effets d'intéret 
+# pour éviter la table 2 fallacy (les coefficient des facteurs de confusion L ne sont pas interprétables)
+
+cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"), 
+      OR = t[c(12,14,13),6]) %>%
+  as.data.frame %>% 
+      kbl() %>%
+      kable_classic() 
+
+```
+
+Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.
+
+## Régression lineaire
+
+Même si l'outcome binaire, on peut en théorie utiliser un modèle de régression linéaire et explorer les effets sur une échelle additive. Si l'outcome est quantitatif, on utilise aussi, en général, les modèles de régression linéaire.  
+
+
+```{r reg_lm_sum, echo = FALSE, warning=FALSE, message=FALSE}
+
+summary(lm(data = df,
+        Y ~ as.factor(A1)+
+                as.factor(A2)+
+                as.factor(A1)*as.factor(A2)+ 
+                as.factor(L1)+
+                as.factor(L2)+ 
+                as.factor(L3)))
+
+```
+
+
+A partir de cette sortie, on peut extraire : 
+
+- **A1|A2=0** 
+    + à partir du coefficient `as.factor(A1)1` 
+    + qui correspond à l'effet de A1 dans la catégorie de référence de A2, 
+    + soit $\small DR = +30,08 \%$.
+- **A1|A2=1** 
+    + à partir du coefficient `as.factor(A1)1:as.factor(A2)1`, 
+    + qui correspond à la différence d'effet de A1 quand on passe dans l'autre catégorie de A2. 
+    + L'effet de A1 dans la catégorie A2=1 est donc 
+    + $\small DR = 30.08+39.40 =$ `r round(30.08+39.40,2)` %.
+- **L'interaction additive** 
+    + à partir du coefficient `as.factor(A1)1:as.factor(A2)1` 
+    + avec $\small AI = +39.40 \%$, 
+    + qu'on peut retrouver en faisant $\small DR(A1|A2=1) - DR(A1|A2=0)$. 
+    + Ici l'interaction est significative (p-value >0.05). 
+- **A2|A1=0** et **A2|A1=1** 
+    + On aurait aussi pu décrire cette interaction à partir de l'effet d'A2 dans chaque strate de A1 
+    + à partir de `as.factor(A2)1` et `as.factor(A1)1:as.factor(A2)1`, 
+    + avec : $\small DR_{A1|A2=0} = +9.23\%$ 
+    + et $\small DR_{A1|A2=1} = 9.23+39.40 =$ `r round(9.23+39.40,2)`%.
+
+
+En résumé, (le package `finalfit` permet de sortir quelques résultats proprement) : 
+
+```{r reg_lm, echo=TRUE, warning=FALSE, message=FALSE}
+
+explanatory = c("as.factor(A1)",
+                "as.factor(A2)",
+                "as.factor(A1)*as.factor(A2)", 
+                "as.factor(L1)",
+                "as.factor(L2)", 
+                "as.factor(L3)")
+dependent = "Y"
+df %>%
+  finalfit(dependent, explanatory)-> t
+
+cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"), DR = t[c(12,14,13),6]) %>%
+  as.data.frame %>% 
+      kbl() %>%
+      kable_classic() 
+
+```

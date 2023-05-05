@@ -1,0 +1,106 @@
+
+# Interaction vs modification d'effets
+
+Dans le champ des analyses d'interaction, deux termes peuvent être rencontrés : "interaction" et "modification d'effet". Quel est la différence entre ces deux termes ?
+
+## Modification d'effets
+
+La question de la modification d'effet consiste à d’identifier si l’effet du traitement ou de l’exposition est différent dans différents groupes de patients ayant des caractéristiques différentes (estimer l’effet d’une exposition séparément en fonction d’une autre variable) @corraini_effect_2017. 
+
+Si l'on compare avec un essai d'intervention, c'est comme s'il y avait 1 seule intervention mais que l’analyse est stratifiée sur V. On analyse donc l'effet du scénario $\small do(X)$ dans chaque groupe de $\small V$. 
+
+En observationnel, l'effet causal qui nous intéresse est donc celui de $\small X$ mais pas celui de $\small V$.
+On ajustera sur les facteurs de confusion de $\small X \rightarrow Y$. 
+
+On ne fait pas d'hypothèse sur les mécanismes de la modification d'effet, qui peut être causale, de façon directe ou indirecte, ou pas du tout (par proxy ou cause commune) @vanderweele_four_2007.
+
+
+> Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc. 
+
+
+On a une modification de l'effet de X par V si l'effet de X est différent dans chaque strate définie par V:
+
+-	en additif : $\small DR(X | V=0) ≠ DR(X | V=1)$ 
+	 - soit	$\small p_{10}-p_{00} ≠ p_{11}-p_{01}$  
+-	en multiplicatif : $\small RR(X | V=0) ≠ RR(X | V=1)$ 
+	 - soit $\small  p_{10}/p_{00} ≠ p_{11}/p_{01}1$  
+	
+> <ins>Exemple</ins>
+Modification d'effet dans l'exemple 1
+>
+> En additif : 
+>
+- effet quand V=0 : $\small DR (X | V=0) = 0,4 - 0,1 = +0,3$
+- effet quand V=1 : $\small DR (X | V=1) = 0,9 - 0,2 = +0,7$
+- donc $\small DR (X | V=0) ≠ DR (X | V=1)$
+>
+> En multiplicatif : 
+>
+- effet quand V=0 : $\small RR(X | V=0) = 0,4/0,1 = \times 4$
+- effet quand V=1 : $\small RR(X | V=1) = 0,9/0,2 = \times 4,5$
+- donc $\small RR(X | V=0) ≠ RR(X | V=1)$ 
+>
+> Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative. On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
+
+
+## Interaction
+
+Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoints de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l'effet conjoint est supérieur à l'effet de la somme des individuels. Il y a une interaction antagoniste lorsque l'effet conjoint est inférieur à la somme des effets individuels @corraini_effect_2017. 
+
+Si l'on compare avec un essai d'intervention, c'est comme s'il y a plusieurs interventions selon le nombre de combinaison. On analyse donc l'effet du scénario $\small do(X, V)$. Ici l'effet causal d'interêt est vraiment l'effet conjoint des deux variables. 
+
+Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de $\small X*V$. On ajustera sur les facteurs de confusion de $\small X.V \rightarrow Y$.
+On fait l'hypothèse que les mécanismes de l'effet conjoint de X et V sont causaux.
+
+On a une interaction si :
+
+-	en additif : $\small DR(X \cap V) ≠ DR(X| V=0) + DR(V| X=0)$
+	 + $\small p_{11}-p_{00} ≠ (p_{10}-p_{00})+(p_{01}-p_{00})$
+	 + $\small p_{11} ≠ p_{10} + p_{01} - p_{00}$
+- en multiplicatif	$\small 	RR(X \cap V) ≠ RR(X| V=0) + RR(V| X=0)$
+	 + $\small p_{11}/p_{00}  ≠ (p_{10}/p_{00})+(p_{01}/p_{00})$
+	 + $\small p_{11} ≠ (p_{10} + p_{01}) / p_{00}$ 
+
+
+> <ins>Exemple</ins>
+Interaction dans l'exemple 1
+>
+> En additif : 
+>
+- effet joint : $\small DR(X \cap V) = 0,9 - 0,1 = +0.8$ 
+- somme des effets individuel : $\small DR(X| V=0) + DR(V| X=0) = +0,3 +0,1 = +0,4$
+- donc $\small DR(X \cap V) ≠ DR(X| V=0) + DR(V| X=0)$
+>
+> En multiplicatif : 
+>
+- effet joint : $\small RR(X \cap V) = 0,9/0,1 = \times 9$
+- produit des effets individuel : $\small RR(X | V=0) \times RR(V | X=0) = 4 \times 2 = \times 8$
+- donc $\small DR(X \cap V) ≠ DR(X| V=0) \times DR(V| X=0)$
+>
+> Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions.
+
+
+
+
+## Synthèse
+
+Mathématiquement, les formulations sont équivalentes :
+
+-	échelle additive: $\small p_{10} -p_{00} ≠ p_{11}- p_{01} ⇔ p_{11}≠(p_{10}+p_{01})- p_{00}$
+-	échelle multiplicative : $\small p_{10} /p_{00} ≠ p_{11}/ p_{01} ⇔ p_{11}≠(p_{10} \times p_{01})/p_{00}$
+
+La différence se joue plutôt sur :
+
+- la façon dont la question est posée (effet de X selon V ou effet conjoint de X et V), 
+- sur les hypothèses causales formulées (scénarii $\small do(X)$ ou $\small do(X,V)$) 
+- et donc sur les sets de facteurs de confusion à considérer (seulement sur $\small X \rightarrow Y$ ou $\small X.V \rightarrow Y$).
+
+
+Il existe des cas où l'identification d'une interaction ou d'une modification d'effet ne conduira pas à la même démarche et donc au même résultat @vanderweele_distinction_2009. Prenons le DAG suivant : 
+
+> ![](img/Image12.png){width=30%}
+
+Dans ce cas, il n'y a pas d’interaction entre A1 et A2, car si on intervient sur les 2 ($\small do(A1, A2)$), il n'y a plus de chemin entre A2 et Y. Il peut par contre y avoir une modification de l'effet $\small A1 \rightarrow Y$ par A2 ($\small do(A1)$). Dans ce cas, pour estimer cet effet, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3.
+
+
+

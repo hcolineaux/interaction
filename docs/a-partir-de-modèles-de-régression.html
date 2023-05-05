@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie</title>
+  <title>Chapter 9 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta property="og:title" content="Chapter 9 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta name="twitter:title" content="Chapter 9 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie" />
   
   <meta name="twitter:description" content="." />
   
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="simulations.html"/>
-<link rel="next" href="analyses-confirmatoires.html"/>
+<link rel="next" href="représentations-graphiques.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -178,69 +178,69 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="notations.html"><a href="notations.html#concernant-les-différences-de-risques-dr-effets-additifs"><i class="fa fa-check"></i>Concernant les différences de risques (DR, effets additifs)</a></li>
 <li class="chapter" data-level="" data-path="notations.html"><a href="notations.html#concernant-les-rapports-de-risque-effets-multiplicatifs"><i class="fa fa-check"></i>Concernant, les rapports de risque (effets multiplicatifs)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="notations.html"><a href="notations.html#modification-deffets"><i class="fa fa-check"></i><b>3.3</b> Modification d’effets</a></li>
-<li class="chapter" data-level="3.4" data-path="notations.html"><a href="notations.html#interaction"><i class="fa fa-check"></i><b>3.4</b> Interaction</a></li>
-<li class="chapter" data-level="3.5" data-path="notations.html"><a href="notations.html#synthèse"><i class="fa fa-check"></i><b>3.5</b> Synthèse</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html"><i class="fa fa-check"></i><b>4</b> La question des échelles</a>
+<li class="chapter" data-level="4" data-path="interaction-vs-modification-deffets.html"><a href="interaction-vs-modification-deffets.html"><i class="fa fa-check"></i><b>4</b> Interaction vs modification d’effets</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#mesures-des-interactions"><i class="fa fa-check"></i><b>4.1</b> Mesures des interactions</a>
+<li class="chapter" data-level="4.1" data-path="interaction-vs-modification-deffets.html"><a href="interaction-vs-modification-deffets.html#modification-deffets"><i class="fa fa-check"></i><b>4.1</b> Modification d’effets</a></li>
+<li class="chapter" data-level="4.2" data-path="interaction-vs-modification-deffets.html"><a href="interaction-vs-modification-deffets.html#interaction"><i class="fa fa-check"></i><b>4.2</b> Interaction</a></li>
+<li class="chapter" data-level="4.3" data-path="interaction-vs-modification-deffets.html"><a href="interaction-vs-modification-deffets.html#synthèse"><i class="fa fa-check"></i><b>4.3</b> Synthèse</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html"><i class="fa fa-check"></i><b>5</b> La question des échelles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#mesures-des-interactions"><i class="fa fa-check"></i><b>5.1</b> Mesures des interactions</a>
 <ul>
 <li class="chapter" data-level="" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#echelle-additive"><i class="fa fa-check"></i>Echelle additive</a></li>
 <li class="chapter" data-level="" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#echelle-multiplicative"><i class="fa fa-check"></i>Echelle multiplicative</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#lien-entre-les-deux-échelles"><i class="fa fa-check"></i><b>4.2</b> Lien entre les deux échelles</a>
+<li class="chapter" data-level="5.2" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#lien-entre-les-deux-échelles"><i class="fa fa-check"></i><b>5.2</b> Lien entre les deux échelles</a>
 <ul>
 <li class="chapter" data-level="" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#un-apparent-paradoxe"><i class="fa fa-check"></i>Un apparent paradoxe</a></li>
 <li class="chapter" data-level="" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#le-continuum"><i class="fa fa-check"></i>Le continuum</a></li>
 <li class="chapter" data-level="" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#interaction-pure-et-qualitative"><i class="fa fa-check"></i>Interaction pure et qualitative</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#synthèse-1"><i class="fa fa-check"></i><b>4.3</b> Synthèse</a></li>
-<li class="chapter" data-level="4.4" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#avec-les-différences-de-risques-dr"><i class="fa fa-check"></i><b>4.4</b> Avec les différences de risques (DR)</a></li>
-<li class="chapter" data-level="4.5" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#avec-les-risques-relatifs-rr"><i class="fa fa-check"></i><b>4.5</b> Avec les risques relatifs (RR)</a></li>
-<li class="chapter" data-level="4.6" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#avec-les-odds-ration-or"><i class="fa fa-check"></i><b>4.6</b> Avec les Odds Ration (OR)</a></li>
-<li class="chapter" data-level="4.7" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#excès-de-risque-à-partir-des-rr-reri"><i class="fa fa-check"></i><b>4.7</b> Excès de risque à partir des RR (RERI)</a></li>
-<li class="chapter" data-level="4.8" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#autres"><i class="fa fa-check"></i><b>4.8</b> Autres</a>
+<li class="chapter" data-level="5.3" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#synthèse-1"><i class="fa fa-check"></i><b>5.3</b> Synthèse</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html"><i class="fa fa-check"></i><b>6</b> Types de paramètres</a>
 <ul>
-<li class="chapter" data-level="" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#le-synergie-index-si"><i class="fa fa-check"></i>Le “Synergie index” (SI)</a></li>
-<li class="chapter" data-level="4.8.1" data-path="la-question-des-échelles.html"><a href="la-question-des-échelles.html#proportion-attribuable-ap"><i class="fa fa-check"></i><b>4.8.1</b> Proportion attribuable (AP)</a></li>
+<li class="chapter" data-level="6.1" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#avec-les-différences-de-risques-dr"><i class="fa fa-check"></i><b>6.1</b> Avec les différences de risques (DR)</a></li>
+<li class="chapter" data-level="6.2" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#avec-les-risques-relatifs-rr"><i class="fa fa-check"></i><b>6.2</b> Avec les risques relatifs (RR)</a></li>
+<li class="chapter" data-level="6.3" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#avec-les-odds-ration-or"><i class="fa fa-check"></i><b>6.3</b> Avec les Odds Ration (OR)</a></li>
+<li class="chapter" data-level="6.4" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#excès-de-risque-à-partir-des-rr-reri"><i class="fa fa-check"></i><b>6.4</b> Excès de risque à partir des RR (RERI)</a></li>
+<li class="chapter" data-level="6.5" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#autres"><i class="fa fa-check"></i><b>6.5</b> Autres</a>
+<ul>
+<li class="chapter" data-level="" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#le-synergie-index-si"><i class="fa fa-check"></i>Le “Synergie index” (SI)</a></li>
+<li class="chapter" data-level="6.5.1" data-path="types-de-paramètres.html"><a href="types-de-paramètres.html#proportion-attribuable-ap"><i class="fa fa-check"></i><b>6.5.1</b> Proportion attribuable (AP)</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Estimations, Interprétations, Présentations</b></span></li>
-<li class="chapter" data-level="5" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>5</b> Simulations</a></li>
-<li class="chapter" data-level="6" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html"><i class="fa fa-check"></i><b>6</b> A partir de modèles de régression</a>
+<li class="chapter" data-level="7" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html"><i class="fa fa-check"></i><b>7</b> Présentation des résultats</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#régression-logistique"><i class="fa fa-check"></i><b>6.1</b> Régression logistique</a></li>
-<li class="chapter" data-level="6.2" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#régression-lineaire"><i class="fa fa-check"></i><b>6.2</b> Régression lineaire</a></li>
+<li class="chapter" data-level="7.1" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#modification-deffet"><i class="fa fa-check"></i><b>7.1</b> Modification d’effet</a></li>
+<li class="chapter" data-level="7.2" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#interaction-1"><i class="fa fa-check"></i><b>7.2</b> Interaction</a></li>
+<li class="chapter" data-level="7.3" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#proposition"><i class="fa fa-check"></i><b>7.3</b> Proposition</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html"><i class="fa fa-check"></i><b>7</b> Analyses confirmatoires</a>
+<li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a></li>
+<li class="chapter" data-level="9" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html"><i class="fa fa-check"></i><b>9</b> A partir de modèles de régression</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#estimation-par-g-computation"><i class="fa fa-check"></i><b>7.1</b> Estimation par G-computation</a></li>
-<li class="chapter" data-level="7.2" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#estimation-par-modèle-structurel-marginal"><i class="fa fa-check"></i><b>7.2</b> Estimation par Modèle Structurel Marginal</a></li>
-<li class="chapter" data-level="7.3" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#estimation-avec-tmle"><i class="fa fa-check"></i><b>7.3</b> Estimation avec TMLE</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#tmle"><i class="fa fa-check"></i><b>7.3.1</b> TMLE</a></li>
-<li class="chapter" data-level="7.3.2" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#iptw"><i class="fa fa-check"></i><b>7.3.2</b> IPTW</a></li>
-<li class="chapter" data-level="7.3.3" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#g-computation"><i class="fa fa-check"></i><b>7.3.3</b> G-computation</a></li>
+<li class="chapter" data-level="9.1" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#régression-logistique"><i class="fa fa-check"></i><b>9.1</b> Régression logistique</a></li>
+<li class="chapter" data-level="9.2" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#régression-lineaire"><i class="fa fa-check"></i><b>9.2</b> Régression lineaire</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="représentations-graphiques.html"><a href="représentations-graphiques.html"><i class="fa fa-check"></i><b>8</b> Représentations graphiques</a></li>
-<li class="chapter" data-level="9" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html"><i class="fa fa-check"></i><b>9</b> Présentation des résultats</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#modification-deffet"><i class="fa fa-check"></i><b>9.1</b> Modification d’effet</a></li>
-<li class="chapter" data-level="9.2" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#interaction-1"><i class="fa fa-check"></i><b>9.2</b> Interaction</a></li>
-<li class="chapter" data-level="9.3" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#proposition"><i class="fa fa-check"></i><b>9.3</b> Proposition</a></li>
-</ul></li>
+<li class="chapter" data-level="10" data-path="représentations-graphiques.html"><a href="représentations-graphiques.html"><i class="fa fa-check"></i><b>10</b> Représentations graphiques</a></li>
 <li class="part"><span><b>III En pratique</b></span></li>
-<li class="chapter" data-level="10" data-path="proposition-détapes.html"><a href="proposition-détapes.html"><i class="fa fa-check"></i><b>10</b> Proposition d’étapes</a></li>
+<li class="chapter" data-level="11" data-path="proposition-détapes.html"><a href="proposition-détapes.html"><i class="fa fa-check"></i><b>11</b> Proposition d’étapes</a></li>
+<li class="chapter" data-level="12" data-path="exemple-1---y-binaire.html"><a href="exemple-1---y-binaire.html"><i class="fa fa-check"></i><b>12</b> Exemple 1 - Y binaire</a></li>
+<li class="chapter" data-level="13" data-path="exemple-2---y-quantitatif.html"><a href="exemple-2---y-quantitatif.html"><i class="fa fa-check"></i><b>13</b> Exemple 2 - Y quantitatif</a></li>
+<li class="chapter" data-level="14" data-path="exemple-3---y-multinomial.html"><a href="exemple-3---y-multinomial.html"><i class="fa fa-check"></i><b>14</b> Exemple 3 - Y multinomial</a></li>
+<li class="chapter" data-level="15" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html"><i class="fa fa-check"></i><b>15</b> Exemple 4 - X quantitatif</a></li>
 <li class="part"><span><b>IV Conclusion</b></span></li>
-<li class="chapter" data-level="11" data-path="synthèse-générale.html"><a href="synthèse-générale.html"><i class="fa fa-check"></i><b>11</b> Synthèse générale</a>
+<li class="chapter" data-level="16" data-path="synthèse-générale.html"><a href="synthèse-générale.html"><i class="fa fa-check"></i><b>16</b> Synthèse générale</a></li>
+<li class="chapter" data-level="17" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html"><i class="fa fa-check"></i><b>17</b> Pour aller plus loin…</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="synthèse-générale.html"><a href="synthèse-générale.html#ajouter-de-la-complexité"><i class="fa fa-check"></i><b>11.1</b> Ajouter de la complexité</a></li>
-<li class="chapter" data-level="11.2" data-path="synthèse-générale.html"><a href="synthèse-générale.html#interaction-avec-confusion-intermédiaire"><i class="fa fa-check"></i><b>11.2</b> Interaction avec confusion intermédiaire</a></li>
-<li class="chapter" data-level="11.3" data-path="synthèse-générale.html"><a href="synthèse-générale.html#interaction-et-médiation"><i class="fa fa-check"></i><b>11.3</b> Interaction et médiation</a></li>
+<li class="chapter" data-level="17.1" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#ajouter-de-la-complexité"><i class="fa fa-check"></i><b>17.1</b> Ajouter de la complexité</a></li>
+<li class="chapter" data-level="17.2" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#interaction-avec-confusion-intermédiaire"><i class="fa fa-check"></i><b>17.2</b> Interaction avec confusion intermédiaire</a></li>
+<li class="chapter" data-level="17.3" data-path="pour-aller-plus-loin.html"><a href="pour-aller-plus-loin.html#interaction-et-médiation"><i class="fa fa-check"></i><b>17.3</b> Interaction et médiation</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>12</b> Références</a></li>
+<li class="chapter" data-level="18" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>18</b> Références</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -261,11 +261,11 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-partir-de-modèles-de-régression" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> A partir de modèles de régression<a href="a-partir-de-modèles-de-régression.html#a-partir-de-modèles-de-régression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="a-partir-de-modèles-de-régression" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> A partir de modèles de régression<a href="a-partir-de-modèles-de-régression.html#a-partir-de-modèles-de-régression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.</p>
-<div id="régression-logistique" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Régression logistique<a href="a-partir-de-modèles-de-régression.html#régression-logistique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="régression-logistique" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Régression logistique<a href="a-partir-de-modèles-de-régression.html#régression-logistique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Lorsque l’on étudie un outcome binaire, on utilise souvent les modèles de régression logistique.</p>
 <pre><code>## 
 ## Call:
@@ -296,12 +296,44 @@ div.csl-indent {
 ## AIC: 8474.4
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<p>Le coefficient <code>as.factor(A1)1</code> correspond à l’effet de A1 dans la catégorie de référence de A2, soit <span class="math inline">\(\small OR = exp(1.756) =\)</span> 5.789.</p>
-<p>Le coefficient <code>as.factor(A1)1:as.factor(A2)1</code> correspond à la différence d’effet de A1 quand on passe dans l’autre catégorie de A2. L’effet de A1 dans la catégorie A2=1 est donc <span class="math inline">\(\small OR = exp(1.756+1.786) =\)</span> 34.536.</p>
-<p>L’interaction multiplicative peut donc être estimée par <span class="math inline">\(\small IM = exp(1.786) =\)</span> 5.966, soit <span class="math inline">\(\small OR(A1|A2=0) - OR(A1|A2=1)\)</span>. Ici l’interaction est significative.</p>
-<p>On aurait aussi pu décrire cette interaction à partir de l’effet d’A2 dans chaque strate de A1.</p>
-<p>On peut explorer l’interaction sur l’échelle additive en estimant le RERI par <span class="math inline">\(\small RERI \approx OR_{11} - OR_{10} - OR_{01} + 1 =\)</span> 28.499, soit <span class="math inline">\(\small OR(A1|A2=0) - OR(A1|A2=1)\)</span>. Ici l’interaction est significative.</p>
-<p>En résumé (le package <code>finalfit</code> permet de sortir les résultats proprement) :</p>
+<p>A partir de cette sortie, on peut extraire :</p>
+<ul>
+<li><strong>A1|A2=0</strong>
+<ul>
+<li>à partir du coefficient <code>as.factor(A1)1</code></li>
+<li>qui correspond à l’effet de A1 dans la catégorie de référence de A2,</li>
+<li>soit <span class="math inline">\(\small OR_{A1|A2=0} = exp(1.756) =\)</span> 5.789.</li>
+</ul></li>
+<li><strong>A1|A2=1</strong>
+<ul>
+<li>à partir du coefficient <code>as.factor(A1)1:as.factor(A2)1</code>,</li>
+<li>qui correspond à la différence d’effet de A1 quand on passe dans l’autre catégorie de A2.</li>
+<li>L’effet de A1 dans la catégorie A2=1 est donc</li>
+<li><span class="math inline">\(\small OR_{A1|A2=1} = exp(1.756+1.786) =\)</span> 34.536.</li>
+</ul></li>
+<li><strong>L’interaction multiplicative (IM)</strong>
+<ul>
+<li>peut être estimée à partir du coefficient <code>as.factor(A1)1:as.factor(A2)1</code></li>
+<li>par <span class="math inline">\(\small IM = exp(1.786) =\)</span> 5.966,</li>
+<li>qu’on peut retrouver en faisant <span class="math inline">\(\small OR_{A1|A2=1}/ OR_{A1|A2=0}\)</span>.</li>
+<li>Ici l’interaction est significative (p-value &gt;0.05).</li>
+</ul></li>
+<li><strong>A2|A1=0</strong> et <strong>A2|A1=1</strong>
+<ul>
+<li>On aurait aussi pu décrire l’interaction à partir de l’effet d’A2 dans chaque strate de A1</li>
+<li>à partir de <code>as.factor(A2)1</code> et <code>as.factor(A1)1:as.factor(A2)1</code>,</li>
+<li>avec : <span class="math inline">\(\small OR_{A2|A1=0} = exp(0.753) =\)</span> 2.123</li>
+<li>et <span class="math inline">\(\small OR_{A2|A1=1} = exp(0.753+1.786) =\)</span> 12.667</li>
+</ul></li>
+<li><strong>L’interaction additive</strong>
+<ul>
+<li>On peut explorer l’interaction sur l’échelle additive en estimant le RERI par</li>
+<li><span class="math inline">\(\small RERI \approx OR_{11} - OR_{10} - OR_{01} + 1 =\)</span></li>
+<li><span class="math inline">\(\small OR_{A1,A2} - OR_{A1|A2=0} - OR_{A2|A1=0} + 1 =\)</span></li>
+<li><span class="math inline">\(\small exp(1.786+0.753+1.786) - exp(1.786) - exp(0.753) + 1 =\)</span> 68.477.</li>
+</ul></li>
+</ul>
+<p>En résumé, (le package <code>finalfit</code> permet de sortir quelques résultats proprement) :</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="a-partir-de-modèles-de-régression.html#cb3-1" aria-hidden="true" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
 <span id="cb3-2"><a href="a-partir-de-modèles-de-régression.html#cb3-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
 <span id="cb3-3"><a href="a-partir-de-modèles-de-régression.html#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
@@ -313,11 +345,14 @@ div.csl-indent {
 <span id="cb3-9"><a href="a-partir-de-modèles-de-régression.html#cb3-9" aria-hidden="true" tabindex="-1"></a>df_f <span class="sc">%&gt;%</span></span>
 <span id="cb3-10"><a href="a-partir-de-modèles-de-régression.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
 <span id="cb3-11"><a href="a-partir-de-modèles-de-régression.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="a-partir-de-modèles-de-régression.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), </span>
-<span id="cb3-13"><a href="a-partir-de-modèles-de-régression.html#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb3-14"><a href="a-partir-de-modèles-de-régression.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
-<span id="cb3-15"><a href="a-partir-de-modèles-de-régression.html#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb3-16"><a href="a-partir-de-modèles-de-régression.html#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
+<span id="cb3-12"><a href="a-partir-de-modèles-de-régression.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># le tableau t entier peut être imprimé, mais ici je sélectionne seulement les effets d&#39;intéret </span></span>
+<span id="cb3-13"><a href="a-partir-de-modèles-de-régression.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># pour éviter la table 2 fallacy (les coefficient des facteurs de confusion L ne sont pas interprétables)</span></span>
+<span id="cb3-14"><a href="a-partir-de-modèles-de-régression.html#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="a-partir-de-modèles-de-régression.html#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), </span>
+<span id="cb3-16"><a href="a-partir-de-modèles-de-régression.html#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb3-17"><a href="a-partir-de-modèles-de-régression.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb3-18"><a href="a-partir-de-modèles-de-régression.html#cb3-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="a-partir-de-modèles-de-régression.html#cb3-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -358,8 +393,8 @@ Interaction
 </table>
 <p>Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.</p>
 </div>
-<div id="régression-lineaire" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Régression lineaire<a href="a-partir-de-modèles-de-régression.html#régression-lineaire" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="régression-lineaire" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Régression lineaire<a href="a-partir-de-modèles-de-régression.html#régression-lineaire" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Même si l’outcome binaire, on peut en théorie utiliser un modèle de régression linéaire et explorer les effets sur une échelle additive. Si l’outcome est quantitatif, on utilise aussi, en général, les modèles de régression linéaire.</p>
 <pre><code>## 
 ## Call:
@@ -386,7 +421,51 @@ Interaction
 ## Residual standard error: 0.3615 on 9993 degrees of freedom
 ## Multiple R-squared:  0.2856, Adjusted R-squared:  0.2852 
 ## F-statistic: 665.8 on 6 and 9993 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p><span style="color: red;">partie à compléter </span></p>
+<p>A partir de cette sortie, on peut extraire :</p>
+<ul>
+<li><strong>A1|A2=0</strong>
+<ul>
+<li>à partir du coefficient <code>as.factor(A1)1</code></li>
+<li>qui correspond à l’effet de A1 dans la catégorie de référence de A2,</li>
+<li>soit <span class="math inline">\(\small DR = +30,08 \%\)</span>.</li>
+</ul></li>
+<li><strong>A1|A2=1</strong>
+<ul>
+<li>à partir du coefficient <code>as.factor(A1)1:as.factor(A2)1</code>,</li>
+<li>qui correspond à la différence d’effet de A1 quand on passe dans l’autre catégorie de A2.</li>
+<li>L’effet de A1 dans la catégorie A2=1 est donc</li>
+<li><span class="math inline">\(\small DR = 30.08+39.40 =\)</span> 69.48 %.</li>
+</ul></li>
+<li><strong>L’interaction additive</strong>
+<ul>
+<li>à partir du coefficient <code>as.factor(A1)1:as.factor(A2)1</code></li>
+<li>avec <span class="math inline">\(\small AI = +39.40 \%\)</span>,</li>
+<li>qu’on peut retrouver en faisant <span class="math inline">\(\small DR(A1|A2=1) - DR(A1|A2=0)\)</span>.</li>
+<li>Ici l’interaction est significative (p-value &gt;0.05).</li>
+</ul></li>
+<li><strong>A2|A1=0</strong> et <strong>A2|A1=1</strong>
+<ul>
+<li>On aurait aussi pu décrire cette interaction à partir de l’effet d’A2 dans chaque strate de A1</li>
+<li>à partir de <code>as.factor(A2)1</code> et <code>as.factor(A1)1:as.factor(A2)1</code>,</li>
+<li>avec : <span class="math inline">\(\small DR_{A1|A2=0} = +9.23\%\)</span></li>
+<li>et <span class="math inline">\(\small DR_{A1|A2=1} = 9.23+39.40 =\)</span> 48.63%.</li>
+</ul></li>
+</ul>
+<p>En résumé, (le package <code>finalfit</code> permet de sortir quelques résultats proprement) :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="a-partir-de-modèles-de-régression.html#cb5-1" aria-hidden="true" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
+<span id="cb5-2"><a href="a-partir-de-modèles-de-régression.html#cb5-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
+<span id="cb5-3"><a href="a-partir-de-modèles-de-régression.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
+<span id="cb5-4"><a href="a-partir-de-modèles-de-régression.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L1)&quot;</span>,</span>
+<span id="cb5-5"><a href="a-partir-de-modèles-de-régression.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L2)&quot;</span>, </span>
+<span id="cb5-6"><a href="a-partir-de-modèles-de-régression.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L3)&quot;</span>)</span>
+<span id="cb5-7"><a href="a-partir-de-modèles-de-régression.html#cb5-7" aria-hidden="true" tabindex="-1"></a>dependent <span class="ot">=</span> <span class="st">&quot;Y&quot;</span></span>
+<span id="cb5-8"><a href="a-partir-de-modèles-de-régression.html#cb5-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="a-partir-de-modèles-de-régression.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
+<span id="cb5-10"><a href="a-partir-de-modèles-de-régression.html#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="a-partir-de-modèles-de-régression.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), <span class="at">DR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb5-12"><a href="a-partir-de-modèles-de-régression.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb5-13"><a href="a-partir-de-modèles-de-régression.html#cb5-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="a-partir-de-modèles-de-régression.html#cb5-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -394,7 +473,7 @@ Interaction
 names
 </th>
 <th style="text-align:left;">
-OR
+DR
 </th>
 </tr>
 </thead>
@@ -425,6 +504,1203 @@ Interaction
 </tr>
 </tbody>
 </table>
+
+<!-- # Analyses confirmatoires -->
+<!-- <script type="text/javascript"> -->
+<!-- // toggle visibility of R source blocks in R Markdown output -->
+<!-- function toggle_R() { -->
+<!--   var x = document.getElementsByClassName('r'); -->
+<!--   if (x.length == 0) return; -->
+<!--   function toggle_vis(o) { -->
+<!--     var d = o.style.display; -->
+<!--     o.style.display = (d == 'block' || d == '') ? 'none':'block'; -->
+<!--   } -->
+<!--   for (i = 0; i < x.length; i++) { -->
+<!--     var y = x[i]; -->
+<!--     if (y.tagName.toLowerCase() === 'pre') toggle_vis(y); -->
+<!--   } -->
+<!--     var elem = document.getElementById("myButton1"); -->
+<!--     if (elem.value === "Hide Code") elem.value = "Show Code"; -->
+<!--     else elem.value = "Hide Code"; -->
+<!-- } -->
+<!-- document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id="myButton1" style="position: static; top: 1%; left: 2%; z-index: 200"></input>') -->
+<!-- </script> -->
+<!-- ## Estimation par G-computation -->
+<!-- Il s'agit d'une "G-methods" aussi appelée "standardisation" par Hernàn. -->
+<!-- ```{r gcomp, results ='hide', cache = TRUE} -->
+<!-- ## 1.a) on crée 4 tables correspondant aux 4 interventions contrefactuelles -->
+<!--     df.A1_0.A2_0 <- df.A1_1.A2_0 <- df.A1_0.A2_1 <- df.A1_1.A2_1 <- df -->
+<!--     df.A1_0.A2_0$A1 <- df.A1_0.A2_0$A2 <- rep(0, nrow(df)) -->
+<!--     df.A1_1.A2_0$A1 <- rep(1, nrow(df)) -->
+<!--     df.A1_1.A2_0$A2 <- rep(0, nrow(df)) -->
+<!--     df.A1_0.A2_1$A1 <- rep(0, nrow(df)) -->
+<!--     df.A1_0.A2_1$A2 <- rep(1, nrow(df)) -->
+<!--     df.A1_1.A2_1$A1 <- df.A1_1.A2_1$A2 <- rep(1, nrow(df)) -->
+<!-- ## 1.b) on modélise le critère de jugement -->
+<!--     # model.Y <- glm(Y ~ L1 + L2 + L3 + A1 + A2 + A1:A2, data = df, family = "binomial")  -->
+<!--     # modèle logistique biaisé (il y a des interactions avec les baseline) -->
+<!--     model.Y <- glm(Y ~ L1 + L2 + L3 + A1 + A2 + A1:A2, data = df, -->
+<!--                    family = "gaussian") # modèle non biaisé -->
+<!--     # en pratique la régression logistique n'est pas tellement biaisée,  -->
+<!--     # mais peut être car il n'y a pas la place de mettre beaucoup de confusion -->
+<!--     # par rapport aux effets importants de A1 et A2 ? (10 fois plus grands) -->
+<!-- ## 1.c) on prédit le critère de jugement sous les interventions contrefactuelles -->
+<!--     Y.A1_0.A2_0 <- predict(model.Y, newdata = df.A1_0.A2_0, type = "response") -->
+<!--     Y.A1_1.A2_0 <- predict(model.Y, newdata = df.A1_1.A2_0, type = "response") -->
+<!--     Y.A1_0.A2_1 <- predict(model.Y, newdata = df.A1_0.A2_1, type = "response") -->
+<!--     Y.A1_1.A2_1 <- predict(model.Y, newdata = df.A1_1.A2_1, type = "response") -->
+<!-- ## 1.d) on va enregistrer l'ensemble des résultats pertinents dans une table de longueur k1 x k2 -->
+<!--     int.r <- matrix(NA,  -->
+<!--                     ncol = 26,  -->
+<!--                     nrow = nlevels(as.factor(df$A1)) * nlevels(as.factor(df$A2))) -->
+<!--     int.r <- as.data.frame(int.r) -->
+<!--     names(int.r) <- c("A1","A2","p","p.lo","p.up", -->
+<!--                       "RD.A1","RD.A1.lo","RD.A1.up","RD.A2","RD.A2.lo","RD.A2.up", -->
+<!--                       "RR.A1","RR.A1.lo","RR.A1.up","RR.A2","RR.A2.lo","RR.A2.up", -->
+<!--                       "a.INT", "a.INT.lo", "a.INT.up","RERI","RERI.lo","RERI.up", -->
+<!--                       "m.INT", "m.INT.lo", "m.INT.up" ) -->
+<!--     int.r[,c("A1","A2")] <- expand.grid(c(0,1), c(0,1)) -->
+<!-- # marginal effects in the k1 x k2 table -->
+<!--     # A1 = 0 et A2 = 0 -->
+<!--     int.r$p[int.r$A1 == 0 & int.r$A2 == 0] <- mean(Y.A1_0.A2_0) -->
+<!--     # A1 = 1 et A2 = 0 -->
+<!--     int.r$p[int.r$A1 == 1 & int.r$A2 == 0] <- mean(Y.A1_1.A2_0) -->
+<!--     # A1 = 0 et A2 = 1 -->
+<!--     int.r$p[int.r$A1 == 0 & int.r$A2 == 1] <- mean(Y.A1_0.A2_1) -->
+<!--     # A1 = 1 et A2 = 1 -->
+<!--     int.r$p[int.r$A1 == 1 & int.r$A2 == 1] <- mean(Y.A1_1.A2_1) -->
+<!-- # risk difference -->
+<!--     # RD.A1.A2is0 -->
+<!--     int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] <- mean(Y.A1_1.A2_0) - mean(Y.A1_0.A2_0) -->
+<!--     # RD.A1.A2is1 -->
+<!--     int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] <- mean(Y.A1_1.A2_1) - mean(Y.A1_0.A2_1) -->
+<!--     # RD.A2.A1is0 -->
+<!--     int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] <- mean(Y.A1_0.A2_1) - mean(Y.A1_0.A2_0) -->
+<!--     # RD.A2.A1is1 -->
+<!--     int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] <- mean(Y.A1_1.A2_1) - mean(Y.A1_1.A2_0) -->
+<!-- # relative risk -->
+<!--     # RR.A1.A2is0 -->
+<!--     int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0] <- mean(Y.A1_1.A2_0) / mean(Y.A1_0.A2_0) -->
+<!--     # RR.A1.A2is1 -->
+<!--     int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] <- mean(Y.A1_1.A2_1) / mean(Y.A1_0.A2_1) -->
+<!--     # RR.A2.A1is0 -->
+<!--     int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1] <- mean(Y.A1_0.A2_1) / mean(Y.A1_0.A2_0) -->
+<!--     # RR.A2.A1is1 -->
+<!--     int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1] <- mean(Y.A1_1.A2_1) / mean(Y.A1_1.A2_0) -->
+<!-- # additive interaction -->
+<!--     int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] <- mean(Y.A1_1.A2_1) -  -->
+<!--                                                   mean(Y.A1_1.A2_0) -  -->
+<!--                                                   mean(Y.A1_0.A2_1) +  -->
+<!--       mean(Y.A1_0.A2_0) -->
+<!--     # RERI -->
+<!--     int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1] <- (mean(Y.A1_1.A2_1) -  -->
+<!--                                                     mean(Y.A1_1.A2_0) -  -->
+<!--                                                     mean(Y.A1_0.A2_1) +  -->
+<!--                                                     mean(Y.A1_0.A2_0)) /  -->
+<!--                                                     mean(Y.A1_0.A2_0) -->
+<!--     # multiplicative interaction -->
+<!--     int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1] <- (mean(Y.A1_1.A2_1) *  -->
+<!--                                                      mean(Y.A1_0.A2_0)) /  -->
+<!--                                                       (mean(Y.A1_1.A2_0) *  -->
+<!--                                                          mean(Y.A1_0.A2_1)) -->
+<!-- ## 1.e) Intervalles de confiance par bootstrap -->
+<!--     set.seed(5678) -->
+<!--     B <- 2000 -->
+<!--     bootstrap.est <- data.frame(matrix(NA, nrow = B, ncol = 15)) -->
+<!--     colnames(bootstrap.est) <- c("p.A1is0.A2is0", "p.A1is1.A2is0", "p.A1is0.A2is1", "p.A1is1.A2is1",  -->
+<!--                                  "RD.A1.A2is0", "RD.A1.A2is1", "RD.A2.A1is0", "RD.A2.A1is1", -->
+<!--                                  "lnRR.A1.A2is0", "lnRR.A1.A2is1", "lnRR.A2.A1is0", "lnRR.A2.A1is1", -->
+<!--                                  "INT.a", "lnRERI", "lnINT.m") -->
+<!--     for (b in 1:B){ -->
+<!--       # sample the indices 1 to n with replacement -->
+<!--       bootIndices <- sample(1:nrow(df), replace=T) -->
+<!--       bootData <- df[bootIndices,] -->
+<!--       if ( round(b/100, 0) == b/100 ) print(paste0("bootstrap number ",b)) -->
+<!--       # model (unbiased in this case) -->
+<!--       model.Y <- glm(Y ~ L1 + L2 + L3 + A1 + A2 + A1:A2,  -->
+<!--                      data = bootData,                    # use BootData here +++ -->
+<!--                      family = "gaussian")  -->
+<!--       # conterfactual data sets -->
+<!--       boot.A1_0.A2_0 <- boot.A1_1.A2_0 <- boot.A1_0.A2_1 <- boot.A1_1.A2_1 <- bootData -->
+<!--       boot.A1_0.A2_0$A1 <- boot.A1_0.A2_0$A2 <- rep(0, nrow(df)) -->
+<!--       boot.A1_1.A2_0$A1 <- rep(1, nrow(df)) -->
+<!--       boot.A1_1.A2_0$A2 <- rep(0, nrow(df)) -->
+<!--       boot.A1_0.A2_1$A1 <- rep(0, nrow(df)) -->
+<!--       boot.A1_0.A2_1$A2 <- rep(1, nrow(df)) -->
+<!--       boot.A1_1.A2_1$A1 <- boot.A1_1.A2_1$A2 <- rep(1, nrow(df)) -->
+<!--       # predict potential outcomes under counterfactual scenarios -->
+<!--       Y.A1_0.A2_0 <- predict(model.Y, newdata = boot.A1_0.A2_0, type = "response") -->
+<!--       Y.A1_1.A2_0 <- predict(model.Y, newdata = boot.A1_1.A2_0, type = "response") -->
+<!--       Y.A1_0.A2_1 <- predict(model.Y, newdata = boot.A1_0.A2_1, type = "response") -->
+<!--       Y.A1_1.A2_1 <- predict(model.Y, newdata = boot.A1_1.A2_1, type = "response") -->
+<!--       # save results in the bootstrap table -->
+<!--       bootstrap.est[b,"p.A1is0.A2is0"] <- mean(Y.A1_0.A2_0) -->
+<!--       bootstrap.est[b,"p.A1is1.A2is0"] <- mean(Y.A1_1.A2_0) -->
+<!--       bootstrap.est[b,"p.A1is0.A2is1"] <- mean(Y.A1_0.A2_1) -->
+<!--       bootstrap.est[b,"p.A1is1.A2is1"] <- mean(Y.A1_1.A2_1) -->
+<!--       bootstrap.est[b,"RD.A1.A2is0"] <- mean(Y.A1_1.A2_0) - mean(Y.A1_0.A2_0) -->
+<!--       bootstrap.est[b,"RD.A1.A2is1"] <- mean(Y.A1_1.A2_1) - mean(Y.A1_0.A2_1) -->
+<!--       bootstrap.est[b,"RD.A2.A1is0"] <- mean(Y.A1_0.A2_1) - mean(Y.A1_0.A2_0) -->
+<!--       bootstrap.est[b,"RD.A2.A1is1"] <- mean(Y.A1_1.A2_1) - mean(Y.A1_1.A2_0) -->
+<!--       bootstrap.est[b,"lnRR.A1.A2is0"] <- log(mean(Y.A1_1.A2_0) / mean(Y.A1_0.A2_0)) -->
+<!--       bootstrap.est[b,"lnRR.A1.A2is1"] <- log(mean(Y.A1_1.A2_1) / mean(Y.A1_0.A2_1)) -->
+<!--       bootstrap.est[b,"lnRR.A2.A1is0"] <- log(mean(Y.A1_0.A2_1) / mean(Y.A1_0.A2_0)) -->
+<!--       bootstrap.est[b,"lnRR.A2.A1is1"] <- log(mean(Y.A1_1.A2_1) / mean(Y.A1_1.A2_0)) -->
+<!--       bootstrap.est[b,"INT.a"] <- mean(Y.A1_1.A2_1) -  -->
+<!--         mean(Y.A1_1.A2_0) - mean(Y.A1_0.A2_1) + mean(Y.A1_0.A2_0) -->
+<!--       bootstrap.est[b,"lnRERI"] <- log((mean(Y.A1_1.A2_1) -  -->
+<!--         mean(Y.A1_1.A2_0) - mean(Y.A1_0.A2_1) + mean(Y.A1_0.A2_0)) / mean(Y.A1_0.A2_0)) -->
+<!--       bootstrap.est[b,"lnINT.m"] <- log( (mean(Y.A1_1.A2_1) *  -->
+<!--         mean(Y.A1_0.A2_0)) / (mean(Y.A1_1.A2_0) * mean(Y.A1_0.A2_1))) -->
+<!--     } -->
+<!--     # head(bootstrap.est) -->
+<!--     # summary(bootstrap.est) -->
+<!--     # par(mfrow = c(4,4)) -->
+<!--     # for(c in 1:ncol(bootstrap.est)) { -->
+<!--     #   hist(bootstrap.est[,c], freq = FALSE, main = names(bootstrap.est)[c]) -->
+<!--     #   lines(density(bootstrap.est[,c]), col = 2, lwd = 3) -->
+<!--     #   curve(1/sqrt(var(bootstrap.est[,c]) * 2 * pi) *  -->
+<!--     #           exp(-1/2 * ((x-mean(bootstrap.est[,c])) / sd(bootstrap.est[,c]))^2), -->
+<!--     #         col = 1, lwd = 2, lty = 2, add = TRUE) -->
+<!--     # par(mfrow = c(1,1)) -->
+<!--     # ok, on a des belles lois normales dans les distributions bootstrap, tout va bien ! -->
+<!--     # pour les IC95%, je peux utiliser la déviation standard des distributions -->
+<!--     # pour des distributions plus asymétriques, on utiliserait plutôt les percentiles 2.5% et 97.5% -->
+<!--     # } -->
+<!-- # marginal effects in the k1 x k2 table -->
+<!--     # A1 = 0 et A2 = 0 -->
+<!--     int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$p.A1is0.A2is0) -->
+<!--     int.r$p.up[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$p.A1is0.A2is0) -->
+<!--     # A1 = 1 et A2 = 0 -->
+<!--     int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$p.A1is1.A2is0) -->
+<!--     int.r$p.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$p.A1is1.A2is0) -->
+<!--     # A1 = 0 et A2 = 1 -->
+<!--     int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$p.A1is0.A2is1) -->
+<!--     int.r$p.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$p.A1is0.A2is1) -->
+<!--     # A1 = 1 et A2 = 1 -->
+<!--     int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$p.A1is1.A2is1) -->
+<!--     int.r$p.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$p.A1is1.A2is1) -->
+<!-- # risk difference -->
+<!--     # RD.A1.A2is0 -->
+<!--     int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$RD.A1.A2is0) -->
+<!--     int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$RD.A1.A2is0) -->
+<!--     # RD.A1.A2is1 -->
+<!--     int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$RD.A1.A2is1) -->
+<!--     int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$RD.A1.A2is1) -->
+<!--     # RD.A2.A1is0 -->
+<!--     int.r$RD.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$RD.A2.A1is0) -->
+<!--     int.r$RD.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$RD.A2.A1is0) -->
+<!--     # RD.A2.A1is1 -->
+<!--     int.r$RD.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$RD.A2.A1is1) -->
+<!--     int.r$RD.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$RD.A2.A1is1) -->
+<!-- # relative risk -->
+<!--     # RR.A1.A2is0 -->
+<!--     int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -  -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnRR.A1.A2is0)) -->
+<!--     int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) +  -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnRR.A1.A2is0)) -->
+<!--     # RR.A1.A2is1 -->
+<!--     int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnRR.A1.A2is1)) -->
+<!--     int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnRR.A1.A2is1)) -->
+<!--     # RR.A2.A1is0 -->
+<!--     int.r$RR.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnRR.A2.A1is0)) -->
+<!--     int.r$RR.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnRR.A2.A1is0)) -->
+<!--     # RR.A2.A1is1 -->
+<!--     int.r$RR.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnRR.A2.A1is1)) -->
+<!--     int.r$RR.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnRR.A2.A1is1)) -->
+<!-- # additive interaction -->
+<!--     int.r$a.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$INT.a) -->
+<!--     int.r$a.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * sd(bootstrap.est$INT.a) -->
+<!--     # RERI -->
+<!--     int.r$RERI.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                           qnorm(0.975) * sd(bootstrap.est$lnRERI)) -->
+<!--     int.r$RERI.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                           qnorm(0.975) * sd(bootstrap.est$lnRERI)) -->
+<!--     # multiplicative interaction -->
+<!--     int.r$m.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) - -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnINT.m)) -->
+<!--     int.r$m.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) + -->
+<!--                                                            qnorm(0.975) * sd(bootstrap.est$lnINT.m)) -->
+<!-- ``` -->
+<!-- Au final, on a : -->
+<!-- ```{r t_gcomp, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- ## 1.d) tableau des effets marginaux -->
+<!--     out.table <- data.frame(c1 = rep("",4), c2 = rep("",4), c3 = rep("",4), c4 = rep("",4)) -->
+<!--     names(out.table) <- c("A2=0", "A2=1", "RD.A2|A1", "RR.A2|A1") -->
+<!--     rownames(out.table) <- c("A1=0", "A1=1", "RD.A1|A2", "RR.A1|A2") -->
+<!-- # p -->
+<!--     out.table["A1=0","A2=0"] <- paste0("$p_{00}$=",round(int.r$p[which(int.r$A1==0 & int.r$A2==0)], digits = 3), -->
+<!--                                        " [", -->
+<!--                                        round(int.r$p.lo[which(int.r$A1==0 & int.r$A2==0)], digits = 3), -->
+<!--                                        ",", -->
+<!--                                        round(int.r$p.up[which(int.r$A1==0 & int.r$A2==0)], digits = 3), -->
+<!--                                        "]") -->
+<!--     out.table["A1=0","A2=1"] <- paste0("$p_{01}$=",round(int.r$p[which(int.r$A1==0 & int.r$A2==1)], digits = 3), -->
+<!--                                        " [", -->
+<!--                                        round(int.r$p.lo[which(int.r$A1==0 & int.r$A2==1)], digits = 3), -->
+<!--                                        ",", -->
+<!--                                        round(int.r$p.up[which(int.r$A1==0 & int.r$A2==1)], digits = 3), -->
+<!--                                        "]") -->
+<!--     out.table["A1=1","A2=0"] <- paste0("$p_{10}$=",round(int.r$p[which(int.r$A1==1 & int.r$A2==0)], digits = 3), -->
+<!--                                        " [", -->
+<!--                                        round(int.r$p.lo[which(int.r$A1==1 & int.r$A2==0)], digits = 3), -->
+<!--                                        ",", -->
+<!--                                        round(int.r$p.up[which(int.r$A1==1 & int.r$A2==0)], digits = 3), -->
+<!--                                        "]")      -->
+<!--     out.table["A1=1","A2=1"] <- paste0("$p_{11}$=",round(int.r$p[which(int.r$A1==1 & int.r$A2==1)], digits = 3), -->
+<!--                                        " [", -->
+<!--                                        round(int.r$p.lo[which(int.r$A1==1 & int.r$A2==1)], digits = 3), -->
+<!--                                        ",", -->
+<!--                                        round(int.r$p.up[which(int.r$A1==1 & int.r$A2==1)], digits = 3), -->
+<!--                                        "]")     -->
+<!-- # RD -->
+<!--     out.table["A1=0","RD.A2|A1"] <- paste0(round(int.r$RD.A2[which(int.r$A1==0 & int.r$A2==1)], digits = 3), -->
+<!--                                            " [", -->
+<!--                                            round(int.r$RD.A2.lo[which(int.r$A1==0 & int.r$A2==1)], digits = 3), -->
+<!--                                            ",", -->
+<!--                                            round(int.r$RD.A2.up[which(int.r$A1==0 & int.r$A2==1)], digits = 3), -->
+<!--                                            "]") -->
+<!--     out.table["A1=1","RD.A2|A1"] <- paste0(round(int.r$RD.A2[which(int.r$A1==1 & int.r$A2==1)], digits = 3), -->
+<!--                                            " [", -->
+<!--                                            round(int.r$RD.A2.lo[which(int.r$A1==1 & int.r$A2==1)], digits = 3), -->
+<!--                                            ",", -->
+<!--                                            round(int.r$RD.A2.up[which(int.r$A1==1 & int.r$A2==1)], digits = 3), -->
+<!--                                            "]")    -->
+<!--     out.table["RD.A1|A2","A2=0"] <- paste0(round(int.r$RD.A1[which(int.r$A1==1 & int.r$A2==0)],digits = 3), -->
+<!--                                            " [", -->
+<!--                                            round(int.r$RD.A1.lo[which(int.r$A1==1 & int.r$A2==0)],digits = 3), -->
+<!--                                            ",", -->
+<!--                                            round(int.r$RD.A1.up[which(int.r$A1==1 & int.r$A2==0)],digits = 3), -->
+<!--                                            "]")  -->
+<!--     out.table["RD.A1|A2","A2=1"] <- paste0(round(int.r$RD.A1[which(int.r$A1==1 & int.r$A2==1)],digits = 3), -->
+<!--                                            " [", -->
+<!--                                            round(int.r$RD.A1.lo[which(int.r$A1==1 & int.r$A2==1)],digits = 3), -->
+<!--                                            ",", -->
+<!--                                            round(int.r$RD.A1.up[which(int.r$A1==1 & int.r$A2==1)],digits = 3), -->
+<!--                                            "]")  -->
+<!-- # RR -->
+<!--     out.table["A1=0","RR.A2|A1"] <- paste0(round(int.r$RR.A2[which(int.r$A1==0 & int.r$A2==1)], digits = 2), -->
+<!--                                            " [", -->
+<!--                                            round(int.r$RR.A2.lo[which(int.r$A1==0 & int.r$A2==1)], digits = 2), -->
+<!--                                            ",", -->
+<!--                                            round(int.r$RR.A2.up[which(int.r$A1==0 & int.r$A2==1)], digits = 2), -->
+<!--                                            "]") -->
+<!--     out.table["A1=1","RR.A2|A1"] <- paste0(round(int.r$RR.A2[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                            " [", -->
+<!--                                            round(int.r$RR.A2.lo[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                            ",", -->
+<!--                                            round(int.r$RR.A2.up[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                            "]")    -->
+<!--     out.table["RR.A1|A2","A2=0"] <- paste0(round(int.r$RR.A1[which(int.r$A1==1 & int.r$A2==0)],digits = 2), -->
+<!--                                            " [", -->
+<!--                                            round(int.r$RR.A1.lo[which(int.r$A1==1 & int.r$A2==0)],digits = 2), -->
+<!--                                            ",", -->
+<!--                                            round(int.r$RR.A1.up[which(int.r$A1==1 & int.r$A2==0)],digits = 2), -->
+<!--                                            "]")  -->
+<!--     out.table["RR.A1|A2","A2=1"] <- paste0(round(int.r$RR.A1[which(int.r$A1==1 & int.r$A2==1)],digits = 2), -->
+<!--                                            " [", -->
+<!--                                            round(int.r$RR.A1.lo[which(int.r$A1==1 & int.r$A2==1)],digits = 2), -->
+<!--                                            ",", -->
+<!--                                            round(int.r$RR.A1.up[which(int.r$A1==1 & int.r$A2==1)],digits = 2), -->
+<!--                                            "]")  -->
+<!--     interaction.effects <- c(paste0("additive Interaction = ",  -->
+<!--                                    round(int.r$a.INT[which(int.r$A1==1 & int.r$A2==1)], digits = 3),  -->
+<!--                                    " [",  -->
+<!--                                    round(int.r$a.INT.lo[which(int.r$A1==1 & int.r$A2==1)], digits = 3),  -->
+<!--                                    ";",  -->
+<!--                                    round(int.r$a.INT.up[which(int.r$A1==1 & int.r$A2==1)], digits = 3), -->
+<!--                                    "]"), -->
+<!--                               paste0("RERI = ", -->
+<!--                                      round(int.r$RERI[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                      " [", -->
+<!--                                      round(int.r$RERI.lo[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                      ";", -->
+<!--                                      round(int.r$RERI.up[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                      "]"), -->
+<!--                               paste0("multiplicative Interaction = ", -->
+<!--                                      round(int.r$m.INT[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                      " [", -->
+<!--                                      round(int.r$m.INT.lo[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                      ";", -->
+<!--                                      round(int.r$m.INT.up[which(int.r$A1==1 & int.r$A2==1)], digits = 2), -->
+<!--                                      "]")) -->
+<!--     library(kableExtra) -->
+<!--     kbl(out.table) %>% -->
+<!--       kable_classic() %>% -->
+<!--       footnote(general = interaction.effects) -->
+<!-- ``` -->
+<!-- ## Estimation par Modèle Structurel Marginal -->
+<!-- ```{r msm, results ='hide', cache = TRUE} -->
+<!-- # On récupère les Y prédit précédents, que l'on fusionne -->
+<!--     Y <- c(Y.A1_0.A2_0, Y.A1_1.A2_0, Y.A1_0.A2_1, Y.A1_1.A2_1) -->
+<!--     length(Y) -->
+<!--     # on aura une base de données de 40000 lignes -->
+<!-- # On récupère les valeurs d'exposition qui ont servi dans les scénarios contrefactuels -->
+<!--     # (garder le même ordre que pour les Y.A1.A2) -->
+<!--     X <- rbind(subset(df.A1_0.A2_0, select = c("A1", "A2")), -->
+<!--                subset(df.A1_1.A2_0, select = c("A1", "A2")), -->
+<!--                subset(df.A1_0.A2_1, select = c("A1", "A2")), -->
+<!--                subset(df.A1_1.A2_1, select = c("A1", "A2"))) -->
+<!--    #  dim(X) -->
+<!-- ## Modèle structurel marginal -->
+<!--     msm.RD <- glm(Y ~ A1 + A2 + A1:A2,  -->
+<!--                   data = data.frame(Y,X),  -->
+<!--                   family = "gaussian") # ne pas ajuster sur les facteurs de confusion -->
+<!--     msm.RD -->
+<!-- ## tableau des effets marignaux -->
+<!--     results.MSM <- matrix(NA, ncol = 4, nrow = 4) -->
+<!--     colnames(results.MSM) <- c("A2 = 0", "A2 = 1", -->
+<!--                                "RD within strata of A1", -->
+<!--                                "RR within strata of A1") -->
+<!--     rownames(results.MSM) <- c("A1 = 0", "A1 = 1", -->
+<!--                                "RD within strata of A2", -->
+<!--                                "RR within strata of A2") -->
+<!-- # 4 risques marginaux -->
+<!--     results.MSM["A1 = 0","A2 = 0"] <- msm.RD$coefficients["(Intercept)"] -->
+<!--     results.MSM["A1 = 0","A2 = 1"] <- msm.RD$coefficients["(Intercept)"] +  -->
+<!--       msm.RD$coefficients["A2"] -->
+<!--     results.MSM["A1 = 1","A2 = 0"] <- msm.RD$coefficients["(Intercept)"] +  -->
+<!--       msm.RD$coefficients["A1"] -->
+<!--     results.MSM["A1 = 1","A2 = 1"] <- msm.RD$coefficients["(Intercept)"] +  -->
+<!--       msm.RD$coefficients["A2"] + msm.RD$coefficients["A1"] + msm.RD$coefficients["A1:A2"] -->
+<!-- # within strata of A2 -->
+<!--     results.MSM["RR within strata of A2", "A2 = 0"] <- results.MSM["A1 = 1","A2 = 0"] /  -->
+<!--       results.MSM["A1 = 0","A2 = 0"] -->
+<!--     results.MSM["RD within strata of A2", "A2 = 0"] <- results.MSM["A1 = 1","A2 = 0"] -  -->
+<!--       results.MSM["A1 = 0","A2 = 0"] -->
+<!--     results.MSM["RR within strata of A2", "A2 = 1"] <- results.MSM["A1 = 1","A2 = 1"] /  -->
+<!--       results.MSM["A1 = 0","A2 = 1"] -->
+<!--     results.MSM["RD within strata of A2", "A2 = 1"] <- results.MSM["A1 = 1","A2 = 1"] -  -->
+<!--       results.MSM["A1 = 0","A2 = 1"] -->
+<!-- # within strata of A1 -->
+<!--     results.MSM["A1 = 0", "RR within strata of A1"] <- results.MSM["A1 = 0","A2 = 1"] /  -->
+<!--       results.MSM["A1 = 0","A2 = 0"] -->
+<!--     results.MSM["A1 = 0", "RD within strata of A1"] <- results.MSM["A1 = 0","A2 = 1"] -  -->
+<!--       results.MSM["A1 = 0","A2 = 0"] -->
+<!--     results.MSM["A1 = 1", "RR within strata of A1"] <- results.MSM["A1 = 1","A2 = 1"] / -->
+<!--       results.MSM["A1 = 1","A2 = 0"] -->
+<!--     results.MSM["A1 = 1", "RD within strata of A1"] <- results.MSM["A1 = 1","A2 = 1"] -  -->
+<!--       results.MSM["A1 = 1","A2 = 0"] -->
+<!--     results.MSM <- round(results.MSM,3) -->
+<!--     RD.interaction <- msm.RD$coefficients["A1:A2"] -->
+<!--     RR.interaction <- (results.MSM["A1 = 1","A2 = 1"] * -->
+<!--                          results.MSM["A1 = 0","A2 = 0"]) /  -->
+<!--                       ( results.MSM["A1 = 0","A2 = 1"] * -->
+<!--                           results.MSM["A1 = 1","A2 = 0"] ) -->
+<!-- ``` -->
+<!-- Au final, on a (sans les IC): -->
+<!-- ```{r t_msm, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- interaction.effects <- c(paste0("additive Interaction = ",  -->
+<!--                                    round(RD.interaction, digits = 3)), -->
+<!--                               paste0("multiplicative Interaction = ", -->
+<!--                                      round(RR.interaction, digits = 2))) -->
+<!--    kbl(results.MSM) %>% -->
+<!--       kable_classic() %>% -->
+<!--       footnote(general = interaction.effects) -->
+<!-- ``` -->
+<!-- ## Estimation avec TMLE -->
+<!-- ```{r tmle, results ='hide', warning=FALSE, message=FALSE, cache = TRUE} -->
+<!-- ## 3- int.ltmleMSM()          pour estimer les différentes quantités d'intérêt,  -->
+<!-- ###                           par gcomputation, IPTW ou tmle -->
+<!-- int.ltmleMSM <- function(data = data, -->
+<!--                          Q_formulas = Q_formulas, -->
+<!--                          g_formulas = g_formulas, -->
+<!--                          Anodes = Anodes, -->
+<!--                          Lnodes = Lnodes, -->
+<!--                          Ynodes = Ynodes, -->
+<!--                          final.Ynodes = final.Ynodes, -->
+<!--                          SL.library = list(Q="SL.glm", -->
+<!--                                            g="SL.glm"), -->
+<!--                          gcomp = gcomp,  -->
+<!--                          iptw.only = iptw.only, -->
+<!--                          survivalOutcome = FALSE, -->
+<!--                          variance.method = "ic", -->
+<!--                          B = 2000,  -->
+<!--                          boot.seed = 12345) { -->
+<!--   # regime= -->
+<!--   # binary array: n x numAnodes x numRegimes of counterfactual treatment or a list of 'rule' functions -->
+<!--   regimes.MSM <- array(NA, dim = c(nrow(data), 2, 4)) # 2 variables d'exposition (A1, A2), 4 régimes d'exposition (0,0) (1,0) (0,1) (1,1) -->
+<!--   regimes.MSM[,,1] <- matrix(c(0,0), ncol = 2, nrow = nrow(data), byrow = TRUE) # exposé ni à A1, ni à A2 -->
+<!--   regimes.MSM[,,2] <- matrix(c(1,0), ncol = 2, nrow = nrow(data), byrow = TRUE) # exposé à A1 uniquement -->
+<!--   regimes.MSM[,,3] <- matrix(c(0,1), ncol = 2, nrow = nrow(data), byrow = TRUE) # exposé à A2 uniquement -->
+<!--   regimes.MSM[,,4] <- matrix(c(1,1), ncol = 2, nrow = nrow(data), byrow = TRUE) # exposé à A1 et à A2 -->
+<!--   # summary.measures = valeurs des coefficients du MSM associés à chaque régime -->
+<!--   # array: num.regimes x num.summary.measures x num.final.Ynodes -  -->
+<!--   # measures summarizing the regimes that will be used on the right hand side of working.msm  -->
+<!--   # (baseline covariates may also be used in the right hand side of working.msm and do not need to be included in summary.measures) -->
+<!--   summary.measures.reg <- array(NA, dim = c(4, 3, 1)) -->
+<!--   summary.measures.reg[,,1] <- matrix(c(0, 0, 0, # aucun effet ni de A1, ni de A2 -->
+<!--                                         1, 0, 0, # effet de A1 isolé -->
+<!--                                         0, 1, 0, # effet de A2 isolé -->
+<!--                                         1, 1, 1), # effet de A1 + A2 + A1:A2  -->
+<!--                                       ncol = 3, nrow = 4, byrow = TRUE) -->
+<!--   colnames(summary.measures.reg) <- c("A1", "A2", "A1:A2") -->
+<!--   if(gcomp == TRUE) { -->
+<!--     # test length SL.library$Q -->
+<!--     SL.library$Q <- ifelse(length(SL.library$Q) > 1, "SL.glm", SL.library$Q) -->
+<!--     # simplify SL.library$g because g functions are useless with g-computation -->
+<!--     SL.library$g <- "SL.mean" -->
+<!--     iptw.only <- FALSE -->
+<!--   } -->
+<!--   ltmle_MSM <- ltmleMSM(data = data,  -->
+<!--                         Anodes = Anodes, -->
+<!--                         Lnodes = Lnodes, -->
+<!--                         Ynodes = Ynodes,  -->
+<!--                         Qform = Q_formulas,  -->
+<!--                         gform = g_formulas, -->
+<!--                         #deterministic.g.function = det.g, -->
+<!--                         regimes = regimes.MSM, # à la place de abar -->
+<!--                         working.msm= "Y ~ A1 + A2 + A1:A2",  -->
+<!--                         summary.measures = summary.measures.reg, -->
+<!--                         final.Ynodes = final.Ynodes, -->
+<!--                         msm.weights = NULL,  -->
+<!--                         SL.library = SL.library, -->
+<!--                         gcomp = gcomp, -->
+<!--                         iptw.only = iptw.only, -->
+<!--                         survivalOutcome = survivalOutcome, -->
+<!--                         estimate.time = FALSE,  -->
+<!--                         variance.method = variance.method)  -->
+<!--   bootstrap.res <- data.frame("beta.Intercept" = rep(NA, B), -->
+<!--                               "beta.A1" = rep(NA, B), -->
+<!--                               "beta.A2" = rep(NA, B), -->
+<!--                               "beta.A1A2" = rep(NA, B)) -->
+<!--   if(gcomp == TRUE) { -->
+<!--     set.seed <- boot.seed -->
+<!--     for (b in 1:B){ -->
+<!--       # sample the indices 1 to n with replacement -->
+<!--       bootIndices <- sample(1:nrow(data), replace=T) -->
+<!--       bootData <- data[bootIndices,] -->
+<!--       if ( round(b/100, 0) == b/100 ) print(paste0("bootstrap number ",b)) -->
+<!--       boot_ltmle_MSM <- ltmleMSM(data = bootData,  -->
+<!--                                  Anodes = Anodes, -->
+<!--                                  Lnodes = Lnodes, -->
+<!--                                  Ynodes = Ynodes,  -->
+<!--                                  Qform = Q_formulas,  -->
+<!--                                  gform = g_formulas, -->
+<!--                                  #deterministic.g.function = det.g, -->
+<!--                                  regimes = regimes.MSM, # à la place de abar -->
+<!--                                  working.msm= "Y ~ A1 + A2 + A1:A2",  -->
+<!--                                  summary.measures = summary.measures.reg, -->
+<!--                                  final.Ynodes = final.Ynodes, -->
+<!--                                  msm.weights = NULL,  -->
+<!--                                  SL.library = SL.library, -->
+<!--                                  gcomp = gcomp, -->
+<!--                                  iptw.only = iptw.only, -->
+<!--                                  survivalOutcome = survivalOutcome, -->
+<!--                                  estimate.time = FALSE,  -->
+<!--                                  variance.method = variance.method)  -->
+<!--       bootstrap.res$beta.Intercept[b] <- boot_ltmle_MSM$beta["(Intercept)"] -->
+<!--       bootstrap.res$beta.A1[b] <- boot_ltmle_MSM$beta["A1"] -->
+<!--       bootstrap.res$beta.A2[b] <- boot_ltmle_MSM$beta["A2"] -->
+<!--       bootstrap.res$beta.A1A2[b] <- boot_ltmle_MSM$beta["A1:A2"] -->
+<!--     } -->
+<!--   } -->
+<!--   return(list(ltmle_MSM = ltmle_MSM,  -->
+<!--               bootstrap.res = bootstrap.res)) -->
+<!-- } -->
+<!-- ### 4- summary.int()    pour enregistrer l'ensemble des estimations -->
+<!-- summary.int <- function(data = data, -->
+<!--                         ltmle_MSM = ltmle_MSM,  -->
+<!--                         estimator = c("gcomp", "iptw", "tmle")) { -->
+<!--   if(estimator == "gcomp") { -->
+<!--     try(if(ltmle_MSM$ltmle_MSM$gcomp == FALSE) -->
+<!--       stop("The ltmle function did not use the gcomp estimator, but the iptw +/- tmle estimator")) -->
+<!--     beta <- ltmle_MSM$ltmle_MSM$beta -->
+<!--   } -->
+<!--   if(estimator == "iptw") { -->
+<!--     try(if(ltmle_MSM$ltmle_MSM$gcomp == TRUE) -->
+<!--       stop("The ltmle function used the gcomp estimator, iptw is not available")) -->
+<!--     beta <- ltmle_MSM$ltmle_MSM$beta.iptw -->
+<!--     IC <- ltmle_MSM$ltmle_MSM$IC.iptw -->
+<!--   } -->
+<!--   if(estimator == "tmle") { -->
+<!--     try(if(ltmle_MSM$ltmle_MSM$gcomp == TRUE) stop("The ltmle function used the gcomp estimator, tmle is not available")) -->
+<!--     beta <- ltmle_MSM$ltmle_MSM$beta -->
+<!--     IC <- ltmle_MSM$ltmle_MSM$IC -->
+<!--   } -->
+<!--   # on va enregitrer l'ensemble des résultats pertinent dans une table de longueur k1 x k2 -->
+<!--   int.r <- matrix(NA,  -->
+<!--                   ncol = 34,  -->
+<!--                   nrow = nlevels(as.factor(data$A1)) * nlevels(as.factor(data$A2))) -->
+<!--   int.r <- as.data.frame(int.r) -->
+<!--   names(int.r) <- c("A1","A2","p","sd.p","p.lo","p.up", -->
+<!--                     "RD.A1","sd.RD.A1","RD.A1.lo","RD.A1.up", -->
+<!--                     "RD.A2","sd.RD.A2","RD.A2.lo","RD.A2.up", -->
+<!--                     "RR.A1","sd.lnRR.A1","RR.A1.lo","RR.A1.up", -->
+<!--                     "RR.A2","sd.lnRR.A2","RR.A2.lo","RR.A2.up", -->
+<!--                     "a.INT", "sd.a.INT", "a.INT.lo", "a.INT.up","RERI","sd.lnRERI","RERI.lo","RERI.up", -->
+<!--                     "m.INT", "sd.ln.m.INT", "m.INT.lo", "m.INT.up" ) -->
+<!--   int.r[,c("A1","A2")] <- expand.grid(c(0,1), c(0,1)) -->
+<!--   # on peut retrouver les IC95% par delta method -->
+<!--   # A1 = 0 et A2 = 0 -->
+<!--   int.r$p[int.r$A1 == 0 & int.r$A2 == 0] <- plogis(beta["(Intercept)"]) -->
+<!--   # A1 = 1 et A2 = 0 -->
+<!--   int.r$p[int.r$A1 == 1 & int.r$A2 == 0] <- plogis(beta["(Intercept)"] +  -->
+<!--                                                      beta["A1"]) -->
+<!--   # A1 = 0 et A2 = 1 -->
+<!--   int.r$p[int.r$A1 == 0 & int.r$A2 == 1] <- plogis(beta["(Intercept)"] +  -->
+<!--                                                      beta["A2"]) -->
+<!--   # A1 = 1 et A2 = 1 -->
+<!--   int.r$p[int.r$A1 == 1 & int.r$A2 == 1] <- plogis(beta["(Intercept)"] +  -->
+<!--                                                      beta["A1"] +  -->
+<!--                                                      beta["A2"] + -->
+<!--                                                      beta["A1:A2"]) -->
+<!--   # RD.A1.A2is0 -->
+<!--   int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] - int.r$p[int.r$A1 == 0 & int.r$A2 == 0] -->
+<!--   # RD.A1.A2is1 -->
+<!--   int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--   # RD.A2.A1is0 -->
+<!--   int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] - int.r$p[int.r$A1 == 0 & int.r$A2 == 0] -->
+<!--   # RD.A2.A1is1 -->
+<!--   int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--   # RR.A1.A2is0 -->
+<!--   int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) - log(int.r$p[int.r$A1 == 0 & int.r$A2 == 0])) -->
+<!--   # RR.A1.A2is1 -->
+<!--   int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) - log(int.r$p[int.r$A1 == 0 & int.r$A2 == 1])) -->
+<!--   # RR.A2.A1is0 -->
+<!--   int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) - log(int.r$p[int.r$A1 == 0 & int.r$A2 == 0])) -->
+<!--   # RR.A2.A1is1 -->
+<!--   int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) - log(int.r$p[int.r$A1 == 1 & int.r$A2 == 0])) -->
+<!--   # additive interaction -->
+<!--   int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--     int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0] -->
+<!--   # RERI -->
+<!--   int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--                                                          int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]) -  -->
+<!--                                                      log(int.r$p[int.r$A1 == 0 & int.r$A2 == 0])) -->
+<!--   # multiplicative interaction -->
+<!--   int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) - log(int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) -  -->
+<!--                                                       log(int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) + log(int.r$p[int.r$A1 == 0 & int.r$A2 == 0])) -->
+<!--   ## IC95% -->
+<!--   if(estimator == "iptw" | estimator == "tmle") { -->
+<!--     # A1 = 0 et A2 = 0 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),0,0,0) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0] <- sqrt(v / nrow(data)) -->
+<!--     int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0] -->
+<!--     int.r$p.up[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0] -->
+<!--     # A1 = 1 et A2 = 0 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]), -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]),0,0) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0] <- sqrt(v / nrow(data)) -->
+<!--     int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--     int.r$p.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--     # A1 = 0 et A2 = 1 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), 0, -->
+<!--               int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), 0) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1] <- sqrt(v / nrow(data)) -->
+<!--     int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--     int.r$p.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--     # A1 = 1 et A2 = 1 -->
+<!--     grad <- rep(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]), 4) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))   -->
+<!--     int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     int.r$p.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     # RD.A1.A2is0 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) -  -->
+<!--                 int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]), -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]), 0, 0) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--     int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--     # RD.A1.A2is1 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                 int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]), -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                 int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) ) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     # RD.A2.A1is0 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) -  -->
+<!--                 int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]), 0, -->
+<!--               int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), 0 ) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RD.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--     int.r$RD.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--     # RD.A2.A1is1 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                 int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]),  -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                 int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]), -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]),  -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1])) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RD.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     int.r$RD.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     # RR.A1.A2is0 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 0] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0], -->
+<!--               1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0], 0, 0) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -->
+<!--     int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) +  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -->
+<!--     # RR.A1.A2is1 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1], -->
+<!--               1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1], -->
+<!--               int.r$p[int.r$A1 == 0 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1], -->
+<!--               1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1] ) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--                                                                qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1])) -->
+<!--     int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--                                                                qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1])) -->
+<!--     # RR.A2.A1is0 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 0] - int.r$p[int.r$A1 == 0 & int.r$A2 == 1], 0, -->
+<!--               1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1], 0 ) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RR.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -->
+<!--     int.r$RR.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -->
+<!--     # RR.A2.A1is1 -->
+<!--     grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 0] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],  -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 0] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],  -->
+<!--               1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],  -->
+<!--               1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RR.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     int.r$RR.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     # additive interaction -->
+<!--     grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                 int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) -  -->
+<!--                 int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) +  -->
+<!--                 int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),  -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                 int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]), -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                 int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) ) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$a.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     int.r$a.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     # RERI -->
+<!--     grad <- c((int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                  int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) -  -->
+<!--                  int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) +  -->
+<!--                  int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0])) / -->
+<!--                 (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--                    int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]) -  -->
+<!--                 (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),  -->
+<!--               (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                  int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0])) / -->
+<!--                 (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--                    int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]), -->
+<!--               (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                  int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1])) / -->
+<!--                 (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--                    int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]), -->
+<!--               (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1])) / -->
+<!--                 (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--                    int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]) ) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$RERI.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                           qnorm(0.975) * int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     int.r$RERI.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                           qnorm(0.975) * int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     # multiplicative interaction -->
+<!--     grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 0] + int.r$p[int.r$A1 == 0 & int.r$A2 == 1] -  -->
+<!--                 int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 0 & int.r$A2 == 0],  -->
+<!--               int.r$p[int.r$A1 == 1 & int.r$A2 == 0] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1], -->
+<!--               int.r$p[int.r$A1 == 0 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1], -->
+<!--               1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     v <- t(grad) %*% var(IC) %*% grad -->
+<!--     int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))  -->
+<!--     int.r$m.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     int.r$m.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     bootstrap.res <- ltmle_MSM$bootstrap.res -->
+<!--   } -->
+<!--   if(estimator == "gcomp") { -->
+<!--     ltmle_MSM$bootstrap.res$p.A1_0.A2_0 <- plogis(ltmle_MSM$bootstrap.res$beta.Intercept) -->
+<!--     ltmle_MSM$bootstrap.res$p.A1_1.A2_0 <- plogis(ltmle_MSM$bootstrap.res$beta.Intercept +  -->
+<!--                                               ltmle_MSM$bootstrap.res$beta.A1) -->
+<!--     ltmle_MSM$bootstrap.res$p.A1_0.A2_1 <- plogis(ltmle_MSM$bootstrap.res$beta.Intercept +  -->
+<!--                                               ltmle_MSM$bootstrap.res$beta.A2) -->
+<!--     ltmle_MSM$bootstrap.res$p.A1_1.A2_1 <- plogis(ltmle_MSM$bootstrap.res$beta.Intercept +  -->
+<!--                                               ltmle_MSM$bootstrap.res$beta.A1 +  -->
+<!--                                               ltmle_MSM$bootstrap.res$beta.A2 +  -->
+<!--                                               ltmle_MSM$bootstrap.res$beta.A1A2) -->
+<!--     ltmle_MSM$bootstrap.res$RD.A1.A2_0 <- ltmle_MSM$bootstrap.res$p.A1_1.A2_0 - ltmle_MSM$bootstrap.res$p.A1_0.A2_0 -->
+<!--     ltmle_MSM$bootstrap.res$RD.A1.A2_1 <- ltmle_MSM$bootstrap.res$p.A1_1.A2_1 - ltmle_MSM$bootstrap.res$p.A1_0.A2_1 -->
+<!--     ltmle_MSM$bootstrap.res$RD.A2.A1_0 <- ltmle_MSM$bootstrap.res$p.A1_0.A2_1 - ltmle_MSM$bootstrap.res$p.A1_0.A2_0 -->
+<!--     ltmle_MSM$bootstrap.res$RD.A2.A1_1 <- ltmle_MSM$bootstrap.res$p.A1_1.A2_1 - ltmle_MSM$bootstrap.res$p.A1_1.A2_0 -->
+<!--     ltmle_MSM$bootstrap.res$lnRR.A1.A2_0 <- log(ltmle_MSM$bootstrap.res$p.A1_1.A2_0 / ltmle_MSM$bootstrap.res$p.A1_0.A2_0) -->
+<!--     ltmle_MSM$bootstrap.res$lnRR.A1.A2_1 <- log(ltmle_MSM$bootstrap.res$p.A1_1.A2_1 / ltmle_MSM$bootstrap.res$p.A1_0.A2_1) -->
+<!--     ltmle_MSM$bootstrap.res$lnRR.A2.A1_0 <- log(ltmle_MSM$bootstrap.res$p.A1_0.A2_1 / ltmle_MSM$bootstrap.res$p.A1_0.A2_0) -->
+<!--     ltmle_MSM$bootstrap.res$lnRR.A2.A1_1 <- log(ltmle_MSM$bootstrap.res$p.A1_1.A2_1 / ltmle_MSM$bootstrap.res$p.A1_1.A2_0) -->
+<!--     ltmle_MSM$bootstrap.res$a.INT <- ltmle_MSM$bootstrap.res$p.A1_1.A2_1 -  -->
+<!--                                         ltmle_MSM$bootstrap.res$p.A1_1.A2_0 - -->
+<!--                                         ltmle_MSM$bootstrap.res$p.A1_0.A2_1 + -->
+<!--                                         ltmle_MSM$bootstrap.res$p.A1_0.A2_0 -->
+<!--     ltmle_MSM$bootstrap.res$lnRERI <- log((ltmle_MSM$bootstrap.res$p.A1_1.A2_1 -  -->
+<!--                                              ltmle_MSM$bootstrap.res$p.A1_1.A2_0 - -->
+<!--                                              ltmle_MSM$bootstrap.res$p.A1_0.A2_1 + -->
+<!--                                              ltmle_MSM$bootstrap.res$p.A1_0.A2_0) / ltmle_MSM$bootstrap.res$p.A1_0.A2_0) -->
+<!--     ltmle_MSM$bootstrap.res$ln.m.INT <- log((ltmle_MSM$bootstrap.res$p.A1_1.A2_1 * ltmle_MSM$bootstrap.res$p.A1_0.A2_0) / -->
+<!--                                               (ltmle_MSM$bootstrap.res$p.A1_1.A2_0 * ltmle_MSM$bootstrap.res$p.A1_0.A2_1)) -->
+<!--     # A1 = 0 et A2 = 0 -->
+<!--     int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0] <- sd(ltmle_MSM$bootstrap.res$p.A1_0.A2_0) -->
+<!--     int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0] -->
+<!--     int.r$p.up[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0] -->
+<!--     # A1 = 1 et A2 = 0 -->
+<!--     int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0] <- sd(ltmle_MSM$bootstrap.res$p.A1_1.A2_0) -->
+<!--     int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--     int.r$p.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--     # A1 = 0 et A2 = 1 -->
+<!--     int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$p.A1_0.A2_1) -->
+<!--     int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--     int.r$p.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--     # A1 = 1 et A2 = 1 -->
+<!--     int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$p.A1_1.A2_1) -->
+<!--     int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     int.r$p.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     # RD.A1.A2is0 -->
+<!--     int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0] <- sd(ltmle_MSM$bootstrap.res$RD.A1.A2_0) -->
+<!--     int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--     int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] +  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -->
+<!--     # RD.A1.A2is1 -->
+<!--     int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$RD.A1.A2_1) -->
+<!--     int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     # RD.A2.A1is0 -->
+<!--     int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$RD.A2.A1_0) -->
+<!--     int.r$RD.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--     int.r$RD.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -->
+<!--     # RD.A2.A1is1 -->
+<!--     int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$RD.A2.A1_1) -->
+<!--     int.r$RD.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     int.r$RD.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     # RR.A1.A2is0 -->
+<!--     int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0] <- sd(ltmle_MSM$bootstrap.res$lnRR.A1.A2_0) -->
+<!--     int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -->
+<!--     int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) +  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -->
+<!--     # RR.A1.A2is1 -->
+<!--     int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$lnRR.A1.A2_1) -->
+<!--     int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--                                                                qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1])) -->
+<!--     int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--                                                                qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1])) -->
+<!--     # RR.A2.A1is0 -->
+<!--     int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$lnRR.A2.A1_0) -->
+<!--     int.r$RR.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -->
+<!--     int.r$RR.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -->
+<!--     # RR.A2.A1is1 -->
+<!--     int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$lnRR.A2.A1_1) -->
+<!--     int.r$RR.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     int.r$RR.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     # additive interaction -->
+<!--     int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$a.INT) -->
+<!--     int.r$a.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] -  -->
+<!--       qnorm(0.975) * int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     int.r$a.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] +  -->
+<!--       qnorm(0.975) * int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1] -->
+<!--     # RERI -->
+<!--     int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$lnRERI) -->
+<!--     int.r$RERI.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                           qnorm(0.975) * int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     int.r$RERI.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                           qnorm(0.975) * int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     # multiplicative interaction -->
+<!--     int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$ln.m.INT)  -->
+<!--     int.r$m.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) -  -->
+<!--                                                            qnorm(0.975) * int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     int.r$m.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) +  -->
+<!--                                                            qnorm(0.975) * int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1]) -->
+<!--     bootstrap.res <- ltmle_MSM$bootstrap.res -->
+<!--   } -->
+<!--   return(list(int.r = int.r,  -->
+<!--               bootstrap.res = bootstrap.res)) -->
+<!-- } -->
+<!-- ### Obtention du MSM par la fonction ltmle, estimation par gcomp, iptw ou tmle -->
+<!-- # avec la fonction int.ltmleMSM() -->
+<!-- # on définit les arguments de la fonction ltmleMSM du package ltmle -->
+<!-- library(ltmle) -->
+<!-- library(SuperLearner) -->
+<!-- ## arguments à renseigner -->
+<!-- Q_formulas = c(Y="Q.kplus1 ~ L1 + L2 + L3 + A1 * A2") # useful to add A1 * A2 interaction here -->
+<!-- g_formulas = c("A1 ~ L1 + L2", -->
+<!--                "A2 ~ L1 + L3") -->
+<!-- SL.library = list(Q=list("SL.glm", c("SL.glm", "screen.corP"), -->
+<!--                          "SL.xgboost", "SL.rpartPrune", #"SL.randomForest", -->
+<!--                          "SL.step.interaction", c("SL.step.interaction","screen.corP"), -->
+<!--                          "SL.glmnet", "SL.stepAIC", -->
+<!--                          "SL.mean"), -->
+<!--                   g=list("SL.glm",  c("SL.glm", "screen.corP"), -->
+<!--                          "SL.xgboost", "SL.rpartPrune", #"SL.randomForest", -->
+<!--                          "SL.step.interaction", c("SL.step.interaction","screen.corP"), -->
+<!--                          "SL.glmnet", "SL.stepAIC", -->
+<!--                          "SL.mean")) -->
+<!-- ### estimation par IPTW et TMLE -->
+<!--   interaction.ltmle <- int.ltmleMSM(data = df, -->
+<!--                                   Q_formulas = Q_formulas, -->
+<!--                                   g_formulas = g_formulas, -->
+<!--                                   Anodes = c("A1", "A2"), -->
+<!--                                   Lnodes = c("L1", "L2", "L3"), -->
+<!--                                   Ynodes = c("Y"), -->
+<!--                                   final.Ynodes = "Y", -->
+<!--                                   SL.library = SL.library, -->
+<!--                                   gcomp = FALSE,            # si FALSE, fait tmle + IPTW -->
+<!--                                   iptw.only = FALSE,         -->
+<!--                                   # si (gcomp = FALSE et iptw.only = TRUE), fait uniquement iptw -->
+<!--                                   survivalOutcome = FALSE, -->
+<!--                                   variance.method = "ic") -->
+<!-- ### estimation par g-computation -->
+<!--   # par défaut, il fait une régression logistique à partir de la formule Q_formulas  -->
+<!--   # si on veut faire un régression linéaire pour le modèle additif, on peut créer une fonction de SuperLearner -->
+<!--   # à partir de la fonction SL.glm -->
+<!--   SL.glm.gaussian <- function (Y, X, newX,  -->
+<!--                                family = "gaussian",   -->
+<!--                                # tout est comme SL.glm, sauf cette famille "gaussian" -->
+<!--                                obsWeights, model = TRUE, ...) { -->
+<!--   if (is.matrix(X)) { -->
+<!--     X = as.data.frame(X) -->
+<!--   } -->
+<!--   fit.glm <- glm(Y ~ ., data = X, family = family, weights = obsWeights,  -->
+<!--                  model = model) -->
+<!--   if (is.matrix(newX)) { -->
+<!--     newX = as.data.frame(newX) -->
+<!--   } -->
+<!--   pred <- predict(fit.glm, newdata = newX, type = "response") -->
+<!--   fit <- list(object = fit.glm) -->
+<!--   class(fit) <- "SL.glm" -->
+<!--   out <- list(pred = pred, fit = fit) -->
+<!--   return(out) -->
+<!-- } -->
+<!-- environment(SL.glm.gaussian) <-asNamespace("SuperLearner") -->
+<!-- interaction.gcomp <- int.ltmleMSM(data = df, -->
+<!--                                   Q_formulas = Q_formulas, -->
+<!--                                   g_formulas = g_formulas, -->
+<!--                                   Anodes = c("A1", "A2"), -->
+<!--                                   Lnodes = c("L1", "L2", "L3"), -->
+<!--                                   Ynodes = c("Y"), -->
+<!--                                   final.Ynodes = "Y", -->
+<!--                                   # SL.library = SL.library, -->
+<!--                                   SL.library = list(Q="SL.glm.gaussian", #  -->
+<!--                                                     g="SL.mean"), -->
+<!--                                   gcomp = TRUE,            # si FALSE, fait tmle + IPTW -->
+<!--                                   iptw.only = FALSE,        -->
+<!--                                   # si (gcomp = FALSE et iptw.only = TRUE), fait uniquement iptw -->
+<!--                                   survivalOutcome = FALSE, -->
+<!--                                   variance.method = "ic",  -->
+<!--                                   B = 1000, # nombre d'échantillons bootstrap -->
+<!--                                   boot.seed = 54321) # seed pour l'échantillonnage bootstrap -->
+<!-- ### 3) Calcul des paramètres utiles pour l'analyse de l'interaction -->
+<!--     # avec la fonction summary.int() -->
+<!--     ### récupération des résultats tmle -->
+<!--     summary.tmle <- summary.int(data = df, -->
+<!--                                 ltmle_MSM = interaction.ltmle,  -->
+<!--                                 estimator = c("tmle")) -->
+<!--     # summary.tmle$int.r -->
+<!--     ### récupération des résultats iptw -->
+<!--     summary.iptw <- summary.int(data = df, -->
+<!--                                 ltmle_MSM = interaction.ltmle,  -->
+<!--                                 estimator = c("iptw")) -->
+<!--     # summary.iptw$int.r -->
+<!--     ### récupération des résultats gcomputation -->
+<!--     summary.gcomp <- summary.int(data = df, -->
+<!--                                 ltmle_MSM = interaction.gcomp,  -->
+<!--                                 estimator = c("gcomp")) -->
+<!--     # summary.gcomp$int.r -->
+<!--     # head(summary.gcomp$bootstrap.res) -->
+<!--     # # vérifier la normalité des estimations bootstrap -->
+<!--     #     bootstrap.est <- subset(summary.gcomp$bootstrap.res,  -->
+<!--     #                             select = -->
+<!--     #                               c("p.A1_0.A2_0",  -->
+<!--     #                                 "p.A1_1.A2_0", -->
+<!--     #                                 "p.A1_0.A2_1", -->
+<!--     #                                 "p.A1_1.A2_1", -->
+<!--     #                                 "RD.A1.A2_0", -->
+<!--     #                                 "RD.A1.A2_1", -->
+<!--     #                                 "RD.A2.A1_0", -->
+<!--     #                                 "RD.A2.A1_1",  -->
+<!--     #                                 "lnRR.A1.A2_0", -->
+<!--     #                                 "lnRR.A1.A2_1", -->
+<!--     #                                 "lnRR.A2.A1_0", -->
+<!--     #                                 "lnRR.A2.A1_1", -->
+<!--     #                                 "a.INT", -->
+<!--     #                                 "lnRERI", -->
+<!--     #                                 "ln.m.INT")) -->
+<!--     # par(mfrow = c(4,4)) -->
+<!--     # for(c in 1:ncol(bootstrap.est)) { -->
+<!--     #   hist(bootstrap.est[,c], freq = FALSE, main = names(bootstrap.est)[c]) -->
+<!--     #   lines(density(bootstrap.est[,c]), col = 2, lwd = 3) -->
+<!--     #   curve(1/sqrt(var(bootstrap.est[,c]) * 2 * pi) *  exp(-1/2*((x-mean(bootstrap.est[,c]))/sd(bootstrap.est[,c]))^2), -->
+<!--     #         col = 1, lwd = 2, lty = 2, add = TRUE) -->
+<!--     # par(mfrow = c(1,1)) -->
+<!--     # } -->
+<!-- ``` -->
+<!-- Au final, on a (présentation selon recommandation Knol et al. @knol_recommendations_2012): -->
+<!-- ```{r t_tab, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- ### 4) Mise en forme sous forme de table, selon les recommandations Knol et al. -->
+<!-- # avec la fonction out.int.table() -->
+<!-- ################################################################################ -->
+<!-- ### 5- out.int.table()           pour obtenir une table présentant les résultats -->
+<!-- out.int.table <- function(int.r = int.r) { -->
+<!--   ##  tableau des effets marginaux -->
+<!--   out.table <- data.frame(c1 = rep("",4), c2 = rep("",4), c3 = rep("",4), c4 = rep("",4)) -->
+<!--   names(out.table) <- c("A2=0", "A2=1", "RD.A2|A1", "RR.A2|A1") -->
+<!--   rownames(out.table) <- c("A1=0", "A1=1", "RD.A1|A2", "RR.A1|A2") -->
+<!--   # p -->
+<!--   out.table["A1=0","A2=0"] <- paste0("$p_{00}$=",round(int.r$p[which(int.r$A1==0 & int.r$A2==0)], -->
+<!--                                                        digits = 3), -->
+<!--                                      " [", -->
+<!--                                      round(int.r$p.lo[which(int.r$A1==0 & int.r$A2==0)],  -->
+<!--                                            digits = 3), -->
+<!--                                      ",", -->
+<!--                                      round(int.r$p.up[which(int.r$A1==0 & int.r$A2==0)], -->
+<!--                                            digits = 3), -->
+<!--                                      "]") -->
+<!--   out.table["A1=0","A2=1"] <- paste0("$p_{01}$=",round(int.r$p[which(int.r$A1==0 & int.r$A2==1)], -->
+<!--                                                        digits = 3), -->
+<!--                                      " [", -->
+<!--                                      round(int.r$p.lo[which(int.r$A1==0 & int.r$A2==1)],  -->
+<!--                                            digits = 3), -->
+<!--                                      ",", -->
+<!--                                      round(int.r$p.up[which(int.r$A1==0 & int.r$A2==1)],  -->
+<!--                                            digits = 3), -->
+<!--                                      "]") -->
+<!--   out.table["A1=1","A2=0"] <- paste0("$p_{10}$=",round(int.r$p[which(int.r$A1==1 & int.r$A2==0)], -->
+<!--                                                        digits = 3), -->
+<!--                                      " [", -->
+<!--                                      round(int.r$p.lo[which(int.r$A1==1 & int.r$A2==0)],  -->
+<!--                                            digits = 3), -->
+<!--                                      ",", -->
+<!--                                      round(int.r$p.up[which(int.r$A1==1 & int.r$A2==0)],  -->
+<!--                                            digits = 3), -->
+<!--                                      "]")      -->
+<!--   out.table["A1=1","A2=1"] <- paste0("$p_{11}$=",round(int.r$p[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                        digits = 3), -->
+<!--                                      " [", -->
+<!--                                      round(int.r$p.lo[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                            digits = 3), -->
+<!--                                      ",", -->
+<!--                                      round(int.r$p.up[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                            digits = 3), -->
+<!--                                      "]")     -->
+<!--   # RD -->
+<!--   out.table["A1=0","RD.A2|A1"] <- paste0(round(int.r$RD.A2[which(int.r$A1==0 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          " [", -->
+<!--                                          round(int.r$RD.A2.lo[which(int.r$A1==0 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          ",", -->
+<!--                                          round(int.r$RD.A2.up[which(int.r$A1==0 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          "]") -->
+<!--   out.table["A1=1","RD.A2|A1"] <- paste0(round(int.r$RD.A2[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          " [", -->
+<!--                                          round(int.r$RD.A2.lo[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          ",", -->
+<!--                                          round(int.r$RD.A2.up[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          "]")    -->
+<!--   out.table["RD.A1|A2","A2=0"] <- paste0(round(int.r$RD.A1[which(int.r$A1==1 & int.r$A2==0)], -->
+<!--                                                digits = 3), -->
+<!--                                          " [", -->
+<!--                                          round(int.r$RD.A1.lo[which(int.r$A1==1 & int.r$A2==0)], -->
+<!--                                                digits = 3), -->
+<!--                                          ",", -->
+<!--                                          round(int.r$RD.A1.up[which(int.r$A1==1 & int.r$A2==0)], -->
+<!--                                                digits = 3), -->
+<!--                                          "]")  -->
+<!--   out.table["RD.A1|A2","A2=1"] <- paste0(round(int.r$RD.A1[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          " [", -->
+<!--                                          round(int.r$RD.A1.lo[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          ",", -->
+<!--                                          round(int.r$RD.A1.up[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 3), -->
+<!--                                          "]")  -->
+<!--   # RR -->
+<!--   out.table["A1=0","RR.A2|A1"] <- paste0(round(int.r$RR.A2[which(int.r$A1==0 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          " [", -->
+<!--                                          round(int.r$RR.A2.lo[which(int.r$A1==0 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          ",", -->
+<!--                                          round(int.r$RR.A2.up[which(int.r$A1==0 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          "]") -->
+<!--   out.table["A1=1","RR.A2|A1"] <- paste0(round(int.r$RR.A2[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          " [", -->
+<!--                                          round(int.r$RR.A2.lo[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          ",", -->
+<!--                                          round(int.r$RR.A2.up[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          "]")    -->
+<!--   out.table["RR.A1|A2","A2=0"] <- paste0(round(int.r$RR.A1[which(int.r$A1==1 & int.r$A2==0)], -->
+<!--                                                digits = 2), -->
+<!--                                          " [", -->
+<!--                                          round(int.r$RR.A1.lo[which(int.r$A1==1 & int.r$A2==0)], -->
+<!--                                                digits = 2), -->
+<!--                                          ",", -->
+<!--                                          round(int.r$RR.A1.up[which(int.r$A1==1 & int.r$A2==0)], -->
+<!--                                                digits = 2), -->
+<!--                                          "]")  -->
+<!--   out.table["RR.A1|A2","A2=1"] <- paste0(round(int.r$RR.A1[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          " [", -->
+<!--                                          round(int.r$RR.A1.lo[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          ",", -->
+<!--                                          round(int.r$RR.A1.up[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                                digits = 2), -->
+<!--                                          "]")  -->
+<!--   interaction.effects <- c(paste0("additive Interaction = ",  -->
+<!--                                   round(int.r$a.INT[which(int.r$A1==1 & int.r$A2==1)], -->
+<!--                                         digits = 3),  -->
+<!--                                   " [",  -->
+<!--                                   round(int.r$a.INT.lo[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                         digits = 3),  -->
+<!--                                   ";",  -->
+<!--                                   round(int.r$a.INT.up[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                         digits = 3), -->
+<!--                                   "]"), -->
+<!--                            paste0("RERI = ", -->
+<!--                                   round(int.r$RERI[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                         digits = 2), -->
+<!--                                   " [", -->
+<!--                                   round(int.r$RERI.lo[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                         digits = 2), -->
+<!--                                   ";", -->
+<!--                                   round(int.r$RERI.up[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                         digits = 2), -->
+<!--                                   "]"), -->
+<!--                            paste0("multiplicative Interaction = ", -->
+<!--                                   round(int.r$m.INT[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                         digits = 2), -->
+<!--                                   " [", -->
+<!--                                   round(int.r$m.INT.lo[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                         digits = 2), -->
+<!--                                   ";", -->
+<!--                                   round(int.r$m.INT.up[which(int.r$A1==1 & int.r$A2==1)],  -->
+<!--                                         digits = 2), -->
+<!--                                   "]")) -->
+<!--   return(list(out.table = out.table,  -->
+<!--               interaction.effects = interaction.effects)) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ### TMLE -->
+<!-- ```{r t_tmle, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- ### TMLE -->
+<!-- table.tmle <- out.int.table(summary.tmle$int.r) -->
+<!-- table.tmle -->
+<!-- # library(kableExtra) -->
+<!-- # kbl(table.tmle$out.table, -->
+<!-- #     caption = "Interaction effects estimated by TMLE") %>% -->
+<!-- #   kable_classic() %>% -->
+<!-- #   footnote(general = table.tmle$interaction.effects) -->
+<!-- ``` -->
+<!-- ### IPTW -->
+<!-- ```{r t_iptw, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- ### IPTW -->
+<!-- table.iptw <- out.int.table(summary.iptw$int.r) -->
+<!-- table.iptw -->
+<!-- # kbl(table.iptw$out.table, -->
+<!-- #     caption = "Interaction effects estimated by IPTW") %>% -->
+<!-- #   kable_classic() %>% -->
+<!-- #   footnote(general = table.iptw$interaction.effects) -->
+<!-- ``` -->
+<!-- ### G-computation -->
+<!-- ```{r t_ggcomp, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- ### G-COMP -->
+<!-- table.gcomp <- out.int.table(summary.gcomp$int.r) -->
+<!-- table.gcomp -->
+<!-- # kbl(table.gcomp$out.table, -->
+<!-- #     caption = "Interaction effects estimated by G-computation") %>% -->
+<!-- #   kable_classic() %>% -->
+<!-- #   footnote(general = table.gcomp$interaction.effects) -->
+<!-- ``` -->
+
 </div>
 </div>
             </section>
@@ -433,7 +1709,7 @@ Interaction
         </div>
       </div>
 <a href="simulations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="analyses-confirmatoires.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="représentations-graphiques.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -464,7 +1740,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-estimation.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-estimation.Rmd",
 "text": "Edit"
 },
 "history": {
