@@ -3,19 +3,41 @@
 
 # Proposition d'étapes
 
-1. formuler l'objectif
-    - predictif ou explicatif
-    - interaction ou modification d'effet?
-2. DAG, estimand, estimateur 
-3. Description 
-    - tableau croisé
+1. Formuler l'objectif
+    - Est-ce un objectif prédictif ou explicatif ?
+    - Si démarche explicative, s'agit-il plutot d'une analyse d'interaction ou de modification d'effet?
+2. Stratégie et méthodes 
+    - Poser les hypothèses sur un DAG ou schéma conceptuel
+    - Identifier l'estimand (Effet ou paramètres que l'on va chercher à estimer pour répondre à l'objectif), par exemple : 
+            + effet conjoint de X et V sur Y, sur l'échelle multiplicative = $OR_{X=1,V=1}$
+            + effet de X sur Y dans chaque strate de Y, sur l'échelle additive = $DR_{X=1|V=0}$ et $DR_{X=1|V=1}$
+            + effet d'interaction sur l'échelle additive et multiplicative AI et MI 
+    - Elaborer l'estimateur, notamment : 
+            + quelles est(sont) l'exposition(s) d'intérêt ? 
+            + quels sont les facteurs de confusion +/- les médiateurs si besoin ?
+            + quels types de modèlisation va être utilisée ?
+3. Analyses descriptives 
+    - Description habituelle de la population
+    - Décrire, dans un tableau croisé, 
+            + le Y moyen ou la proportion de Y = 1
+            + pour chaque catégorie de X et V
 4. Analyses exploratoires
-    - régressions avec terme d'interaction
-    - analyses stratifiées
-    - marge
-5. Analyses confirmatoire
-    - g computation
+    - Analyses stratifiées : 
+            + pour une analyse de modification d'effet, 
+            + il est possible en exploratoire, d'estimer l'effet de X sur Y
+            + de façon stratifiée sur V (on découpe la population)
+            + les effets ne seront directement pas comparables
+    - Régressions avec terme d'interaction
+            + un modèle dans la population totale peut être utilisé
+            + avec un terme d'interaction entre X et V
+            + les différents paramètres peuvent être déduits des résultats du modèle
+            + voir Chapitre \@ref(reg)
+    - Marges/ Effets prédits
+            + 
+5. Analyses confirmatoires, voir Chapitre \@ref(conf)
+    - G-computation
     - MSM
+    - TMLE
 
 
 # Exemple 1 - Y binaire
@@ -25,7 +47,7 @@
 
 **1. Objectifs**
 
-Dans cette étude [ref], on s'est intéressé, de façon explicative, à l'effet de la défavorisation sociale précoce sur le taux de cholestérol LDL vers 45 ans; mais aussi à l'effet du sexe sur ce taux de cholestérol en fonction de la défavorisation sociale précoce. 
+Dans cette étude @colineaux2023explaining, on s'est intéressé, de façon explicative, à l'effet de la défavorisation sociale précoce sur le taux de cholestérol LDL vers 45 ans; mais aussi à l'effet du sexe sur ce taux de cholestérol en fonction de la défavorisation sociale précoce. 
 
 Ici on s'intéresse donc à deux modifications d'effet. 
 
@@ -33,11 +55,7 @@ Ici on s'intéresse donc à deux modifications d'effet.
 
 Le DAG (sans les médiateurs) était : 
 
-<<<<<<< HEAD
 > ![](img/Image13.png){width=30%}
-=======
-> ![](img\Image13.png){width=30%}
->>>>>>> e225b751959377b69a975cacad5b91fa4793254f
 
 Les estimands étaient définis sur l'échelle additive par : 
 

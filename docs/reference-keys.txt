@@ -26,10 +26,10 @@ présentation-des-résultats
 recommendations
 proposition
 simulations
-a-partir-de-modèles-de-régression
+reg
 régression-logistique
 régression-lineaire
-analyses-confirmatoires
+conf
 estimation-par-g-computation
 estimation-par-modèle-structurel-marginal
 estimation-avec-tmle

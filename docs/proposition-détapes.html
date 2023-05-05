@@ -223,20 +223,20 @@ div.csl-indent {
 <li class="chapter" data-level="7.2" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#proposition"><i class="fa fa-check"></i><b>7.2</b> Proposition</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="simulations.html"><a href="simulations.html"><i class="fa fa-check"></i><b>8</b> Simulations</a></li>
-<li class="chapter" data-level="9" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html"><i class="fa fa-check"></i><b>9</b> A partir de modèles de régression</a>
+<li class="chapter" data-level="9" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>9</b> A partir de modèles de régression</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#régression-logistique"><i class="fa fa-check"></i><b>9.1</b> Régression logistique</a></li>
-<li class="chapter" data-level="9.2" data-path="a-partir-de-modèles-de-régression.html"><a href="a-partir-de-modèles-de-régression.html#régression-lineaire"><i class="fa fa-check"></i><b>9.2</b> Régression lineaire</a></li>
+<li class="chapter" data-level="9.1" data-path="reg.html"><a href="reg.html#régression-logistique"><i class="fa fa-check"></i><b>9.1</b> Régression logistique</a></li>
+<li class="chapter" data-level="9.2" data-path="reg.html"><a href="reg.html#régression-lineaire"><i class="fa fa-check"></i><b>9.2</b> Régression lineaire</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html"><i class="fa fa-check"></i><b>10</b> Analyses confirmatoires</a>
+<li class="chapter" data-level="10" data-path="conf.html"><a href="conf.html"><i class="fa fa-check"></i><b>10</b> Analyses confirmatoires</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#estimation-par-g-computation"><i class="fa fa-check"></i><b>10.1</b> Estimation par G-computation</a></li>
-<li class="chapter" data-level="10.2" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#estimation-par-modèle-structurel-marginal"><i class="fa fa-check"></i><b>10.2</b> Estimation par Modèle Structurel Marginal</a></li>
-<li class="chapter" data-level="10.3" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#estimation-avec-tmle"><i class="fa fa-check"></i><b>10.3</b> Estimation avec TMLE</a>
+<li class="chapter" data-level="10.1" data-path="conf.html"><a href="conf.html#estimation-par-g-computation"><i class="fa fa-check"></i><b>10.1</b> Estimation par G-computation</a></li>
+<li class="chapter" data-level="10.2" data-path="conf.html"><a href="conf.html#estimation-par-modèle-structurel-marginal"><i class="fa fa-check"></i><b>10.2</b> Estimation par Modèle Structurel Marginal</a></li>
+<li class="chapter" data-level="10.3" data-path="conf.html"><a href="conf.html#estimation-avec-tmle"><i class="fa fa-check"></i><b>10.3</b> Estimation avec TMLE</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#tmle"><i class="fa fa-check"></i><b>10.3.1</b> TMLE</a></li>
-<li class="chapter" data-level="10.3.2" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#iptw"><i class="fa fa-check"></i><b>10.3.2</b> IPTW</a></li>
-<li class="chapter" data-level="10.3.3" data-path="analyses-confirmatoires.html"><a href="analyses-confirmatoires.html#g-computation"><i class="fa fa-check"></i><b>10.3.3</b> G-computation</a></li>
+<li class="chapter" data-level="10.3.1" data-path="conf.html"><a href="conf.html#tmle"><i class="fa fa-check"></i><b>10.3.1</b> TMLE</a></li>
+<li class="chapter" data-level="10.3.2" data-path="conf.html"><a href="conf.html#iptw"><i class="fa fa-check"></i><b>10.3.2</b> IPTW</a></li>
+<li class="chapter" data-level="10.3.3" data-path="conf.html"><a href="conf.html#g-computation"><i class="fa fa-check"></i><b>10.3.3</b> G-computation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="représentations-graphiques.html"><a href="représentations-graphiques.html"><i class="fa fa-check"></i><b>11</b> Représentations graphiques</a></li>
@@ -278,26 +278,50 @@ div.csl-indent {
 <div id="proposition-détapes" class="section level1 hasAnchor" number="12">
 <h1><span class="header-section-number">Chapter 12</span> Proposition d’étapes<a href="proposition-détapes.html#proposition-détapes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ol style="list-style-type: decimal">
-<li>formuler l’objectif
+<li>Formuler l’objectif
 <ul>
-<li>predictif ou explicatif</li>
-<li>interaction ou modification d’effet?</li>
+<li>Est-ce un objectif prédictif ou explicatif ?</li>
+<li>Si démarche explicative, s’agit-il plutot d’une analyse d’interaction ou de modification d’effet?</li>
 </ul></li>
-<li>DAG, estimand, estimateur</li>
-<li>Description
+<li>Stratégie et méthodes
 <ul>
-<li>tableau croisé</li>
+<li>Poser les hypothèses sur un DAG ou schéma conceptuel</li>
+<li>Identifier l’estimand (Effet ou paramètres que l’on va chercher à estimer pour répondre à l’objectif), par exemple :
++ effet conjoint de X et V sur Y, sur l’échelle multiplicative = <span class="math inline">\(OR_{X=1,V=1}\)</span>
++ effet de X sur Y dans chaque strate de Y, sur l’échelle additive = <span class="math inline">\(DR_{X=1|V=0}\)</span> et <span class="math inline">\(DR_{X=1|V=1}\)</span>
++ effet d’interaction sur l’échelle additive et multiplicative AI et MI</li>
+<li>Elaborer l’estimateur, notamment :
++ quelles est(sont) l’exposition(s) d’intérêt ?
++ quels sont les facteurs de confusion +/- les médiateurs si besoin ?
++ quels types de modèlisation va être utilisée ?</li>
+</ul></li>
+<li>Analyses descriptives
+<ul>
+<li>Description habituelle de la population</li>
+<li>Décrire, dans un tableau croisé,
++ le Y moyen ou la proportion de Y = 1
++ pour chaque catégorie de X et V</li>
 </ul></li>
 <li>Analyses exploratoires
 <ul>
-<li>régressions avec terme d’interaction</li>
-<li>analyses stratifiées</li>
-<li>marge</li>
+<li>Analyses stratifiées :
++ pour une analyse de modification d’effet,
++ il est possible en exploratoire, d’estimer l’effet de X sur Y
++ de façon stratifiée sur V (on découpe la population)
++ les effets ne seront directement pas comparables</li>
+<li>Régressions avec terme d’interaction
++ un modèle dans la population totale peut être utilisé
++ avec un terme d’interaction entre X et V
++ les différents paramètres peuvent être déduits des résultats du modèle
++ voir Chapitre <a href="reg.html#reg">9</a></li>
+<li>Marges/ Effets prédits
++</li>
 </ul></li>
-<li>Analyses confirmatoire
+<li>Analyses confirmatoires, voir Chapitre <a href="conf.html#conf">10</a>
 <ul>
-<li>g computation</li>
+<li>G-computation</li>
 <li>MSM</li>
+<li>TMLE</li>
 </ul></li>
 </ol>
 </div>

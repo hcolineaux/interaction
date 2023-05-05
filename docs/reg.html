@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Types de paramètres | Interactions et modifications d’effet   en Epidémiologie</title>
+  <title>Chapter 9 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Types de paramètres | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta property="og:title" content="Chapter 9 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Types de paramètres | Interactions et modifications d’effet   en Epidémiologie" />
+  <meta name="twitter:title" content="Chapter 9 A partir de modèles de régression | Interactions et modifications d’effet   en Epidémiologie" />
   
   <meta name="twitter:description" content="." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="la-question-des-échelles.html"/>
-<link rel="next" href="présentation-des-résultats.html"/>
+<link rel="prev" href="simulations.html"/>
+<link rel="next" href="conf.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -275,89 +275,250 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="types-de-paramètres" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Types de paramètres<a href="types-de-paramètres.html#types-de-paramètres" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Plusieurs paramètres peuvent être utilisés pour décrire une interaction, sur l’échelle additive ou multiplicative.</p>
-<div id="avec-les-différences-de-risques-dr" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Avec les différences de risques (DR)<a href="types-de-paramètres.html#avec-les-différences-de-risques-dr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>On a déjà défini un paramètre d’interaction sur l’échelle additive (AI) à partir des différences d’effets <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<div id="reg" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> A partir de modèles de régression<a href="reg.html#reg" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.</p>
+<div id="régression-logistique" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Régression logistique<a href="reg.html#régression-logistique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lorsque l’on étudie un outcome binaire, on utilise souvent les modèles de régression logistique.</p>
+<pre><code>## 
+## Call:
+## glm(formula = Y ~ as.factor(A1) + as.factor(A2) + as.factor(A1) * 
+##     as.factor(A2) + as.factor(L1) + as.factor(L2) + as.factor(L3), 
+##     family = binomial, data = df_f)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.2419  -0.6580  -0.4678  -0.4341   2.1949  
+## 
+## Coefficients:
+##                               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)                   -2.16540    0.06708 -32.281  &lt; 2e-16 ***
+## as.factor(A1)1                 1.75607    0.07604  23.093  &lt; 2e-16 ***
+## as.factor(A2)1                 0.75332    0.06831  11.028  &lt; 2e-16 ***
+## as.factor(L1)1                 0.15753    0.05702   2.763  0.00573 ** 
+## as.factor(L2)1                 0.14128    0.06878   2.054  0.03996 *  
+## as.factor(L3)1                -0.14926    0.06141  -2.431  0.01507 *  
+## as.factor(A1)1:as.factor(A2)1  1.78587    0.14131  12.638  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 11037.7  on 9999  degrees of freedom
+## Residual deviance:  8460.4  on 9993  degrees of freedom
+## AIC: 8474.4
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>A partir de cette sortie, on peut extraire :</p>
 <ul>
-<li><span class="math inline">\(\small AI = DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))\)</span></li>
-<li><span class="math inline">\(\small AI = (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]\)</span></li>
-<li>soit <span class="math inline">\(\small AI =p_{11} - p_{10} - p_{01} + p_{00}\)</span></li>
+<li><strong>A1|A2=0</strong>
+<ul>
+<li>à partir du coefficient <code>as.factor(A1)1</code></li>
+<li>qui correspond à l’effet de A1 dans la catégorie de référence de A2,</li>
+<li>soit <span class="math inline">\(\small OR_{A1|A2=0} = exp(1.756) =\)</span> 5.789.</li>
+</ul></li>
+<li><strong>A1|A2=1</strong>
+<ul>
+<li>à partir du coefficient <code>as.factor(A1)1:as.factor(A2)1</code>,</li>
+<li>qui correspond à la différence d’effet de A1 quand on passe dans l’autre catégorie de A2.</li>
+<li>L’effet de A1 dans la catégorie A2=1 est donc</li>
+<li><span class="math inline">\(\small OR_{A1|A2=1} = exp(1.756+1.786) =\)</span> 34.536.</li>
+</ul></li>
+<li><strong>L’interaction multiplicative (IM)</strong>
+<ul>
+<li>peut être estimée à partir du coefficient <code>as.factor(A1)1:as.factor(A2)1</code></li>
+<li>par <span class="math inline">\(\small IM = exp(1.786) =\)</span> 5.966,</li>
+<li>qu’on peut retrouver en faisant <span class="math inline">\(\small OR_{A1|A2=1}/ OR_{A1|A2=0}\)</span>.</li>
+<li>Ici l’interaction est significative (p-value &gt;0.05).</li>
+</ul></li>
+<li><strong>A2|A1=0</strong> et <strong>A2|A1=1</strong>
+<ul>
+<li>On aurait aussi pu décrire l’interaction à partir de l’effet d’A2 dans chaque strate de A1</li>
+<li>à partir de <code>as.factor(A2)1</code> et <code>as.factor(A1)1:as.factor(A2)1</code>,</li>
+<li>avec : <span class="math inline">\(\small OR_{A2|A1=0} = exp(0.753) =\)</span> 2.123</li>
+<li>et <span class="math inline">\(\small OR_{A2|A1=1} = exp(0.753+1.786) =\)</span> 12.667</li>
+</ul></li>
+<li><strong>L’interaction additive</strong>
+<ul>
+<li>On peut explorer l’interaction sur l’échelle additive en estimant le RERI par</li>
+<li><span class="math inline">\(\small RERI \approx OR_{11} - OR_{10} - OR_{01} + 1 =\)</span></li>
+<li><span class="math inline">\(\small OR_{A1,A2} - OR_{A1|A2=0} - OR_{A2|A1=0} + 1 =\)</span></li>
+<li><span class="math inline">\(\small exp(1.786+0.753+1.786) - exp(1.786) - exp(0.753) + 1 =\)</span> 68.477.</li>
+</ul></li>
 </ul>
+<p>En résumé, (le package <code>finalfit</code> permet de sortir quelques résultats proprement) :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="reg.html#cb3-1" aria-hidden="true" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
+<span id="cb3-2"><a href="reg.html#cb3-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
+<span id="cb3-3"><a href="reg.html#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
+<span id="cb3-4"><a href="reg.html#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L1)&quot;</span>,</span>
+<span id="cb3-5"><a href="reg.html#cb3-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L2)&quot;</span>, </span>
+<span id="cb3-6"><a href="reg.html#cb3-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L3)&quot;</span>)</span>
+<span id="cb3-7"><a href="reg.html#cb3-7" aria-hidden="true" tabindex="-1"></a>dependent <span class="ot">=</span> <span class="st">&quot;Y&quot;</span></span>
+<span id="cb3-8"><a href="reg.html#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="reg.html#cb3-9" aria-hidden="true" tabindex="-1"></a>df_f <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="reg.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
+<span id="cb3-11"><a href="reg.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="reg.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># le tableau t entier peut être imprimé, mais ici je sélectionne seulement les effets d&#39;intéret </span></span>
+<span id="cb3-13"><a href="reg.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># pour éviter la table 2 fallacy (les coefficient des facteurs de confusion L ne sont pas interprétables)</span></span>
+<span id="cb3-14"><a href="reg.html#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="reg.html#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), </span>
+<span id="cb3-16"><a href="reg.html#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb3-17"><a href="reg.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb3-18"><a href="reg.html#cb3-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="reg.html#cb3-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+names
+</th>
+<th style="text-align:left;">
+OR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A1|A2=0
+</td>
+<td style="text-align:left;">
+5.79 (4.99-6.72, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A2|A1=0
+</td>
+<td style="text-align:left;">
+2.12 (1.86-2.43, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interaction
+</td>
+<td style="text-align:left;">
+5.96 (4.54-7.90, p&lt;0.001)
+</td>
+</tr>
+</tbody>
+</table>
+<p>Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.</p>
 </div>
-<div id="avec-les-risques-relatifs-rr" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Avec les risques relatifs (RR)<a href="types-de-paramètres.html#avec-les-risques-relatifs-rr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>On a aussi défini un paramètre d’interaction sur l’échelle multiplicative (MI) à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<div id="régression-lineaire" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Régression lineaire<a href="reg.html#régression-lineaire" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Même si l’outcome binaire, on peut en théorie utiliser un modèle de régression linéaire et explorer les effets sur une échelle additive. Si l’outcome est quantitatif, on utilise aussi, en général, les modèles de régression linéaire.</p>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ as.factor(A1) + as.factor(A2) + as.factor(A1) * 
+##     as.factor(A2) + as.factor(L1) + as.factor(L2) + as.factor(L3), 
+##     data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.93110 -0.19602 -0.10494 -0.08426  0.91574 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                    0.103835   0.008146  12.746  &lt; 2e-16 ***
+## as.factor(A1)1                 0.300796   0.011592  25.948  &lt; 2e-16 ***
+## as.factor(A2)1                 0.092280   0.008671  10.642  &lt; 2e-16 ***
+## as.factor(L1)1                 0.020677   0.007495   2.759  0.00581 ** 
+## as.factor(L2)1                 0.019476   0.009410   2.070  0.03851 *  
+## as.factor(L3)1                -0.019574   0.008085  -2.421  0.01549 *  
+## as.factor(A1)1:as.factor(A2)1  0.394034   0.017854  22.070  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3615 on 9993 degrees of freedom
+## Multiple R-squared:  0.2856, Adjusted R-squared:  0.2852 
+## F-statistic: 665.8 on 6 and 9993 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>A partir de cette sortie, on peut extraire :</p>
 <ul>
-<li><span class="math inline">\(\small MI = \frac{RR_{11}}{RR_{10} \times RR_{01}}\)</span></li>
-<li>soit <span class="math inline">\(\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}\)</span></li>
-<li>soit <span class="math inline">\(\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}\)</span></li>
-</ul>
-</div>
-<div id="avec-les-odds-ratio-or" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Avec les Odds Ratio (OR)<a href="types-de-paramètres.html#avec-les-odds-ratio-or" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Souvent en épidémiologie, lorsque l’outcome Y est binaire, les effets sont mesurés par des odds ratio estimé à partir de modèle de régression logistique.</p>
-<p>Un paramètre d’interaction sur l’echelle multiplicative (<span class="math inline">\(MI_{OR}\)</span>) peut être estimé à partir de ces OR <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<li><strong>A1|A2=0</strong>
 <ul>
-<li><span class="math inline">\(\small MI_{OR} = \frac{OR_{11}}{OR_{10} \times OR_{01}}\)</span></li>
-</ul>
-<p>En général, la mesure <span class="math inline">\(\small MI_{OR}\)</span> et <span class="math inline">\(\small MI_{RR}\)</span> seront proches si l’outcome est rare <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</p>
-</div>
-<div id="excès-de-risque-à-partir-des-rr-reri" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Excès de risque à partir des RR (RERI)<a href="types-de-paramètres.html#excès-de-risque-à-partir-des-rr-reri" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Lorsque seulement les risques relatifs sont donnés mais que l’on souhaite évaluer l’interaction sur l’échelle additive, “l’excès de risque du à l’interaction” (RERI) ou “interaction contrast ratio” (ICR), peut être estimé à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<li>à partir du coefficient <code>as.factor(A1)1</code></li>
+<li>qui correspond à l’effet de A1 dans la catégorie de référence de A2,</li>
+<li>soit <span class="math inline">\(\small DR = +30,08 \%\)</span>.</li>
+</ul></li>
+<li><strong>A1|A2=1</strong>
 <ul>
-<li><span class="math inline">\(\small RERI = RR_{11} - RR_{10} - RR_{01} + 1\)</span></li>
-</ul>
-<p>Il faut noter que, bien que le RERI donne la direction direction (positive, négative ou nulle) de l’interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l’ampleur de l’interaction additive, à moins de connaître au moins <span class="math inline">\(\small p_{00}\)</span>.</p>
-<p>Si l’on a seulement l’OR et que l’outcome est rare, les OR peuvent approximé les RR, on a donc :</p>
+<li>à partir du coefficient <code>as.factor(A1)1:as.factor(A2)1</code>,</li>
+<li>qui correspond à la différence d’effet de A1 quand on passe dans l’autre catégorie de A2.</li>
+<li>L’effet de A1 dans la catégorie A2=1 est donc</li>
+<li><span class="math inline">\(\small DR = 30.08+39.40 =\)</span> 69.48 %.</li>
+</ul></li>
+<li><strong>L’interaction additive</strong>
 <ul>
-<li><span class="math inline">\(\small RERI_{OR} = OR_{11} - OR_{10} - OR_{01} + 1 \approx RERI_{RR}\)</span></li>
-</ul>
-</div>
-<div id="autres" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Autres<a href="types-de-paramètres.html#autres" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>D’autres paramètres ont aussi été proposé <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>, tels que :</p>
-<div id="le-synergie-index-si" class="section level3 unnumbered hasAnchor">
-<h3>Le “Synergie index” (SI)<a href="types-de-paramètres.html#le-synergie-index-si" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Il s’agit d’un paramètre explorant l’interaction additive :</p>
+<li>à partir du coefficient <code>as.factor(A1)1:as.factor(A2)1</code></li>
+<li>avec <span class="math inline">\(\small AI = +39.40 \%\)</span>,</li>
+<li>qu’on peut retrouver en faisant <span class="math inline">\(\small DR(A1|A2=1) - DR(A1|A2=0)\)</span>.</li>
+<li>Ici l’interaction est significative (p-value &gt;0.05).</li>
+</ul></li>
+<li><strong>A2|A1=0</strong> et <strong>A2|A1=1</strong>
 <ul>
-<li><span class="math inline">\(\small S = \frac{RR_{11} - 1}{(RR_{10} - 1) + (RR_{01}-1)}\)</span>.</li>
+<li>On aurait aussi pu décrire cette interaction à partir de l’effet d’A2 dans chaque strate de A1</li>
+<li>à partir de <code>as.factor(A2)1</code> et <code>as.factor(A1)1:as.factor(A2)1</code>,</li>
+<li>avec : <span class="math inline">\(\small DR_{A1|A2=0} = +9.23\%\)</span></li>
+<li>et <span class="math inline">\(\small DR_{A1|A2=1} = 9.23+39.40 =\)</span> 48.63%.</li>
+</ul></li>
 </ul>
-<p>Il mesure à quel point le rapport de risque joint dépasse 1, et si cette mesure est supérieure à la somme de “à quel point” les rapports de risque de chaque exposition dépasse 1.</p>
-<p>Si le dénominateur est positif:</p>
-<ul>
-<li>si S &gt; 1, alors <span class="math inline">\(\small RERI_{RR}\)</span> &gt; 0</li>
-<li>si S &lt; 1, alors <span class="math inline">\(\small RERI_{RR}\)</span> &lt; 0</li>
-</ul>
-<p>L’interprétation de l’indice de synergie devient difficile dans les cas où l’effet de l’une des expositions est négatif et que le dénominateur de S est donc inférieur à 1.</p>
-</div>
-<div id="proportion-attribuable-ap" class="section level3 hasAnchor" number="6.5.1">
-<h3><span class="header-section-number">6.5.1</span> Proportion attribuable (AP)<a href="types-de-paramètres.html#proportion-attribuable-ap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Il s’agit aussi d’un paramètre explorant l’interaction additive :</p>
-<ul>
-<li><span class="math inline">\(\small AP = \frac{RR_{11} - RR_{10} - RR_{01} + 1}{RR_{11}}\)</span>.</li>
-</ul>
-<p>Ce paramètre mesure la proportion du risque dans le groupe doublement exposé qui est due à l’interaction.</p>
-<p>L’AP est en lien avec le <span class="math inline">\(\small RERI_{RR}\)</span> :</p>
-<ul>
-<li>AP &gt; 0 si et seulement si <span class="math inline">\(\small RERI_{RR}\)</span> &gt; 0</li>
-<li>AP &lt; 0 si et seulement si <span class="math inline">\(\small RERI_{RR}\)</span> &lt; 0.</li>
-</ul>
-<p>En fait <span class="math inline">\(\small AP = \frac{RERI_{RR}}{RR_{11}-1}\)</span>.</p>
+<p>En résumé, (le package <code>finalfit</code> permet de sortir quelques résultats proprement) :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="reg.html#cb5-1" aria-hidden="true" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
+<span id="cb5-2"><a href="reg.html#cb5-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
+<span id="cb5-3"><a href="reg.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
+<span id="cb5-4"><a href="reg.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L1)&quot;</span>,</span>
+<span id="cb5-5"><a href="reg.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L2)&quot;</span>, </span>
+<span id="cb5-6"><a href="reg.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L3)&quot;</span>)</span>
+<span id="cb5-7"><a href="reg.html#cb5-7" aria-hidden="true" tabindex="-1"></a>dependent <span class="ot">=</span> <span class="st">&quot;Y&quot;</span></span>
+<span id="cb5-8"><a href="reg.html#cb5-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="reg.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
+<span id="cb5-10"><a href="reg.html#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="reg.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), <span class="at">DR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb5-12"><a href="reg.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb5-13"><a href="reg.html#cb5-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="reg.html#cb5-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+names
+</th>
+<th style="text-align:left;">
+DR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A1|A2=0
+</td>
+<td style="text-align:left;">
+0.30 (0.28 to 0.32, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A2|A1=0
+</td>
+<td style="text-align:left;">
+0.09 (0.08 to 0.11, p&lt;0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interaction
+</td>
+<td style="text-align:left;">
+0.39 (0.36 to 0.43, p&lt;0.001)
+</td>
+</tr>
+</tbody>
+</table>
 
-</div>
-</div>
-</div>
-
-
-
-<h3> Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-vanderweele_tutorial_2014" class="csl-entry">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">VanderWeele TJ, Knol MJ. A <span>Tutorial</span> on <span>Interaction</span>. Epidemiologic Methods 2014;3:33–72. <a href="https://doi.org/10.1515/em-2013-0005">https://doi.org/10.1515/em-2013-0005</a>.</div>
 </div>
 </div>
             </section>
@@ -365,8 +526,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="la-question-des-échelles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="présentation-des-résultats.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simulations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conf.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -397,7 +558,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-parametres.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-estimation.Rmd",
 "text": "Edit"
 },
 "history": {

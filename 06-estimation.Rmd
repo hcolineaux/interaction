@@ -139,7 +139,7 @@ t %>%
 
 ```
 
-# A partir de modèles de régression
+# A partir de modèles de régression {#reg}
 
 Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.
 
