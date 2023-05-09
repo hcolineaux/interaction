@@ -140,30 +140,53 @@ La sortie d'une modèle linéaire simple serait :
 On peut en déduire (échelle additive) que : 
 
 - L'effet du sexe (d'être homme plutot que femme) est : 
-    + Quand on est favorisé : $\small DR(S|D=0) = +0.326$
-    + Quand on est défavorisé : $\small DR(S|D=1) = 0.326 - 0.095 =$ +`r round(0.326 - 0.095,3)`
+    + Quand on est favorisé : $\small DR(S|D=0) = +0.326$ mmol/L
+    + Quand on est défavorisé : $\small DR(S|D=1) = 0.326 - 0.095 =$ +`r round(0.326 - 0.095,3)` mmol/L
 - L'effet de la défavorisation est : 
-    + Quand on est une femme : $\small DR(D|S=0) = +0.126$
-    + Quand on est une homme : $\small DR(D|S=1) = 0.126 - 0.095 =$ +`r round(0.126 - 0.095,3)`
+    + Quand on est une femme : $\small DR(D|S=0) = +0.126$ mmol/L
+    + Quand on est une homme : $\small DR(D|S=1) = 0.126 - 0.095 =$ +`r round(0.126 - 0.095,3)` mmol/L
 - L'effet d'être un homme et défavorisé 
     + plutot que femme et favorisé est 
-    + $\small DR(D,S) = 0.326 + 0.126 - 0.095 =$ +`r round(0.326 + 0.126 - 0.095,3)`
-- **L'effet d'interaction/modification d'effet** est :  $\small AI = -0.095$
+    + $\small DR(D,S) = 0.326 + 0.126 - 0.095 =$ +`r round(0.326 + 0.126 - 0.095,3)` mmol/L
+- **L'effet d'interaction/modification d'effet** est :  $\small AI = -0.095$ mmol/L
 
 On pourrait aussi déduire :
 
-  - $\small Y_{00} = 3.24$
-  - $\small Y_{10} = 3.243 + 0.326 =$ `r round(3.243 + 0.326, 2)`
-  - $\small Y_{01} = 3.243 + 0.126 =$ `r round(3.243 + 0.126, 2)`
-  - $\small Y_{11} = 3.243 + 0.326 + 0.126 - 0.095 =$ `r round(3.243 + 0.326 + 0.126 - 0.095,2)`
+  - $\small Y_{00} = 3.24$ mmol/L
+  - $\small Y_{10} = 3.243 + 0.326 =$ `r round(3.243 + 0.326, 2)` mmol/L
+  - $\small Y_{01} = 3.243 + 0.126 =$ `r round(3.243 + 0.126, 2)` mmol/L
+  - $\small Y_{11} = 3.243 + 0.326 + 0.126 - 0.095 =$ `r round(3.243 + 0.326 + 0.126 - 0.095,2)` mmol/L
   
 
 ### 5.Analyse confirmatoire {-}
 
-Au final, on a réalisé cette analyse par g-computation (voir chapitre \@ref(conf)) sur des données imputées et boostrappées, et les résulats, présentées selon les recommandations de Knol et VanderWeele modifiées, étaient: 
+Si l'on utilise le [package proposé par B Lepage](https://github.com/benoitlepage/MargIntTmle) pour réaliser cet analyse avec la TMLE (effets d'intéraction calculés à partir des paramètres d'une modèle structurel marginal estimé à l'aide du package R ltmle), les résultats sont : 
+
+```{r ex_quant_conf, echo=FALSE, message=FALSE, warning=FALSE}
+
+load("img/yahoo.RData")
+library(knitr)
+library(kableExtra)
+kable(table_inter$out.table2,
+    caption = "Interaction effects estimated by TMLE") %>%
+  kable_classic()  %>%
+  add_footnote(table_inter$interaction.effects[1])
+
+
+```
+
+On retrouve des résulats qui peuvent être intérprété ainsi : 
+
+- l'effet d'être un homme (ou "la différence H-F) est moins fort de `r table_inter$interaction.effects[1]` mmol/L lorsqu'on est défavorisé précocement
+- l'effet de la défavorisation est moins fort de `r table_inter$interaction.effects[1]` mmol/L chez les hommes
+
+
+
+****
+
+En réalité, on a réalisé cette analyse par g-computation (voir chapitre \@ref(conf)) sur des données imputées et boostrappées (l'exemple ci-dessus a été réalisé sur une seule des bases bootstrappées, ce qui explique les différences), et les résultats, présentées selon les recommandations modifiées de Knol et VanderWeele, étaient: 
 
  ![](img/result_quanti.png){width=100%}
-
 
 
 # Exemple 3 - Y multinomial

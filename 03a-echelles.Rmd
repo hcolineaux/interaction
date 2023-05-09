@@ -89,7 +89,7 @@ Par exemple, avec deux expositions ayant un effet positif (qui augmentent le ris
 
 Dans ce continuum, deux cas particuliers d'interaction peuvent être retrouvées :
 
--	**Interaction pure** de X en fonction de V, si X n’a un effet que dans une strate de V. Par exemple, $\small p_{10} = p_{00}$ et $\small p_{11} ≠ p_{01}$
+-	**Interaction pure** de X en fonction de V, si X n’a un effet que dans une strate de V. Par exemple, $\small p_{10} = p_{00}$ et $\small p_{11} \neq p_{01}$
 
 > Par exemple ici, V a un effet si X=0 mais pas si X=1 :
 >

@@ -2,7 +2,6 @@
 title: "Interactions et modifications d'effet <br> en Epidémiologie"
 author: "CERPOP, INSERM, EQUITY Team"
 date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
-output: pdf_document
 documentclass: book
 bibliography: reference.bib
 csl: vancouver.csl

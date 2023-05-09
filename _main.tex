@@ -2820,9 +2820,9 @@ On peut en déduire (échelle additive) que :
   \begin{itemize}
   \tightlist
   \item
-    Quand on est favorisé : \(\small DR(S|D=0) = +0.326\)
+    Quand on est favorisé : \(\small DR(S|D=0) = +0.326\) mmol/L
   \item
-    Quand on est défavorisé : \(\small DR(S|D=1) = 0.326 - 0.095 =\) +0.231
+    Quand on est défavorisé : \(\small DR(S|D=1) = 0.326 - 0.095 =\) +0.231 mmol/L
   \end{itemize}
 \item
   L'effet de la défavorisation est :
@@ -2830,9 +2830,9 @@ On peut en déduire (échelle additive) que :
   \begin{itemize}
   \tightlist
   \item
-    Quand on est une femme : \(\small DR(D|S=0) = +0.126\)
+    Quand on est une femme : \(\small DR(D|S=0) = +0.126\) mmol/L
   \item
-    Quand on est une homme : \(\small DR(D|S=1) = 0.126 - 0.095 =\) +0.031
+    Quand on est une homme : \(\small DR(D|S=1) = 0.126 - 0.095 =\) +0.031 mmol/L
   \end{itemize}
 \item
   L'effet d'être un homme et défavorisé
@@ -2842,10 +2842,10 @@ On peut en déduire (échelle additive) que :
   \item
     plutot que femme et favorisé est
   \item
-    \(\small DR(D,S) = 0.326 + 0.126 - 0.095 =\) +0.357
+    \(\small DR(D,S) = 0.326 + 0.126 - 0.095 =\) +0.357 mmol/L
   \end{itemize}
 \item
-  \textbf{L'effet d'interaction/modification d'effet} est : \(\small AI = -0.095\)
+  \textbf{L'effet d'interaction/modification d'effet} est : \(\small AI = -0.095\) mmol/L
 \end{itemize}
 
 On pourrait aussi déduire :
@@ -2853,20 +2853,52 @@ On pourrait aussi déduire :
 \begin{itemize}
 \tightlist
 \item
-  \(\small Y_{00} = 3.24\)
+  \(\small Y_{00} = 3.24\) mmol/L
 \item
-  \(\small Y_{10} = 3.243 + 0.326 =\) 3.57
+  \(\small Y_{10} = 3.243 + 0.326 =\) 3.57 mmol/L
 \item
-  \(\small Y_{01} = 3.243 + 0.126 =\) 3.37
+  \(\small Y_{01} = 3.243 + 0.126 =\) 3.37 mmol/L
 \item
-  \(\small Y_{11} = 3.243 + 0.326 + 0.126 - 0.095 =\) 3.6
+  \(\small Y_{11} = 3.243 + 0.326 + 0.126 - 0.095 =\) 3.6 mmol/L
 \end{itemize}
 
 \hypertarget{analyse-confirmatoire}{%
 \subsection*{5.Analyse confirmatoire}\label{analyse-confirmatoire}}
 \addcontentsline{toc}{subsection}{5.Analyse confirmatoire}
 
-Au final, on a réalisé cette analyse par g-computation (voir chapitre \ref{conf}) sur des données imputées et boostrappées, et les résulats, présentées selon les recommandations de Knol et VanderWeele modifiées, étaient:
+Si l'on utilise le \href{https://github.com/benoitlepage/MargIntTmle}{package proposé par B Lepage} pour réaliser cet analyse avec la TMLE (effets d'intéraction calculés à partir des paramètres d'une modèle structurel marginal estimé à l'aide du package R ltmle), les résultats sont :
+
+\begin{table}
+
+\caption{(\#tab:ex_quant_conf)Interaction effects estimated by TMLE}
+\centering
+\begin{tabular}[t]{l|l|l|l}
+\hline
+  & A2=0 & A2=1 & RD.A2|A1\\
+\hline
+A1=0 & \$p\_\{00\}\$=3.243 [3.213,3.273] & \$p\_\{01\}\$=3.369 [3.344,3.394] & 0.126 [0.087,0.165]\\
+\hline
+A1=1 & \$p\_\{10\}\$=3.568 [3.538,3.598] & \$p\_\{11\}\$=3.6 [3.574,3.625] & 0.031 [-0.008,0.071]\\
+\hline
+RD.A1|A2 & 0.326 [0.283,0.368] & 0.231 [0.195,0.267] & \\
+\hline
+\multicolumn{4}{l}{\textsuperscript{a} additive Interaction = -0.095 [-0.15;-0.039]}\\
+\end{tabular}
+\end{table}
+
+On retrouve des résulats qui peuvent être intérprété ainsi :
+
+\begin{itemize}
+\tightlist
+\item
+  l'effet d'être un homme (ou ``la différence H-F) est moins fort de additive Interaction = -0.095 {[}-0.15;-0.039{]} mmol/L lorsqu'on est défavorisé précocement
+\item
+  l'effet de la défavorisation est moins fort de additive Interaction = -0.095 {[}-0.15;-0.039{]} mmol/L chez les hommes
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+En réalité, on a réalisé cette analyse par g-computation (voir chapitre \ref{conf}) sur des données imputées et boostrappées (l'exemple ci-dessus a été réalisé sur une seule des bases bootstrappées, ce qui explique les différences), et les résultats, présentées selon les recommandations modifiées de Knol et VanderWeele, étaient:
 
 \includegraphics[width=1\textwidth,height=\textheight]{img/result_quanti.png}
 
