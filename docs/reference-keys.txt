@@ -26,7 +26,6 @@ présentation-des-résultats
 recommendations
 proposition
 simulations
-regression
 régression-logistique
 régression-lineaire
 conf
@@ -40,7 +39,6 @@ exemple-2---y-quantitatif
 exemple-3---y-multinomial
 exemple-4---x-quantitatif
 synthèse-générale
-pour-aller-plus-loin
 ajouter-de-la-complexité
 interaction-avec-confusion-intermédiaire
 interaction-et-médiation

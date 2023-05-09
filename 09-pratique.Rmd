@@ -166,11 +166,13 @@ Si l'on utilise le [package proposé par B Lepage](https://github.com/benoitlepa
 
 load("img/yahoo.RData")
 library(knitr)
-library(kableExtra)
-kable(table_inter$out.table2,
-    caption = "Interaction effects estimated by TMLE") %>%
+#library(kableExtra)
+knitr::kable(table_inter$out.table2,
+    #caption = "Interaction effects estimated by TMLE"
+    ) %>%
   kable_classic()  %>%
-  add_footnote(table_inter$interaction.effects[1])
+  add_footnote(table_inter$interaction.effects[1],
+               escape = TRUE)
 
 
 ```
