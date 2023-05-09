@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 10 Analyses confirmatoires | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 10 Analyses confirmatoires | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
@@ -1586,58 +1586,40 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 <div id="tmle" class="section level3 unnumbered hasAnchor">
 <h3>TMLE<a href="conf.html#tmle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre><code>## $out.table
-##                                  A2=0                        A2=1            RD.A2|A1
-## A1=0     $p_{00}$=0.104 [0.095,0.113]  $p_{01}$=0.195 [0.18,0.21] 0.091 [0.073,0.109]
-## A1=1     $p_{10}$=0.408 [0.378,0.439] $p_{11}$=0.903 [0.88,0.927] 0.495 [0.457,0.534]
-## RD.A1|A2          0.304 [0.272,0.336]          0.708 [0.68,0.737]                    
-## RR.A1|A2              3.93 [3.5,4.41]            4.63 [4.55,4.72]                    
-##                  RR.A2|A1
-## A1=0     1.88 [1.67,2.11]
-## A1=1      2.21 [2.04,2.4]
-## RD.A1|A2                 
-## RR.A1|A2                 
+##                                  A2=0                        A2=1            RD.A2|A1         RR.A2|A1
+## A1=0     $p_{00}$=0.104 [0.095,0.113]  $p_{01}$=0.195 [0.18,0.21] 0.091 [0.073,0.109] 1.88 [1.67,2.11]
+## A1=1     $p_{10}$=0.408 [0.378,0.439] $p_{11}$=0.903 [0.88,0.927] 0.495 [0.457,0.534]  2.21 [2.04,2.4]
+## RD.A1|A2          0.304 [0.272,0.336]          0.708 [0.68,0.737]                                     
+## RR.A1|A2              3.93 [3.5,4.41]            4.63 [4.55,4.72]                                     
 ## 
 ## $interaction.effects
-## [1] &quot;additive Interaction = 0.404 [0.362;0.447]&quot;   
-## [2] &quot;RERI = 3.89 [3.45;4.4]&quot;                       
+## [1] &quot;additive Interaction = 0.404 [0.362;0.447]&quot;    &quot;RERI = 3.89 [3.45;4.4]&quot;                       
 ## [3] &quot;multiplicative Interaction = 1.18 [1.02;1.36]&quot;</code></pre>
 </div>
 <div id="iptw" class="section level3 unnumbered hasAnchor">
 <h3>IPTW<a href="conf.html#iptw" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre><code>## $out.table
-##                                  A2=0                        A2=1            RD.A2|A1
-## A1=0     $p_{00}$=0.104 [0.095,0.113]  $p_{01}$=0.195 [0.18,0.21] 0.091 [0.073,0.109]
-## A1=1     $p_{10}$=0.408 [0.377,0.439] $p_{11}$=0.904 [0.88,0.927] 0.496 [0.457,0.534]
-## RD.A1|A2          0.304 [0.272,0.336]          0.709 [0.68,0.737]                    
-## RR.A1|A2              3.93 [3.5,4.41]            4.63 [4.55,4.72]                    
-##                  RR.A2|A1
-## A1=0     1.88 [1.67,2.11]
-## A1=1      2.22 [2.05,2.4]
-## RD.A1|A2                 
-## RR.A1|A2                 
+##                                  A2=0                        A2=1            RD.A2|A1         RR.A2|A1
+## A1=0     $p_{00}$=0.104 [0.095,0.113]  $p_{01}$=0.195 [0.18,0.21] 0.091 [0.073,0.109] 1.88 [1.67,2.11]
+## A1=1     $p_{10}$=0.408 [0.377,0.439] $p_{11}$=0.904 [0.88,0.927] 0.496 [0.457,0.534]  2.22 [2.05,2.4]
+## RD.A1|A2          0.304 [0.272,0.336]          0.709 [0.68,0.737]                                     
+## RR.A1|A2              3.93 [3.5,4.41]            4.63 [4.55,4.72]                                     
 ## 
 ## $interaction.effects
-## [1] &quot;additive Interaction = 0.405 [0.362;0.447]&quot;   
-## [2] &quot;RERI = 3.9 [3.45;4.4]&quot;                        
+## [1] &quot;additive Interaction = 0.405 [0.362;0.447]&quot;    &quot;RERI = 3.9 [3.45;4.4]&quot;                        
 ## [3] &quot;multiplicative Interaction = 1.18 [1.02;1.36]&quot;</code></pre>
 </div>
 <div id="g-computation" class="section level3 unnumbered hasAnchor">
 <h3>G-computation<a href="conf.html#g-computation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre><code>## $out.table
-##                                  A2=0                         A2=1           RD.A2|A1
-## A1=0     $p_{00}$=0.104 [0.095,0.112] $p_{01}$=0.197 [0.183,0.211] 0.093 [0.077,0.11]
-## A1=1       $p_{10}$=0.4 [0.373,0.427] $p_{11}$=0.893 [0.872,0.914] 0.494 [0.46,0.527]
-## RD.A1|A2          0.296 [0.268,0.325]          0.697 [0.671,0.722]                   
-## RR.A1|A2             3.86 [3.46,4.31]             4.54 [4.46,4.61]                   
-##                 RR.A2|A1
-## A1=0      1.9 [1.7,2.12]
-## A1=1     2.23 [2.08,2.4]
-## RD.A1|A2                
-## RR.A1|A2                
+##                                  A2=0                         A2=1           RD.A2|A1        RR.A2|A1
+## A1=0     $p_{00}$=0.104 [0.095,0.112] $p_{01}$=0.197 [0.183,0.211] 0.093 [0.077,0.11]  1.9 [1.7,2.12]
+## A1=1       $p_{10}$=0.4 [0.373,0.427] $p_{11}$=0.893 [0.872,0.914] 0.494 [0.46,0.527] 2.23 [2.08,2.4]
+## RD.A1|A2          0.296 [0.268,0.325]          0.697 [0.671,0.722]                                   
+## RR.A1|A2             3.86 [3.46,4.31]             4.54 [4.46,4.61]                                   
 ## 
 ## $interaction.effects
-## [1] &quot;additive Interaction = 0.4 [0.363;0.438]&quot;     
-## [2] &quot;RERI = 3.86 [3.46;4.32]&quot;                      
+## [1] &quot;additive Interaction = 0.4 [0.363;0.438]&quot;      &quot;RERI = 3.86 [3.46;4.32]&quot;                      
 ## [3] &quot;multiplicative Interaction = 1.18 [1.03;1.34]&quot;</code></pre>
 
 </div>
