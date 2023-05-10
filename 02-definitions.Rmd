@@ -5,7 +5,6 @@ output:
 ---
 # (PART) Synthèse de la littérature {-}
 
-
 # Notations
 
 ## Variables et probabilités

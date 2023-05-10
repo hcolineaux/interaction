@@ -3,7 +3,8 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Représentations graphiques
+
+# Représentations graphiques {#graph}
 
 
 

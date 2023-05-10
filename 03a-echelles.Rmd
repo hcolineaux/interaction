@@ -4,7 +4,7 @@ output:
   html_document: default
 ---
 
-# La question des échelles
+# La question des échelles {#echelle}
 
 ## Mesures des interactions
 
@@ -89,14 +89,14 @@ Par exemple, avec deux expositions ayant un effet positif (qui augmentent le ris
 
 Dans ce continuum, deux cas particuliers d'interaction peuvent être retrouvées :
 
--	**Interaction pure** de X en fonction de V, si X n’a un effet que dans une strate de V. Par exemple, $\small p_{10} = p_{00}$ et $\small p_{11} \neq p_{01}$
+-	**Interaction pure** de X en fonction de V, si X n’a un effet que dans une strate de V. Par exemple, $\small p_{10} = p_{00}$ et $\small p_{11} \neq p_{01}$.
 
 > Par exemple ici, V a un effet si X=0 mais pas si X=1 :
 >
 > ![](img\Image8.png){width=90%}
 
 
--	**Interaction qualitative** de X1 en fonction de X2, , si l’effet de X1 dans une strate de X2 va dans la direction opposée de l’autre strate de X2 
+-	**Interaction qualitative** de X en fonction de V, , si l’effet de X dans une strate de V va dans la direction opposée de l’autre strate de V.
 
 > Par exemple ici, V a un effet positif si X=0 mais négatif si X=1 :
 >
@@ -106,7 +106,7 @@ Dans ce continuum, deux cas particuliers d'interaction peuvent être retrouvées
 ## Synthèse
 Quelle échelle choisir pour mesurer un effet d'interaction ?
 
-Même si en pratique l’échelle multiplicative est plus utilisée en raison de l’utilisation des modèles logistiques @knol_recommendations_2012, il semble y avoir un consensus pour privilégier l’échelle additive, plus appropriée pour évaluer l’utilité en santé publique @vanderweele_tutorial_2014 @knol_recommendations_2012.  
+Même si en pratique l’échelle multiplicative est plus utilisée, car les outcomes sont souvent binaires en épidémiologie et donc les modèles logistiques sont souvent utilisés @knol_recommendations_2012, il semble y avoir un consensus pour privilégier plutôt l’échelle additive, plus appropriée pour évaluer l’utilité en santé publique @vanderweele_tutorial_2014 @knol_recommendations_2012.  
 
 > Si on reprend l'exemple ci dessous :
 >

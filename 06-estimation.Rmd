@@ -146,7 +146,7 @@ t %>%
 
 # A partir de modèles de régression {#regression}
 
-Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels.
+Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels : les modèles de régression logistique et linéaire.
 
 
 ## Régression logistique
@@ -223,7 +223,7 @@ cbind(names = c("A1|A2=0", "A2|A1=0", "Interaction"),
 
 ```
 
-Attention, les modèles de régressions logistiques sont biaisés car les données sont générées à partir de modèles additifs.
+Attention, les modèles de régressions logistiques sont ici biaisés car les données sont générées à partir de modèles additifs.
 
 ## Régression lineaire
 

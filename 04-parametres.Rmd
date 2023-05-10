@@ -4,7 +4,7 @@ output:
   html_document: default
 ---
 
-# Types de paramètres 
+# Types de paramètres {#param}
 
 Plusieurs paramètres peuvent être utilisés pour décrire une interaction, sur l'échelle additive ou multiplicative. 
 
@@ -26,7 +26,7 @@ On a aussi défini un paramètre d'interaction sur l'échelle multiplicative (MI
 
 ## Avec les Odds Ratio (OR) 
 
-Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mesurés par des odds ratio estimé à partir de modèle de régression logistique.
+Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mesurés par des odds ratios estimés à partir de modèles de régression logistique.
 
 Un paramètre d'interaction sur l'echelle multiplicative ($MI_{OR}$) peut être estimé à partir de ces OR @vanderweele_tutorial_2014 :
 

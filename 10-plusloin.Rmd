@@ -21,7 +21,7 @@ Concernant le **choix de l'échelle**, idéalement, les interactions devraient �
 Concernant les paramètres,
 
 
-# Pour aller plus loin...
+# Pour aller plus loin... {#plusloin}
 
 ## Ajouter de la complexité
 

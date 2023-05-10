@@ -44,11 +44,11 @@ Les objectifs pouvant nécessiter l’étude de l’interaction/modification d�
 
 -	**Cibler des sous-groupes**. Par exemple, identifier des sous-groupes pour lesquels l’intervention aura le plus d’effet afin de pouvoir cibler l’intervention en cas de ressources limitées, ou s’assurer que l’intervention est bénéfice pour tous les groupes et pas délétères pour certains groupes.
 -	**Explorer les mécanismes d’un effet**. Par exemple, en cas d’intervention qui n’a d’effet qu’en présence ou absence d’une caractéristiques particulière (définition mécanistique de l’interaction) ou seulement conjointement à une autre intervention. 
--	**Etudier l’effet d’une intervention pour éliminer une partie de l’effet d’une exposition non modifiable**. Par exemple, quelle part de l’effet du niveau d’éducation des parents sur la mortalité disparaîtrait si on intervenait sur le tabagisme à l’adolescence ?
+-	**Etudier l’effet d’une intervention pour éliminer une partie de l’effet d’une exposition non modifiable**. Par exemple, quelle part de l’effet du niveau d’éducation des parents sur la mortalité disparaîtrait si on intervenait sur le tabagisme à l’adolescence ? Ce type d'objectif est proche d'un objectif ciblant la *médiation* d'un effet, par exemple la médiation de l'effet du niveau d'éducation des parents *par* le tabagisme, mais les mécanismes envisagés et explorés ne sont pas exactement les mêmes. Explorer ces deux types de mécanismes peut nécessiter des approches spécifiques (voir chapitre \@ref(plusloin))
 
 ## Les points les plus importants 
 
-La première étape importante consiste à **définir précisément l'objectif** : 
+La première étape importante consiste donc à **définir précisément l'objectif** : 
 
 - L'objectif est-il de type descriptif, prédictif ou explicatif ? 
 - Si l'on est dans une démarche explicative, d'inférence causale, est-ce que la mesure d'un effet d’interaction est nécessaire pour y répondre ? (identifier précisément l'effet que l'on cherche à estimer, ou *estimand*).
@@ -56,8 +56,9 @@ La première étape importante consiste à **définir précisément l'objectif**
 
 Ensuite, de **nombreuses questions** se posent pour réaliser une analyse d'interaction, auxquelles nous tentons de répondre dans ce document : 
 
-- S'agit-il d'une interaction ou une modification d'effet ? 
-- Sur quelle échelle la mesure-t-on ? Un effet d'interaction peut en effet être défini sur une échelle multiplicative ou additive, et les résultats entre ces échelles peuvent être contradictoires.
-- Comment estimer cette interaction ? Quels paramètres présenter et comment les interpréter ?
-- Comment la représenter graphiquement ?
+- S'agit-il d'une interaction ou une modification d'effet ? (Chapitre \@ref(intmodif))
+- Sur quelle échelle la mesure-t-on ? Un effet d'interaction peut en effet être défini sur une échelle multiplicative ou additive, et les résultats entre ces échelles peuvent être contradictoires. (Chapitre \@ref(echelle))
+- Quels paramètres présenter et comment les interpréter ? (Chapitre \@ref(param))
+- Comment estimer ces paramètres ? (Chapitre \@ref(regression) et Chapitre \@ref(conf))
+- Comment représenter cette interaction graphiquement ? (Chapitre \@ref(graph))
 

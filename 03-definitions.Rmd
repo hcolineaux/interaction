@@ -4,7 +4,7 @@ output:
   html_document: default
 ---
 
-# Interaction vs modification d'effets
+# Interaction vs modification d'effets {#intmodif}
 
 Dans le champ des analyses d'interaction, deux termes peuvent être rencontrés : "interaction" et "modification d'effet". Quel est la différence entre ces deux termes ?
 
@@ -12,7 +12,7 @@ Dans le champ des analyses d'interaction, deux termes peuvent être rencontrés 
 
 La question de la modification d'effet consiste à d’identifier si l’effet du traitement ou de l’exposition est différent dans différents groupes de patients ayant des caractéristiques différentes (estimer l’effet d’une exposition séparément en fonction d’une autre variable) @corraini_effect_2017. 
 
-Si l'on compare avec un essai d'intervention, c'est comme s'il y avait 1 seule intervention mais que l’analyse est stratifiée sur V. On analyse donc l'effet du scénario $\small do(X)$ dans chaque groupe de $\small V$. 
+Si l'on compare avec un essai d'intervention, c'est comme s'il y avait 1 seule intervention X mais que l’analyse est stratifiée sur V. On analyse donc l'effet du scénario $\small do(X)$ dans chaque groupe de $\small V$. 
 
 En observationnel, l'effet causal qui nous intéresse est donc celui de $\small X$ mais pas celui de $\small V$.
 On ajustera sur les facteurs de confusion de $\small X \rightarrow Y$. 
@@ -20,8 +20,7 @@ On ajustera sur les facteurs de confusion de $\small X \rightarrow Y$.
 On ne fait pas d'hypothèse sur les mécanismes de la modification d'effet, qui peut être causale, de façon directe ou indirecte, ou pas du tout (par proxy ou cause commune) @vanderweele_four_2007.
 
 
-> Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc. 
-
+> Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou explorer si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc. 
 
 On a une modification de l'effet de X par V si l'effet de X est différent dans chaque strate définie par V:
 
@@ -45,7 +44,7 @@ Modification d'effet dans l'exemple 1
 - effet quand V=1 : $\small RR(X | V=1) = 0,9/0,2 = \times 4,5$
 - donc $\small RR(X | V=0) \neq RR(X | V=1)$ 
 >
-> Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative. On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
+> Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
 
 
 ## Interaction
@@ -54,7 +53,7 @@ Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’eff
 
 Si l'on compare avec un essai d'intervention, c'est comme s'il y a plusieurs interventions selon le nombre de combinaison. On analyse donc l'effet du scénario $\small do(X, V)$. Ici l'effet causal d'interêt est vraiment l'effet conjoint des deux variables. 
 
-Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de $\small X*V$. On ajustera sur les facteurs de confusion de $\small X.V \rightarrow Y$.
+Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de $\small X*V$. On ajustera sur les facteurs de confusion de $\small X*V \rightarrow Y$.
 On fait l'hypothèse que les mécanismes de l'effet conjoint de X et V sont causaux.
 
 On a une interaction si :
@@ -98,7 +97,7 @@ La différence se joue plutôt sur :
 
 - la façon dont la question est posée (effet de X selon V ou effet conjoint de X et V), 
 - sur les hypothèses causales formulées (scénarii $\small do(X)$ ou $\small do(X,V)$) 
-- et donc sur les sets de facteurs de confusion à considérer (seulement sur $\small X \rightarrow Y$ ou $\small X.V \rightarrow Y$).
+- et donc sur les sets de facteurs de confusion à considérer (seulement sur $\small X \rightarrow Y$ ou $\small X*V \rightarrow Y$).
 
 
 Il existe des cas où l'identification d'une interaction ou d'une modification d'effet ne conduira pas à la même démarche et donc au même résultat @vanderweele_distinction_2009. Prenons le DAG suivant : 

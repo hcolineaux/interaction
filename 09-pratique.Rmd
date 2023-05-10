@@ -51,7 +51,7 @@ output:
 
 # Exemple 2 - Y quantitatif
 
-### 1. Formuler les objectifs {-}
+## 1. Formuler les objectifs 
 
 Dans cette étude @colineaux2023explaining, on s'est intéressé à :
 
@@ -64,7 +64,7 @@ A partir de la formulation des objectifs, on pourrait dire qu'on s'intéresse ic
 On va donc devoir à la fois agir sur le sexe $\small do(S)$ et sur la défavorisation sociale $\small do(D)$.
 Donc la démarche, en fait, sera plutôt une analyse d'interaction $\small do(S,D)$
 
-### 2. Stratégies et méthodes {-}
+## 2. Stratégies et méthodes 
 
 **Le DAG** (sans les médiateurs) était : 
 
@@ -83,12 +83,11 @@ Les deux formulations sont ici équivalentes car il n'y pas de facteurs de confu
 
 **L'estimateur** :
 Les effets ont été estimés par g-computation (*standardisation par régression*) @hernan2020causal. 
-Des régressions linéaires ont été utilisées pour estimer les potential outcomes pour chaque scénario, désignées par Q(S, D) = E(Y|S, D), avec L les facteurs de confusion. 
-A partir des fonctions Q(S, D) estimées, nous avons prédit la valeur de l’outcome Y pour chaque individu i
-pour chaque scénario. Les valeurs moyennes de Y dans chaque scénario vont ensuite nous permettre d'estimer les estimands selon leurs définitions précisées ci-dessus.
-Ces modèles Q(S, D) vont comprendre 2 variables : le sexe et la défavorisation sociale précoce (il n'y a pas ici de facteurs de confusion). 
+Des régressions linéaires ont été utilisées pour estimer les *potential outcomes* pour chaque scénario, désignées par $\small \overline{Q}(S, D) = E(Y|S, D)$. 
+A partir des fonctions $\small \overline{Q}(S, D)$ estimées, nous avons prédit la valeur de l’outcome Y pour chaque individu i pour chaque scénario. Les valeurs moyennes de Y dans chaque scénario vont ensuite nous permettre d'estimer les estimands selon leurs définitions précisées ci-dessus.
+Ces modèles$\small \overline{Q}(S, D)$ vont comprendre 2 variables : le sexe et la défavorisation sociale précoce (il n'y a pas ici de facteurs de confusion). 
 
-### 3.Analyse descriptive {-}
+## 3.Analyse descriptive
 
 Dans cette population (N=17 272), il y avait 51,4% d'hommes et 60,5% de personnes ayant été précocement défavorisées.
 
@@ -107,7 +106,7 @@ cbind(Sexe = c("Male", "Male", "Female", "Female"),
 
 ```
 
-### 4.Analyse exploratoire {-}
+## 4.Analyse exploratoire
 
 La sortie d'une modèle linéaire simple serait :
 
@@ -158,7 +157,7 @@ On pourrait aussi déduire :
   - $\small Y_{11} = 3.243 + 0.326 + 0.126 - 0.095 =$ `r round(3.243 + 0.326 + 0.126 - 0.095,2)` mmol/L
   
 
-### 5.Analyse confirmatoire {-}
+## 5.Analyse confirmatoire 
 
 Si l'on utilise le [package proposé par B Lepage](https://github.com/benoitlepage/MargIntTmle) pour réaliser cet analyse avec la TMLE (effets d'intéraction calculés à partir des paramètres d'une modèle structurel marginal estimé à l'aide du package R ltmle), les résultats sont : 
 
@@ -177,7 +176,7 @@ knitr::kable(table_inter$out.table2,
 
 ```
 
-On retrouve des résulats qui peuvent être intérprété ainsi : 
+On retrouve des résulats qui peuvent être intérprétés ainsi : 
 
 - l'effet d'être un homme (ou "la différence H-F) est moins fort de `r table_inter$interaction.effects[1]` mmol/L lorsqu'on est défavorisé précocement
 - l'effet de la défavorisation est moins fort de `r table_inter$interaction.effects[1]` mmol/L chez les hommes
