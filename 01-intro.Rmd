@@ -29,7 +29,7 @@ En épidémiologie, à l'exception des cas où l'on souhaite développer un test
 
 Finalement, pour répondre à la question "quand doit-on prendre en compte les interactions ?", il est d'abord nécessaire d'identifier dans quel type de démarche l'on s’inscrit :
 
-- **Démarche prédictive** : on ajoutera alors les interactions dans le modèle de prédiction, pour le rendre plus *flexible*, si cela améliore la précision de l'estimation @vanderweele_tutorial_2014.
+- **Démarche prédictive** : on ajoutera alors les interactions dans le modèle de prédiction, pour le rendre plus *flexible*, si cela améliore les performances de la prédiction @vanderweele_tutorial_2014.
 - **Démarche explicative/étiologique** : on étudiera les interactions ou modifications d'effet, si cela répond directement à l'objectif. Par exemple :
   + Si l'objectif est du type "l'effet de X sur Y varie-t-il en fonction de V ?", on prendra en compte l'interactions entre X et V.
   + Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : "Quel est l'effet conjoint de X et V sur Y ?" ou "Quel part de l'effet de X sur Y disparaît quand V est modifié ?", etc.
