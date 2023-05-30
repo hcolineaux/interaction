@@ -8,7 +8,8 @@ csl: vancouver.csl
 description: |
   .
 link-citations: yes
-github-repo: "rstudio/bookdown-demo"
+# github-repo: "rstudio/bookdown-demo"
+github-repo: interaction
 site: bookdown::bookdown_site
 always_allow_html: true
 ---
