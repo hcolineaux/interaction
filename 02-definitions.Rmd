@@ -14,13 +14,13 @@ On note :
 - un outcome :  $\small Y$, 
 - deux expositions : $\small X$ et $\small V$
 
-La probabilité de l’outcome Y dans chaque strate définie par les 2 expositions est notée :
+La probabilité de l’outcome $Y$ dans chaque strate définie par les 2 expositions est notée :
 
 - $\small p_{xv} = P(Y = 1|X = x,V = v)$
 
 
 > <ins> Exemple  </ins>
-On a deux exposition $\small X$, le tabagisme actif à 20 ans, et $\small V$, le fait d'avoir vécu un évènement traumatique pendant l'enfance. L'outcome $\small Y$ est binaire et représente le fait d'avoir au moins une pathologie chronique à 60 ans $\small Y=1$ ou aucune $\small Y=0$.
+On a deux expositions $\small X$, le tabagisme actif à 20 ans, et $\small V$, le fait d'avoir vécu un évènement traumatique pendant l'enfance. L'outcome $\small Y$ est binaire et représente le fait d'avoir au moins une pathologie chronique à 60 ans ($\small Y=1$) ou aucune ($\small Y=0$).
 >
 > On décrit (données complètement fictives) :
 >
@@ -36,35 +36,37 @@ L'effet d'une variable $\small X$ sur $\small Y$ peut être mesuré sur deux éc
 
 ### Concernant les différences de risques (DR, effets additifs) {-}
 
-On a donc :
+On va noter $P(Y = 1|do(X = 1))$ la probabilité d'observer $Y=1$ sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à $X=1$ (notée $do(X=1)$). 
 
--	L'effet d'un X binaire sur Y est : $\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))$ 
+De même, on va noter $P(Y = 1|do(X=1,V=1))$ la probabilité d'observer $Y=1$ sous une intervention contrefactuelle conjointe à la fois sur $X$ et sur $V$ où la totalité de la population étudiée est exposée à $X=1$ et $V=1$ (notée $do(X=1,V=1)$).
+
+-	L'effet d'une exposition $X$ binaire sur $Y$ est : $\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))$ 
     + qu'on peut estimer, si les conditions d'identifiabilité sont réunies, 
     + par $\small  P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0$
--	L'effet conjoint de X et V est : $\small DR(X,V) = p_{11}-p_{00}$ 
-- L'effet de X sur Y dans chaque strate de V est : $\small DR(X|V=0) = p_{10}-p_{00}$ et $\small DR(X|V=1) = p_{11}-p_{01}$
+-	L'effet conjoint de $X$ et $V$ est : $\small DR(X,V) = p_{11}-p_{00}$ 
+- L'effet de $X$ sur $Y$ pour chaque valeur fixée de $V$ est : $\small DR(X,V=0) = p_{10}-p_{00}$ et $\small DR(X,V=1) = p_{11}-p_{01}$
 
 > <ins>Exemple</ins>
 Différences de risques pour l'exemple 1
 >
 >![](img/Image1.png){width=30%}
 >
--	$\small DR(X \cap V) = p_{11}-p_{00} = 0,9 - 0,1 = +0,8$
--	$\small DR (X | V=0) = p_{10}-p_{00} = 0,4 - 0,1 = +0,3$
--	$\small DR (X | V=1) = p_{11}-p_{01} = 0,9 - 0,2 = +0,7$
+-	$\small DR(X,V) = p_{11}-p_{00} = 0,90 - 0,10 = +0,80$
+-	$\small DR (X,V=0) = p_{10}-p_{00} = 0,40 - 0,10 = +0,30$
+-	$\small DR (X,V=1) = p_{11}-p_{01} = 0,90 - 0,20 = +0,70$
 >
-> Le fait d'être doublement exposé par rapport à pas du tout augmente le risque de +80%. Parmi les personnes n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 augmente le risque de +30%, alors que parmi les personnes ayant vécu un événement traumatique, il est augmenté de +70%.
+> Le fait d'être doublement exposé par rapport à pas du tout augmente le risque de +80%. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans augmente le risque de +30%, alors que dans une population ayant vécu un événement traumatique, il est augmenté de +70%.
 
 
 ### Concernant, les rapports de risque (effets multiplicatifs) {-}
 
 on peut notamment utiliser les **risques relatifs** (RR). On  donc :
 
--	L'effet d'un X binaire sur Y est : $\small RR(X) = P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))$ 
+-	L'effet d'une exposition $X$ binaire sur $Y$ est : $\small RR(X) = P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))$ 
     + qu'on peut estimer, si les conditions d'identifiabilité sont réunies, 
     + par $\small P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))= p_1 / p_0$
--	L'effet conjoint de X et V est : $\small RR(X,V) = p_{11}/p_{00}$ 
-- L'effet de X sur Y dans chaque strate de V est : $\small RR(X|V=0) = p_{10}/p_{00}$ et $\small RR(X|V=1) =p_{11}/p_{01}$
+-	L'effet conjoint de $X$ et $V$ est : $\small RR(X,V) = p_{11}/p_{00}$ 
+- L'effet de $X$ sur $Y$ pour chaque valeur fixée de $V$ est : $\small RR(X,V=0) = p_{10}/p_{00}$ et $\small RR(X,V=1) =p_{11}/p_{01}$
 
 
 > <ins> Exemple </ins> 
@@ -72,9 +74,9 @@ Risques relatifs pour l'exemple 1
 >
 >![](img/Image1.png){width=30%}
 >
--	$\small RR(X \cap V) = 0,9/0,1 = \times 9$
--	$\small RR(X | V=0) = 0,4/0,1 = \times 4$
--	$\small RR(X | V=1) = 0,9/0,2 = \times 4,5$
+-	$\small RR(X,V) = 0,9/0,1 = \times 9$
+-	$\small RR(X,V=0) = 0,4/0,1 = \times 4$
+-	$\small RR(X,V=1) = 0,9/0,2 = \times 4,5$
 >
-> Le risque quand on est doublement exposé par rapport à pas du tout est multiplié par 9. Parmi les personnes n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 multiplie le risque par 4, alors que parmi les personnes ayant vécu un événement traumatique, il est multiplié par 4,5.
+> Le risque quand on est doublement exposé par rapport à pas du tout est multiplié par 9. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.
 
