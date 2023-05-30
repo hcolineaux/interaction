@@ -131,7 +131,7 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
-\date{Last compiled on 24 mai, 2023}
+\date{Last compiled on 30 mai, 2023}
 
 \begin{document}
 \maketitle
@@ -189,11 +189,11 @@ La science des données cherche à répondre à 3 types d'objectifs \citet{herna
 
 \includegraphics[width=1\textwidth,height=\textheight]{img/threetask.png}
 
-Selon le type d'objectif, la démarche d'analyse et les enjeux méthodologiques ne vont pas être les mêmes. Si l'objectif est prédictif, la démarche va être centrée sur la \emph{prédiction de l'outcome}, à partir de covariables sélectionnées afin d'optimiser la précision de l'estimation, tout en prenant en compte leur disponibilité en pratique et la parcimonie du modèle.
+Selon le type d'objectif, la démarche d'analyse et les enjeux méthodologiques ne vont pas être les mêmes. Si l'objectif est prédictif, la démarche va être centrée sur la \emph{prédiction de l'outcome}, à partir de covariables sélectionnées afin d'optimiser les performances de la prédiction, tout en prenant en compte leur disponibilité en pratique et la parcimonie du modèle.
 
-Dans une démarche explicative, ou \emph{étiologique}, au contraire, la démarche va être centré sur l'\emph{estimation d'un effet causal}, en prenant en compte les covariables en fonction de leur rôle vis-à-vis de l'effet d'intérêt (facteurs de confusion, colliders, médiateurs\ldots).
+Dans une démarche explicative, ou \emph{étiologique}, au contraire, la démarche va être centrée sur l'\emph{estimation d'un effet causal}, en prenant en compte les covariables en fonction de leur rôle vis-à-vis de l'effet d'intérêt (facteurs de confusion, colliders, médiateurs\ldots).
 
-En épidémiologie, à l'exception des cas où l'on souhaite développer un test ou score diagnostic ou pronostic, les objectifs sont le plus souvent explicatifs. On cherche en effet, la plupart du temps, à identifier des liens de cause à effet, afin de pouvoir agir sur les causes pour modifier les effets.
+En épidémiologie, à l'exception des cas où l'on souhaite développer un test ou score diagnostique ou pronostique, les objectifs sont le plus souvent explicatifs. On cherche en effet, la plupart du temps, à identifier des liens de cause à effet, afin de pouvoir agir sur les causes pour modifier les effets.
 
 Finalement, pour répondre à la question ``quand doit-on prendre en compte les interactions ?'', il est d'abord nécessaire d'identifier dans quel type de démarche l'on s'inscrit :
 
@@ -207,11 +207,11 @@ Finalement, pour répondre à la question ``quand doit-on prendre en compte les 
   \begin{itemize}
   \tightlist
   \item
-    Si l'objectif est du type ``l'effet de X sur Y varie-t-il en fonction de V ?'', on prendra en compte l'interactions entre X et V.
+    Si l'objectif est du type ``l'effet de \(X\) sur \(Y\) varie-t-il en fonction de \(V\) ?'', on prendra en compte l'interaction entre \(X\) et \(V\).
   \item
-    Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : ``Quel est l'effet conjoint de X et V sur Y ?'' ou ``Quel part de l'effet de X sur Y disparaît quand V est modifié ?'', etc.
+    Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : ``Quel est l'effet conjoint de \(X\) et \(V\) sur \(Y\) ?'' ou ``Quel part de l'effet de \(X\) sur \(Y\) disparaît quand \(V\) est modifié ?'', etc.
   \item
-    Par contre, si l'objectif est simplement d'estimer l'effet de X sur Y, ou l'effet médié par M, la prise en compte des interactions entre X et des covariables (facteurs de confusion ou médiateurs) n'est pas indispensable. C'est l'effet ``moyen'' qui sera estimé. Des termes d'interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l'estimation (enjeu d'optimisation du modèle).
+    Par contre, si l'objectif est simplement d'estimer l'effet de \(X\) sur \(Y\), ou l'effet médié par un médiateur \(M\), la prise en compte des interactions entre \(X\) et des covariables (facteurs de confusion ou médiateurs) n'est pas indispensable pour répondre à la question scientifique. Un effet ``moyen'' pourra être estimé. Des termes d'interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l'estimation (enjeu d'optimisation du modèle).
   \end{itemize}
 \end{itemize}
 
@@ -225,7 +225,7 @@ Les objectifs pouvant nécessiter l'étude de l'interaction/modification d'effet
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Cibler des sous-groupes}. Par exemple, identifier des sous-groupes pour lesquels l'intervention aura le plus d'effet afin de pouvoir cibler l'intervention en cas de ressources limitées, ou s'assurer que l'intervention est bénéfice pour tous les groupes et pas délétères pour certains groupes.
+  \textbf{Cibler des sous-groupes}. Par exemple, identifier des sous-groupes pour lesquels l'intervention aura le plus d'effet afin de pouvoir cibler l'intervention en cas de ressources limitées, ou s'assurer que l'intervention est bénéfique pour tous les groupes et pas délétères pour certains groupes.
 \item
   \textbf{Explorer les mécanismes d'un effet}. Par exemple, en cas d'intervention qui n'a d'effet qu'en présence ou absence d'une caractéristiques particulière (définition mécanistique de l'interaction) ou seulement conjointement à une autre intervention.
 \item
