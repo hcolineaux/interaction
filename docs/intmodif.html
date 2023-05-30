@@ -287,15 +287,15 @@ div.csl-indent {
 <p>Dans le champ des analyses d’interaction, deux termes peuvent être rencontrés : “interaction” et “modification d’effet”. Quel est la différence entre ces deux termes ?</p>
 <div id="modification-deffets" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Modification d’effets<a href="intmodif.html#modification-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La question de la modification d’effet consiste à d’identifier si l’effet du traitement ou de l’exposition est différent dans différents groupes de patients ayant des caractéristiques différentes (estimer l’effet d’une exposition séparément en fonction d’une autre variable) <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">3</a>]</span>.</p>
-<p>Si l’on compare avec un essai d’intervention, c’est comme s’il y avait 1 seule intervention X mais que l’analyse est stratifiée sur V. On analyse donc l’effet du scénario <span class="math inline">\(\small do(X)\)</span> dans chaque groupe de <span class="math inline">\(\small V\)</span>.</p>
+<p>La question de la modification d’effet consiste à identifier si un scénario contrefactuel modifiant le traitement ou l’exposition <span class="math inline">\(X\)</span> donne un résultat différent dans différents groupes <span class="math inline">\(V\)</span> de patients (estimer l’effet d’une exposition séparément en fonction d’une autre variable) <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">3</a>]</span>.</p>
+<p>Si l’on compare avec un essai d’intervention, c’est comme s’il y avait une seule intervention <span class="math inline">\(X\)</span> et que l’analyse était stratifiée sur <span class="math inline">\(V\)</span>. On analyse donc l’effet du scénario <span class="math inline">\(\small do(X)\)</span> dans chaque groupe de <span class="math inline">\(\small V\)</span>.</p>
 <p>En observationnel, l’effet causal qui nous intéresse est donc celui de <span class="math inline">\(\small X\)</span> mais pas celui de <span class="math inline">\(\small V\)</span>.
-On ajustera sur les facteurs de confusion de <span class="math inline">\(\small X \rightarrow Y\)</span>.</p>
-<p>On ne fait pas d’hypothèse sur les mécanismes de la modification d’effet, qui peut être causale, de façon directe ou indirecte, ou pas du tout (par proxy ou cause commune) <span class="citation">[<a href="#ref-vanderweele_four_2007" role="doc-biblioref">4</a>]</span>.</p>
+On ajustera sur les facteurs de confusion de la relation <span class="math inline">\(\small X \rightarrow Y\)</span>.</p>
+<p>On ne fait pas d’hypothèse sur les mécanismes de la modification d’effet, qui peut être causale (de façon directe ou indirecte), ou non-causale (présence d’une modification d’effet par proxy ou cause commune, sans qu’il existe d’effet direct ou indirect du modificateur d’effet vers le critère de jugement, comme dans la figure en bas de page) <span class="citation">[<a href="#ref-vanderweele_four_2007" role="doc-biblioref">4</a>]</span>.</p>
 <blockquote>
 <p>Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou explorer si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc.</p>
 </blockquote>
-<p>On a une modification de l’effet de X par V si l’effet de X est différent dans chaque strate définie par V:</p>
+<p>On a une modification de l’effet de <span class="math inline">\(X\)</span> par <span class="math inline">\(V\)</span> si l’effet de <span class="math inline">\(X\)</span> est différent dans deux strates définies par <span class="math inline">\(V\)</span>:</p>
 <ul>
 <li>en additif : <span class="math inline">\(\small DR(X | V=0) \neq DR(X | V=1)\)</span>
 <ul>
@@ -304,7 +304,7 @@ On ajustera sur les facteurs de confusion de <span class="math inline">\(\small 
 </ul></li>
 <li>en multiplicatif : <span class="math inline">\(\small RR(X | V=0) \neq RR(X | V=1)\)</span>
 <ul>
-<li>soit <span class="math inline">\(\small p_{10}/p_{00} \neq p_{11}/p_{01}1\)</span></li>
+<li>soit <span class="math inline">\(\small p_{10}/p_{00} \neq p_{11}/p_{01}\)</span></li>
 </ul></li>
 </ul>
 <blockquote>
@@ -314,36 +314,43 @@ Exemple
 <p>Modification d’effet dans l’exemple 1</p>
 <p>En additif :</p>
 <ul>
-<li>effet quand V=0 : <span class="math inline">\(\small DR (X | V=0) = 0,4 - 0,1 = +0,3\)</span></li>
-<li>effet quand V=1 : <span class="math inline">\(\small DR (X | V=1) = 0,9 - 0,2 = +0,7\)</span></li>
+<li>effet dans le groupe <span class="math inline">\(V=0\)</span> : <span class="math inline">\(\small DR (X | V=0) = 0,40 - 0,10 = +0,30\)</span></li>
+<li>effet dans le groupe <span class="math inline">\(V=1\)</span> : <span class="math inline">\(\small DR (X | V=1) = 0,90 - 0,20 = +0,70\)</span></li>
 <li>donc <span class="math inline">\(\small DR (X | V=0) \neq DR (X | V=1)\)</span></li>
 </ul>
 <p>En multiplicatif :</p>
 <ul>
-<li>effet quand V=0 : <span class="math inline">\(\small RR(X | V=0) = 0,4/0,1 = \times 4\)</span></li>
-<li>effet quand V=1 : <span class="math inline">\(\small RR(X | V=1) = 0,9/0,2 = \times 4,5\)</span></li>
+<li>effet dans le groupe <span class="math inline">\(V=0\)</span> : <span class="math inline">\(\small RR(X | V=0) = 0,40/0,10 = \times 4,0\)</span></li>
+<li>effet dans le groupe <span class="math inline">\(V=1\)</span> : <span class="math inline">\(\small RR(X | V=1) = 0,90/0,20 = \times 4,5\)</span></li>
 <li>donc <span class="math inline">\(\small RR(X | V=0) \neq RR(X | V=1)\)</span></li>
 </ul>
-<p>Ici l’effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l’échelle additive et multiplicative (données fictives). On peut donc dire que le fait d’avoir vécu un événement traumatique modifie l’effet du tabac. Attention, on fait l’hypothèse de l’absence de facteurs de confusion entre le tabagisme et l’outcome, ce qui est en réalité peu probable.</p>
+<p>Ici l’effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l’échelle additive et multiplicative (données fictives). On peut donc dire que le fait d’avoir vécu un événement traumatique modifie l’effet du tabac. Attention, dans cet exemple, on fait l’hypothèse de l’absence de facteurs de confusion entre le tabagisme et l’outcome, ce qui est en réalité peu probable.</p>
 </blockquote>
 </div>
 <div id="interaction" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Interaction<a href="intmodif.html#interaction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoints de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l’effet conjoint est supérieur à l’effet de la somme des individuels. Il y a une interaction antagoniste lorsque l’effet conjoint est inférieur à la somme des effets individuels <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">3</a>]</span>.</p>
+<p>Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoint de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l’effet conjoint est supérieur à l’effet de la somme des individuels. Il y a une interaction antagoniste lorsque l’effet conjoint est inférieur à la somme des effets individuels <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">3</a>]</span>.</p>
 <p>Si l’on compare avec un essai d’intervention, c’est comme s’il y a plusieurs interventions selon le nombre de combinaison. On analyse donc l’effet du scénario <span class="math inline">\(\small do(X, V)\)</span>. Ici l’effet causal d’interêt est vraiment l’effet conjoint des deux variables.</p>
-<p>Dans un schéma observationnel, l’effet causal qui nous intéresse est donc celui de <span class="math inline">\(\small X*V\)</span>. On ajustera sur les facteurs de confusion de <span class="math inline">\(\small X*V \rightarrow Y\)</span>.
-On fait l’hypothèse que les mécanismes de l’effet conjoint de X et V sont causaux.</p>
-<p>On a une interaction si :</p>
+<p>Dans un schéma observationnel, l’effet causal qui nous intéresse est donc celui de l’interaction <span class="math inline">\(\small X*V\)</span>. On ajustera sur les facteurs de confusion des deux relations <span class="math inline">\(\small X \rightarrow Y\)</span> et <span class="math inline">\(\small V \rightarrow Y\)</span>.
+On fait l’hypothèse que les mécanismes de l’effet conjoint de <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span> sont causaux.</p>
+<p>Par définition, on a une interaction si l’effet conjoint de <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span> sur <span class="math inline">\(Y\)</span> (<span class="math inline">\(DR(X,V)\)</span>) est différent de la somme (ou du produit sur l’échelle multiplicative) :</p>
 <ul>
-<li>en additif : <span class="math inline">\(\small DR(X \cap V) \neq DR(X| V=0) + DR(V| X=0)\)</span>
+<li>de l’effet isolé de <span class="math inline">\(X\)</span> sur <span class="math inline">\(Y\)</span> (où <span class="math inline">\(V\)</span> est constant, fixé à <span class="math inline">\(V=0\)</span>), noté <span class="math inline">\(DR(X,V=0)\)</span> (ou <span class="math inline">\(RR(X,V=0)\)</span>)</li>
+<li>et de l’effet isolé de <span class="math inline">\(V\)</span> sur <span class="math inline">\(Y\)</span> (où <span class="math inline">\(X\)</span> est constant, fixé à <span class="math inline">\(X=0\)</span>), noté <span class="math inline">\(DR(V,X=0)\)</span> (ou <span class="math inline">\(RR(V,X=0)\)</span>)</li>
+</ul>
+<p>On a ainsi,</p>
+<ul>
+<li>en additif : <span class="math inline">\(\small DR(X,V) \neq DR(X,V=0) + DR(V,X=0)\)</span>
 <ul>
 <li><span class="math inline">\(\small p_{11}-p_{00} \neq (p_{10}-p_{00})+(p_{01}-p_{00})\)</span></li>
 <li><span class="math inline">\(\small p_{11} \neq p_{10} + p_{01} - p_{00}\)</span></li>
+<li><span class="math inline">\(\small p_{11} - p_{10} - p_{01} + p_{00} \neq 0\)</span></li>
 </ul></li>
-<li>en multiplicatif <span class="math inline">\(\small RR(X \cap V) \neq RR(X| V=0) + RR(V| X=0)\)</span>
+<li>en multiplicatif <span class="math inline">\(\small RR(X,V) \neq RR(X,V=0) \times RR(V,X=0)\)</span>
 <ul>
-<li><span class="math inline">\(\small p_{11}/p_{00} \neq (p_{10}/p_{00})+(p_{01}/p_{00})\)</span></li>
-<li><span class="math inline">\(\small p_{11} \neq (p_{10} + p_{01}) / p_{00}\)</span></li>
+<li><span class="math inline">\(\small p_{11}/p_{00} \neq (p_{10}/p_{00}) \times (p_{01}/p_{00})\)</span></li>
+<li><span class="math inline">\(\small p_{11} \neq (p_{10} \times p_{01}) / p_{00}\)</span></li>
+<li><span class="math inline">\(\small (p_{00} \times p_{11}) / (p_{10} \times p_{01}) \neq 1\)</span></li>
 </ul></li>
 </ul>
 <blockquote>
@@ -353,15 +360,15 @@ Exemple
 <p>Interaction dans l’exemple 1</p>
 <p>En additif :</p>
 <ul>
-<li>effet joint : <span class="math inline">\(\small DR(X \cap V) = 0,9 - 0,1 = +0.8\)</span></li>
-<li>somme des effets individuel : <span class="math inline">\(\small DR(X| V=0) + DR(V| X=0) = +0,3 +0,1 = +0,4\)</span></li>
-<li>donc <span class="math inline">\(\small DR(X \cap V) \neq DR(X| V=0) + DR(V| X=0)\)</span></li>
+<li>effet joint : <span class="math inline">\(\small DR(X,V) = 0,90 - 0,10 = +0.80\)</span></li>
+<li>somme des effets individuels : <span class="math inline">\(\small DR(X,V=0) + DR(V,X=0) = +0,30 +0,10 = +0,40\)</span></li>
+<li>donc <span class="math inline">\(\small DR(X,V) \neq DR(X,V=0) + DR(V,X=0)\)</span></li>
 </ul>
 <p>En multiplicatif :</p>
 <ul>
-<li>effet joint : <span class="math inline">\(\small RR(X \cap V) = 0,9/0,1 = \times 9\)</span></li>
-<li>produit des effets individuel : <span class="math inline">\(\small RR(X | V=0) \times RR(V | X=0) = 4 \times 2 = \times 8\)</span></li>
-<li>donc <span class="math inline">\(\small DR(X \cap V) \neq DR(X| V=0) \times DR(V| X=0)\)</span></li>
+<li>effet joint : <span class="math inline">\(\small RR(X,V) = 0,9/0,1 = \times 9\)</span></li>
+<li>produit des effets individuels : <span class="math inline">\(\small RR(X,V=0) \times RR(V,X=0) = 4 \times 2 = \times 8\)</span></li>
+<li>donc <span class="math inline">\(\small DR(X,V) \neq DR(X,V=0) \times DR(V,X=0)\)</span></li>
 </ul>
 <p>Ici l’effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions.</p>
 </blockquote>
@@ -375,15 +382,19 @@ Exemple
 </ul>
 <p>La différence se joue plutôt sur :</p>
 <ul>
-<li>la façon dont la question est posée (effet de X selon V ou effet conjoint de X et V),</li>
-<li>sur les hypothèses causales formulées (scénarii <span class="math inline">\(\small do(X)\)</span> ou <span class="math inline">\(\small do(X,V)\)</span>)</li>
-<li>et donc sur les sets de facteurs de confusion à considérer (seulement sur <span class="math inline">\(\small X \rightarrow Y\)</span> ou <span class="math inline">\(\small X*V \rightarrow Y\)</span>).</li>
+<li>la façon dont la question est posée (effet de <span class="math inline">\(X\)</span> selon <span class="math inline">\(V\)</span>, <em>versus</em> effet conjoint de <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span>),</li>
+<li>sur les hypothèses causales formulées (scénarii <span class="math inline">\(\small do(X)|V\)</span> <em>versus</em> <span class="math inline">\(\small do(X,V)\)</span>)</li>
+<li>et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation <span class="math inline">\(\small X \rightarrow Y\)</span> <em>versus</em> les deux relations <span class="math inline">\(\small X \rightarrow Y\)</span> et <span class="math inline">\(\small V \rightarrow Y\)</span>).</li>
 </ul>
 <p>Il existe des cas où l’identification d’une interaction ou d’une modification d’effet ne conduira pas à la même démarche et donc au même résultat <span class="citation">[<a href="#ref-vanderweele_distinction_2009" role="doc-biblioref">5</a>]</span>. Prenons le DAG suivant :</p>
 <blockquote>
 <p><img src="img/Image12.png" style="width:30.0%" /></p>
 </blockquote>
-<p>Dans ce cas, il n’y a pas d’interaction entre A1 et A2, car si on intervient sur les 2 (<span class="math inline">\(\small do(A1, A2)\)</span>), il n’y a plus de chemin entre A2 et Y. Il peut par contre y avoir une modification de l’effet <span class="math inline">\(\small A1 \rightarrow Y\)</span> par A2 (<span class="math inline">\(\small do(A1)\)</span>). Dans ce cas, pour estimer cet effet, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3.</p>
+<p>Dans ce cas, il n’y a pas d’interaction entre <span class="math inline">\(A1\)</span> et <span class="math inline">\(A2\)</span>, car il n’y a pas d’effet direct ni indirect de <span class="math inline">\(A2 \rightarrow Y\)</span>. L’effet de <span class="math inline">\(A1 \rightarrow Y\)</span> restera le même quelle que soit la valeur que l’on pourrait attribuer à <span class="math inline">\(A2\)</span> :</p>
+<p><span class="math inline">\(\scriptsize P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] - P\left[Y=1|do(A1=0, A2=1)\right]\)</span></p>
+<p>Par contre, il peut y avoir une modification de l’effet de <span class="math inline">\(A1\)</span> par <span class="math inline">\(A2\)</span>, en particulier s’il existe une interaction <span class="math inline">\(A1 * L2 \rightarrow Y\)</span> ou <span class="math inline">\(A1 * L3 \rightarrow Y\)</span>, on s’attend à ce que les contrastes suivants soient différents :</p>
+<p><span class="math inline">\(\scriptsize P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] - P[Y=1|do(A1=2),A2=0]\)</span>.
+<!-- Note, dans ce cas, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3. --></p>
 
 </div>
 </div>

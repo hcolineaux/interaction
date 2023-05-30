@@ -403,20 +403,20 @@ Dans le champ des analyses d'interaction, deux termes peuvent être rencontrés 
 \hypertarget{modification-deffets}{%
 \section{Modification d'effets}\label{modification-deffets}}
 
-La question de la modification d'effet consiste à d'identifier si l'effet du traitement ou de l'exposition est différent dans différents groupes de patients ayant des caractéristiques différentes (estimer l'effet d'une exposition séparément en fonction d'une autre variable) \citet{corraini_effect_2017}.
+La question de la modification d'effet consiste à identifier si un scénario contrefactuel modifiant le traitement ou l'exposition \(X\) donne un résultat différent dans différents groupes \(V\) de patients (estimer l'effet d'une exposition séparément en fonction d'une autre variable) \citet{corraini_effect_2017}.
 
-Si l'on compare avec un essai d'intervention, c'est comme s'il y avait 1 seule intervention X mais que l'analyse est stratifiée sur V. On analyse donc l'effet du scénario \(\small do(X)\) dans chaque groupe de \(\small V\).
+Si l'on compare avec un essai d'intervention, c'est comme s'il y avait une seule intervention \(X\) et que l'analyse était stratifiée sur \(V\). On analyse donc l'effet du scénario \(\small do(X)\) dans chaque groupe de \(\small V\).
 
 En observationnel, l'effet causal qui nous intéresse est donc celui de \(\small X\) mais pas celui de \(\small V\).
-On ajustera sur les facteurs de confusion de \(\small X \rightarrow Y\).
+On ajustera sur les facteurs de confusion de la relation \(\small X \rightarrow Y\).
 
-On ne fait pas d'hypothèse sur les mécanismes de la modification d'effet, qui peut être causale, de façon directe ou indirecte, ou pas du tout (par proxy ou cause commune) \citet{vanderweele_four_2007}.
+On ne fait pas d'hypothèse sur les mécanismes de la modification d'effet, qui peut être causale (de façon directe ou indirecte), ou non-causale (présence d'une modification d'effet par proxy ou cause commune, sans qu'il existe d'effet direct ou indirect du modificateur d'effet vers le critère de jugement, comme dans la figure en bas de page) \citet{vanderweele_four_2007}.
 
 \begin{quote}
 Exemples d'objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou explorer si l'effet du traitement est homogène/hétérogène en fonction de l'âge, du sexe, etc.
 \end{quote}
 
-On a une modification de l'effet de X par V si l'effet de X est différent dans chaque strate définie par V:
+On a une modification de l'effet de \(X\) par \(V\) si l'effet de \(X\) est différent dans deux strates définies par \(V\):
 
 \begin{itemize}
 \tightlist
@@ -434,7 +434,7 @@ On a une modification de l'effet de X par V si l'effet de X est différent dans 
   \begin{itemize}
   \tightlist
   \item
-    soit \(\small p_{10}/p_{00} \neq p_{11}/p_{01}1\)
+    soit \(\small p_{10}/p_{00} \neq p_{11}/p_{01}\)
   \end{itemize}
 \end{itemize}
 
@@ -448,9 +448,9 @@ En additif :
 \begin{itemize}
 \tightlist
 \item
-  effet quand V=0 : \(\small DR (X | V=0) = 0,4 - 0,1 = +0,3\)
+  effet dans le groupe \(V=0\) : \(\small DR (X | V=0) = 0,40 - 0,10 = +0,30\)
 \item
-  effet quand V=1 : \(\small DR (X | V=1) = 0,9 - 0,2 = +0,7\)
+  effet dans le groupe \(V=1\) : \(\small DR (X | V=1) = 0,90 - 0,20 = +0,70\)
 \item
   donc \(\small DR (X | V=0) \neq DR (X | V=1)\)
 \end{itemize}
@@ -460,32 +460,42 @@ En multiplicatif :
 \begin{itemize}
 \tightlist
 \item
-  effet quand V=0 : \(\small RR(X | V=0) = 0,4/0,1 = \times 4\)
+  effet dans le groupe \(V=0\) : \(\small RR(X | V=0) = 0,40/0,10 = \times 4,0\)
 \item
-  effet quand V=1 : \(\small RR(X | V=1) = 0,9/0,2 = \times 4,5\)
+  effet dans le groupe \(V=1\) : \(\small RR(X | V=1) = 0,90/0,20 = \times 4,5\)
 \item
   donc \(\small RR(X | V=0) \neq RR(X | V=1)\)
 \end{itemize}
 
-Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
+Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
 \end{quote}
 
 \hypertarget{interaction}{%
 \section{Interaction}\label{interaction}}
 
-Quand on s'intéresse à l'interaction, on s'intéresse plutôt à l'effet conjoints de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l'effet conjoint est supérieur à l'effet de la somme des individuels. Il y a une interaction antagoniste lorsque l'effet conjoint est inférieur à la somme des effets individuels \citet{corraini_effect_2017}.
+Quand on s'intéresse à l'interaction, on s'intéresse plutôt à l'effet conjoint de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l'effet conjoint est supérieur à l'effet de la somme des individuels. Il y a une interaction antagoniste lorsque l'effet conjoint est inférieur à la somme des effets individuels \citet{corraini_effect_2017}.
 
 Si l'on compare avec un essai d'intervention, c'est comme s'il y a plusieurs interventions selon le nombre de combinaison. On analyse donc l'effet du scénario \(\small do(X, V)\). Ici l'effet causal d'interêt est vraiment l'effet conjoint des deux variables.
 
-Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de \(\small X*V\). On ajustera sur les facteurs de confusion de \(\small X*V \rightarrow Y\).
-On fait l'hypothèse que les mécanismes de l'effet conjoint de X et V sont causaux.
+Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de l'interaction \(\small X*V\). On ajustera sur les facteurs de confusion des deux relations \(\small X \rightarrow Y\) et \(\small V \rightarrow Y\).
+On fait l'hypothèse que les mécanismes de l'effet conjoint de \(X\) et \(V\) sont causaux.
 
-On a une interaction si :
+Par définition, on a une interaction si l'effet conjoint de \(X\) et \(V\) sur \(Y\) (\(DR(X,V)\)) est différent de la somme (ou du produit sur l'échelle multiplicative) :
 
 \begin{itemize}
 \tightlist
 \item
-  en additif : \(\small DR(X \cap V) \neq DR(X| V=0) + DR(V| X=0)\)
+  de l'effet isolé de \(X\) sur \(Y\) (où \(V\) est constant, fixé à \(V=0\)), noté \(DR(X,V=0)\) (ou \(RR(X,V=0)\))
+\item
+  et de l'effet isolé de \(V\) sur \(Y\) (où \(X\) est constant, fixé à \(X=0\)), noté \(DR(V,X=0)\) (ou \(RR(V,X=0)\))
+\end{itemize}
+
+On a ainsi,
+
+\begin{itemize}
+\tightlist
+\item
+  en additif : \(\small DR(X,V) \neq DR(X,V=0) + DR(V,X=0)\)
 
   \begin{itemize}
   \tightlist
@@ -493,16 +503,20 @@ On a une interaction si :
     \(\small p_{11}-p_{00} \neq (p_{10}-p_{00})+(p_{01}-p_{00})\)
   \item
     \(\small p_{11} \neq p_{10} + p_{01} - p_{00}\)
+  \item
+    \(\small p_{11} - p_{10} - p_{01} + p_{00} \neq 0\)
   \end{itemize}
 \item
-  en multiplicatif \(\small RR(X \cap V) \neq RR(X| V=0) + RR(V| X=0)\)
+  en multiplicatif \(\small RR(X,V) \neq RR(X,V=0) \times RR(V,X=0)\)
 
   \begin{itemize}
   \tightlist
   \item
-    \(\small p_{11}/p_{00} \neq (p_{10}/p_{00})+(p_{01}/p_{00})\)
+    \(\small p_{11}/p_{00} \neq (p_{10}/p_{00}) \times (p_{01}/p_{00})\)
   \item
-    \(\small p_{11} \neq (p_{10} + p_{01}) / p_{00}\)
+    \(\small p_{11} \neq (p_{10} \times p_{01}) / p_{00}\)
+  \item
+    \(\small (p_{00} \times p_{11}) / (p_{10} \times p_{01}) \neq 1\)
   \end{itemize}
 \end{itemize}
 
@@ -516,11 +530,11 @@ En additif :
 \begin{itemize}
 \tightlist
 \item
-  effet joint : \(\small DR(X \cap V) = 0,9 - 0,1 = +0.8\)
+  effet joint : \(\small DR(X,V) = 0,90 - 0,10 = +0.80\)
 \item
-  somme des effets individuel : \(\small DR(X| V=0) + DR(V| X=0) = +0,3 +0,1 = +0,4\)
+  somme des effets individuels : \(\small DR(X,V=0) + DR(V,X=0) = +0,30 +0,10 = +0,40\)
 \item
-  donc \(\small DR(X \cap V) \neq DR(X| V=0) + DR(V| X=0)\)
+  donc \(\small DR(X,V) \neq DR(X,V=0) + DR(V,X=0)\)
 \end{itemize}
 
 En multiplicatif :
@@ -528,11 +542,11 @@ En multiplicatif :
 \begin{itemize}
 \tightlist
 \item
-  effet joint : \(\small RR(X \cap V) = 0,9/0,1 = \times 9\)
+  effet joint : \(\small RR(X,V) = 0,9/0,1 = \times 9\)
 \item
-  produit des effets individuel : \(\small RR(X | V=0) \times RR(V | X=0) = 4 \times 2 = \times 8\)
+  produit des effets individuels : \(\small RR(X,V=0) \times RR(V,X=0) = 4 \times 2 = \times 8\)
 \item
-  donc \(\small DR(X \cap V) \neq DR(X| V=0) \times DR(V| X=0)\)
+  donc \(\small DR(X,V) \neq DR(X,V=0) \times DR(V,X=0)\)
 \end{itemize}
 
 Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions.
@@ -556,11 +570,11 @@ La différence se joue plutôt sur :
 \begin{itemize}
 \tightlist
 \item
-  la façon dont la question est posée (effet de X selon V ou effet conjoint de X et V),
+  la façon dont la question est posée (effet de \(X\) selon \(V\), \emph{versus} effet conjoint de \(X\) et \(V\)),
 \item
-  sur les hypothèses causales formulées (scénarii \(\small do(X)\) ou \(\small do(X,V)\))
+  sur les hypothèses causales formulées (scénarii \(\small do(X)|V\) \emph{versus} \(\small do(X,V)\))
 \item
-  et donc sur les sets de facteurs de confusion à considérer (seulement sur \(\small X \rightarrow Y\) ou \(\small X*V \rightarrow Y\)).
+  et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation \(\small X \rightarrow Y\) \emph{versus} les deux relations \(\small X \rightarrow Y\) et \(\small V \rightarrow Y\)).
 \end{itemize}
 
 Il existe des cas où l'identification d'une interaction ou d'une modification d'effet ne conduira pas à la même démarche et donc au même résultat \citet{vanderweele_distinction_2009}. Prenons le DAG suivant :
@@ -569,7 +583,13 @@ Il existe des cas où l'identification d'une interaction ou d'une modification d
 \includegraphics[width=0.3\textwidth,height=\textheight]{img/Image12.png}
 \end{quote}
 
-Dans ce cas, il n'y a pas d'interaction entre A1 et A2, car si on intervient sur les 2 (\(\small do(A1, A2)\)), il n'y a plus de chemin entre A2 et Y. Il peut par contre y avoir une modification de l'effet \(\small A1 \rightarrow Y\) par A2 (\(\small do(A1)\)). Dans ce cas, pour estimer cet effet, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3.
+Dans ce cas, il n'y a pas d'interaction entre \(A1\) et \(A2\), car il n'y a pas d'effet direct ni indirect de \(A2 \rightarrow Y\). L'effet de \(A1 \rightarrow Y\) restera le même quelle que soit la valeur que l'on pourrait attribuer à \(A2\) :
+
+\(\scriptsize P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] - P\left[Y=1|do(A1=0, A2=1)\right]\)
+
+Par contre, il peut y avoir une modification de l'effet de \(A1\) par \(A2\), en particulier s'il existe une interaction \(A1 * L2 \rightarrow Y\) ou \(A1 * L3 \rightarrow Y\), on s'attend à ce que les contrastes suivants soient différents :
+
+\(\scriptsize P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] - P[Y=1|do(A1=2),A2=0]\).
 
 \hypertarget{echelle}{%
 \chapter{La question des échelles}\label{echelle}}
