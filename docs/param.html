@@ -289,7 +289,7 @@ div.csl-indent {
 <h2><span class="header-section-number">6.1</span> Avec les différences de risques (DR)<a href="param.html#avec-les-différences-de-risques-dr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On a déjà défini un paramètre d’interaction sur l’échelle additive (AI) à partir des différences d’effets <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
 <ul>
-<li><span class="math inline">\(\small AI = DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))\)</span></li>
+<li><span class="math inline">\(\small AI = DR(X, V) - [DR(X|V=0) + DR(V|X=0)]\)</span></li>
 <li><span class="math inline">\(\small AI = (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]\)</span></li>
 <li>soit <span class="math inline">\(\small AI =p_{11} - p_{10} - p_{01} + p_{00}\)</span></li>
 </ul>
@@ -315,31 +315,42 @@ div.csl-indent {
 <div id="excès-de-risque-à-partir-des-rr-reri" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Excès de risque à partir des RR (RERI)<a href="param.html#excès-de-risque-à-partir-des-rr-reri" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Lorsque seulement les risques relatifs sont donnés mais que l’on souhaite évaluer l’interaction sur l’échelle additive, “l’excès de risque du à l’interaction” (RERI) ou “interaction contrast ratio” (ICR), peut être estimé à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
-<ul>
-<li><span class="math inline">\(\small RERI = RR_{11} - RR_{10} - RR_{01} + 1\)</span></li>
-</ul>
-<p>Il faut noter que, bien que le RERI donne la direction direction (positive, négative ou nulle) de l’interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l’ampleur de l’interaction additive, à moins de connaître au moins <span class="math inline">\(\small p_{00}\)</span>.</p>
-<p>Si l’on a seulement l’OR et que l’outcome est rare, les OR peuvent approximé les RR, on a donc :</p>
+<p><span class="math display">\[\begin{align*}\small
+RERI =&amp; \frac{AI}{p_{00}} = \frac{p_{11} - p_{10} - p_{01} + p_{00}}{p_{00}}\\
+RERI =&amp; RR_{11} - RR_{10} - RR_{01} + 1
+\end{align*}\]</span></p>
+<p>On voit que le RERI correspond à l’interaction mesurée sur l’échelle additive, rapportée au risque de base <span class="math inline">\(p_{00}\)</span>.</p>
+<p>Il faut noter que, bien que le RERI donne la direction (positive, négative ou nulle) de l’interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l’ampleur de l’interaction additive, à moins de connaître au moins <span class="math inline">\(\small p_{00}\)</span>.</p>
+<p>Si l’on a seulement l’OR et que l’outcome est rare, les OR peuvent approximer les RR, on a donc :</p>
 <ul>
 <li><span class="math inline">\(\small RERI_{OR} = OR_{11} - OR_{10} - OR_{01} + 1 \approx RERI_{RR}\)</span></li>
 </ul>
 </div>
 <div id="autres" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Autres<a href="param.html#autres" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>D’autres paramètres ont aussi été proposé <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>, tels que :</p>
+<p>D’autres paramètres ont aussi été proposés <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>, tels que :</p>
 <div id="le-synergie-index-si" class="section level3 unnumbered hasAnchor">
 <h3>Le “Synergie index” (SI)<a href="param.html#le-synergie-index-si" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Il s’agit d’un paramètre explorant l’interaction additive :</p>
 <ul>
 <li><span class="math inline">\(\small S = \frac{RR_{11} - 1}{(RR_{10} - 1) + (RR_{01}-1)}\)</span>.</li>
 </ul>
-<p>Il mesure à quel point le rapport de risque joint dépasse 1, et si cette mesure est supérieure à la somme de “à quel point” les rapports de risque de chaque exposition dépasse 1.</p>
+<p>Il mesure l’augmentation relative du risque liée à l’exposition jointe, rapportée à la somme des augmentations relatives du risque liées à la 1ère et la 2ème exposition.</p>
+<p>Pour rappel, l’augmentation relative du risque liée à l’exposition jointe correspond à l’augmentation absolue du risque (différence de risque), exprimée en pourcentage par rapport au risque de base <span class="math inline">\(p_{00}\)</span>.</p>
+<p><span class="math inline">\(ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)</span></p>
+<p>L’augmentation relative du risque liée à l’exposition <span class="math inline">\(X\)</span> ou <span class="math inline">\(V\)</span>, exprimées en pourcentage par rapport au risque de base <span class="math inline">\(p_{00}\)</span> sont respectivement :</p>
+<ul>
+<li><span class="math inline">\(ARR(X|V=0) = \frac{p_{10}-p_{00}}{p_{00}}= RR_{10}-1\)</span></li>
+<li>et <span class="math inline">\(ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1\)</span></li>
+</ul>
+<p>Une autre façon d’interpréter le “Synergie index” est d’indiquer que la différence liée à l’effet joint <span class="math inline">\(DR(X,V)\)</span> est égale à <span class="math inline">\(S\)</span> fois la somme des différences liées aux effets individuels <span class="math inline">\(DR(X|V=0) + DR(V|X=0)\)</span> :</p>
+<p><span class="math inline">\(\small S = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}\)</span></p>
 <p>Si le dénominateur est positif:</p>
 <ul>
-<li>si S &gt; 1, alors <span class="math inline">\(\small RERI_{RR}\)</span> &gt; 0</li>
-<li>si S &lt; 1, alors <span class="math inline">\(\small RERI_{RR}\)</span> &lt; 0</li>
+<li>si <span class="math inline">\(S &gt; 1\)</span>, alors <span class="math inline">\(\small AI &gt; 0\)</span> et <span class="math inline">\(\small RERI_{RR} &gt; 0\)</span></li>
+<li>si <span class="math inline">\(S &lt; 1\)</span>, alors <span class="math inline">\(\small AI &lt; 0\)</span> et <span class="math inline">\(\small RERI_{RR} &lt; 0\)</span></li>
 </ul>
-<p>L’interprétation de l’indice de synergie devient difficile dans les cas où l’effet de l’une des expositions est négatif et que le dénominateur de S est donc inférieur à 1.</p>
+<p>L’interprétation de l’indice de synergie devient difficile dans les cas où l’effet de l’une des expositions a un effet négatif et que le dénominateur de <span class="math inline">\(S\)</span> est inférieur à 1.</p>
 </div>
 <div id="proportion-attribuable-ap" class="section level3 hasAnchor" number="6.5.1">
 <h3><span class="header-section-number">6.5.1</span> Proportion attribuable (AP)<a href="param.html#proportion-attribuable-ap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
