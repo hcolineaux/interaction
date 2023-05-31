@@ -131,7 +131,11 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
+<<<<<<< HEAD
 \date{Last compiled on 31 May, 2023}
+=======
+\date{Last compiled on 31 mai, 2023}
+>>>>>>> 9b1ccf8e76a152f1ad6c22e53e1d3aac86c8cc11
 
 \begin{document}
 \maketitle
@@ -787,7 +791,7 @@ On a déjà défini un paramètre d'interaction sur l'échelle additive (AI) à 
 \begin{itemize}
 \tightlist
 \item
-  \(\small AI = DR(X\cap V) - (DR(X|V=0) + DR(V|X=0))\)
+  \(\small AI = DR(X, V) - [DR(X|V=0) + DR(V|X=0)]\)
 \item
   \(\small AI = (p_{11} - p_{00}) - [(p_{10} - p_{00}) + (p_{01} - p_{00})]\)
 \item
@@ -829,15 +833,16 @@ En général, la mesure \(\small MI_{OR}\) et \(\small MI_{RR}\) seront proches 
 
 Lorsque seulement les risques relatifs sont donnés mais que l'on souhaite évaluer l'interaction sur l'échelle additive, ``l'excès de risque du à l'interaction'' (RERI) ou ``interaction contrast ratio'' (ICR), peut être estimé à partir des risques relatifs \citet{vanderweele_tutorial_2014} :
 
-\begin{itemize}
-\tightlist
-\item
-  \(\small RERI = RR_{11} - RR_{10} - RR_{01} + 1\)
-\end{itemize}
+\begin{align*}\small
+RERI =& \frac{AI}{p_{00}} = \frac{p_{11} - p_{10} - p_{01} + p_{00}}{p_{00}}\\ 
+RERI =& RR_{11} - RR_{10} - RR_{01} + 1
+\end{align*}
 
-Il faut noter que, bien que le RERI donne la direction direction (positive, négative ou nulle) de l'interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l'ampleur de l'interaction additive, à moins de connaître au moins \(\small p_{00}\).
+On voit que le RERI correspond à l'interaction mesurée sur l'échelle additive, rapportée au risque de base \(p_{00}\).
 
-Si l'on a seulement l'OR et que l'outcome est rare, les OR peuvent approximé les RR, on a donc :
+Il faut noter que, bien que le RERI donne la direction (positive, négative ou nulle) de l'interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l'ampleur de l'interaction additive, à moins de connaître au moins \(\small p_{00}\).
+
+Si l'on a seulement l'OR et que l'outcome est rare, les OR peuvent approximer les RR, on a donc :
 
 \begin{itemize}
 \tightlist
@@ -848,7 +853,7 @@ Si l'on a seulement l'OR et que l'outcome est rare, les OR peuvent approximé le
 \hypertarget{autres}{%
 \section{Autres}\label{autres}}
 
-D'autres paramètres ont aussi été proposé \citet{vanderweele_tutorial_2014}, tels que :
+D'autres paramètres ont aussi été proposés \citet{vanderweele_tutorial_2014}, tels que :
 
 \hypertarget{le-synergie-index-si}{%
 \subsection*{Le ``Synergie index'' (SI)}\label{le-synergie-index-si}}
@@ -862,19 +867,37 @@ Il s'agit d'un paramètre explorant l'interaction additive :
   \(\small S = \frac{RR_{11} - 1}{(RR_{10} - 1) + (RR_{01}-1)}\).
 \end{itemize}
 
-Il mesure à quel point le rapport de risque joint dépasse 1, et si cette mesure est supérieure à la somme de ``à quel point'' les rapports de risque de chaque exposition dépasse 1.
+Il mesure l'augmentation relative du risque liée à l'exposition jointe, rapportée à la somme des augmentations relatives du risque liées à la 1ère et la 2ème exposition.
+
+Pour rappel, l'augmentation relative du risque liée à l'exposition jointe correspond à l'augmentation absolue du risque (différence de risque), exprimée en pourcentage par rapport au risque de base \(p_{00}\).
+
+\(ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)
+
+L'augmentation relative du risque liée à l'exposition \(X\) ou \(V\), exprimées en pourcentage par rapport au risque de base \(p_{00}\) sont respectivement :
+
+\begin{itemize}
+\tightlist
+\item
+  \(ARR(X|V=0) = \frac{p_{10}-p_{00}}{p_{00}}= RR_{10}-1\)
+\item
+  et \(ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1\)
+\end{itemize}
+
+Une autre façon d'interpréter le ``Synergie index'' est d'indiquer que la différence liée à l'effet joint \(DR(X,V)\) est égale à \(S\) fois la somme des différences liées aux effets individuels \(DR(X|V=0) + DR(V|X=0)\) :
+
+\(\small S = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}\)
 
 Si le dénominateur est positif:
 
 \begin{itemize}
 \tightlist
 \item
-  si S \textgreater{} 1, alors \(\small RERI_{RR}\) \textgreater{} 0
+  si \(S > 1\), alors \(\small AI > 0\) et \(\small RERI_{RR} > 0\)
 \item
-  si S \textless{} 1, alors \(\small RERI_{RR}\) \textless{} 0
+  si \(S < 1\), alors \(\small AI < 0\) et \(\small RERI_{RR} < 0\)
 \end{itemize}
 
-L'interprétation de l'indice de synergie devient difficile dans les cas où l'effet de l'une des expositions est négatif et que le dénominateur de S est donc inférieur à 1.
+L'interprétation de l'indice de synergie devient difficile dans les cas où l'effet de l'une des expositions a un effet négatif et que le dénominateur de \(S\) est inférieur à 1.
 
 \hypertarget{proportion-attribuable-ap}{%
 \subsection{Proportion attribuable (AP)}\label{proportion-attribuable-ap}}
