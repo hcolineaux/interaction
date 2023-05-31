@@ -218,7 +218,7 @@ div.csl-indent {
 <li class="chapter" data-level="7.1" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#recommendations"><i class="fa fa-check"></i><b>7.1</b> Recommendations</a>
 <ul>
 <li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#pour-une-analyse-dune-modification-deffet-de-a1-sur-y-par-a2"><i class="fa fa-check"></i>Pour une analyse d’une modification d’effet de A1 sur Y par A2</a></li>
-<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#interaction-a1.a2-sur-y"><i class="fa fa-check"></i>Interaction A1.A2 sur Y</a></li>
+<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#interaction-a1a2-sur-y"><i class="fa fa-check"></i>Interaction A1<span class="math inline">\(*\)</span>A2 sur Y</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#proposition"><i class="fa fa-check"></i><b>7.2</b> Proposition</a></li>
 </ul></li>
@@ -292,7 +292,7 @@ div.csl-indent {
 <ul>
 <li>Présenter les effectifs dans chaque catégorie
 <ul>
-<li>avec et sans l’outcome (<span class="math inline">\(\small N_{a1,a2}(Y=1) et N_{a1,a2}(Y=0)\)</span>)</li>
+<li>avec et sans l’outcome (<span class="math inline">\(\small N_{a1,a2}(Y=1)\)</span> et <span class="math inline">\(N_{a1,a2}(Y=0)\)</span>)</li>
 </ul></li>
 <li>Présenter les risques relatifs (RR), les OR ou les différences de risque (RD)
 <ul>
@@ -312,8 +312,8 @@ div.csl-indent {
 <li>Énumérez les facteurs de confusion pour lesquels la relation entre A1 et Y a été ajustée.</li>
 </ul>
 </div>
-<div id="interaction-a1.a2-sur-y" class="section level3 unnumbered hasAnchor">
-<h3>Interaction A1.A2 sur Y<a href="présentation-des-résultats.html#interaction-a1.a2-sur-y" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="interaction-a1a2-sur-y" class="section level3 unnumbered hasAnchor">
+<h3>Interaction A1<span class="math inline">\(*\)</span>A2 sur Y<a href="présentation-des-résultats.html#interaction-a1a2-sur-y" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Présenter les effectifs dans chaque catégorie
 <ul>
@@ -341,7 +341,8 @@ div.csl-indent {
 </div>
 <div id="proposition" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Proposition<a href="présentation-des-résultats.html#proposition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Dans la suite de ce document, nous proposons des résultats présentés selon une variante de ce que proposent Knol et VanderWeele. Nous proposons en effet :</p>
+<p>Ces recommandations sont très utiles lorsque les interactions ont été évaluées à partir de modèles de régression (logistiques, log-linéaires ou linéaires) permettant d’estimer directement des OR, des RR ou des DR, condionnellement aux facteurs de confusion.</p>
+<p>En inférence causale, des assocations marginales plutôt que conditionnelles sont souvent estimées (que ce soit en termes de difference de risque, de risques relatifs ou d’odds ratio). Dans la suite de ce document, nous proposons une variante des recommandations de Knol et VanderWeele, adaptée à des estimations marginales. Nous proposons en effet :</p>
 <ul>
 <li>De présenter les effets marginaux ou proportions prédites de Y dans chaque strate A1.A2,
 <ul>

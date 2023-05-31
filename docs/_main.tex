@@ -943,7 +943,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
   \begin{itemize}
   \tightlist
   \item
-    avec et sans l'outcome (\(\small N_{a1,a2}(Y=1) et N_{a1,a2}(Y=0)\))
+    avec et sans l'outcome (\(\small N_{a1,a2}(Y=1)\) et \(N_{a1,a2}(Y=0)\))
   \end{itemize}
 \item
   Présenter les risques relatifs (RR), les OR ou les différences de risque (RD)
@@ -979,9 +979,9 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
   Énumérez les facteurs de confusion pour lesquels la relation entre A1 et Y a été ajustée.
 \end{itemize}
 
-\hypertarget{interaction-a1.a2-sur-y}{%
-\subsection*{Interaction A1.A2 sur Y}\label{interaction-a1.a2-sur-y}}
-\addcontentsline{toc}{subsection}{Interaction A1.A2 sur Y}
+\hypertarget{interaction-a1a2-sur-y}{%
+\subsection*{\texorpdfstring{Interaction A1\(*\)A2 sur Y}{Interaction A1*A2 sur Y}}\label{interaction-a1a2-sur-y}}
+\addcontentsline{toc}{subsection}{Interaction A1\(*\)A2 sur Y}
 
 \begin{itemize}
 \tightlist
@@ -1032,7 +1032,9 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
 \hypertarget{proposition}{%
 \section{Proposition}\label{proposition}}
 
-Dans la suite de ce document, nous proposons des résultats présentés selon une variante de ce que proposent Knol et VanderWeele. Nous proposons en effet :
+Ces recommandations sont très utiles lorsque les interactions ont été évaluées à partir de modèles de régression (logistiques, log-linéaires ou linéaires) permettant d'estimer directement des OR, des RR ou des DR, condionnellement aux facteurs de confusion.
+
+En inférence causale, des assocations marginales plutôt que conditionnelles sont souvent estimées (que ce soit en termes de difference de risque, de risques relatifs ou d'odds ratio). Dans la suite de ce document, nous proposons une variante des recommandations de Knol et VanderWeele, adaptée à des estimations marginales. Nous proposons en effet :
 
 \begin{itemize}
 \tightlist
