@@ -11,6 +11,17 @@ Pour la description des différents types d'estimation, on a simulé des donnée
 
 > ![](img/Image10.png){width=50%}
 
+Les équations structurelles associées au DAG sont décrites ci-dessous, les paramètres correspondent aux paramètres renseignés dans le code de simulation.
+\begin{align*}
+\small P(L1 = 1) =& p_{L_1} \\
+\small P(L2 = 1) =& p_{L_2} \\
+\small P(L3 = 1) =& p_{L_3} \\
+\small P(A1 = 1 \mid L1, L2) =& \beta_{A_1} + \beta_{L_1,A_1} L1 + \beta_{L_2,A_1} L2 \\
+\small P(A2 = 1 \mid L1, L3) =& \beta_{A_2} + \beta_{L_1,A_2} L1 + \beta_{L_3,A_2} L3 \\
+\small P(Y = 1 \mid L1, L2, L3, A1, A2) =& \beta_{Y} + \beta_{L_1,Y} L1 + \beta_{L_2,Y} L2 + \beta_{L_3,Y} L3 \\
+                  & + \beta_{A_1,Y} A1 + \beta_{A_2,Y} A2 + \beta_{A_1 \ast A_2,Y} (A1 \ast A2)
+\end{align*}
+
 
 Le code ayant permis de simuler les données est le suivant :
 
@@ -40,25 +51,24 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 </script>
 
 
-
 ```{r simul, results ='hide', cache = TRUE}
   rm(list=ls())
 
-  param.causal.model <- function(p_L1 = 0.50, 
-                                 p_L2 = 0.20, 
-                                 p_L3 = 0.70,       # baseline confounders
-                                 b_A1 = 0.10, 
-                                 b_L1_A1 = 0.15, 
+  param.causal.model <- function(p_L1 = 0.50, # baseline confounders
+                                 p_L2 = 0.20, # baseline confounders
+                                 p_L3 = 0.70, # baseline confounders
+                                 b_A1 = 0.10,    # modèle de A1
+                                 b_L1_A1 = 0.15, # modèle de A1
                                  b_L2_A1 = 0.25, # modèle de A1
-                                 b_A2 = 0.15, 
-                                 b_L1_A2 = 0.20, 
+                                 b_A2 = 0.15,    # modèle de A2
+                                 b_L1_A2 = 0.20, # modèle de A2 
                                  b_L3_A2 = 0.20, # modèle de A2
                                  b_Y = 0.10,      # modèle de Y
-                                 b_L1_Y = 0.02,
-                                 b_L2_Y = 0.02,
-                                 b_L3_Y = -0.02,
-                                 b_A1_Y = 0.3,
-                                 b_A2_Y = 0.1,
+                                 b_L1_Y = 0.02,   # modèle de Y
+                                 b_L2_Y = 0.02,   # modèle de Y
+                                 b_L3_Y = -0.02,  # modèle de Y
+                                 b_A1_Y = 0.3,    # modèle de Y
+                                 b_A2_Y = 0.1,    # modèle de Y
                                  b_A1A2_Y = 0.4 ) { # <- effet d'interaction Delta)
 
   # coefficients pour simuler l'exposition
@@ -143,6 +153,8 @@ t %>%
 
 
 ```
+
+Les paramètres utilisés pour simuler les données ont été choisis de sorte que les "vraies" valeurs des paramètres de la distribution correspondent au tableau présenté au paragraphe \@ref(echelle) "Mesure des interactions".
 
 # A partir de modèles de régression {#regression}
 

@@ -293,6 +293,16 @@ div.csl-indent {
 <blockquote>
 <p><img src="img/Image10.png" style="width:50.0%" /></p>
 </blockquote>
+<p>Les équations structurelles associées au DAG sont décrites ci-dessous, les paramètres correspondent aux paramètres renseignés dans le code de simulation.
+<span class="math display">\[\begin{align*}
+\small P(L1 = 1) =&amp; p_{L_1} \\
+\small P(L2 = 1) =&amp; p_{L_2} \\
+\small P(L3 = 1) =&amp; p_{L_3} \\
+\small P(A1 = 1 \mid L1, L2) =&amp; \beta_{A_1} + \beta_{L_1,A_1} L1 + \beta_{L_2,A_1} L2 \\
+\small P(A2 = 1 \mid L1, L3) =&amp; \beta_{A_2} + \beta_{L_1,A_2} L1 + \beta_{L_3,A_2} L3 \\
+\small P(Y = 1 \mid L1, L2, L3, A1, A2) =&amp; \beta_{Y} + \beta_{L_1,Y} L1 + \beta_{L_2,Y} L2 + \beta_{L_3,Y} L3 \\
+                  &amp; + \beta_{A_1,Y} A1 + \beta_{A_2,Y} A2 + \beta_{A_1 \ast A_2,Y} (A1 \ast A2)
+\end{align*}\]</span></p>
 <p>Le code ayant permis de simuler les données est le suivant :</p>
 <script type="text/javascript">
 
@@ -320,21 +330,21 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 </script>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="simulations.html#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
 <span id="cb1-2"><a href="simulations.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="simulations.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  param.causal.model <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">p_L1 =</span> <span class="fl">0.50</span>, </span>
-<span id="cb1-4"><a href="simulations.html#cb1-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">p_L2 =</span> <span class="fl">0.20</span>, </span>
-<span id="cb1-5"><a href="simulations.html#cb1-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">p_L3 =</span> <span class="fl">0.70</span>,       <span class="co"># baseline confounders</span></span>
-<span id="cb1-6"><a href="simulations.html#cb1-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A1 =</span> <span class="fl">0.10</span>, </span>
-<span id="cb1-7"><a href="simulations.html#cb1-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L1_A1 =</span> <span class="fl">0.15</span>, </span>
+<span id="cb1-3"><a href="simulations.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  param.causal.model <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">p_L1 =</span> <span class="fl">0.50</span>, <span class="co"># baseline confounders</span></span>
+<span id="cb1-4"><a href="simulations.html#cb1-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">p_L2 =</span> <span class="fl">0.20</span>, <span class="co"># baseline confounders</span></span>
+<span id="cb1-5"><a href="simulations.html#cb1-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">p_L3 =</span> <span class="fl">0.70</span>, <span class="co"># baseline confounders</span></span>
+<span id="cb1-6"><a href="simulations.html#cb1-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A1 =</span> <span class="fl">0.10</span>,    <span class="co"># modèle de A1</span></span>
+<span id="cb1-7"><a href="simulations.html#cb1-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L1_A1 =</span> <span class="fl">0.15</span>, <span class="co"># modèle de A1</span></span>
 <span id="cb1-8"><a href="simulations.html#cb1-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L2_A1 =</span> <span class="fl">0.25</span>, <span class="co"># modèle de A1</span></span>
-<span id="cb1-9"><a href="simulations.html#cb1-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A2 =</span> <span class="fl">0.15</span>, </span>
-<span id="cb1-10"><a href="simulations.html#cb1-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L1_A2 =</span> <span class="fl">0.20</span>, </span>
+<span id="cb1-9"><a href="simulations.html#cb1-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A2 =</span> <span class="fl">0.15</span>,    <span class="co"># modèle de A2</span></span>
+<span id="cb1-10"><a href="simulations.html#cb1-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L1_A2 =</span> <span class="fl">0.20</span>, <span class="co"># modèle de A2 </span></span>
 <span id="cb1-11"><a href="simulations.html#cb1-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L3_A2 =</span> <span class="fl">0.20</span>, <span class="co"># modèle de A2</span></span>
 <span id="cb1-12"><a href="simulations.html#cb1-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_Y =</span> <span class="fl">0.10</span>,      <span class="co"># modèle de Y</span></span>
-<span id="cb1-13"><a href="simulations.html#cb1-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L1_Y =</span> <span class="fl">0.02</span>,</span>
-<span id="cb1-14"><a href="simulations.html#cb1-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L2_Y =</span> <span class="fl">0.02</span>,</span>
-<span id="cb1-15"><a href="simulations.html#cb1-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L3_Y =</span> <span class="sc">-</span><span class="fl">0.02</span>,</span>
-<span id="cb1-16"><a href="simulations.html#cb1-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A1_Y =</span> <span class="fl">0.3</span>,</span>
-<span id="cb1-17"><a href="simulations.html#cb1-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A2_Y =</span> <span class="fl">0.1</span>,</span>
+<span id="cb1-13"><a href="simulations.html#cb1-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L1_Y =</span> <span class="fl">0.02</span>,   <span class="co"># modèle de Y</span></span>
+<span id="cb1-14"><a href="simulations.html#cb1-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L2_Y =</span> <span class="fl">0.02</span>,   <span class="co"># modèle de Y</span></span>
+<span id="cb1-15"><a href="simulations.html#cb1-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_L3_Y =</span> <span class="sc">-</span><span class="fl">0.02</span>,  <span class="co"># modèle de Y</span></span>
+<span id="cb1-16"><a href="simulations.html#cb1-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A1_Y =</span> <span class="fl">0.3</span>,    <span class="co"># modèle de Y</span></span>
+<span id="cb1-17"><a href="simulations.html#cb1-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A2_Y =</span> <span class="fl">0.1</span>,    <span class="co"># modèle de Y</span></span>
 <span id="cb1-18"><a href="simulations.html#cb1-18" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">b_A1A2_Y =</span> <span class="fl">0.4</span> ) { <span class="co"># &lt;- effet d&#39;interaction Delta)</span></span>
 <span id="cb1-19"><a href="simulations.html#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="simulations.html#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficients pour simuler l&#39;exposition</span></span>
@@ -462,6 +472,7 @@ A1
 </tr>
 </tbody>
 </table>
+<p>Les paramètres utilisés pour simuler les données ont été choisis de sorte que les “vraies” valeurs des paramètres de la distribution correspondent au tableau présenté au paragraphe <a href="echelle.html#echelle">5</a> “Mesure des interactions”.</p>
 </div>
             </section>
 

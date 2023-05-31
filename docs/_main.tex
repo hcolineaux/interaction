@@ -1077,27 +1077,38 @@ Pour la description des différents types d'estimation, on a simulé des donnée
 \includegraphics[width=0.5\textwidth,height=\textheight]{img/Image10.png}
 \end{quote}
 
+Les équations structurelles associées au DAG sont décrites ci-dessous, les paramètres correspondent aux paramètres renseignés dans le code de simulation.
+\begin{align*}
+\small P(L1 = 1) =& p_{L_1} \\
+\small P(L2 = 1) =& p_{L_2} \\
+\small P(L3 = 1) =& p_{L_3} \\
+\small P(A1 = 1 \mid L1, L2) =& \beta_{A_1} + \beta_{L_1,A_1} L1 + \beta_{L_2,A_1} L2 \\
+\small P(A2 = 1 \mid L1, L3) =& \beta_{A_2} + \beta_{L_1,A_2} L1 + \beta_{L_3,A_2} L3 \\
+\small P(Y = 1 \mid L1, L2, L3, A1, A2) =& \beta_{Y} + \beta_{L_1,Y} L1 + \beta_{L_2,Y} L2 + \beta_{L_3,Y} L3 \\
+                  & + \beta_{A_1,Y} A1 + \beta_{A_2,Y} A2 + \beta_{A_1 \ast A_2,Y} (A1 \ast A2)
+\end{align*}
+
 Le code ayant permis de simuler les données est le suivant :
 
 \begin{Shaded}
 \begin{Highlighting}[]
   \FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{())}
 
-\NormalTok{  param.causal.model }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{p\_L1 =} \FloatTok{0.50}\NormalTok{, }
-                                 \AttributeTok{p\_L2 =} \FloatTok{0.20}\NormalTok{, }
-                                 \AttributeTok{p\_L3 =} \FloatTok{0.70}\NormalTok{,       }\CommentTok{\# baseline confounders}
-                                 \AttributeTok{b\_A1 =} \FloatTok{0.10}\NormalTok{, }
-                                 \AttributeTok{b\_L1\_A1 =} \FloatTok{0.15}\NormalTok{, }
+\NormalTok{  param.causal.model }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{p\_L1 =} \FloatTok{0.50}\NormalTok{, }\CommentTok{\# baseline confounders}
+                                 \AttributeTok{p\_L2 =} \FloatTok{0.20}\NormalTok{, }\CommentTok{\# baseline confounders}
+                                 \AttributeTok{p\_L3 =} \FloatTok{0.70}\NormalTok{, }\CommentTok{\# baseline confounders}
+                                 \AttributeTok{b\_A1 =} \FloatTok{0.10}\NormalTok{,    }\CommentTok{\# modèle de A1}
+                                 \AttributeTok{b\_L1\_A1 =} \FloatTok{0.15}\NormalTok{, }\CommentTok{\# modèle de A1}
                                  \AttributeTok{b\_L2\_A1 =} \FloatTok{0.25}\NormalTok{, }\CommentTok{\# modèle de A1}
-                                 \AttributeTok{b\_A2 =} \FloatTok{0.15}\NormalTok{, }
-                                 \AttributeTok{b\_L1\_A2 =} \FloatTok{0.20}\NormalTok{, }
+                                 \AttributeTok{b\_A2 =} \FloatTok{0.15}\NormalTok{,    }\CommentTok{\# modèle de A2}
+                                 \AttributeTok{b\_L1\_A2 =} \FloatTok{0.20}\NormalTok{, }\CommentTok{\# modèle de A2 }
                                  \AttributeTok{b\_L3\_A2 =} \FloatTok{0.20}\NormalTok{, }\CommentTok{\# modèle de A2}
                                  \AttributeTok{b\_Y =} \FloatTok{0.10}\NormalTok{,      }\CommentTok{\# modèle de Y}
-                                 \AttributeTok{b\_L1\_Y =} \FloatTok{0.02}\NormalTok{,}
-                                 \AttributeTok{b\_L2\_Y =} \FloatTok{0.02}\NormalTok{,}
-                                 \AttributeTok{b\_L3\_Y =} \SpecialCharTok{{-}}\FloatTok{0.02}\NormalTok{,}
-                                 \AttributeTok{b\_A1\_Y =} \FloatTok{0.3}\NormalTok{,}
-                                 \AttributeTok{b\_A2\_Y =} \FloatTok{0.1}\NormalTok{,}
+                                 \AttributeTok{b\_L1\_Y =} \FloatTok{0.02}\NormalTok{,   }\CommentTok{\# modèle de Y}
+                                 \AttributeTok{b\_L2\_Y =} \FloatTok{0.02}\NormalTok{,   }\CommentTok{\# modèle de Y}
+                                 \AttributeTok{b\_L3\_Y =} \SpecialCharTok{{-}}\FloatTok{0.02}\NormalTok{,  }\CommentTok{\# modèle de Y}
+                                 \AttributeTok{b\_A1\_Y =} \FloatTok{0.3}\NormalTok{,    }\CommentTok{\# modèle de Y}
+                                 \AttributeTok{b\_A2\_Y =} \FloatTok{0.1}\NormalTok{,    }\CommentTok{\# modèle de Y}
                                  \AttributeTok{b\_A1A2\_Y =} \FloatTok{0.4}\NormalTok{ ) \{ }\CommentTok{\# \textless{}{-} effet d\textquotesingle{}interaction Delta)}
 
   \CommentTok{\# coefficients pour simuler l\textquotesingle{}exposition}
@@ -1170,6 +1181,8 @@ A2 & label & levels & value\\
 \end{tabular}
 \endgroup{}
 \end{table}
+
+Les paramètres utilisés pour simuler les données ont été choisis de sorte que les ``vraies'' valeurs des paramètres de la distribution correspondent au tableau présenté au paragraphe \ref{echelle} ``Mesure des interactions''.
 
 \hypertarget{regression}{%
 \chapter{A partir de modèles de régression}\label{regression}}
