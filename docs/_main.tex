@@ -131,7 +131,11 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
+<<<<<<< HEAD
+\date{Last compiled on 31 May, 2023}
+=======
 \date{Last compiled on 31 mai, 2023}
+>>>>>>> 9b1ccf8e76a152f1ad6c22e53e1d3aac86c8cc11
 
 \begin{document}
 \maketitle
@@ -2735,7 +2739,7 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
 \chapter{Exemple 2 - Y quantitatif}\label{exemple-2---y-quantitatif}}
 
 \hypertarget{formuler-les-objectifs}{%
-\section{1. Formuler les objectifs}\label{formuler-les-objectifs}}
+\section{Formuler les objectifs}\label{formuler-les-objectifs}}
 
 Dans cette étude \citet{colineaux2023explaining}, on s'est intéressé à :
 
@@ -2754,7 +2758,7 @@ On va donc devoir à la fois agir sur le sexe \(\small do(S)\) et sur la défavo
 Donc la démarche, en fait, sera plutôt une analyse d'interaction \(\small do(S,D)\)
 
 \hypertarget{stratuxe9gies-et-muxe9thodes}{%
-\section{2. Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes}}
+\section{Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes}}
 
 \textbf{Le DAG} (sans les médiateurs) était :
 
@@ -2797,7 +2801,7 @@ A partir des fonctions \(\small \overline{Q}(S, D)\) estimées, nous avons préd
 Ces modèles\(\small \overline{Q}(S, D)\) vont comprendre 2 variables : le sexe et la défavorisation sociale précoce (il n'y a pas ici de facteurs de confusion).
 
 \hypertarget{analyse-descriptive}{%
-\section{3.Analyse descriptive}\label{analyse-descriptive}}
+\section{Analyse descriptive}\label{analyse-descriptive}}
 
 Dans cette population (N=17 272), il y avait 51,4\% d'hommes et 60,5\% de personnes ayant été précocement défavorisées.
 
@@ -2821,7 +2825,7 @@ Female & Oui & 3.37\\
 \end{table}
 
 \hypertarget{analyse-exploratoire}{%
-\section{4.Analyse exploratoire}\label{analyse-exploratoire}}
+\section{Analyse exploratoire}\label{analyse-exploratoire}}
 
 La sortie d'une modèle linéaire simple serait :
 
@@ -2830,10 +2834,6 @@ La sortie d'une modèle linéaire simple serait :
 \CommentTok{\# Call:}
 \CommentTok{\# lm(formula = t8\_ldl \textasciitilde{} as.factor(sex) + as.factor(soc\_group) + }
 \CommentTok{\#     as.factor(sex) * as.factor(soc\_group), data = ba\_1)}
-\CommentTok{\# }
-\CommentTok{\# Residuals:}
-\CommentTok{\#     Min      1Q  Median      3Q     Max }
-\CommentTok{\# {-}3.1996 {-}0.6427 {-}0.0688  0.5318  4.6312 }
 \CommentTok{\# }
 \CommentTok{\# Coefficients:}
 \CommentTok{\#                                             Estimate Std. Error t value Pr(\textgreater{}|t|)    }
@@ -2844,9 +2844,6 @@ La sortie d'une modèle linéaire simple serait :
 \CommentTok{\# {-}{-}{-}}
 \CommentTok{\# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1}
 \CommentTok{\# }
-\CommentTok{\# Residual standard error: 0.9194 on 17268 degrees of freedom}
-\CommentTok{\# Multiple R{-}squared:  0.0231,  Adjusted R{-}squared:  0.02293 }
-\CommentTok{\# F{-}statistic: 136.1 on 3 and 17268 DF,  p{-}value: \textless{} 2.2e{-}16}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2903,7 +2900,7 @@ On pourrait aussi déduire :
 \end{itemize}
 
 \hypertarget{analyse-confirmatoire}{%
-\section{5.Analyse confirmatoire}\label{analyse-confirmatoire}}
+\section{Analyse confirmatoire}\label{analyse-confirmatoire}}
 
 Si l'on utilise le \href{https://github.com/benoitlepage/MargIntTmle}{package proposé par B Lepage} pour réaliser cet analyse avec la TMLE (effets d'intéraction calculés à partir des paramètres d'une modèle structurel marginal estimé à l'aide du package R ltmle), les résultats sont :
 
@@ -2944,6 +2941,97 @@ En réalité, on a réalisé cette analyse par g-computation (voir chapitre \ref
 
 \hypertarget{exemple-4---x-quantitatif}{%
 \chapter{Exemple 4 - X quantitatif}\label{exemple-4---x-quantitatif}}
+
+\hypertarget{formuler-les-objectifs-1}{%
+\section{Formuler les objectifs}\label{formuler-les-objectifs-1}}
+
+Dans cette étude fictive, on s'est intéressé à la consommation de cannabis et comment le fait d'avoir déjà fumer du cannabis varie avec l'âge A et le sexe S.
+
+La démarche est explicative : on cherche à comprendre des mécanismes causaux.
+
+Ici, on adoptera une démarche d'analyse d'interaction \(\small do(S,A)\)
+
+\hypertarget{stratuxe9gies-et-muxe9thodes-1}{%
+\section{Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes-1}}
+
+\textbf{Le DAG} (sans les médiateurs) était :
+
+\textbf{L'estimand} était défini par :
+
+\textbf{L'estimateur} :
+
+\hypertarget{analyse-descriptive-1}{%
+\section{Analyse descriptive}\label{analyse-descriptive-1}}
+
+Dans cette population (N=202 768), il y avait 53,7\% d'hommes et la moyenne d'âge était de 47,1 ans.
+
+On peut commencer par décrire la proportion de personnes ayant déjà fumé du cannabis par sexe et classe d'âge :
+
+\begin{table}
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+Sexe & Age & P(Cannabis), \%\\
+\hline
+Male & 20- & 51,1\\
+\hline
+Male & ]20 à 40] & 66,3\\
+\hline
+Male & ]40 à 60] & 40,4\\
+\hline
+Male & 60+ & 12,1\\
+\hline
+Female & 20- & 44,2\\
+\hline
+Female & ]20 à 40] & 52,7\\
+\hline
+Female & ]40 à 60] & 26,7\\
+\hline
+Female & 60+ & 12,1\\
+\hline
+\end{tabular}
+\end{table}
+
+Il semble y avoir une interaction entre l'âge et le sexe sur la probabilité d'avoir déjà fumé du cannabis. Cependant, la relation entre l'âge et l'outcome ne semble pas linéaire, ce qui est confirmé graphiquement :
+
+\includegraphics[width=0.8\textwidth,height=\textheight]{img/graph_Xquanti_1.png}
+
+Pour simplifier les analyses, nous n'allons inclure que les plus de 30 ans (N = 177 940), pour lesquels la relation est linéaire :
+
+\includegraphics[width=0.8\textwidth,height=\textheight]{img/graph_Xquanti_2.png}
+
+La sortie d'une modèle linéaire simple serait :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# }
+\CommentTok{\# Call:}
+\CommentTok{\# lm(formula = cannabis \textasciitilde{} sexe + age + sexe * age, data = data)}
+\CommentTok{\# }
+\CommentTok{\# Coefficients:}
+\CommentTok{\#                 Estimate Std. Error t value Pr(\textgreater{}|t|)    }
+\CommentTok{\# (Intercept)    1.3197103  0.0066820  197.50   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen     {-}0.3373482  0.0091573  {-}36.84   \textless{}2e{-}16 ***}
+\CommentTok{\# age           {-}0.0183730  0.0001294 {-}142.03   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen:age  0.0044248  0.0001781   24.85   \textless{}2e{-}16 ***}
+\CommentTok{\# {-}{-}{-}}
+\CommentTok{\# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1}
+\end{Highlighting}
+\end{Shaded}
+
+On peut en déduire (échelle additive) que :
+
+L'outcome étant binaire, il est plus classique d'utiliser un modèle logistique, dont les résultats (en odds ratio) seraient :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#                       OR      2.5 \%     97.5 \%}
+\CommentTok{\# (Intercept)   50.1220409 46.5985990 53.9259952}
+\CommentTok{\# sexeWomen      0.3120878  0.2822910  0.3450107}
+\CommentTok{\# age            0.9154927  0.9141333  0.9168485}
+\CommentTok{\# sexeWomen:age  1.0117927  1.0096884  1.0139018}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{part-conclusion}{%
 \part{Conclusion}\label{part-conclusion}}

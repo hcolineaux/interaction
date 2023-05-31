@@ -51,7 +51,7 @@ output:
 
 # Exemple 2 - Y quantitatif
 
-## 1. Formuler les objectifs 
+## Formuler les objectifs 
 
 Dans cette étude @colineaux2023explaining, on s'est intéressé à :
 
@@ -64,7 +64,7 @@ A partir de la formulation des objectifs, on pourrait dire qu'on s'intéresse ic
 On va donc devoir à la fois agir sur le sexe $\small do(S)$ et sur la défavorisation sociale $\small do(D)$.
 Donc la démarche, en fait, sera plutôt une analyse d'interaction $\small do(S,D)$
 
-## 2. Stratégies et méthodes 
+## Stratégies et méthodes 
 
 **Le DAG** (sans les médiateurs) était : 
 
@@ -87,7 +87,7 @@ Des régressions linéaires ont été utilisées pour estimer les *potential out
 A partir des fonctions $\small \overline{Q}(S, D)$ estimées, nous avons prédit la valeur de l’outcome Y pour chaque individu i pour chaque scénario. Les valeurs moyennes de Y dans chaque scénario vont ensuite nous permettre d'estimer les estimands selon leurs définitions précisées ci-dessus.
 Ces modèles$\small \overline{Q}(S, D)$ vont comprendre 2 variables : le sexe et la défavorisation sociale précoce (il n'y a pas ici de facteurs de confusion). 
 
-## 3.Analyse descriptive
+## Analyse descriptive
 
 Dans cette population (N=17 272), il y avait 51,4% d'hommes et 60,5% de personnes ayant été précocement défavorisées.
 
@@ -106,7 +106,7 @@ cbind(Sexe = c("Male", "Male", "Female", "Female"),
 
 ```
 
-## 4.Analyse exploratoire
+## Analyse exploratoire
 
 La sortie d'une modèle linéaire simple serait :
 
@@ -115,10 +115,6 @@ La sortie d'une modèle linéaire simple serait :
 # Call:
 # lm(formula = t8_ldl ~ as.factor(sex) + as.factor(soc_group) + 
 #     as.factor(sex) * as.factor(soc_group), data = ba_1)
-# 
-# Residuals:
-#     Min      1Q  Median      3Q     Max 
-# -3.1996 -0.6427 -0.0688  0.5318  4.6312 
 # 
 # Coefficients:
 #                                             Estimate Std. Error t value Pr(>|t|)    
@@ -129,10 +125,6 @@ La sortie d'une modèle linéaire simple serait :
 # ---
 # Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 # 
-# Residual standard error: 0.9194 on 17268 degrees of freedom
-# Multiple R-squared:  0.0231,	Adjusted R-squared:  0.02293 
-# F-statistic: 136.1 on 3 and 17268 DF,  p-value: < 2.2e-16
-
 ```
 
 
@@ -157,7 +149,7 @@ On pourrait aussi déduire :
   - $\small Y_{11} = 3.243 + 0.326 + 0.126 - 0.095 =$ `r round(3.243 + 0.326 + 0.126 - 0.095,2)` mmol/L
   
 
-## 5.Analyse confirmatoire 
+## Analyse confirmatoire 
 
 Si l'on utilise le [package proposé par B Lepage](https://github.com/benoitlepage/MargIntTmle) pour réaliser cet analyse avec la TMLE (effets d'intéraction calculés à partir des paramètres d'une modèle structurel marginal estimé à l'aide du package R ltmle), les résultats sont : 
 
@@ -193,4 +185,88 @@ En réalité, on a réalisé cette analyse par g-computation (voir chapitre \@re
 # Exemple 3 - Y multinomial
 
 # Exemple 4 - X quantitatif
+
+
+## Formuler les objectifs 
+
+Dans cette étude fictive, on s'est intéressé à la consommation de cannabis et comment le fait d'avoir déjà fumer du cannabis varie avec l'âge A et le sexe S. 
+
+La démarche est explicative : on cherche à comprendre des mécanismes causaux.
+
+Ici, on adoptera une démarche d'analyse d'interaction $\small do(S,A)$
+
+## Stratégies et méthodes 
+
+**Le DAG** (sans les médiateurs) était : 
+
+
+**L'estimand** était défini par : 
+
+
+**L'estimateur** :
+
+
+## Analyse descriptive
+
+Dans cette population (N=202 768), il y avait 53,7% d'hommes et la moyenne d'âge était de 47,1 ans.
+
+On peut commencer par décrire la proportion de personnes ayant déjà fumé du cannabis par sexe et classe d'âge : 
+
+
+```{r ex_Xquant_desc, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(kableExtra)
+
+cbind(Sexe = c("Male", "Male", "Male", "Male","Female", "Female","Female", "Female"), 
+      "Age" = c("20-", "]20 à 40]", "]40 à 60]", "60+","20-", "]20 à 40]", "]40 à 60]", "60+"), 
+      "P(Cannabis), %" = c("51,1","66,3","40,4","12,1", "44,2","52,7","26,7","12,1")) %>%
+  as.data.frame %>% 
+      kbl() %>%
+      kable_classic() 
+
+```
+
+Il semble y avoir une interaction entre l'âge et le sexe sur la probabilité d'avoir déjà fumé du cannabis. Cependant, la relation entre l'âge et l'outcome ne semble pas linéaire, ce qui est confirmé graphiquement : 
+
+![](img/graph_Xquanti_1.png){width=80%}
+
+
+Pour simplifier les analyses, nous n'allons inclure que les plus de 30 ans (N = 177 940), pour lesquels la relation est linéaire :
+
+![](img/graph_Xquanti_2.png){width=80%}
+
+La sortie d'une modèle linéaire simple serait :
+
+```{r ex_Xquant_expl, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+# 
+# Call:
+# lm(formula = cannabis ~ sexe + age + sexe * age, data = data)
+# 
+# Coefficients:
+#                 Estimate Std. Error t value Pr(>|t|)    
+# (Intercept)    1.3197103  0.0066820  197.50   <2e-16 ***
+# sexeWomen     -0.3373482  0.0091573  -36.84   <2e-16 ***
+# age           -0.0183730  0.0001294 -142.03   <2e-16 ***
+# sexeWomen:age  0.0044248  0.0001781   24.85   <2e-16 ***
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+```
+
+
+On peut en déduire (échelle additive) que : 
+
+
+L'outcome étant binaire, il est plus classique d'utiliser un modèle logistique, dont les résultats (en odds ratio) seraient : 
+
+```{r ex_Xquant_expl_glm, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+
+#                       OR      2.5 %     97.5 %
+# (Intercept)   50.1220409 46.5985990 53.9259952
+# sexeWomen      0.3120878  0.2822910  0.3450107
+# age            0.9154927  0.9141333  0.9168485
+# sexeWomen:age  1.0117927  1.0096884  1.0139018
+
+```
+
 
