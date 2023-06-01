@@ -2965,9 +2965,45 @@ Ici, on adoptera une démarche d'analyse d'interaction \(\small do(S,A)\)
 
 \textbf{Le DAG} (sans les médiateurs) était :
 
-\textbf{L'estimand} était défini par :
+\begin{quote}
+\includegraphics[width=0.5\textwidth,height=\textheight]{img/Image14.png}
+\end{quote}
 
-\textbf{L'estimateur} :
+\textbf{Les estimands} était définis par :
+
+\begin{itemize}
+\tightlist
+\item
+  L'effet de l'âge (``avoir 10 ans de plus'') chez les hommes
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\small DR = Y_{S=0,A=a+10} - Y_{S=0,A=a}\)
+  \item
+    \(\small RR = \frac{Y_{S=0,A=a+10}}{Y_{S=0,A=a}}\)
+  \end{itemize}
+\item
+  L'effet de l'âge (``avoir 10 ans de plus'') chez les femmes :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\small DR = Y_{S=1,A=a+10} - Y_{S=1,A=a}\)
+  \item
+    \(\small RR = \frac{Y_{S=1,A=a+10}}{Y_{S=1,A=a}}\)
+  \end{itemize}
+\item
+  L'effet d'interaction entre l'âge et le sexe (l'effet du sexe est-il différent en fonction de l'âge et l'effet de l'âge est-il différent en fonction du sexe ?)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    sur l'échelle additive : \(\small AI = Y_{S=1,A=a+10} - Y_{S=0,A=a+10} - Y_{S=1,A=a} + Y_{S=0,A=a+10}\)
+  \item
+    sur l'échelle multiplicative : \(\small MI =\frac{Y_{S=1,A=a+10} \times Y_{S=0,A=a}}{Y_{S=1,A=a} \times Y_{S=0,A=a+10}}\)
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{analyse-descriptive-1}{%
 \section{Analyse descriptive}\label{analyse-descriptive-1}}
@@ -3022,10 +3058,10 @@ La sortie d'une modèle linéaire simple serait :
 \CommentTok{\# }
 \CommentTok{\# Coefficients:}
 \CommentTok{\#                 Estimate Std. Error t value Pr(\textgreater{}|t|)    }
-\CommentTok{\# (Intercept)    1.3270453  0.0068655  193.29   \textless{}2e{-}16 ***}
-\CommentTok{\# sexeWomen     {-}0.3362871  0.0094614  {-}35.54   \textless{}2e{-}16 ***}
-\CommentTok{\# age           {-}0.0185252  0.0001335 {-}138.78   \textless{}2e{-}16 ***}
-\CommentTok{\# sexeWomen:age  0.0044007  0.0001853   23.75   \textless{}2e{-}16 ***\# {-}{-}{-}}
+\CommentTok{\# (Intercept)    1.3197103  0.0066820  197.50   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen     {-}0.3373482  0.0091573  {-}36.84   \textless{}2e{-}16 ***}
+\CommentTok{\# age           {-}0.0183730  0.0001294 {-}142.03   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen:age  0.0044248  0.0001781   24.85   \textless{}2e{-}16 ***}
 \CommentTok{\# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1}
 \end{Highlighting}
 \end{Shaded}
@@ -3040,9 +3076,9 @@ On peut en déduire (échelle additive) que :
   \begin{itemize}
   \tightlist
   \item
-    ``A 0 ans'' (à l'origine) : \(\small DR(S|A=0) = -33,63\)\%
+    ``A 0 ans'' (à l'origine) : \(\small DR(S|A=0) = -33,73\)\%
   \item
-    A 40 ans (par exemple) : \(\small DR(S|A=40) = -33,63 + 0,44 \times 40 =\) -16\%
+    A 40 ans (par exemple) : \(\small DR(S|A=40) = -33,73 + 0,44 \times 40 =\) -16.1\%
   \end{itemize}
 \item
   L'effet de l'age est :
@@ -3050,9 +3086,9 @@ On peut en déduire (échelle additive) que :
   \begin{itemize}
   \tightlist
   \item
-    Quand on est un homme : \(\small DR(A|S=0) = -1,85\) \% par année d'âge
+    Quand on est un homme : \(\small DR(A|S=0) = -1,84\) \% par année d'âge
   \item
-    Quand on est une femme : \(\small DR(A|S=1) = -1,85 + 0.44 =\) -1.4 \% par année d'âge
+    Quand on est une femme : \(\small DR(A|S=1) = -1,84 + 0.44 =\) -1.4 \% par année d'âge
   \end{itemize}
 \item
   L'effet d'être une femme et d'avoir 1 an de plus
@@ -3062,7 +3098,7 @@ On peut en déduire (échelle additive) que :
   \item
     plutot que homme et un certain âge
   \item
-    \(\small DR(A,S) = -33,63 -1,85 + 0,44 =\) -35.1 \%
+    \(\small DR(A,S) = -33,73 -1,84 + 0,44 =\) -35.1 \%
   \end{itemize}
 \item
   \textbf{L'effet d'interaction/modification d'effet} est : \(\small AI = +0.44\) \%
@@ -3073,13 +3109,13 @@ On pourrait aussi déduire :
 \begin{itemize}
 \tightlist
 \item
-  \(\small Y_{S=0,A=30} = 132,7 - 1,85 \times 30 =\) 77.2\%
+  \(\small Y_{S=0,A=30} = 131,97 - 1,84 \times 30 =\) 76.8\%
 \item
-  \(\small Y_{S=0,A=50} = 132,7 - 1,85 \times 50 =\) 40.2\%
+  \(\small Y_{S=0,A=50} = 131,97 - 1,84 \times 50 =\) 40\%
 \item
-  \(\small Y_{S=1,A=30} = 132,7 -33,63 - 1,85 \times 30 + 0,44 \times 30 =\) 56.8\%
+  \(\small Y_{S=1,A=30} = 131,97 -33,73 - 1,84 \times 30 + 0,44 \times 30 =\) 56.2\%
 \item
-  \(\small Y_{S=1,A=50} = 132,7 -33,63 - 1,85 \times 50 + 0,44 \times 50 =\) 28.6\%
+  \(\small Y_{S=1,A=50} = 131,97 -33,73 - 1,84 \times 50 + 0,44 \times 50 =\) 28.2\%
 \end{itemize}
 
 \hypertarget{analyse-exploratoire-2}{%
@@ -3095,10 +3131,10 @@ L'outcome étant binaire, il est plus classique d'utiliser un modèle logistique
 \CommentTok{\# }
 \CommentTok{\# Coefficients:}
 \CommentTok{\#                 Estimate Std. Error z value Pr(\textgreater{}|z|)    }
-\CommentTok{\# (Intercept)    3.9524082  0.0382785  103.25   \textless{}2e{-}16 ***}
-\CommentTok{\# sexeWomen     {-}1.1787828  0.0528351  {-}22.31   \textless{}2e{-}16 ***}
-\CommentTok{\# age           {-}0.0891173  0.0007808 {-}114.14   \textless{}2e{-}16 ***}
-\CommentTok{\# sexeWomen:age  0.0120384  0.0011038   10.91   \textless{}2e{-}16 ***}
+\CommentTok{\# (Intercept)    3.9144609  0.0372560  105.07   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen     {-}1.1644706  0.0511834  {-}22.75   \textless{}2e{-}16 ***}
+\CommentTok{\# age           {-}0.0882928  0.0007566 {-}116.70   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen:age  0.0117238  0.0010623   11.04   \textless{}2e{-}16 ***}
 \CommentTok{\# {-}{-}{-}}
 \CommentTok{\# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1}
 \end{Highlighting}
@@ -3109,10 +3145,10 @@ Ce qui, en terme d'OR, donnerait :
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#                       OR      2.5 \%     97.5 \%}
-\CommentTok{\# (Intercept)   52.0605878 48.3044121 56.1245459}
-\CommentTok{\# sexeWomen      0.3076530  0.2773804  0.3412112}
-\CommentTok{\# age            0.9147383  0.9133364  0.9161362}
-\CommentTok{\# sexeWomen:age  1.0121112  1.0099239  1.0143033}
+\CommentTok{\# (Intercept)   50.1220409 46.5985990 53.9259952}
+\CommentTok{\# sexeWomen      0.3120878  0.2822910  0.3450107}
+\CommentTok{\# age            0.9154927  0.9141333  0.9168485}
+\CommentTok{\# sexeWomen:age  1.0117927  1.0096884  1.0139018}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3126,9 +3162,9 @@ Ce qui, en terme d'OR, donnerait :
   \item
     ``A 0 ans'' (à l'origine) : \(\small OR(S|A=0) = \times 0.31\)
   \item
-    ``A 1 ans'' : \(\small OR(S|A=1) = \times 0.31 + 0,012 = \times\) 0.3
+    ``A 1 ans'' : \(\small OR(S|A=1) = exp(-1,164 + 0,012) \times\) 0.3
   \item
-    A 40 ans (par exemple) : \(\small OR(S|A=40) = exp(-1,179 + 0,012 \times 40) = \times\) 0.5
+    A 40 ans (par exemple) : \(\small OR(S|A=40) = exp(-1,164 + 0,012 \times 40) = \times\) 0.5
   \end{itemize}
 \item
   L'effet de l'age est :
@@ -3136,9 +3172,9 @@ Ce qui, en terme d'OR, donnerait :
   \begin{itemize}
   \tightlist
   \item
-    Quand on est un homme : \(\small OR(A|S=0) = \times 0,91\) par année d'âge
+    Quand on est un homme : \(\small OR(A|S=0) = \times 0,92\) par année d'âge
   \item
-    Quand on est une femme : \(\small OR(A|S=1) = exp(-0,089 + 0,012) = \times\) 0.9 par année d'âge
+    Quand on est une femme : \(\small OR(A|S=1) = exp(-0,088 + 0,012) = \times\) 0.9 par année d'âge
   \end{itemize}
 \item
   L'effet d'être une femme et d'avoir 1 an de plus
@@ -3148,7 +3184,7 @@ Ce qui, en terme d'OR, donnerait :
   \item
     plutot que homme ``et 0 ans''
   \item
-    \(\small OR(A,S) = exp(-1,179 -0,089 + 0,012) = \times\) 0.3
+    \(\small OR(A,S) = exp(-1,164 -0,088 + 0,012) = \times\) 0.3
   \end{itemize}
 \item
   \textbf{L'effet d'interaction/modification d'effet} est : \(\small MI =\times 1,01\)
@@ -3161,17 +3197,292 @@ On pourrait aussi déduire :
 \begin{itemize}
 \tightlist
 \item
-  \(\small Y_{S=0,A=30} = \frac{exp(3,952 - 0,089 \times 30)}{1+exp(3,952 - 0,089 \times 30)} =\) 78.3\%
+  \(\small Y_{S=0,A=30} = \frac{exp(3,914 - 0,088 \times 30)}{1+exp(3,914 - 0,088 \times 30)} =\) 78.1\%
 \item
-  \(\small Y_{S=0,A=50} = \frac{exp(3,952 - 0,089 \times 50)}{1+exp(3,952 - 0,089 \times 50)} =\) 37.8\%
+  \(\small Y_{S=0,A=50} = \frac{exp(3,914 - 0,088 \times 50)}{1+exp(3,914 - 0,088 \times 50)} =\) 38.1\%
 \item
-  \(\small Y_{S=1,A=30} = \frac{exp(3,952 - 1,179 - 0,089 \times 30 + 0,012 \times 30)}{1+exp(3,952 - 1,179 - 0,089 \times 30 + 0,012 \times 30)} =\) 61.4\%
+  \(\small Y_{S=1,A=30} = \frac{exp(3,914 - 1,164 - 0,088 \times 30 + 0,012 \times 30)}{1+exp(3,914 - 1,164 - 0,088 \times 30 + 0,012 \times 30)} =\) 61.5\%
 \item
-  \(\small Y_{S=1,A=50} = \frac{exp(3,952 - 1,179 - 0,089 \times 50 + 0,012 \times 50)}{1+exp(3,952 - 1,179 - 0,089 \times 50 + 0,012 \times 50)} =\) 25.4\%
+  \(\small Y_{S=1,A=50} = \frac{exp(3,914 - 1,164 - 0,088 \times 50 + 0,012 \times 50)}{1+exp(3,914 - 1,164 - 0,088 \times 50 + 0,012 \times 50)} =\) 25.9\%
 \end{itemize}
 
 \hypertarget{analyse-confirmatoire-1}{%
-\section{Analyse confirmatoire}\label{analyse-confirmatoire-1}}
+\section{Analyse confirmatoire (1)}\label{analyse-confirmatoire-1}}
+
+Nous avons calculé les effets d'intérêt avec une méthode de g-computation (Intervalles de confiance estimé par bootstrap, 200 répétitions). Le modèle utilisé était un modèle de régression logistique.
+
+\hypertarget{par-intervalle-30-uxe0-40-ans-40-uxe0-50-ans-50-uxe0-60-ans}{%
+\subsection*{Par intervalle (30 à 40 ans, 40 à 50 ans, 50 à 60 ans)}\label{par-intervalle-30-uxe0-40-ans-40-uxe0-50-ans-50-uxe0-60-ans}}
+\addcontentsline{toc}{subsection}{Par intervalle (30 à 40 ans, 40 à 50 ans, 50 à 60 ans)}
+
+Le code était :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+     \DocumentationTok{\#\# g conputation avec modèle logistique {-}{-}{-}{-}{-}}
+     
+\NormalTok{     B}\OtherTok{=}\DecValTok{200}
+     
+\NormalTok{     simu.base }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{i.simu=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{B))}
+     
+     
+     \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B)\{ }
+       \CommentTok{\# sample the indices 1 to n with replacement}
+\NormalTok{       bootIndices }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(data), }\AttributeTok{replace=}\NormalTok{T) ; }\FunctionTok{set.seed}\NormalTok{(}\DecValTok{01062023}\SpecialCharTok{+}\NormalTok{i}\SpecialCharTok{*}\DecValTok{12}\NormalTok{)}
+\NormalTok{       bootData }\OtherTok{\textless{}{-}}\NormalTok{ data[bootIndices,]}
+       
+\NormalTok{       Q.model }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\AttributeTok{data=}\NormalTok{bootData, }
+                      \AttributeTok{formula =}\NormalTok{ cannabis }\SpecialCharTok{\textasciitilde{}}\NormalTok{ sexe}\SpecialCharTok{+}\NormalTok{ age}\SpecialCharTok{+}\NormalTok{  sexe}\SpecialCharTok{*}\NormalTok{age,}
+                      \AttributeTok{family =}\NormalTok{ binomial)}
+       
+       \CommentTok{\# Scénarios \#}
+\NormalTok{       data.S1 }\OtherTok{\textless{}{-}}\NormalTok{  data.S2 }\OtherTok{\textless{}{-}}\NormalTok{ bootData}
+\NormalTok{       data.S1}\SpecialCharTok{$}\NormalTok{sexe }\OtherTok{\textless{}{-}} \StringTok{"Women"}
+\NormalTok{       data.S2}\SpecialCharTok{$}\NormalTok{sexe }\OtherTok{\textless{}{-}} \StringTok{"Men"}
+\NormalTok{       data.S1A30 }\OtherTok{\textless{}{-}}\NormalTok{  data.S1A40 }\OtherTok{\textless{}{-}}\NormalTok{ data.S1A50 }\OtherTok{\textless{}{-}}\NormalTok{ data.S1A60 }\OtherTok{\textless{}{-}}\NormalTok{ data.S1}
+\NormalTok{       data.S2A30 }\OtherTok{\textless{}{-}}\NormalTok{  data.S2A40 }\OtherTok{\textless{}{-}}\NormalTok{ data.S2A50 }\OtherTok{\textless{}{-}}\NormalTok{ data.S2A60 }\OtherTok{\textless{}{-}}\NormalTok{ data.S2}
+\NormalTok{       data.S1A30}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}}\NormalTok{ data.S2A30}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{       data.S1A40}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}}\NormalTok{ data.S2A40}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}} \DecValTok{40}
+\NormalTok{       data.S1A50}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}}\NormalTok{ data.S2A50}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}} \DecValTok{50}
+\NormalTok{       data.S1A60}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}}\NormalTok{ data.S2A60}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}} \DecValTok{60}
+       
+\NormalTok{       bootData}\SpecialCharTok{$}\NormalTok{dead.S1A30.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.S1A30, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.S1A40, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.S1A50, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       bootData}\SpecialCharTok{$}\NormalTok{dead.S1A60.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.S1A60, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       bootData}\SpecialCharTok{$}\NormalTok{dead.S2A30.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.S2A30, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.S2A40, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.S2A50, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       bootData}\SpecialCharTok{$}\NormalTok{dead.S2A60.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.S2A60, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est.Y0\_30[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A30.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est.Y0\_40[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est.Y0\_50[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est.Y0\_60[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A60.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est.Y1\_30[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A30.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est.Y1\_40[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est.Y1\_50[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est.Y1\_60[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A60.pred),}\DecValTok{4}\NormalTok{)}
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S\_30[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A30.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                 bootData}\SpecialCharTok{$}\NormalTok{dead.S2A30.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S\_30[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A30.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                 bootData}\SpecialCharTok{$}\NormalTok{dead.S2A30.pred),}\DecValTok{4}\NormalTok{)}
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S\_40[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                 bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S\_40[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                 bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred),}\DecValTok{4}\NormalTok{)}
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S\_50[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                 bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S\_50[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                 bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred),}\DecValTok{4}\NormalTok{)}
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S\_60[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A60.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                 bootData}\SpecialCharTok{$}\NormalTok{dead.S2A60.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S\_60[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A60.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                 bootData}\SpecialCharTok{$}\NormalTok{dead.S2A60.pred),}\DecValTok{4}\NormalTok{)}
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S1\_Aa[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A30.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S2\_Aa[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A30.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S1\_Aa[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A30.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S2\_Aa[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred }\SpecialCharTok{/}
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A30.pred),}\DecValTok{4}\NormalTok{)}
+       
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S1\_Ab[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S2\_Ab[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S1\_Ab[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S2\_Ab[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred),}\DecValTok{4}\NormalTok{)}
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S1\_Ac[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A60.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_ET\_S2\_Ac[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A60.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred),}\DecValTok{4}\NormalTok{)}
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S1\_Ac[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S1A60.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_RR\_S2\_Ac[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{dead.S2A60.pred }\SpecialCharTok{/} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred),}\DecValTok{4}\NormalTok{)}
+       
+       
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_AI\_30[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{((bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                bootData}\SpecialCharTok{$}\NormalTok{dead.S1A30.pred) }\SpecialCharTok{{-}} 
+\NormalTok{                                                               (bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A30.pred)),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_MI\_30[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{((bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred }\SpecialCharTok{*} 
+\NormalTok{                                                                bootData}\SpecialCharTok{$}\NormalTok{dead.S2A30.pred) }\SpecialCharTok{/} 
+\NormalTok{                                                               (bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred }\SpecialCharTok{*} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A30.pred)),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_AI\_40[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{((bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred) }\SpecialCharTok{{-}} 
+\NormalTok{                                                               (bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred)),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_MI\_40[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{((bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred }\SpecialCharTok{*} 
+\NormalTok{                                                                bootData}\SpecialCharTok{$}\NormalTok{dead.S2A40.pred) }\SpecialCharTok{/} 
+\NormalTok{                                                               (bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred }\SpecialCharTok{*} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A40.pred)),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_AI\_50[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{((bootData}\SpecialCharTok{$}\NormalTok{dead.S1A60.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred) }\SpecialCharTok{{-}} 
+\NormalTok{                                                               (bootData}\SpecialCharTok{$}\NormalTok{dead.S2A60.pred }\SpecialCharTok{{-}} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred)),}\DecValTok{4}\NormalTok{)}
+\NormalTok{       simu.base}\SpecialCharTok{$}\NormalTok{est\_MI\_50[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{((bootData}\SpecialCharTok{$}\NormalTok{dead.S1A60.pred }\SpecialCharTok{*} 
+\NormalTok{                                                                bootData}\SpecialCharTok{$}\NormalTok{dead.S2A50.pred) }\SpecialCharTok{/} 
+\NormalTok{                                                               (bootData}\SpecialCharTok{$}\NormalTok{dead.S2A60.pred }\SpecialCharTok{*} 
+\NormalTok{                                                                  bootData}\SpecialCharTok{$}\NormalTok{dead.S1A50.pred)),}\DecValTok{4}\NormalTok{)}
+\NormalTok{     \}}
+     
+\NormalTok{     effect }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{colMeans}\NormalTok{(simu.base),}\DecValTok{2}\NormalTok{)}
+\NormalTok{     confint }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(simu.base, }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{quantile}\NormalTok{(x,}\AttributeTok{probs =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\FloatTok{0.975}\NormalTok{)))}
+     
+\NormalTok{     tab\_all }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(effects,confint)}
+\end{Highlighting}
+\end{Shaded}
+
+Les résultats pour les 3 intervalles identifiés :
+
+\begin{table}
+
+\caption{(\#tab:ex_Xquant_conf_30)Effect d'interaction entre 30 et 40 ans}
+\centering
+\begin{tabular}[t]{l|l|l|l|l}
+\hline
+. & Sexe.Femme & Sexe.Homme & ET.H.à.F. & RR.H.à.F.\\
+\hline
+Age=30 & 0.61 [0.61 to 0.62] & 0.78 [0.78 to 0.78] & -0.17 [-0.18 to -0.16] & 0.78 [0.78 to 0.79]\\
+\hline
+Age=40 & 0.42 [0.42 to 0.43] & 0.59 [0.59 to 0.6] & -0.17 [-0.18 to -0.17] & 0.71 [0.7 to 0.72]\\
+\hline
+ET(De 30 à 40 ans) & -0.19 [-0.19 to -0.19] & -0.19 [-0.19 to -0.18] &  & \\
+\hline
+RR(De 30 à 40 ans) & 0.69 [0.69 to 0.69] & 0.76 [0.76 to 0.77] &  & \\
+\hline
+\multicolumn{5}{l}{\textsuperscript{a} AI =0 [-0.01 to 0]}\\
+\multicolumn{5}{l}{\textsuperscript{b} MI =0.91 [0.9 to 0.91]}\\
+\end{tabular}
+\end{table}
+
+\begin{table}
+
+\caption{(\#tab:ex_Xquant_conf_40)Effect d'interaction entre 50 et 60 ans}
+\centering
+\begin{tabular}[t]{l|l|l|l|l}
+\hline
+. & Sexe.Femme & Sexe.Homme & ET.H.à.F. & RR.H.à.F.\\
+\hline
+Age=40 & 0.42 [0.42 to 0.43] & 0.59 [0.59 to 0.6] & -0.17 [-0.18 to -0.17] & 0.71 [0.7 to 0.72]\\
+\hline
+Age=50 & 0.25 [0.25 to 0.26] & 0.38 [0.37 to 0.38] & -0.12 [-0.13 to -0.12] & 0.67 [0.66 to 0.68]\\
+\hline
+ET(De 40 à 50 ans) & -0.17 [-0.17 to -0.17] & -0.22 [-0.22 to -0.21] &  & \\
+\hline
+RR(De 40 à 50 ans) & 0.6 [0.59 to 0.61] & 0.64 [0.63 to 0.64] &  & \\
+\hline
+\multicolumn{5}{l}{\textsuperscript{a} AI =0.05 [0.04 to 0.05]}\\
+\multicolumn{5}{l}{\textsuperscript{b} MI =0.95 [0.94 to 0.96]}\\
+\end{tabular}
+\end{table}
+
+\begin{table}
+
+\caption{(\#tab:ex_Xquant_conf_50)Effect d'interaction entre 40 et 50 ans}
+\centering
+\begin{tabular}[t]{l|l|l|l|l}
+\hline
+. & Sexe.Femme & Sexe.Homme & ET.H.à.F. & RR.H.à.F.\\
+\hline
+Age=50 & 0.25 [0.25 to 0.26] & 0.38 [0.37 to 0.38] & -0.12 [-0.13 to -0.12] & 0.67 [0.66 to 0.68]\\
+\hline
+Age=60 & 0.14 [0.13 to 0.14] & 0.2 [0.2 to 0.2] & -0.06 [-0.07 to -0.06] & 0.68 [0.66 to 0.7]\\
+\hline
+ET(De 50 à 60 ans) & -0.12 [-0.12 to -0.12] & -0.18 [-0.18 to -0.17] &  & \\
+\hline
+RR(De 50 à 60 ans) & 0.54 [0.53 to 0.54] & 0.53 [0.53 to 0.54] &  & \\
+\hline
+\multicolumn{5}{l}{\textsuperscript{a} AI =0.06 [0.06 to 0.06]}\\
+\multicolumn{5}{l}{\textsuperscript{b} MI =1.01 [0.99 to 1.03]}\\
+\end{tabular}
+\end{table}
+
+\hypertarget{globalement}{%
+\subsection*{Globalement}\label{globalement}}
+\addcontentsline{toc}{subsection}{Globalement}
+
+\hypertarget{analyse-confirmatoire-2}{%
+\section{Analyse confirmatoire (2)}\label{analyse-confirmatoire-2}}
+
+Si on avait utilisé un modèle linéaire, les résultats auraient été :
+
+\begin{table}
+
+\caption{(\#tab:ex_Xquant_conf_30_lm)Effect d'interaction entre 30 et 40 ans}
+\centering
+\begin{tabular}[t]{l|l|l|l|l}
+\hline
+. & Sexe.Femme & Sexe.Homme & ET.H.à.F. & RR.H.à.F.\\
+\hline
+Age=30 & 0.56 [0.56 to 0.57] & 0.77 [0.76 to 0.77] & -0.2 [-0.21 to -0.2] & 0.73 [0.72 to 0.74]\\
+\hline
+Age=40 & 0.42 [0.42 to 0.43] & 0.58 [0.58 to 0.59] & -0.16 [-0.17 to -0.15] & 0.73 [0.72 to 0.73]\\
+\hline
+ET(De 30 à 40 ans) & -0.14 [-0.14 to -0.14] & -0.18 [-0.19 to -0.18] &  & \\
+\hline
+RR(De 30 à 40 ans) & 0.75 [0.75 to 0.75] & 0.76 [0.76 to 0.76] &  & \\
+\hline
+\multicolumn{5}{l}{\textsuperscript{a} AI =0.04 [0.04 to 0.05]}\\
+\multicolumn{5}{l}{\textsuperscript{b} MI =0.99 [0.99 to 0.99]}\\
+\end{tabular}
+\end{table}
+
+\begin{table}
+
+\caption{(\#tab:ex_Xquant_conf_40_lm)Effect d'interaction entre 50 et 60 ans}
+\centering
+\begin{tabular}[t]{l|l|l|l|l}
+\hline
+. & Sexe.Femme & Sexe.Homme & ET.H.à.F. & RR.H.à.F.\\
+\hline
+Age=40 & 0.42 [0.42 to 0.43] & 0.58 [0.58 to 0.59] & -0.16 [-0.17 to -0.15] & 0.73 [0.72 to 0.73]\\
+\hline
+Age=50 & 0.28 [0.28 to 0.29] & 0.4 [0.4 to 0.4] & -0.12 [-0.12 to -0.11] & 0.71 [0.7 to 0.72]\\
+\hline
+ET(De 40 à 50 ans) & -0.14 [-0.14 to -0.14] & -0.18 [-0.19 to -0.18] &  & \\
+\hline
+RR(De 40 à 50 ans) & 0.67 [0.67 to 0.67] & 0.69 [0.68 to 0.69] &  & \\
+\hline
+\multicolumn{5}{l}{\textsuperscript{a} AI =0.04 [0.04 to 0.05]}\\
+\multicolumn{5}{l}{\textsuperscript{b} MI =0.98 [0.97 to 0.99]}\\
+\end{tabular}
+\end{table}
+
+\begin{table}
+
+\caption{(\#tab:ex_Xquant_conf_50_lm)Effect d'interaction entre 40 et 50 ans}
+\centering
+\begin{tabular}[t]{l|l|l|l|l}
+\hline
+. & Sexe.Femme & Sexe.Homme & ET.H.à.F. & RR.H.à.F.\\
+\hline
+Age=50 & 0.28 [0.28 to 0.29] & 0.4 [0.4 to 0.4] & -0.12 [-0.12 to -0.11] & 0.71 [0.7 to 0.72]\\
+\hline
+Age=60 & 0.15 [0.14 to 0.15] & 0.22 [0.21 to 0.22] & -0.07 [-0.08 to -0.07] & 0.67 [0.65 to 0.68]\\
+\hline
+ET(De 50 à 60 ans) & -0.14 [-0.14 to -0.14] & -0.18 [-0.19 to -0.18] &  & \\
+\hline
+RR(De 50 à 60 ans) & 0.51 [0.5 to 0.52] & 0.54 [0.54 to 0.55] &  & \\
+\hline
+\multicolumn{5}{l}{\textsuperscript{a} AI =0.04 [0.04 to 0.05]}\\
+\multicolumn{5}{l}{\textsuperscript{b} MI =0.94 [0.92 to 0.96]}\\
+\end{tabular}
+\end{table}
 
 \hypertarget{part-conclusion}{%
 \part{Conclusion}\label{part-conclusion}}
