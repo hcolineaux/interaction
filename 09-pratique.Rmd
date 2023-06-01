@@ -135,7 +135,7 @@ On peut en déduire (échelle additive) que :
     + Quand on est défavorisé : $\small DR(S|D=1) = 0.326 - 0.095 =$ +`r round(0.326 - 0.095,3)` mmol/L
 - L'effet de la défavorisation est : 
     + Quand on est une femme : $\small DR(D|S=0) = +0.126$ mmol/L
-    + Quand on est une homme : $\small DR(D|S=1) = 0.126 - 0.095 =$ +`r round(0.126 - 0.095,3)` mmol/L
+    + Quand on est un homme : $\small DR(D|S=1) = 0.126 - 0.095 =$ +`r round(0.126 - 0.095,3)` mmol/L
 - L'effet d'être un homme et défavorisé 
     + plutot que femme et favorisé est 
     + $\small DR(D,S) = 0.326 + 0.126 - 0.095 =$ +`r round(0.326 + 0.126 - 0.095,3)` mmol/L
@@ -234,6 +234,7 @@ Il semble y avoir une interaction entre l'âge et le sexe sur la probabilité d'
 Pour simplifier les analyses, nous n'allons inclure que les plus de 30 ans (N = 177 940), pour lesquels la relation est linéaire :
 
 ![](img/graph_Xquanti_2.png){width=80%}
+## Analyse exploratoire (1)
 
 La sortie d'une modèle linéaire simple serait :
 
@@ -244,11 +245,10 @@ La sortie d'une modèle linéaire simple serait :
 # 
 # Coefficients:
 #                 Estimate Std. Error t value Pr(>|t|)    
-# (Intercept)    1.3197103  0.0066820  197.50   <2e-16 ***
-# sexeWomen     -0.3373482  0.0091573  -36.84   <2e-16 ***
-# age           -0.0183730  0.0001294 -142.03   <2e-16 ***
-# sexeWomen:age  0.0044248  0.0001781   24.85   <2e-16 ***
-# ---
+# (Intercept)    1.3270453  0.0068655  193.29   <2e-16 ***
+# sexeWomen     -0.3362871  0.0094614  -35.54   <2e-16 ***
+# age           -0.0185252  0.0001335 -138.78   <2e-16 ***
+# sexeWomen:age  0.0044007  0.0001853   23.75   <2e-16 ***# ---
 # Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 ```
@@ -257,16 +257,76 @@ La sortie d'une modèle linéaire simple serait :
 On peut en déduire (échelle additive) que : 
 
 
-L'outcome étant binaire, il est plus classique d'utiliser un modèle logistique, dont les résultats (en odds ratio) seraient : 
+- L'effet du sexe (d'être femme plutot que homme) est : 
+    + "A 0 ans" (coordonnée à l'origine) : $\small DR(S|A=0) = -33,63$%
+    + A 40 ans (par exemple) : $\small DR(S|A=40) = -33,63 + 0,44 \times 40 =$ `r round(-33.63 + 0.44 * 40,1)`%
+- L'effet de l'age est : 
+    + Quand on est un homme : $\small DR(A|S=0) = -1,85$ % par année d'âge
+    + Quand on est une femme : $\small DR(A|S=1) = -1,85 + 0.44 =$ `r round(-1.85 + 0.44,1)` % par année d'âge
+- L'effet d'être une femme et d'avoir 1 an de plus 
+    + plutot que homme et un certain âge
+    + $\small DR(A,S) = -33,63 -1,85 + 0,44 =$ `r round(-33.7 -1.85 + 0.44,1)` %
+- **L'effet d'interaction/modification d'effet** est :  $\small AI = +0.44$ %
+
+On pourrait aussi déduire :
+
+  - $\small Y_{S=0,A=30} = 132,7 - 1,85 \times 30 =$ `r round(132.7 - 1.85*30,1)`%
+  - $\small Y_{S=0,A=50} = 132,7 - 1,85 \times 50 =$ `r round(132.7 - 1.85*50,1)`%
+  - $\small Y_{S=1,A=30} = 132,7 -33,63 - 1,85 \times 30 + 0,44 \times 30 =$ `r round(132.7 - 33.63 - 1.85*30 + 0.44*30,1)`%
+  - $\small Y_{S=1,A=50} = 132,7 -33,63 - 1,85 \times 50 + 0,44 \times 50 =$ `r round(132.7 - 33.63 - 1.85*50 +0.44*50,1)`%
+
+## Analyse exploratoire (2)
+
+L'outcome étant binaire, il est plus classique d'utiliser un modèle logistique, dont les résultats  seraient : 
 
 ```{r ex_Xquant_expl_glm, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+# Call:
+# glm(formula = cannabis ~ sexe + age + sexe * age, family = binomial, 
+#     data = data)
+# 
+# Coefficients:
+#                 Estimate Std. Error z value Pr(>|z|)    
+# (Intercept)    3.9524082  0.0382785  103.25   <2e-16 ***
+# sexeWomen     -1.1787828  0.0528351  -22.31   <2e-16 ***
+# age           -0.0891173  0.0007808 -114.14   <2e-16 ***
+# sexeWomen:age  0.0120384  0.0011038   10.91   <2e-16 ***
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
 
+Ce qui, en terme d'OR, donnerait : 
+
+```{r ex_Xquant_expl_glm_2, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
 #                       OR      2.5 %     97.5 %
-# (Intercept)   50.1220409 46.5985990 53.9259952
-# sexeWomen      0.3120878  0.2822910  0.3450107
-# age            0.9154927  0.9141333  0.9168485
-# sexeWomen:age  1.0117927  1.0096884  1.0139018
+# (Intercept)   52.0605878 48.3044121 56.1245459
+# sexeWomen      0.3076530  0.2773804  0.3412112
+# age            0.9147383  0.9133364  0.9161362
+# sexeWomen:age  1.0121112  1.0099239  1.0143033
 
 ```
+
+- L'effet du sexe (d'être femme plutot que homme) est : 
+    + "A 0 ans" (coordonnée à l'origine) : $\small OR(S|A=0) = \times 0.31$
+    + "A 1 ans" : $\small OR(S|A=1) = \times 0.31 + 0,012 = \times$ `r round(exp(-1.178 + 0.012),1)`
+    + A 40 ans (par exemple) : $\small OR(S|A=40) = exp(-1,179 + 0,012 \times 40) = \times$ `r round(exp(-1.178 + 0.012 * 40),1)`
+- L'effet de l'age est : 
+    + Quand on est un homme : $\small OR(A|S=0) = \times 0,91$ par année d'âge
+    + Quand on est une femme : $\small OR(A|S=1) = exp(-0,089 + 0,012) = \times$ `r round(exp(-0.089 + 0.012),1)`  par année d'âge
+- L'effet d'être une femme et d'avoir 1 an de plus 
+    + plutot que homme "et 0 ans" 
+    + $\small OR(A,S) = exp(-1,179 -0,089 + 0,012) = \times$ `r round(exp(-1.179 -0.089 + 0.012),1)`
+- **L'effet d'interaction/modification d'effet** est :  $\small MI =\times 1,01$
+- **Un effet d'interaction additif** $\small RERI_{OR} = OR_{11} - OR_{01} - OR_{10} + 1 =$ `r round(exp(-1.179 -0.089 + 0.012) - exp(-1.178 + 0.012) - exp(-0.089 + 0.012) + 1,3)`
+
+
+On pourrait aussi déduire :
+
+  - $\small Y_{S=0,A=30} = \frac{exp(3,952 - 0,089 \times 30)}{1+exp(3,952 - 0,089 \times 30)} =$ `r round((exp(3.952 - 0.089*30)/(1+exp(3.952 - 0.089*30)))*100,1)`%
+  - $\small Y_{S=0,A=50} = \frac{exp(3,952 - 0,089 \times 50)}{1+exp(3,952 - 0,089 \times 50)} =$ `r round((exp(3.952 - 0.089*50)/(1+exp(3.952 - 0.089*50)))*100,1)`%
+   - $\small Y_{S=1,A=30} = \frac{exp(3,952 - 1,179 - 0,089 \times 30 + 0,012 \times 30)}{1+exp(3,952 - 1,179 - 0,089 \times 30 + 0,012 \times 30)} =$ `r round((exp(3.952 - 1.179 - 0.089*30 +0.012*30)/(1+exp(3.952 - 1.179 - 0.089*30+0.012*30)))*100,1)`%
+   - $\small Y_{S=1,A=50} = \frac{exp(3,952 - 1,179 - 0,089 \times 50 + 0,012 \times 50)}{1+exp(3,952 - 1,179 - 0,089 \times 50 + 0,012 \times 50)} =$ `r round((exp(3.952 - 1.179 - 0.089*50 +0.012*50)/(1+exp(3.952 - 1.179 - 0.089*50+0.012*50)))*100,1)`%
+   
+## Analyse confirmatoire 
+
 
 
