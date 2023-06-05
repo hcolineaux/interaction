@@ -63,7 +63,7 @@ Il s'agit d'un paramètre explorant l'interaction additive :
 
 Il mesure l'augmentation relative du risque liée à l'exposition jointe, rapportée à la somme des augmentations relatives du risque liées à la 1ère et la 2ème exposition. 
 
-Pour rappel, l'augmentation relative du risque liée à l'exposition jointe correspond à l'augmentation absolue du risque (différence de risque), exprimée en pourcentage par rapport au risque de base $p_{00}$. 
+Pour rappel, l'augmentation relative du risque liée à l'exposition jointe correspond à l'augmentation absolue du risque (différence de risques), exprimée en pourcentage par rapport au risque de base $p_{00}$. 
 
 $ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1$
 

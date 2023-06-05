@@ -393,6 +393,8 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 </script>
 
 ```{r, results ='hide', eval=FALSE}
+
+
 ```
 
 

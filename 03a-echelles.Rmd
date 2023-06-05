@@ -28,6 +28,8 @@ Mesure de l'interaction dans l'exemple 1
 >
 > ![](img\Image2.png){width=65%}
 
+**Remarques : la mesure de l'effet joint est donnée dans la dernière ligne et la dernière colonne (entre parenthèse). L'effet d'interaction (flèche) est identifié soit comme l'ecart entre l'effet joint et **
+
 
 ### Echelle multiplicative {-}
 

@@ -27,7 +27,7 @@ On a une modification de l'effet de $X$ par $V$ si l'effet de $X$ est différent
 -	en additif : $\small DR(X | V=0) \neq DR(X | V=1)$ 
 	 - soit	$\small p_{10}-p_{00} \neq p_{11}-p_{01}$  
 -	en multiplicatif : $\small RR(X | V=0) \neq RR(X | V=1)$ 
-	 - soit $\small  p_{10}/p_{00} \neq p_{11}/p_{01}$  
+	 - soit $\small   \frac{p_{10}}{p_{00}} \neq \frac{{11}}{p_{01}}$  
 	
 > <ins>Exemple</ins>
 Modification d'effet dans l'exemple 1
@@ -40,8 +40,8 @@ Modification d'effet dans l'exemple 1
 >
 > En multiplicatif : 
 >
-- effet dans le groupe $V=0$ : $\small RR(X | V=0) = 0,40/0,10 = \times 4,0$
-- effet dans le groupe $V=1$ : $\small RR(X | V=1) = 0,90/0,20 = \times 4,5$
+- effet dans le groupe $V=0$ : $\small RR(X | V=0) = \frac{0,40}{0,10} = \times 4,0$
+- effet dans le groupe $V=1$ : $\small RR(X | V=1) = \frac{0,90}{0,20} = \times 4,5$
 - donc $\small RR(X | V=0) \neq RR(X | V=1)$ 
 >
 > Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
@@ -49,9 +49,9 @@ Modification d'effet dans l'exemple 1
 
 ## Interaction
 
-Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoint de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l'effet conjoint est supérieur à l'effet de la somme des individuels. Il y a une interaction antagoniste lorsque l'effet conjoint est inférieur à la somme des effets individuels @corraini_effect_2017. 
+Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoint de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l'effet conjoint est supérieur à la somme de l'effet individuels. Il y a une interaction antagoniste lorsque l'effet conjoint est inférieur à la somme des effets individuels @corraini_effect_2017. 
 
-Si l'on compare avec un essai d'intervention, c'est comme s'il y a plusieurs interventions selon le nombre de combinaison. On analyse donc l'effet du scénario $\small do(X, V)$. Ici l'effet causal d'interêt est vraiment l'effet conjoint des deux variables. 
+Si l'on compare avec un essai d'intervention, c'est comme s'il y avait plusieurs interventions, selon le nombre de combinaisons. On analyse donc l'effet du scénario $\small do(X, V)$. Ici l'effet causal d’intérêt est vraiment l'effet conjoint des deux variables. 
 
 Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de l'interaction $\small X*V$. On ajustera sur les facteurs de confusion des deux relations $\small X \rightarrow Y$ et $\small V \rightarrow Y$.
 On fait l'hypothèse que les mécanismes de l'effet conjoint de $X$ et $V$ sont causaux.
@@ -68,9 +68,9 @@ On a ainsi,
 	 + $\small p_{11} \neq p_{10} + p_{01} - p_{00}$
 	 + $\small p_{11} - p_{10} - p_{01} + p_{00} \neq 0$
 - en multiplicatif	$\small 	RR(X,V) \neq RR(X,V=0) \times RR(V,X=0)$
-	 + $\small p_{11}/p_{00}  \neq (p_{10}/p_{00}) \times (p_{01}/p_{00})$
-	 + $\small p_{11} \neq (p_{10} \times p_{01}) / p_{00}$ 
-	 + $\small (p_{00} \times p_{11}) / (p_{10} \times p_{01}) \neq 1$ 
+	 + $\small \frac{p_{11}}{p_{00}}  \neq \frac{p_{10}}{p_{00}} \times \frac{p_{01}}{p_{00}}$
+	 + $\small p_{11} \neq \frac{\frac{p_{10}}{p_{01}}}{p_{00}}$ 
+	 + $\small \frac{p_{00} \times p_{11}}{p_{10} \times p_{01}} \neq 1$ 
 
 
 > <ins>Exemple</ins>
@@ -84,7 +84,7 @@ Interaction dans l'exemple 1
 >
 > En multiplicatif : 
 >
-- effet joint : $\small RR(X,V) = 0,9/0,1 = \times 9$
+- effet joint : $\small RR(X,V) = \frac{0,9}{0,1} = \times 9$
 - produit des effets individuels : $\small RR(X,V=0) \times RR(V,X=0) = 4 \times 2 = \times 8$
 - donc $\small DR(X,V) \neq DR(X,V=0) \times DR(V,X=0)$
 >
@@ -102,8 +102,8 @@ Mathématiquement, les formulations sont équivalentes :
 
 La différence se joue plutôt sur :
 
-- la façon dont la question est posée (effet de $X$ selon $V$, _versus_ effet conjoint de $X$ et $V$), 
-- sur les hypothèses causales formulées (scénarii $\small do(X)|V$ _versus_ $\small do(X,V)$) 
+- la façon dont la question est posée (effet de $\small X$ selon $\small V$, _versus_ effet conjoint de $\small X$ et $\small V$), 
+- les hypothèses causales formulées (scénario $\small do(X)|V$ _versus_ $\small do(X,V)$) 
 - et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation $\small X \rightarrow Y$ _versus_ les deux relations $\small X \rightarrow Y$ et $\small V \rightarrow Y$).
 
 
@@ -111,13 +111,13 @@ Il existe des cas où l'identification d'une interaction ou d'une modification d
 
 > ![](img/Image12.png){width=30%}
 
-Dans ce cas, il n'y a pas d’interaction entre $A1$ et $A2$, car il n'y a pas d'effet direct ni indirect de $A2 \rightarrow Y$. L'effet de $A1 \rightarrow Y$ restera le même quelle que soit la valeur que l'on pourrait attribuer à $A2$ :
+Dans ce cas, il n'y a pas d’interaction entre $\small A1$ et $\small A2$, car il n'y a pas d'effet direct ni indirect de $\small A2 \rightarrow Y$. L'effet de $\small A1 \rightarrow Y$ restera le même quelle que soit la valeur que l'on pourrait attribuer à $\small A2$ :
 
-$\scriptsize P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] - P\left[Y=1|do(A1=0, A2=1)\right]$
+$\small P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] - P\left[Y=1|do(A1=0, A2=1)\right]$
 
-Par contre, il peut y avoir une modification de l'effet de $A1$ par $A2$, en particulier s'il existe une interaction $A1 * L2 \rightarrow Y$ ou $A1 * L3 \rightarrow Y$, on s'attend à ce que les contrastes suivants soient différents :
+Par contre, il peut y avoir une modification de l'effet de $A1$ par $A2$, en particulier s'il existe une interaction $\small A1 * L2 \rightarrow Y$ ou $\small A1 * L3 \rightarrow Y$, on s'attend à ce que les contrastes suivants soient différents :
 
-$\scriptsize P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] - P[Y=1|do(A1=2),A2=0]$.
+$\small P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] - P[Y=1|do(A1=2),A2=0]$.
 <!-- Note, dans ce cas, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3. -->
 
 

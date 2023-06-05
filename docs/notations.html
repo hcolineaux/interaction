@@ -176,7 +176,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="notations.html"><a href="notations.html#mesures-deffets"><i class="fa fa-check"></i><b>3.2</b> Mesures d’effets</a>
 <ul>
 <li class="chapter" data-level="" data-path="notations.html"><a href="notations.html#concernant-les-différences-de-risques-dr-effets-additifs"><i class="fa fa-check"></i>Concernant les différences de risques (DR, effets additifs)</a></li>
-<li class="chapter" data-level="" data-path="notations.html"><a href="notations.html#concernant-les-rapports-de-risque-effets-multiplicatifs"><i class="fa fa-check"></i>Concernant, les rapports de risque (effets multiplicatifs)</a></li>
+<li class="chapter" data-level="" data-path="notations.html"><a href="notations.html#concernant-les-rapports-de-risques-effets-multiplicatifs"><i class="fa fa-check"></i>Concernant, les rapports de risques (effets multiplicatifs)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="intmodif.html"><a href="intmodif.html"><i class="fa fa-check"></i><b>4</b> Interaction vs modification d’effets</a>
@@ -319,7 +319,7 @@ Exemple
 </div>
 <div id="mesures-deffets" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Mesures d’effets<a href="notations.html#mesures-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>L’effet d’une variable <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> peut être mesuré sur deux échelles : additive (différence de risque/probabilité) ou multiplicative (rapport de risque/probabilité).</p>
+<p>L’effet d’une variable <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> peut être mesuré sur deux échelles : additive (différence de risques ou de probabilités) ou multiplicative (rapport de risques ou de probabilités).</p>
 <div id="concernant-les-différences-de-risques-dr-effets-additifs" class="section level3 unnumbered hasAnchor">
 <h3>Concernant les différences de risques (DR, effets additifs)<a href="notations.html#concernant-les-différences-de-risques-dr-effets-additifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>On va noter <span class="math inline">\(P(Y = 1|do(X = 1))\)</span> la probabilité d’observer <span class="math inline">\(Y=1\)</span> sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à <span class="math inline">\(X=1\)</span> (notée <span class="math inline">\(do(X=1)\)</span>).</p>
@@ -344,20 +344,25 @@ Exemple
 <li><span class="math inline">\(\small DR (X,V=0) = p_{10}-p_{00} = 0,40 - 0,10 = +0,30\)</span></li>
 <li><span class="math inline">\(\small DR (X,V=1) = p_{11}-p_{01} = 0,90 - 0,20 = +0,70\)</span></li>
 </ul>
-<p>Le fait d’être doublement exposé par rapport à pas du tout augmente le risque de +80%. Dans une population n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 ans augmente le risque de +30%, alors que dans une population ayant vécu un événement traumatique, il est augmenté de +70%.</p>
+<p>Le fait d’être doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout augmente le risque d’avoir au moins une pathologie chronique à 60 ans de +80%. Dans une population n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 ans augmente le risque d’avoir au moins une pathologie chronique à 60 ans de +30%, alors que dans une population ayant vécu un événement traumatique, il est augmenté de +70%.</p>
 </blockquote>
 </div>
-<div id="concernant-les-rapports-de-risque-effets-multiplicatifs" class="section level3 unnumbered hasAnchor">
-<h3>Concernant, les rapports de risque (effets multiplicatifs)<a href="notations.html#concernant-les-rapports-de-risque-effets-multiplicatifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="concernant-les-rapports-de-risques-effets-multiplicatifs" class="section level3 unnumbered hasAnchor">
+<h3>Concernant, les rapports de risques (effets multiplicatifs)<a href="notations.html#concernant-les-rapports-de-risques-effets-multiplicatifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>on peut notamment utiliser les <strong>risques relatifs</strong> (RR). On donc :</p>
 <ul>
-<li>L’effet d’une exposition <span class="math inline">\(X\)</span> binaire sur <span class="math inline">\(Y\)</span> est : <span class="math inline">\(\small RR(X) = P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))\)</span>
+<li>L’effet d’une exposition <span class="math inline">\(X\)</span> binaire sur <span class="math inline">\(Y\)</span> est :
 <ul>
-<li>qu’on peut estimer, si les conditions d’identifiabilité sont réunies,</li>
-<li>par <span class="math inline">\(\small P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))= p_1 / p_0\)</span></li>
+<li><span class="math inline">\(\small RR(X) = \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))}\)</span></li>
+<li>qu’on peut estimer, si les conditions d’identifiabilité sont réunies, par :</li>
+<li><span class="math inline">\(\small \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))} = \frac{p_1}{p_0}\)</span></li>
 </ul></li>
-<li>L’effet conjoint de <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span> est : <span class="math inline">\(\small RR(X,V) = p_{11}/p_{00}\)</span></li>
-<li>L’effet de <span class="math inline">\(X\)</span> sur <span class="math inline">\(Y\)</span> pour chaque valeur fixée de <span class="math inline">\(V\)</span> est : <span class="math inline">\(\small RR(X,V=0) = p_{10}/p_{00}\)</span> et <span class="math inline">\(\small RR(X,V=1) =p_{11}/p_{01}\)</span></li>
+<li>L’effet conjoint de <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span> est : <span class="math inline">\(\small RR(X,V) = \frac{p_{11}}{p_{00}}\)</span></li>
+<li>L’effet de <span class="math inline">\(X\)</span> sur <span class="math inline">\(Y\)</span> pour chaque valeur fixée de <span class="math inline">\(V\)</span> est :
+<ul>
+<li><span class="math inline">\(\small RR(X,V=0) = \frac{p_{10}}{p_{00}}\)</span></li>
+<li>et <span class="math inline">\(\small RR(X,V=1) = \frac{p_{11}}{p_{01}}\)</span></li>
+</ul></li>
 </ul>
 <blockquote>
 <ins>
@@ -366,11 +371,11 @@ Exemple
 <p>Risques relatifs pour l’exemple 1</p>
 <p><img src="img/Image1.png" style="width:30.0%" /></p>
 <ul>
-<li><span class="math inline">\(\small RR(X,V) = 0,9/0,1 = \times 9\)</span></li>
-<li><span class="math inline">\(\small RR(X,V=0) = 0,4/0,1 = \times 4\)</span></li>
-<li><span class="math inline">\(\small RR(X,V=1) = 0,9/0,2 = \times 4,5\)</span></li>
+<li><span class="math inline">\(\small RR(X,V) = \frac{0,9}{0,1} = \times 9\)</span></li>
+<li><span class="math inline">\(\small RR(X,V=0) = \frac{0,4}{0,1} = \times 4\)</span></li>
+<li><span class="math inline">\(\small RR(X,V=1) = \frac{0,9}{0,2} = \times 4,5\)</span></li>
 </ul>
-<p>Le risque quand on est doublement exposé par rapport à pas du tout est multiplié par 9. Dans une population n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.</p>
+<p>Le risque d’avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 9. Dans une population n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.</p>
 </blockquote>
 
 </div>

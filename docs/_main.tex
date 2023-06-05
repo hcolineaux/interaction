@@ -303,7 +303,7 @@ Interprétation : La probabilité d'avoir au moins une pathologie chronique à 6
 \hypertarget{mesures-deffets}{%
 \section{Mesures d'effets}\label{mesures-deffets}}
 
-L'effet d'une variable \(\small X\) sur \(\small Y\) peut être mesuré sur deux échelles : additive (différence de risque/probabilité) ou multiplicative (rapport de risque/probabilité).
+L'effet d'une variable \(\small X\) sur \(\small Y\) peut être mesuré sur deux échelles : additive (différence de risques ou de probabilités) ou multiplicative (rapport de risques ou de probabilités).
 
 \hypertarget{concernant-les-diffuxe9rences-de-risques-dr-effets-additifs}{%
 \subsection*{Concernant les différences de risques (DR, effets additifs)}\label{concernant-les-diffuxe9rences-de-risques-dr-effets-additifs}}
@@ -348,31 +348,41 @@ Différences de risques pour l'exemple 1
   \(\small DR (X,V=1) = p_{11}-p_{01} = 0,90 - 0,20 = +0,70\)
 \end{itemize}
 
-Le fait d'être doublement exposé par rapport à pas du tout augmente le risque de +80\%. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans augmente le risque de +30\%, alors que dans une population ayant vécu un événement traumatique, il est augmenté de +70\%.
+Le fait d'être doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout augmente le risque d'avoir au moins une pathologie chronique à 60 ans de +80\%. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans augmente le risque d'avoir au moins une pathologie chronique à 60 ans de +30\%, alors que dans une population ayant vécu un événement traumatique, il est augmenté de +70\%.
 \end{quote}
 
-\hypertarget{concernant-les-rapports-de-risque-effets-multiplicatifs}{%
-\subsection*{Concernant, les rapports de risque (effets multiplicatifs)}\label{concernant-les-rapports-de-risque-effets-multiplicatifs}}
-\addcontentsline{toc}{subsection}{Concernant, les rapports de risque (effets multiplicatifs)}
+\hypertarget{concernant-les-rapports-de-risques-effets-multiplicatifs}{%
+\subsection*{Concernant, les rapports de risques (effets multiplicatifs)}\label{concernant-les-rapports-de-risques-effets-multiplicatifs}}
+\addcontentsline{toc}{subsection}{Concernant, les rapports de risques (effets multiplicatifs)}
 
 on peut notamment utiliser les \textbf{risques relatifs} (RR). On donc :
 
 \begin{itemize}
 \tightlist
 \item
-  L'effet d'une exposition \(X\) binaire sur \(Y\) est : \(\small RR(X) = P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))\)
+  L'effet d'une exposition \(X\) binaire sur \(Y\) est :
 
   \begin{itemize}
   \tightlist
   \item
-    qu'on peut estimer, si les conditions d'identifiabilité sont réunies,
+    \(\small RR(X) = \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))}\)
   \item
-    par \(\small P(Y = 1| do(X = 1)) / P(Y = 1|do(X = 0))= p_1 / p_0\)
+    qu'on peut estimer, si les conditions d'identifiabilité sont réunies, par :
+  \item
+    \(\small \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))} = \frac{p_1}{p_0}\)
   \end{itemize}
 \item
-  L'effet conjoint de \(X\) et \(V\) est : \(\small RR(X,V) = p_{11}/p_{00}\)
+  L'effet conjoint de \(X\) et \(V\) est : \(\small RR(X,V) = \frac{p_{11}}{p_{00}}\)
 \item
-  L'effet de \(X\) sur \(Y\) pour chaque valeur fixée de \(V\) est : \(\small RR(X,V=0) = p_{10}/p_{00}\) et \(\small RR(X,V=1) =p_{11}/p_{01}\)
+  L'effet de \(X\) sur \(Y\) pour chaque valeur fixée de \(V\) est :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\small RR(X,V=0) = \frac{p_{10}}{p_{00}}\)
+  \item
+    et \(\small RR(X,V=1) = \frac{p_{11}}{p_{01}}\)
+  \end{itemize}
 \end{itemize}
 
 \begin{quote}
@@ -385,14 +395,14 @@ Risques relatifs pour l'exemple 1
 \begin{itemize}
 \tightlist
 \item
-  \(\small RR(X,V) = 0,9/0,1 = \times 9\)
+  \(\small RR(X,V) = \frac{0,9}{0,1} = \times 9\)
 \item
-  \(\small RR(X,V=0) = 0,4/0,1 = \times 4\)
+  \(\small RR(X,V=0) = \frac{0,4}{0,1} = \times 4\)
 \item
-  \(\small RR(X,V=1) = 0,9/0,2 = \times 4,5\)
+  \(\small RR(X,V=1) = \frac{0,9}{0,2} = \times 4,5\)
 \end{itemize}
 
-Le risque quand on est doublement exposé par rapport à pas du tout est multiplié par 9. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.
+Le risque d'avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 9. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.
 \end{quote}
 
 \hypertarget{intmodif}{%
@@ -434,7 +444,7 @@ On a une modification de l'effet de \(X\) par \(V\) si l'effet de \(X\) est diff
   \begin{itemize}
   \tightlist
   \item
-    soit \(\small p_{10}/p_{00} \neq p_{11}/p_{01}\)
+    soit \(\small \frac{p_{10}}{p_{00}} \neq \frac{{11}}{p_{01}}\)
   \end{itemize}
 \end{itemize}
 
@@ -460,9 +470,9 @@ En multiplicatif :
 \begin{itemize}
 \tightlist
 \item
-  effet dans le groupe \(V=0\) : \(\small RR(X | V=0) = 0,40/0,10 = \times 4,0\)
+  effet dans le groupe \(V=0\) : \(\small RR(X | V=0) = \frac{0,40}{0,10} = \times 4,0\)
 \item
-  effet dans le groupe \(V=1\) : \(\small RR(X | V=1) = 0,90/0,20 = \times 4,5\)
+  effet dans le groupe \(V=1\) : \(\small RR(X | V=1) = \frac{0,90}{0,20} = \times 4,5\)
 \item
   donc \(\small RR(X | V=0) \neq RR(X | V=1)\)
 \end{itemize}
@@ -473,9 +483,9 @@ Ici l'effet du tabagisme est différent selon que les personnes ont vécu un év
 \hypertarget{interaction}{%
 \section{Interaction}\label{interaction}}
 
-Quand on s'intéresse à l'interaction, on s'intéresse plutôt à l'effet conjoint de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l'effet conjoint est supérieur à l'effet de la somme des individuels. Il y a une interaction antagoniste lorsque l'effet conjoint est inférieur à la somme des effets individuels \citet{corraini_effect_2017}.
+Quand on s'intéresse à l'interaction, on s'intéresse plutôt à l'effet conjoint de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l'effet conjoint est supérieur à la somme de l'effet individuels. Il y a une interaction antagoniste lorsque l'effet conjoint est inférieur à la somme des effets individuels \citet{corraini_effect_2017}.
 
-Si l'on compare avec un essai d'intervention, c'est comme s'il y a plusieurs interventions selon le nombre de combinaison. On analyse donc l'effet du scénario \(\small do(X, V)\). Ici l'effet causal d'interêt est vraiment l'effet conjoint des deux variables.
+Si l'on compare avec un essai d'intervention, c'est comme s'il y avait plusieurs interventions, selon le nombre de combinaisons. On analyse donc l'effet du scénario \(\small do(X, V)\). Ici l'effet causal d'intérêt est vraiment l'effet conjoint des deux variables.
 
 Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de l'interaction \(\small X*V\). On ajustera sur les facteurs de confusion des deux relations \(\small X \rightarrow Y\) et \(\small V \rightarrow Y\).
 On fait l'hypothèse que les mécanismes de l'effet conjoint de \(X\) et \(V\) sont causaux.
@@ -512,11 +522,11 @@ On a ainsi,
   \begin{itemize}
   \tightlist
   \item
-    \(\small p_{11}/p_{00} \neq (p_{10}/p_{00}) \times (p_{01}/p_{00})\)
+    \(\small \frac{p_{11}}{p_{00}} \neq \frac{p_{10}}{p_{00}} \times \frac{p_{01}}{p_{00}}\)
   \item
-    \(\small p_{11} \neq (p_{10} \times p_{01}) / p_{00}\)
+    \(\small p_{11} \neq \frac{\frac{p_{10}}{p_{01}}}{p_{00}}\)
   \item
-    \(\small (p_{00} \times p_{11}) / (p_{10} \times p_{01}) \neq 1\)
+    \(\small \frac{p_{00} \times p_{11}}{p_{10} \times p_{01}} \neq 1\)
   \end{itemize}
 \end{itemize}
 
@@ -542,7 +552,7 @@ En multiplicatif :
 \begin{itemize}
 \tightlist
 \item
-  effet joint : \(\small RR(X,V) = 0,9/0,1 = \times 9\)
+  effet joint : \(\small RR(X,V) = \frac{0,9}{0,1} = \times 9\)
 \item
   produit des effets individuels : \(\small RR(X,V=0) \times RR(V,X=0) = 4 \times 2 = \times 8\)
 \item
@@ -570,9 +580,9 @@ La différence se joue plutôt sur :
 \begin{itemize}
 \tightlist
 \item
-  la façon dont la question est posée (effet de \(X\) selon \(V\), \emph{versus} effet conjoint de \(X\) et \(V\)),
+  la façon dont la question est posée (effet de \(\small X\) selon \(\small V\), \emph{versus} effet conjoint de \(\small X\) et \(\small V\)),
 \item
-  sur les hypothèses causales formulées (scénarii \(\small do(X)|V\) \emph{versus} \(\small do(X,V)\))
+  les hypothèses causales formulées (scénario \(\small do(X)|V\) \emph{versus} \(\small do(X,V)\))
 \item
   et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation \(\small X \rightarrow Y\) \emph{versus} les deux relations \(\small X \rightarrow Y\) et \(\small V \rightarrow Y\)).
 \end{itemize}
@@ -583,13 +593,13 @@ Il existe des cas où l'identification d'une interaction ou d'une modification d
 \includegraphics[width=0.3\textwidth,height=\textheight]{img/Image12.png}
 \end{quote}
 
-Dans ce cas, il n'y a pas d'interaction entre \(A1\) et \(A2\), car il n'y a pas d'effet direct ni indirect de \(A2 \rightarrow Y\). L'effet de \(A1 \rightarrow Y\) restera le même quelle que soit la valeur que l'on pourrait attribuer à \(A2\) :
+Dans ce cas, il n'y a pas d'interaction entre \(\small A1\) et \(\small A2\), car il n'y a pas d'effet direct ni indirect de \(\small A2 \rightarrow Y\). L'effet de \(\small A1 \rightarrow Y\) restera le même quelle que soit la valeur que l'on pourrait attribuer à \(\small A2\) :
 
-\(\scriptsize P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] - P\left[Y=1|do(A1=0, A2=1)\right]\)
+\(\small P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] - P\left[Y=1|do(A1=0, A2=1)\right]\)
 
-Par contre, il peut y avoir une modification de l'effet de \(A1\) par \(A2\), en particulier s'il existe une interaction \(A1 * L2 \rightarrow Y\) ou \(A1 * L3 \rightarrow Y\), on s'attend à ce que les contrastes suivants soient différents :
+Par contre, il peut y avoir une modification de l'effet de \(A1\) par \(A2\), en particulier s'il existe une interaction \(\small A1 * L2 \rightarrow Y\) ou \(\small A1 * L3 \rightarrow Y\), on s'attend à ce que les contrastes suivants soient différents :
 
-\(\scriptsize P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] - P[Y=1|do(A1=2),A2=0]\).
+\(\small P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] - P[Y=1|do(A1=2),A2=0]\).
 
 \hypertarget{echelle}{%
 \chapter{La question des échelles}\label{echelle}}
@@ -634,6 +644,8 @@ soit :
 
 \includegraphics[width=0.65\textwidth,height=\textheight]{img/Image2.png}
 \end{quote}
+
+\textbf{Remarques : la mesure de l'effet joint est donnée dans la dernière ligne et la dernière colonne (entre parenthèse). L'effet d'interaction (flèche) est identifié soit comme l'ecart entre l'effet joint et }
 
 \hypertarget{echelle-multiplicative}{%
 \subsection*{Echelle multiplicative}\label{echelle-multiplicative}}
@@ -865,7 +877,7 @@ Il s'agit d'un paramètre explorant l'interaction additive :
 
 Il mesure l'augmentation relative du risque liée à l'exposition jointe, rapportée à la somme des augmentations relatives du risque liées à la 1ère et la 2ème exposition.
 
-Pour rappel, l'augmentation relative du risque liée à l'exposition jointe correspond à l'augmentation absolue du risque (différence de risque), exprimée en pourcentage par rapport au risque de base \(p_{00}\).
+Pour rappel, l'augmentation relative du risque liée à l'exposition jointe correspond à l'augmentation absolue du risque (différence de risques), exprimée en pourcentage par rapport au risque de base \(p_{00}\).
 
 \(ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)
 
@@ -946,7 +958,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
     avec et sans l'outcome (\(\small N_{a1,a2}(Y=1)\) et \(N_{a1,a2}(Y=0)\))
   \end{itemize}
 \item
-  Présenter les risques relatifs (RR), les OR ou les différences de risque (RD)
+  Présenter les risques relatifs (RR), les OR ou les différences de risques (RD)
 
   \begin{itemize}
   \tightlist
@@ -994,7 +1006,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
     avec et sans l'outcome (\(\small N_{a1,a2}(Y=1) et N_{a1,a2}(Y=0)\))
   \end{itemize}
 \item
-  Présenter les risques relatifs (RR), les OR ou les différences de risque (RD)
+  Présenter les risques relatifs (RR), les OR ou les différences de risques (RD)
 
   \begin{itemize}
   \tightlist
@@ -1016,7 +1028,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
     \textbf{et de A2 sur Y dans les strates de A1}.
   \end{itemize}
 \item
-  Présenter les mesures d'e la modification de l'effet'interaction avec les IC sur des échelles
+  Présenter les mesures de la modification de l'effet d'interaction avec les IC sur des échelles
 
   \begin{itemize}
   \tightlist
@@ -1034,7 +1046,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
 
 Ces recommandations sont très utiles lorsque les interactions ont été évaluées à partir de modèles de régression (logistiques, log-linéaires ou linéaires) permettant d'estimer directement des OR, des RR ou des DR, condionnellement aux facteurs de confusion.
 
-En inférence causale, des assocations marginales plutôt que conditionnelles sont souvent estimées (que ce soit en termes de difference de risque, de risques relatifs ou d'odds ratio). Dans la suite de ce document, nous proposons une variante des recommandations de Knol et VanderWeele, adaptée à des estimations marginales. Nous proposons en effet :
+En inférence causale, des assocations marginales plutôt que conditionnelles sont souvent estimées (que ce soit en termes de difference de risques, de risques relatifs ou d'odds ratio). Dans la suite de ce document, nous proposons une variante des recommandations de Knol et VanderWeele, adaptée à des estimations marginales. Nous proposons en effet :
 
 \begin{itemize}
 \tightlist
@@ -1044,10 +1056,10 @@ En inférence causale, des assocations marginales plutôt que conditionnelles so
   \begin{itemize}
   \tightlist
   \item
-    plutot les effectifs avec et sans l'outcome
+    plutôt les effectifs avec et sans l'outcome
   \end{itemize}
 \item
-  Ne pas forcément présenter une différence de risque ou un rapport de risque
+  Ne pas forcément présenter une différence de risques ou un rapport de risques
 
   \begin{itemize}
   \tightlist
