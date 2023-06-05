@@ -186,12 +186,15 @@ En réalité, on a réalisé cette analyse par g-computation (voir chapitre \@re
 
 # Exemple 4 - X quantitatif
 
+Les articles qui se consacrent aux interactions présentent souvent des méthodes applicables lorsque les deux expositions X et V sont binaires. Or, en épidémiologie, les expositions peuvent aussi être continues et, si dichotomiser ces variables peut simplifier l'approche de l'interaction, cela conduit à une perte d'information qui n'est pas souhaitable et pose la question complexe du choix des seuils @royston2006dichotomizing @knol2007estimating @cadarso2006effect.
+
+Nous présentons ici un exemple ou l'une des expositions, l'âge, est analysée en tant que variable quantitative continue.
 
 ## Formuler les objectifs 
 
-Dans cette étude fictive, on s'est intéressé à la consommation de cannabis et comment le fait d'avoir déjà fumer du cannabis varie avec l'âge A et le sexe S. 
+Dans cette étude fictive, on s'est intéressé à la consommation de cannabis : comment le fait d'avoir déjà fumé du cannabis Y varie avec l'âge A et le sexe S. 
 
-La démarche est explicative : on cherche à comprendre des mécanismes causaux.
+La démarche est explicative : on cherche à comprendre les mécanismes causaux de ce comportement de santé.
 
 Ici, on adoptera une démarche d'analyse d'interaction $\small do(S,A)$
 
@@ -244,51 +247,11 @@ Pour simplifier les analyses, nous n'allons inclure que les plus de 30 ans (N = 
 
 ![](img/graph_Xquanti_2.png){width=80%}
 
+Le modèle de régression logistique ($\cdot\cdot\cdot$) semble être plus proche de la modélisation non paramétrique sur données observées (loess, -----) que la modélisation linaire ($---$) . D'ailleurs, le R² du modèle logistique est de 0,168 contre 0,139 pour le modèle linéaire.
 
-## Analyse exploratoire (1)
+## Analyse exploratoire
 
-
-La sortie d'une modèle linéaire simple serait :
-
-```{r ex_Xquant_expl, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
-# 
-# Call:
-# lm(formula = cannabis ~ sexe + age + sexe * age, data = data)
-# 
-# Coefficients:
-#                 Estimate Std. Error t value Pr(>|t|)    
-# (Intercept)    1.3197103  0.0066820  197.50   <2e-16 ***
-# sexeWomen     -0.3373482  0.0091573  -36.84   <2e-16 ***
-# age           -0.0183730  0.0001294 -142.03   <2e-16 ***
-# sexeWomen:age  0.0044248  0.0001781   24.85   <2e-16 ***
-# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-```
-
-
-On peut en déduire (échelle additive) que : 
-
-
-- L'effet du sexe (d'être femme plutot que homme) est : 
-    + "A 0 ans" (à l'origine) : $\small DR(S|A=0) = -33,73$%
-    + A 40 ans (par exemple) : $\small DR(S|A=40) = -33,73 + 0,44 \times 40 =$ `r round(-33.73 + 0.44 * 40,1)`%
-- L'effet de l'age est : 
-    + Quand on est un homme : $\small DR(A|S=0) = -1,84$ % par année d'âge
-    + Quand on est une femme : $\small DR(A|S=1) = -1,84 + 0.44 =$ `r round(-1.84 + 0.44,1)` % par année d'âge
-- L'effet d'être une femme et d'avoir 1 an de plus 
-    + plutot que homme et un certain âge
-    + $\small DR(A,S) = -33,73 -1,84 + 0,44 =$ `r round(-33.73 -1.84 + 0.44,1)` %
-- **L'effet d'interaction/modification d'effet** est :  $\small AI = +0.44$ %
-
-On pourrait aussi déduire :
-
-  - $\small Y_{S=0,A=30} = 131,97 - 1,84 \times 30 =$ `r round(131.97 - 1.84*30,1)`%
-  - $\small Y_{S=0,A=50} = 131,97 - 1,84 \times 50 =$ `r round(131.97 - 1.84*50,1)`%
-  - $\small Y_{S=1,A=30} = 131,97 -33,73 - 1,84 \times 30 + 0,44 \times 30 =$ `r round(131.97 - 33.73 - 1.84*30 + 0.44*30,1)`%
-  - $\small Y_{S=1,A=50} = 131,97 -33,73 - 1,84 \times 50 + 0,44 \times 50 =$ `r round(131.97 - 33.73 - 1.84*50 +0.44*50,1)`%
-
-
-## Analyse exploratoire (2)
+### Régression logistique
 
 L'outcome étant binaire, il est plus classique d'utiliser un modèle logistique, dont les résultats  seraient : 
 
@@ -318,6 +281,8 @@ Ce qui, en terme d'OR, donnerait :
 
 ```
 
+Les modèles de régression logistique donnent des résulats sur l'échelle multiplicative :
+
 - L'effet du sexe (d'être femme plutot que homme) est : 
     + "A 0 ans" (à l'origine) : $\small OR(S|A=0) = \times 0.31$
     + "A 1 ans" : $\small OR(S|A=1) = exp(-1,164 + 0,012) \times$ `r round(exp(-1.164 + 0.012),1)`
@@ -331,243 +296,103 @@ Ce qui, en terme d'OR, donnerait :
 - **L'effet d'interaction/modification d'effet** est :  $\small MI =\times 1,01$
 - **Un effet d'interaction additif** $\small RERI_{OR} = OR_{11} - OR_{01} - OR_{10} + 1 =$ `r round(exp(-1.164 -0.088 + 0.012) - exp(-1.164 + 0.012) - exp(-0.088 + 0.012) + 1,3)`
 
+On a donc une interaction multiplicative positive (MI>1) et significative et une interaction additive aussi positive (RERI >0).
 
-On pourrait aussi déduire :
+
+### Régression linéaire
+
+
+La sortie d'une modèle linéaire simple serait :
+
+```{r ex_Xquant_expl, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+# 
+# Call:
+# lm(formula = cannabis ~ sexe + age + sexe * age, data = data)
+# 
+# Coefficients:
+#                 Estimate Std. Error t value Pr(>|t|)    
+# (Intercept)    1.3197103  0.0066820  197.50   <2e-16 ***
+# sexeWomen     -0.3373482  0.0091573  -36.84   <2e-16 ***
+# age           -0.0183730  0.0001294 -142.03   <2e-16 ***
+# sexeWomen:age  0.0044248  0.0001781   24.85   <2e-16 ***
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+```
+
+
+On peut en déduire, ici sur une échelle additive, que : 
+
+
+- L'effet du sexe (d'être femme plutot que homme) est : 
+    + "A 0 ans" (à l'origine) : $\small DR(S|A=0) = -33,73$%
+    + A 20 ans (par exemple) : $\small DR(S|A=20) = -33,73 + 0,44 \times 20 =$ `r round(-33.73 + 0.44 * 20,2)`%
+    + A 40 ans (par exemple) : $\small DR(S|A=40) = -33,73 + 0,44 \times 40 =$ `r round(-33.73 + 0.44 * 40,2)`%
+    + A 60 ans (par exemple) : $\small DR(S|A=60) = -33,73 + 0,44 \times 60 =$ `r round(-33.73 + 0.44 * 60,2)`%
+
+- L'effet de l'age est : 
+    + Quand on est un homme : $\small DR(A|S=0) = -1,84$ % par année d'âge
+    + Quand on est une femme : $\small DR(A|S=1) = -1,84 + 0.44 =$ `r round(-1.84 + 0.44,2)` % par année d'âge
+- L'effet d'être une femme et d'avoir 1 an de plus 
+    + plutot que homme et un certain âge
+    + $\small DR(A,S) = -33,73 -1,84 + 0,44 =$ `r round(-33.73 -1.84 + 0.44,2)` %
+- **L'effet d'interaction/modification d'effet** est :  $\small AI = +0.44$ %
+
+On retrouve une interaction additive significative et positive. Les expositions ayant un effet négatif et l'effet d'interaction étant positif, cet effet est difficile à interpréter, mais on pourrait le formuler plus simplement en changeant la catégorie de référence du sexe de homme à femme. 
+
+Ainsi : globalement, la probabilité d'avoir déjà fumer du cannabis diminue avec l'âge chez les hommes (-1,8% par an) et chez les femmes (-1,4% par an). Cette probabilité est plus élevée chez les hommes (de 16% par exemple à 40 ans), mais cet écart diminue avec l'âge, de 0,44% par année d'âge.
+
+
+### Effets marginaux
+
+A partir des modèles, on peut déduire les effets marginaux pour certaines catégories. Par exemple, avec le modèle logistique : 
 
   - $\small Y_{S=0,A=30} = \frac{exp(3,914 - 0,088 \times 30)}{1+exp(3,914 - 0,088 \times 30)} =$ `r round((exp(3.914 - 0.088*30)/(1+exp(3.914 - 0.088*30)))*100,1)`%
   - $\small Y_{S=0,A=50} = \frac{exp(3,914 - 0,088 \times 50)}{1+exp(3,914 - 0,088 \times 50)} =$ `r round((exp(3.914 - 0.088*50)/(1+exp(3.914 - 0.088*50)))*100,1)`%
    - $\small Y_{S=1,A=30} = \frac{exp(3,914 - 1,164 - 0,088 \times 30 + 0,012 \times 30)}{1+exp(3,914 - 1,164 - 0,088 \times 30 + 0,012 \times 30)} =$ `r round((exp(3.914 - 1.164 - 0.088*30 +0.012*30)/(1+exp(3.914 - 1.164 - 0.088*30+0.012*30)))*100,1)`%
    - $\small Y_{S=1,A=50} = \frac{exp(3,914 - 1,164 - 0,088 \times 50 + 0,012 \times 50)}{1+exp(3,914 - 1,164 - 0,088 \times 50 + 0,012 \times 50)} =$ `r round((exp(3.914 - 1.164 - 0.088*50 +0.012*50)/(1+exp(3.914 - 1.164 - 0.088*50+0.012*50)))*100,1)`%
    
-## Analyse confirmatoire (1)
+Avec le modèle linéaire, on aurait :
+
+  - $\small Y_{S=0,A=30} = 131,97 - 1,84 \times 30 =$ `r round(131.97 - 1.84*30,1)`%
+  - $\small Y_{S=0,A=50} = 131,97 - 1,84 \times 50 =$ `r round(131.97 - 1.84*50,1)`%
+  - $\small Y_{S=1,A=30} = 131,97 -33,73 - 1,84 \times 30 + 0,44 \times 30 =$ `r round(131.97 - 33.73 - 1.84*30 + 0.44*30,1)`%
+  - $\small Y_{S=1,A=50} = 131,97 -33,73 - 1,84 \times 50 + 0,44 \times 50 =$ `r round(131.97 - 33.73 - 1.84*50 +0.44*50,1)`%
+
+   
+## Analyse confirmatoire
 
 
-Nous avons calculé les effets d'intérêt avec une méthode de g-computation (Intervalles de confiance estimé par bootstrap, 200 répétitions). Le modèle utilisé était un modèle de régression logistique.
+Nous avons calculé les effets d'intérêt avec une méthode de g-computation/MSM (Intervalles de confiance estimé par bootstrap, 200 répétitions). 
 
 
 Le code était : 
 
-```{r eval=FALSE, echo=TRUE}
-     ## g computation avec modèle logistique -----
-     
-     B=200
-     
-     simu.base <- data.frame(i.simu=c(1:B))
-     
-     
-     for (i in 1:B){ 
-       # sample the indices 1 to n with replacement
-       bootIndices <- sample(1:nrow(data), replace=T) ; set.seed(01062023+i*12)
-       bootData <- data[bootIndices,]
-       
-       Q.model <- glm(data=bootData, 
-                      formula = cannabis ~ sexe+ age+  sexe*age,
-                      family = binomial)
-       
-       # Scénarios #
-       data.S1 <-  data.S2 <- bootData
-       data.S1$sexe <- "Women"
-       data.S2$sexe <- "Men"
-       data.S1A30 <-  data.S1A40 <- data.S1A50 <- data.S1A60 <- data.S1
-       data.S2A30 <-  data.S2A40 <- data.S2A50 <- data.S2A60 <- data.S2
-       data.S1A30$age <- data.S2A30$age <- 30
-       data.S1A40$age <- data.S2A40$age <- 40
-       data.S1A50$age <- data.S2A50$age <- 50
-       data.S1A60$age <- data.S2A60$age <- 60
-       
-       bootData$dead.S1A30.pred <- predict(Q.model, newdata = data.S1A30, type = "response")
-       bootData$dead.S1A40.pred <- predict(Q.model, newdata = data.S1A40, type = "response")
-       bootData$dead.S1A50.pred <- predict(Q.model, newdata = data.S1A50, type = "response")
-       bootData$dead.S1A60.pred <- predict(Q.model, newdata = data.S1A60, type = "response")
-       bootData$dead.S2A30.pred <- predict(Q.model, newdata = data.S2A30, type = "response")
-       bootData$dead.S2A40.pred <- predict(Q.model, newdata = data.S2A40, type = "response")
-       bootData$dead.S2A50.pred <- predict(Q.model, newdata = data.S2A50, type = "response")
-       bootData$dead.S2A60.pred <- predict(Q.model, newdata = data.S2A60, type = "response")
-       
-       simu.base$est.Y0_30[simu.base$i.simu==i] = round(mean(bootData$dead.S2A30.pred),4)
-       simu.base$est.Y0_40[simu.base$i.simu==i] = round(mean(bootData$dead.S2A40.pred),4)
-       simu.base$est.Y0_50[simu.base$i.simu==i] = round(mean(bootData$dead.S2A50.pred),4)
-       simu.base$est.Y0_60[simu.base$i.simu==i] = round(mean(bootData$dead.S2A60.pred),4)
-       simu.base$est.Y1_30[simu.base$i.simu==i] = round(mean(bootData$dead.S1A30.pred),4)
-       simu.base$est.Y1_40[simu.base$i.simu==i] = round(mean(bootData$dead.S1A40.pred),4)
-       simu.base$est.Y1_50[simu.base$i.simu==i] = round(mean(bootData$dead.S1A50.pred),4)
-       simu.base$est.Y1_60[simu.base$i.simu==i] = round(mean(bootData$dead.S1A60.pred),4)
-       
-       simu.base$est_ET_S_30[simu.base$i.simu==i] = round(mean(bootData$dead.S1A30.pred - 
-                                                                 bootData$dead.S2A30.pred),4)
-       simu.base$est_RR_S_30[simu.base$i.simu==i] = round(mean(bootData$dead.S1A30.pred / 
-                                                                 bootData$dead.S2A30.pred),4)
-       
-       simu.base$est_ET_S_40[simu.base$i.simu==i] = round(mean(bootData$dead.S1A40.pred - 
-                                                                 bootData$dead.S2A40.pred),4)
-       simu.base$est_RR_S_40[simu.base$i.simu==i] = round(mean(bootData$dead.S1A40.pred / 
-                                                                 bootData$dead.S2A40.pred),4)
-       
-       simu.base$est_ET_S_50[simu.base$i.simu==i] = round(mean(bootData$dead.S1A50.pred - 
-                                                                 bootData$dead.S2A50.pred),4)
-       simu.base$est_RR_S_50[simu.base$i.simu==i] = round(mean(bootData$dead.S1A50.pred / 
-                                                                 bootData$dead.S2A50.pred),4)
-       
-       simu.base$est_ET_S_60[simu.base$i.simu==i] = round(mean(bootData$dead.S1A60.pred - 
-                                                                 bootData$dead.S2A60.pred),4)
-       simu.base$est_RR_S_60[simu.base$i.simu==i] = round(mean(bootData$dead.S1A60.pred / 
-                                                                 bootData$dead.S2A60.pred),4)
-       
-       simu.base$est_ET_S1_Aa[simu.base$i.simu==i] = round(mean(bootData$dead.S1A40.pred - 
-                                                                  bootData$dead.S1A30.pred),4)
-       simu.base$est_ET_S2_Aa[simu.base$i.simu==i] = round(mean(bootData$dead.S2A40.pred - 
-                                                                  bootData$dead.S2A30.pred),4)
-       simu.base$est_RR_S1_Aa[simu.base$i.simu==i] = round(mean(bootData$dead.S1A40.pred / 
-                                                                  bootData$dead.S1A30.pred),4)
-       simu.base$est_RR_S2_Aa[simu.base$i.simu==i] = round(mean(bootData$dead.S2A40.pred /
-                                                                  bootData$dead.S2A30.pred),4)
-       
-       
-       simu.base$est_ET_S1_Ab[simu.base$i.simu==i] = round(mean(bootData$dead.S1A50.pred - 
-                                                                  bootData$dead.S1A40.pred),4)
-       simu.base$est_ET_S2_Ab[simu.base$i.simu==i] = round(mean(bootData$dead.S2A50.pred - 
-                                                                  bootData$dead.S2A40.pred),4)
-       simu.base$est_RR_S1_Ab[simu.base$i.simu==i] = round(mean(bootData$dead.S1A50.pred / 
-                                                                  bootData$dead.S1A40.pred),4)
-       simu.base$est_RR_S2_Ab[simu.base$i.simu==i] = round(mean(bootData$dead.S2A50.pred / 
-                                                                  bootData$dead.S2A40.pred),4)
-       
-       simu.base$est_ET_S1_Ac[simu.base$i.simu==i] = round(mean(bootData$dead.S1A60.pred - 
-                                                                  bootData$dead.S1A50.pred),4)
-       simu.base$est_ET_S2_Ac[simu.base$i.simu==i] = round(mean(bootData$dead.S2A60.pred - 
-                                                                  bootData$dead.S2A50.pred),4)
-       
-       simu.base$est_RR_S1_Ac[simu.base$i.simu==i] = round(mean(bootData$dead.S1A60.pred / 
-                                                                  bootData$dead.S1A50.pred),4)
-       simu.base$est_RR_S2_Ac[simu.base$i.simu==i] = round(mean(bootData$dead.S2A60.pred / 
-                                                                  bootData$dead.S2A50.pred),4)
-       
-       
-       simu.base$est_AI_30[simu.base$i.simu==i] = round(mean((bootData$dead.S1A40.pred - 
-                                                                bootData$dead.S1A30.pred) - 
-                                                               (bootData$dead.S2A40.pred - 
-                                                                  bootData$dead.S2A30.pred)),4)
-       simu.base$est_MI_30[simu.base$i.simu==i] = round(mean((bootData$dead.S1A40.pred * 
-                                                                bootData$dead.S2A30.pred) / 
-                                                               (bootData$dead.S2A40.pred * 
-                                                                  bootData$dead.S1A30.pred)),4)
-       simu.base$est_AI_40[simu.base$i.simu==i] = round(mean((bootData$dead.S1A50.pred - 
-                                                                bootData$dead.S1A40.pred) - 
-                                                               (bootData$dead.S2A50.pred - 
-                                                                  bootData$dead.S2A40.pred)),4)
-       simu.base$est_MI_40[simu.base$i.simu==i] = round(mean((bootData$dead.S1A50.pred * 
-                                                                bootData$dead.S2A40.pred) / 
-                                                               (bootData$dead.S2A50.pred * 
-                                                                  bootData$dead.S1A40.pred)),4)
-       simu.base$est_AI_50[simu.base$i.simu==i] = round(mean((bootData$dead.S1A60.pred - 
-                                                                bootData$dead.S1A50.pred) - 
-                                                               (bootData$dead.S2A60.pred - 
-                                                                  bootData$dead.S2A50.pred)),4)
-       simu.base$est_MI_50[simu.base$i.simu==i] = round(mean((bootData$dead.S1A60.pred * 
-                                                                bootData$dead.S2A50.pred) / 
-                                                               (bootData$dead.S2A60.pred * 
-                                                                  bootData$dead.S1A50.pred)),4)
-     }
-     
-     effect <- round(colMeans(simu.base),2)
-     confint <- apply(simu.base, 2, function(x) quantile(x,probs = c(0.025, 0.975)))
-     
-     tab_all <- rbind(effects,confint)
+<script type="text/javascript">
 
+// toggle visibility of R source blocks in R Markdown output
+function toggle_R() {
+  var x = document.getElementsByClassName('r');
+  if (x.length == 0) return;
+  function toggle_vis(o) {
+    var d = o.style.display;
+    o.style.display = (d == 'block' || d == '') ? 'none':'block';
+  }
+
+  for (i = 0; i < x.length; i++) {
+    var y = x[i];
+    if (y.tagName.toLowerCase() === 'pre') toggle_vis(y);
+  }
+
+    var elem = document.getElementById("myButton1");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+}
+
+document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id="myButton1" style="position: static; top: 1%; left: 2%; z-index: 200"></input>')
+
+</script>
+
+```{r, results ='hide', eval=FALSE}
 ```
 
-
-Les résultats pour les 3 intervalles identifiés :
-
-```{r ex_Xquant_conf_30, echo=FALSE, message=FALSE, warning=FALSE}
-
-load("img/table_glm_30.RData")
-load("img/footnote_30.RData")
-
-     library(knitr)
-     library(kableExtra)
-     kable(table_glm_30,
-           caption = "Effect d'interaction entre 30 et 40 ans") %>%
-       kable_classic()  %>%
-       add_footnote(footnote_1)
-
-```
-
-
-```{r ex_Xquant_conf_40, echo=FALSE, message=FALSE, warning=FALSE}
-
-load("img/table_glm_40.RData")
-load("img/footnote_40.RData")
-
-     library(knitr)
-     library(kableExtra)
-     kable(table_glm_40,
-           caption = "Effect d'interaction entre 50 et 60 ans") %>%
-       kable_classic()  %>%
-       add_footnote(footnote_40)
-
-```
-
-```{r ex_Xquant_conf_50, echo=FALSE, message=FALSE, warning=FALSE}
-
-load("img/table_glm_50.RData")
-load("img/footnote_50.RData")
-
-     library(knitr)
-     library(kableExtra)
-     kable(table_glm_50,
-           caption = "Effect d'interaction entre 40 et 50 ans") %>%
-       kable_classic()  %>%
-       add_footnote(footnote_50)
-
-```
-
-
-## Analyse confirmatoire (2)
-
-
-Si on avait utilisé un modèle linéaire, les résultats auraient été : 
-
-```{r ex_Xquant_conf_30_lm, echo=FALSE, message=FALSE, warning=FALSE}
-
-load("img/table_glm_30_lm.RData")
-load("img/footnote_30_lm.RData")
-
-     library(knitr)
-     library(kableExtra)
-     kable(table_glm_30_lm,
-           caption = "Effect d'interaction entre 30 et 40 ans") %>%
-       kable_classic()  %>%
-       add_footnote(footnote_1_lm)
-
-```
-
-
-```{r ex_Xquant_conf_40_lm, echo=FALSE, message=FALSE, warning=FALSE}
-
-load("img/table_glm_40_lm.RData")
-load("img/footnote_40_lm.RData")
-
-     library(knitr)
-     library(kableExtra)
-     kable(table_glm_40_lm,
-           caption = "Effect d'interaction entre 50 et 60 ans") %>%
-       kable_classic()  %>%
-       add_footnote(footnote_40_lm)
-
-```
-
-```{r ex_Xquant_conf_50_lm, echo=FALSE, message=FALSE, warning=FALSE}
-
-load("img/table_glm_50_lm.RData")
-load("img/footnote_50_lm.RData")
-
-     library(knitr)
-     library(kableExtra)
-     kable(table_glm_50_lm,
-           caption = "Effect d'interaction entre 40 et 50 ans") %>%
-       kable_classic()  %>%
-       add_footnote(footnote_50_lm)
-
-```
 

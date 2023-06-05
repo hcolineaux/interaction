@@ -131,7 +131,7 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
-\date{Last compiled on 01 June, 2023}
+\date{Last compiled on 05 June, 2023}
 
 \begin{document}
 \maketitle
@@ -2951,12 +2951,16 @@ En réalité, on a réalisé cette analyse par g-computation (voir chapitre \ref
 \hypertarget{exemple-4---x-quantitatif}{%
 \chapter{Exemple 4 - X quantitatif}\label{exemple-4---x-quantitatif}}
 
+Les articles qui se consacrent aux interactions présentent souvent des méthodes applicables lorsque les deux expositions X et V sont binaires. Or, en épidémiologie, les expositions peuvent aussi être continues et, si dichotomiser ces variables peut simplifier l'approche de l'interaction, cela conduit à une perte d'information qui n'est pas souhaitable et pose la question complexe du choix des seuils \citet{royston2006dichotomizing} \citet{knol2007estimating} \citet{cadarso2006effect}.
+
+Nous présentons ici un exemple ou l'une des expositions, l'âge, est analysée en tant que variable quantitative continue.
+
 \hypertarget{formuler-les-objectifs-1}{%
 \section{Formuler les objectifs}\label{formuler-les-objectifs-1}}
 
-Dans cette étude fictive, on s'est intéressé à la consommation de cannabis et comment le fait d'avoir déjà fumer du cannabis varie avec l'âge A et le sexe S.
+Dans cette étude fictive, on s'est intéressé à la consommation de cannabis : comment le fait d'avoir déjà fumé du cannabis Y varie avec l'âge A et le sexe S.
 
-La démarche est explicative : on cherche à comprendre des mécanismes causaux.
+La démarche est explicative : on cherche à comprendre les mécanismes causaux de ce comportement de santé.
 
 Ici, on adoptera une démarche d'analyse d'interaction \(\small do(S,A)\)
 
@@ -2965,9 +2969,45 @@ Ici, on adoptera une démarche d'analyse d'interaction \(\small do(S,A)\)
 
 \textbf{Le DAG} (sans les médiateurs) était :
 
-\textbf{L'estimand} était défini par :
+\begin{quote}
+\includegraphics[width=0.5\textwidth,height=\textheight]{img/Image14.png}
+\end{quote}
 
-\textbf{L'estimateur} :
+\textbf{Les estimands} était définis par :
+
+\begin{itemize}
+\tightlist
+\item
+  L'effet de l'âge (``avoir 10 ans de plus'') chez les hommes
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\small DR = Y_{S=0,A=a+10} - Y_{S=0,A=a}\)
+  \item
+    \(\small RR = \frac{Y_{S=0,A=a+10}}{Y_{S=0,A=a}}\)
+  \end{itemize}
+\item
+  L'effet de l'âge (``avoir 10 ans de plus'') chez les femmes :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\small DR = Y_{S=1,A=a+10} - Y_{S=1,A=a}\)
+  \item
+    \(\small RR = \frac{Y_{S=1,A=a+10}}{Y_{S=1,A=a}}\)
+  \end{itemize}
+\item
+  L'effet d'interaction entre l'âge et le sexe (l'effet du sexe est-il différent en fonction de l'âge et l'effet de l'âge est-il différent en fonction du sexe ?)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    sur l'échelle additive : \(\small AI = Y_{S=1,A=a+10} - Y_{S=0,A=a+10} - Y_{S=1,A=a} + Y_{S=0,A=a+10}\)
+  \item
+    sur l'échelle multiplicative : \(\small MI =\frac{Y_{S=1,A=a+10} \times Y_{S=0,A=a}}{Y_{S=1,A=a} \times Y_{S=0,A=a+10}}\)
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{analyse-descriptive-1}{%
 \section{Analyse descriptive}\label{analyse-descriptive-1}}
@@ -3009,81 +3049,13 @@ Pour simplifier les analyses, nous n'allons inclure que les plus de 30 ans (N = 
 
 \includegraphics[width=0.8\textwidth,height=\textheight]{img/graph_Xquanti_2.png}
 
+Le modèle de régression logistique (\(\cdot\cdot\cdot\)) semble être plus proche de la modélisation non paramétrique sur données observées (loess, -----) que la modélisation linaire (\(---\)) . D'ailleurs, le R² du modèle logistique est de 0,168 contre 0,139 pour le modèle linéaire.
+
 \hypertarget{analyse-exploratoire-1}{%
-\section{Analyse exploratoire (1)}\label{analyse-exploratoire-1}}
+\section{Analyse exploratoire}\label{analyse-exploratoire-1}}
 
-La sortie d'une modèle linéaire simple serait :
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# }
-\CommentTok{\# Call:}
-\CommentTok{\# lm(formula = cannabis \textasciitilde{} sexe + age + sexe * age, data = data)}
-\CommentTok{\# }
-\CommentTok{\# Coefficients:}
-\CommentTok{\#                 Estimate Std. Error t value Pr(\textgreater{}|t|)    }
-\CommentTok{\# (Intercept)    1.3270453  0.0068655  193.29   \textless{}2e{-}16 ***}
-\CommentTok{\# sexeWomen     {-}0.3362871  0.0094614  {-}35.54   \textless{}2e{-}16 ***}
-\CommentTok{\# age           {-}0.0185252  0.0001335 {-}138.78   \textless{}2e{-}16 ***}
-\CommentTok{\# sexeWomen:age  0.0044007  0.0001853   23.75   \textless{}2e{-}16 ***\# {-}{-}{-}}
-\CommentTok{\# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1}
-\end{Highlighting}
-\end{Shaded}
-
-On peut en déduire (échelle additive) que :
-
-\begin{itemize}
-\tightlist
-\item
-  L'effet du sexe (d'être femme plutot que homme) est :
-
-  \begin{itemize}
-  \tightlist
-  \item
-    ``A 0 ans'' (à l'origine) : \(\small DR(S|A=0) = -33,63\)\%
-  \item
-    A 40 ans (par exemple) : \(\small DR(S|A=40) = -33,63 + 0,44 \times 40 =\) -16\%
-  \end{itemize}
-\item
-  L'effet de l'age est :
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Quand on est un homme : \(\small DR(A|S=0) = -1,85\) \% par année d'âge
-  \item
-    Quand on est une femme : \(\small DR(A|S=1) = -1,85 + 0.44 =\) -1.4 \% par année d'âge
-  \end{itemize}
-\item
-  L'effet d'être une femme et d'avoir 1 an de plus
-
-  \begin{itemize}
-  \tightlist
-  \item
-    plutot que homme et un certain âge
-  \item
-    \(\small DR(A,S) = -33,63 -1,85 + 0,44 =\) -35.1 \%
-  \end{itemize}
-\item
-  \textbf{L'effet d'interaction/modification d'effet} est : \(\small AI = +0.44\) \%
-\end{itemize}
-
-On pourrait aussi déduire :
-
-\begin{itemize}
-\tightlist
-\item
-  \(\small Y_{S=0,A=30} = 132,7 - 1,85 \times 30 =\) 77.2\%
-\item
-  \(\small Y_{S=0,A=50} = 132,7 - 1,85 \times 50 =\) 40.2\%
-\item
-  \(\small Y_{S=1,A=30} = 132,7 -33,63 - 1,85 \times 30 + 0,44 \times 30 =\) 56.8\%
-\item
-  \(\small Y_{S=1,A=50} = 132,7 -33,63 - 1,85 \times 50 + 0,44 \times 50 =\) 28.6\%
-\end{itemize}
-
-\hypertarget{analyse-exploratoire-2}{%
-\section{Analyse exploratoire (2)}\label{analyse-exploratoire-2}}
+\hypertarget{ruxe9gression-logistique-1}{%
+\subsection{Régression logistique}\label{ruxe9gression-logistique-1}}
 
 L'outcome étant binaire, il est plus classique d'utiliser un modèle logistique, dont les résultats seraient :
 
@@ -3095,10 +3067,10 @@ L'outcome étant binaire, il est plus classique d'utiliser un modèle logistique
 \CommentTok{\# }
 \CommentTok{\# Coefficients:}
 \CommentTok{\#                 Estimate Std. Error z value Pr(\textgreater{}|z|)    }
-\CommentTok{\# (Intercept)    3.9524082  0.0382785  103.25   \textless{}2e{-}16 ***}
-\CommentTok{\# sexeWomen     {-}1.1787828  0.0528351  {-}22.31   \textless{}2e{-}16 ***}
-\CommentTok{\# age           {-}0.0891173  0.0007808 {-}114.14   \textless{}2e{-}16 ***}
-\CommentTok{\# sexeWomen:age  0.0120384  0.0011038   10.91   \textless{}2e{-}16 ***}
+\CommentTok{\# (Intercept)    3.9144609  0.0372560  105.07   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen     {-}1.1644706  0.0511834  {-}22.75   \textless{}2e{-}16 ***}
+\CommentTok{\# age           {-}0.0882928  0.0007566 {-}116.70   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen:age  0.0117238  0.0010623   11.04   \textless{}2e{-}16 ***}
 \CommentTok{\# {-}{-}{-}}
 \CommentTok{\# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1}
 \end{Highlighting}
@@ -3109,12 +3081,14 @@ Ce qui, en terme d'OR, donnerait :
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#                       OR      2.5 \%     97.5 \%}
-\CommentTok{\# (Intercept)   52.0605878 48.3044121 56.1245459}
-\CommentTok{\# sexeWomen      0.3076530  0.2773804  0.3412112}
-\CommentTok{\# age            0.9147383  0.9133364  0.9161362}
-\CommentTok{\# sexeWomen:age  1.0121112  1.0099239  1.0143033}
+\CommentTok{\# (Intercept)   50.1220409 46.5985990 53.9259952}
+\CommentTok{\# sexeWomen      0.3120878  0.2822910  0.3450107}
+\CommentTok{\# age            0.9154927  0.9141333  0.9168485}
+\CommentTok{\# sexeWomen:age  1.0117927  1.0096884  1.0139018}
 \end{Highlighting}
 \end{Shaded}
+
+Les modèles de régression logistique donnent des résulats sur l'échelle multiplicative :
 
 \begin{itemize}
 \tightlist
@@ -3126,9 +3100,9 @@ Ce qui, en terme d'OR, donnerait :
   \item
     ``A 0 ans'' (à l'origine) : \(\small OR(S|A=0) = \times 0.31\)
   \item
-    ``A 1 ans'' : \(\small OR(S|A=1) = \times 0.31 + 0,012 = \times\) 0.3
+    ``A 1 ans'' : \(\small OR(S|A=1) = exp(-1,164 + 0,012) \times\) 0.3
   \item
-    A 40 ans (par exemple) : \(\small OR(S|A=40) = exp(-1,179 + 0,012 \times 40) = \times\) 0.5
+    A 40 ans (par exemple) : \(\small OR(S|A=40) = exp(-1,164 + 0,012 \times 40) = \times\) 0.5
   \end{itemize}
 \item
   L'effet de l'age est :
@@ -3136,9 +3110,9 @@ Ce qui, en terme d'OR, donnerait :
   \begin{itemize}
   \tightlist
   \item
-    Quand on est un homme : \(\small OR(A|S=0) = \times 0,91\) par année d'âge
+    Quand on est un homme : \(\small OR(A|S=0) = \times 0,92\) par année d'âge
   \item
-    Quand on est une femme : \(\small OR(A|S=1) = exp(-0,089 + 0,012) = \times\) 0.9 par année d'âge
+    Quand on est une femme : \(\small OR(A|S=1) = exp(-0,088 + 0,012) = \times\) 0.9 par année d'âge
   \end{itemize}
 \item
   L'effet d'être une femme et d'avoir 1 an de plus
@@ -3148,7 +3122,7 @@ Ce qui, en terme d'OR, donnerait :
   \item
     plutot que homme ``et 0 ans''
   \item
-    \(\small OR(A,S) = exp(-1,179 -0,089 + 0,012) = \times\) 0.3
+    \(\small OR(A,S) = exp(-1,164 -0,088 + 0,012) = \times\) 0.3
   \end{itemize}
 \item
   \textbf{L'effet d'interaction/modification d'effet} est : \(\small MI =\times 1,01\)
@@ -3156,22 +3130,112 @@ Ce qui, en terme d'OR, donnerait :
   \textbf{Un effet d'interaction additif} \(\small RERI_{OR} = OR_{11} - OR_{01} - OR_{10} + 1 =\) 0.047
 \end{itemize}
 
-On pourrait aussi déduire :
+On a donc une interaction multiplicative positive (MI\textgreater1) et significative et une interaction additive aussi positive (RERI \textgreater0).
+
+\hypertarget{ruxe9gression-linuxe9aire}{%
+\subsection{Régression linéaire}\label{ruxe9gression-linuxe9aire}}
+
+La sortie d'une modèle linéaire simple serait :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# }
+\CommentTok{\# Call:}
+\CommentTok{\# lm(formula = cannabis \textasciitilde{} sexe + age + sexe * age, data = data)}
+\CommentTok{\# }
+\CommentTok{\# Coefficients:}
+\CommentTok{\#                 Estimate Std. Error t value Pr(\textgreater{}|t|)    }
+\CommentTok{\# (Intercept)    1.3197103  0.0066820  197.50   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen     {-}0.3373482  0.0091573  {-}36.84   \textless{}2e{-}16 ***}
+\CommentTok{\# age           {-}0.0183730  0.0001294 {-}142.03   \textless{}2e{-}16 ***}
+\CommentTok{\# sexeWomen:age  0.0044248  0.0001781   24.85   \textless{}2e{-}16 ***}
+\CommentTok{\# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1}
+\end{Highlighting}
+\end{Shaded}
+
+On peut en déduire, ici sur une échelle additive, que :
 
 \begin{itemize}
 \tightlist
 \item
-  \(\small Y_{S=0,A=30} = \frac{exp(3,952 - 0,089 \times 30)}{1+exp(3,952 - 0,089 \times 30)} =\) 78.3\%
+  L'effet du sexe (d'être femme plutot que homme) est :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``A 0 ans'' (à l'origine) : \(\small DR(S|A=0) = -33,73\)\%
+  \item
+    A 20 ans (par exemple) : \(\small DR(S|A=20) = -33,73 + 0,44 \times 20 =\) -24.93\%
+  \item
+    A 40 ans (par exemple) : \(\small DR(S|A=40) = -33,73 + 0,44 \times 40 =\) -16.13\%
+  \item
+    A 60 ans (par exemple) : \(\small DR(S|A=60) = -33,73 + 0,44 \times 60 =\) -7.33\%
+  \end{itemize}
 \item
-  \(\small Y_{S=0,A=50} = \frac{exp(3,952 - 0,089 \times 50)}{1+exp(3,952 - 0,089 \times 50)} =\) 37.8\%
+  L'effet de l'age est :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Quand on est un homme : \(\small DR(A|S=0) = -1,84\) \% par année d'âge
+  \item
+    Quand on est une femme : \(\small DR(A|S=1) = -1,84 + 0.44 =\) -1.4 \% par année d'âge
+  \end{itemize}
 \item
-  \(\small Y_{S=1,A=30} = \frac{exp(3,952 - 1,179 - 0,089 \times 30 + 0,012 \times 30)}{1+exp(3,952 - 1,179 - 0,089 \times 30 + 0,012 \times 30)} =\) 61.4\%
+  L'effet d'être une femme et d'avoir 1 an de plus
+
+  \begin{itemize}
+  \tightlist
+  \item
+    plutot que homme et un certain âge
+  \item
+    \(\small DR(A,S) = -33,73 -1,84 + 0,44 =\) -35.13 \%
+  \end{itemize}
 \item
-  \(\small Y_{S=1,A=50} = \frac{exp(3,952 - 1,179 - 0,089 \times 50 + 0,012 \times 50)}{1+exp(3,952 - 1,179 - 0,089 \times 50 + 0,012 \times 50)} =\) 25.4\%
+  \textbf{L'effet d'interaction/modification d'effet} est : \(\small AI = +0.44\) \%
+\end{itemize}
+
+On retrouve une interaction additive significative et positive. Les expositions ayant un effet négatif et l'effet d'interaction étant positif, cet effet est difficile à interpréter, mais on pourrait le formuler plus simplement en changeant la catégorie de référence du sexe de homme à femme.
+
+Ainsi : globalement, la probabilité d'avoir déjà fumer du cannabis diminue avec l'âge chez les hommes (-1,8\% par an) et chez les femmes (-1,4\% par an). Cette probabilité est plus élevée chez les hommes (de 16\% par exemple à 40 ans), mais cet écart diminue avec l'âge, de 0,44\% par année d'âge.
+
+\hypertarget{effets-marginaux}{%
+\subsection{Effets marginaux}\label{effets-marginaux}}
+
+A partir des modèles, on peut déduire les effets marginaux pour certaines catégories. Par exemple, avec le modèle logistique :
+
+\begin{itemize}
+\tightlist
+\item
+  \(\small Y_{S=0,A=30} = \frac{exp(3,914 - 0,088 \times 30)}{1+exp(3,914 - 0,088 \times 30)} =\) 78.1\%
+\item
+  \(\small Y_{S=0,A=50} = \frac{exp(3,914 - 0,088 \times 50)}{1+exp(3,914 - 0,088 \times 50)} =\) 38.1\%
+\item
+  \(\small Y_{S=1,A=30} = \frac{exp(3,914 - 1,164 - 0,088 \times 30 + 0,012 \times 30)}{1+exp(3,914 - 1,164 - 0,088 \times 30 + 0,012 \times 30)} =\) 61.5\%
+\item
+  \(\small Y_{S=1,A=50} = \frac{exp(3,914 - 1,164 - 0,088 \times 50 + 0,012 \times 50)}{1+exp(3,914 - 1,164 - 0,088 \times 50 + 0,012 \times 50)} =\) 25.9\%
+\end{itemize}
+
+Avec le modèle linéaire, on aurait :
+
+\begin{itemize}
+\tightlist
+\item
+  \(\small Y_{S=0,A=30} = 131,97 - 1,84 \times 30 =\) 76.8\%
+\item
+  \(\small Y_{S=0,A=50} = 131,97 - 1,84 \times 50 =\) 40\%
+\item
+  \(\small Y_{S=1,A=30} = 131,97 -33,73 - 1,84 \times 30 + 0,44 \times 30 =\) 56.2\%
+\item
+  \(\small Y_{S=1,A=50} = 131,97 -33,73 - 1,84 \times 50 + 0,44 \times 50 =\) 28.2\%
 \end{itemize}
 
 \hypertarget{analyse-confirmatoire-1}{%
 \section{Analyse confirmatoire}\label{analyse-confirmatoire-1}}
+
+Nous avons calculé les effets d'intérêt avec une méthode de g-computation/MSM (Intervalles de confiance estimé par bootstrap, 200 répétitions).
+
+Le code était :
 
 \hypertarget{part-conclusion}{%
 \part{Conclusion}\label{part-conclusion}}
