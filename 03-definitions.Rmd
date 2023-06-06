@@ -10,9 +10,9 @@ Dans le champ des analyses d'interaction, deux termes peuvent être rencontrés 
 
 ## Modification d'effets
 
-La question de la modification d'effet consiste à identifier si un scénario contrefactuel modifiant le traitement ou l’exposition $X$ donne un résultat différent dans différents groupes $V$ de patients (estimer l’effet d’une exposition séparément en fonction d’une autre variable) @corraini_effect_2017. 
+La question de la modification d'effet consiste à identifier si un scénario contrefactuel modifiant le traitement ou l’exposition $\small X$ donne un résultat différent dans différents groupes $\small V$ de patients (estimer l’effet d’une exposition séparément en fonction d’une autre variable) @corraini_effect_2017. 
 
-Si l'on compare avec un essai d'intervention, c'est comme s'il y avait une seule intervention $X$ et que l’analyse était stratifiée sur $V$. On analyse donc l'effet du scénario $\small do(X)$ dans chaque groupe de $\small V$. 
+Si l'on compare avec un essai d'intervention, c'est comme s'il y avait une seule intervention $\small X$ et que l’analyse était stratifiée sur $\small V$. On analyse donc l'effet du scénario $\small do(X)$ dans chaque groupe de $\small V$. 
 
 En observationnel, l'effet causal qui nous intéresse est donc celui de $\small X$ mais pas celui de $\small V$.
 On ajustera sur les facteurs de confusion de la relation $\small X \rightarrow Y$. 
@@ -22,7 +22,7 @@ On ne fait pas d'hypothèse sur les mécanismes de la modification d'effet, qui 
 
 > Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou explorer si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc. 
 
-On a une modification de l'effet de $X$ par $V$ si l'effet de $X$ est différent dans deux strates définies par $V$:
+On a une modification de l'effet de $\small X$ par $\small V$ si l'effet de $\small X$ est différent dans deux strates définies par $\small V$:
 
 -	en additif : $\small DR(X | V=0) \neq DR(X | V=1)$ 
 	 - soit	$\small p_{10}-p_{00} \neq p_{11}-p_{01}$  
@@ -34,14 +34,14 @@ Modification d'effet dans l'exemple 1
 >
 > En additif : 
 >
-- effet dans le groupe $V=0$ : $\small DR (X | V=0) = 0,40 - 0,10 = +0,30$
-- effet dans le groupe $V=1$ : $\small DR (X | V=1) = 0,90 - 0,20 = +0,70$
+- effet dans le groupe $\small V=0$ : $\small DR (X | V=0) = 0,40 - 0,10 = +0,30$
+- effet dans le groupe $\small V=1$ : $\small DR (X | V=1) = 0,90 - 0,20 = +0,70$
 - donc $\small DR (X | V=0) \neq DR (X | V=1)$
 >
 > En multiplicatif : 
 >
-- effet dans le groupe $V=0$ : $\small RR(X | V=0) = \frac{0,40}{0,10} = \times 4,0$
-- effet dans le groupe $V=1$ : $\small RR(X | V=1) = \frac{0,90}{0,20} = \times 4,5$
+- effet dans le groupe $\small V=0$ : $\small RR(X | V=0) = \frac{0,40}{0,10} = \times 4,0$
+- effet dans le groupe $\small V=1$ : $\small RR(X | V=1) = \frac{0,90}{0,20} = \times 4,5$
 - donc $\small RR(X | V=0) \neq RR(X | V=1)$ 
 >
 > Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
@@ -54,12 +54,12 @@ Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’eff
 Si l'on compare avec un essai d'intervention, c'est comme s'il y avait plusieurs interventions, selon le nombre de combinaisons. On analyse donc l'effet du scénario $\small do(X, V)$. Ici l'effet causal d’intérêt est vraiment l'effet conjoint des deux variables. 
 
 Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de l'interaction $\small X*V$. On ajustera sur les facteurs de confusion des deux relations $\small X \rightarrow Y$ et $\small V \rightarrow Y$.
-On fait l'hypothèse que les mécanismes de l'effet conjoint de $X$ et $V$ sont causaux.
+On fait l'hypothèse que les mécanismes de l'effet conjoint de $\small X$ et $\small V$ sont causaux.
 
-Par définition, on a une interaction si l'effet conjoint de $X$ et $V$ sur $Y$ ($DR(X,V)$) est différent de la somme (ou du produit sur l'échelle multiplicative) : 
+Par définition, on a une interaction si l'effet conjoint de $\small X$ et $\small V$ sur $\small Y$ ($\small DR(X,V)$) est différent de la somme (ou du produit sur l'échelle multiplicative) : 
 
-- de l'effet isolé de $X$ sur $Y$ (où $V$ est constant, fixé à $V=0$), noté $DR(X,V=0)$ (ou $RR(X,V=0)$)
-- et de l'effet isolé de $V$ sur $Y$ (où $X$ est constant, fixé à $X=0$), noté $DR(V,X=0)$ (ou $RR(V,X=0)$)
+- de l'effet isolé de $\small X$ sur $\small Y$ (où $\small V$ est constant, fixé à $\small V=0$), noté $\small DR(X,V=0)$ (ou $\small RR(X,V=0)$)
+- et de l'effet isolé de $\small V$ sur $\small Y$ (où $\small X$ est constant, fixé à $\small X=0$), noté $\small DR(V,X=0)$ (ou $\small RR(V,X=0)$)
 
 On a ainsi,
 
@@ -113,11 +113,17 @@ Il existe des cas où l'identification d'une interaction ou d'une modification d
 
 Dans ce cas, il n'y a pas d’interaction entre $\small A1$ et $\small A2$, car il n'y a pas d'effet direct ni indirect de $\small A2 \rightarrow Y$. L'effet de $\small A1 \rightarrow Y$ restera le même quelle que soit la valeur que l'on pourrait attribuer à $\small A2$ :
 
-$\small P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] - P\left[Y=1|do(A1=0, A2=1)\right]$
+\begin{multline*}
+\scriptsize P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] \\
+\scriptsize - P\left[Y=1|do(A1=0, A2=1)\right]
+\end{multline*}
 
-Par contre, il peut y avoir une modification de l'effet de $A1$ par $A2$, en particulier s'il existe une interaction $\small A1 * L2 \rightarrow Y$ ou $\small A1 * L3 \rightarrow Y$, on s'attend à ce que les contrastes suivants soient différents :
+Par contre, il peut y avoir une modification de l'effet de $\small A1$ par $\small A2$, en particulier s'il existe une interaction $\small A1 * L2 \rightarrow Y$ ou $\small A1 * L3 \rightarrow Y$, on s'attend à ce que les contrastes suivants soient différents :
 
-$\small P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] - P[Y=1|do(A1=2),A2=0]$.
+\begin{multline*}
+\scriptsize P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] \\
+\scriptsize - P[Y=1|do(A1=2),A2=0]
+\end{multline*}
 <!-- Note, dans ce cas, L1 et L2 seront considérés comme des facteurs de confusion, mais pas L3. -->
 
 
