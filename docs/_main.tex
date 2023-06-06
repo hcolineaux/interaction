@@ -1492,20 +1492,25 @@ Interaction & 0.39 (0.36 to 0.43, p<0.001)\\
 \hypertarget{estimation-par-g-computation}{%
 \section{Estimation par G-computation}\label{estimation-par-g-computation}}
 
-Il s'agit d'une ``G-methods'' aussi appelée ``standardisation'' par Hernàn \citet{hernan2020causal}. Le principe est le suivant :
+Il s'agit d'une ``G-method'' qui peut être décrite comme une ``standardisation'' par régression (Hernàn \citet{hernan2020causal}). Le principe est le suivant :
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \DocumentationTok{\#\# 1.a) on crée 4 tables correspondant aux 4 interventions contrefactuelles}
 \NormalTok{    df.A1\_0.A2\_0 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_1.A2\_0 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_0.A2\_1 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_1.A2\_1 }\OtherTok{\textless{}{-}}\NormalTok{ df}
 
+    \CommentTok{\# scénario do(A1 = 0, A2 = 0) pour toute la population}
 \NormalTok{    df.A1\_0.A2\_0}\SpecialCharTok{$}\NormalTok{A1 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_0.A2\_0}\SpecialCharTok{$}\NormalTok{A2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
+    
+    \CommentTok{\# scénario do(A1 = 1, A2 = 0) pour toute la population}
 \NormalTok{    df.A1\_1.A2\_0}\SpecialCharTok{$}\NormalTok{A1 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
 \NormalTok{    df.A1\_1.A2\_0}\SpecialCharTok{$}\NormalTok{A2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
-
+    
+    \CommentTok{\# scénario do(A1 = 0, A2 = 1) pour toute la population}
 \NormalTok{    df.A1\_0.A2\_1}\SpecialCharTok{$}\NormalTok{A1 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
 \NormalTok{    df.A1\_0.A2\_1}\SpecialCharTok{$}\NormalTok{A2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
 
+    \CommentTok{\# scénario do(A1 = 1, A2 = 1) pour toute la population}
 \NormalTok{    df.A1\_1.A2\_1}\SpecialCharTok{$}\NormalTok{A1 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_1.A2\_1}\SpecialCharTok{$}\NormalTok{A2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
 
 \DocumentationTok{\#\# 1.b) on modélise le critère de jugement}

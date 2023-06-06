@@ -76,7 +76,7 @@ generate.data <- function(N, b =  param.causal.model()) {
 
 ## Estimation par G-computation 
 
-Il s'agit d'une "G-methods" aussi appelée "standardisation" par Hernàn @hernan2020causal. Le principe est le suivant :
+Il s'agit d'une "G-method" qui peut être décrite comme une "standardisation" par régression (Hernàn @hernan2020causal). Le principe est le suivant :
 
 <script type="text/javascript">
 
@@ -108,13 +108,18 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 ## 1.a) on crée 4 tables correspondant aux 4 interventions contrefactuelles
     df.A1_0.A2_0 <- df.A1_1.A2_0 <- df.A1_0.A2_1 <- df.A1_1.A2_1 <- df
 
+    # scénario do(A1 = 0, A2 = 0) pour toute la population
     df.A1_0.A2_0$A1 <- df.A1_0.A2_0$A2 <- rep(0, nrow(df))
+    
+    # scénario do(A1 = 1, A2 = 0) pour toute la population
     df.A1_1.A2_0$A1 <- rep(1, nrow(df))
     df.A1_1.A2_0$A2 <- rep(0, nrow(df))
-
+    
+    # scénario do(A1 = 0, A2 = 1) pour toute la population
     df.A1_0.A2_1$A1 <- rep(0, nrow(df))
     df.A1_0.A2_1$A2 <- rep(1, nrow(df))
 
+    # scénario do(A1 = 1, A2 = 1) pour toute la population
     df.A1_1.A2_1$A1 <- df.A1_1.A2_1$A2 <- rep(1, nrow(df))
 
 ## 1.b) on modélise le critère de jugement
