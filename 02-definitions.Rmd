@@ -14,7 +14,7 @@ On note :
 - un outcome :  $\small Y$, 
 - deux expositions : $\small X$ et $\small V$
 
-La probabilité de l’outcome $Y$ dans chaque strate définie par les 2 expositions est notée :
+La probabilité de l’outcome $\small Y$ dans chaque strate définie par les 2 expositions est notée :
 
 - $\small p_{xv} = P(Y = 1|X = x,V = v)$
 
@@ -36,15 +36,15 @@ L'effet d'une variable $\small X$ sur $\small Y$ peut être mesuré sur deux éc
 
 ### Concernant les différences de risques (DR, effets additifs) {-}
 
-On va noter $P(Y = 1|do(X = 1))$ la probabilité d'observer $Y=1$ sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à $X=1$ (notée $do(X=1)$). 
+On va noter $\small P(Y = 1|do(X = 1))$ la probabilité d'observer $\small Y=1$ sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à $\small X=1$ (notée $\small do(X=1)$). 
 
-De même, on va noter $P(Y = 1|do(X=1,V=1))$ la probabilité d'observer $Y=1$ sous une intervention contrefactuelle conjointe à la fois sur $X$ et sur $V$ où la totalité de la population étudiée est exposée à $X=1$ et $V=1$ (notée $do(X=1,V=1)$).
+De même, on va noter $\small P(Y = 1|do(X=1,V=1))$ la probabilité d'observer $\small Y=1$ sous une intervention contrefactuelle conjointe à la fois sur $\small X$ et sur $\small V$ où la totalité de la population étudiée est exposée à $\small X=1$ et $\small V=1$ (notée $\small do(X=1,V=1)$).
 
 -	L'effet d'une exposition $X$ binaire sur $Y$ est : $\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))$ 
     + qu'on peut estimer, si les conditions d'identifiabilité sont réunies, 
     + par $\small  P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0$
--	L'effet conjoint de $X$ et $V$ est : $\small DR(X,V) = p_{11}-p_{00}$ 
-- L'effet de $X$ sur $Y$ pour chaque valeur fixée de $V$ est : $\small DR(X,V=0) = p_{10}-p_{00}$ et $\small DR(X,V=1) = p_{11}-p_{01}$
+-	L'effet conjoint de $\small X$ et $\small V$ est : $\small DR(X,V) = p_{11}-p_{00}$ 
+- L'effet de $\small X$ sur $\small Y$ pour chaque valeur fixée de $\small V$ est : $\small DR(X,V=0) = p_{10}-p_{00}$ et $\small DR(X,V=1) = p_{11}-p_{01}$
 
 > <ins>Exemple</ins>
 Différences de risques pour l'exemple 1
@@ -62,12 +62,12 @@ Différences de risques pour l'exemple 1
 
 on peut notamment utiliser les **risques relatifs** (RR). On  donc :
 
--	L'effet d'une exposition $X$ binaire sur $Y$ est : 
+-	L'effet d'une exposition $\small X$ binaire sur $\small Y$ est : 
     + $\small RR(X) = \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))}$ 
     + qu'on peut estimer, si les conditions d'identifiabilité sont réunies, par :
     + $\small \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))} = \frac{p_1}{p_0}$
--	L'effet conjoint de $X$ et $V$ est : $\small RR(X,V) = \frac{p_{11}}{p_{00}}$ 
-- L'effet de $X$ sur $Y$ pour chaque valeur fixée de $V$ est : 
+-	L'effet conjoint de $\small X$ et $\small V$ est : $\small RR(X,V) = \frac{p_{11}}{p_{00}}$ 
+- L'effet de $\small X$ sur $\small Y$ pour chaque valeur fixée de $\small V$ est : 
     + $\small RR(X,V=0) = \frac{p_{10}}{p_{00}}$ 
     + et $\small RR(X,V=1) = \frac{p_{11}}{p_{01}}$
 

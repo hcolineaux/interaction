@@ -280,7 +280,7 @@ On note :
   deux expositions : \(\small X\) et \(\small V\)
 \end{itemize}
 
-La probabilité de l'outcome \(Y\) dans chaque strate définie par les 2 expositions est notée :
+La probabilité de l'outcome \(\small Y\) dans chaque strate définie par les 2 expositions est notée :
 
 \begin{itemize}
 \tightlist
@@ -309,9 +309,9 @@ L'effet d'une variable \(\small X\) sur \(\small Y\) peut être mesuré sur deux
 \subsection*{Concernant les différences de risques (DR, effets additifs)}\label{concernant-les-diffuxe9rences-de-risques-dr-effets-additifs}}
 \addcontentsline{toc}{subsection}{Concernant les différences de risques (DR, effets additifs)}
 
-On va noter \(P(Y = 1|do(X = 1))\) la probabilité d'observer \(Y=1\) sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à \(X=1\) (notée \(do(X=1)\)).
+On va noter \(\small P(Y = 1|do(X = 1))\) la probabilité d'observer \(\small Y=1\) sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à \(\small X=1\) (notée \(\small do(X=1)\)).
 
-De même, on va noter \(P(Y = 1|do(X=1,V=1))\) la probabilité d'observer \(Y=1\) sous une intervention contrefactuelle conjointe à la fois sur \(X\) et sur \(V\) où la totalité de la population étudiée est exposée à \(X=1\) et \(V=1\) (notée \(do(X=1,V=1)\)).
+De même, on va noter \(\small P(Y = 1|do(X=1,V=1))\) la probabilité d'observer \(\small Y=1\) sous une intervention contrefactuelle conjointe à la fois sur \(\small X\) et sur \(\small V\) où la totalité de la population étudiée est exposée à \(\small X=1\) et \(\small V=1\) (notée \(\small do(X=1,V=1)\)).
 
 \begin{itemize}
 \tightlist
@@ -326,9 +326,9 @@ De même, on va noter \(P(Y = 1|do(X=1,V=1))\) la probabilité d'observer \(Y=1\
     par \(\small P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0\)
   \end{itemize}
 \item
-  L'effet conjoint de \(X\) et \(V\) est : \(\small DR(X,V) = p_{11}-p_{00}\)
+  L'effet conjoint de \(\small X\) et \(\small V\) est : \(\small DR(X,V) = p_{11}-p_{00}\)
 \item
-  L'effet de \(X\) sur \(Y\) pour chaque valeur fixée de \(V\) est : \(\small DR(X,V=0) = p_{10}-p_{00}\) et \(\small DR(X,V=1) = p_{11}-p_{01}\)
+  L'effet de \(\small X\) sur \(\small Y\) pour chaque valeur fixée de \(\small V\) est : \(\small DR(X,V=0) = p_{10}-p_{00}\) et \(\small DR(X,V=1) = p_{11}-p_{01}\)
 \end{itemize}
 
 \begin{quote}
@@ -360,7 +360,7 @@ on peut notamment utiliser les \textbf{risques relatifs} (RR). On donc :
 \begin{itemize}
 \tightlist
 \item
-  L'effet d'une exposition \(X\) binaire sur \(Y\) est :
+  L'effet d'une exposition \(\small X\) binaire sur \(\small Y\) est :
 
   \begin{itemize}
   \tightlist
@@ -372,9 +372,9 @@ on peut notamment utiliser les \textbf{risques relatifs} (RR). On donc :
     \(\small \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))} = \frac{p_1}{p_0}\)
   \end{itemize}
 \item
-  L'effet conjoint de \(X\) et \(V\) est : \(\small RR(X,V) = \frac{p_{11}}{p_{00}}\)
+  L'effet conjoint de \(\small X\) et \(\small V\) est : \(\small RR(X,V) = \frac{p_{11}}{p_{00}}\)
 \item
-  L'effet de \(X\) sur \(Y\) pour chaque valeur fixée de \(V\) est :
+  L'effet de \(\small X\) sur \(\small Y\) pour chaque valeur fixée de \(\small V\) est :
 
   \begin{itemize}
   \tightlist
@@ -413,9 +413,9 @@ Dans le champ des analyses d'interaction, deux termes peuvent être rencontrés 
 \hypertarget{modification-deffets}{%
 \section{Modification d'effets}\label{modification-deffets}}
 
-La question de la modification d'effet consiste à identifier si un scénario contrefactuel modifiant le traitement ou l'exposition \(X\) donne un résultat différent dans différents groupes \(V\) de patients (estimer l'effet d'une exposition séparément en fonction d'une autre variable) \citet{corraini_effect_2017}.
+La question de la modification d'effet consiste à identifier si un scénario contrefactuel modifiant le traitement ou l'exposition \(\small X\) donne un résultat différent dans différents groupes \(\small V\) de patients (estimer l'effet d'une exposition séparément en fonction d'une autre variable) \citet{corraini_effect_2017}.
 
-Si l'on compare avec un essai d'intervention, c'est comme s'il y avait une seule intervention \(X\) et que l'analyse était stratifiée sur \(V\). On analyse donc l'effet du scénario \(\small do(X)\) dans chaque groupe de \(\small V\).
+Si l'on compare avec un essai d'intervention, c'est comme s'il y avait une seule intervention \(\small X\) et que l'analyse était stratifiée sur \(\small V\). On analyse donc l'effet du scénario \(\small do(X)\) dans chaque groupe de \(\small V\).
 
 En observationnel, l'effet causal qui nous intéresse est donc celui de \(\small X\) mais pas celui de \(\small V\).
 On ajustera sur les facteurs de confusion de la relation \(\small X \rightarrow Y\).
@@ -426,7 +426,7 @@ On ne fait pas d'hypothèse sur les mécanismes de la modification d'effet, qui 
 Exemples d'objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou explorer si l'effet du traitement est homogène/hétérogène en fonction de l'âge, du sexe, etc.
 \end{quote}
 
-On a une modification de l'effet de \(X\) par \(V\) si l'effet de \(X\) est différent dans deux strates définies par \(V\):
+On a une modification de l'effet de \(\small X\) par \(\small V\) si l'effet de \(\small X\) est différent dans deux strates définies par \(\small V\):
 
 \begin{itemize}
 \tightlist
@@ -458,9 +458,9 @@ En additif :
 \begin{itemize}
 \tightlist
 \item
-  effet dans le groupe \(V=0\) : \(\small DR (X | V=0) = 0,40 - 0,10 = +0,30\)
+  effet dans le groupe \(\small V=0\) : \(\small DR (X | V=0) = 0,40 - 0,10 = +0,30\)
 \item
-  effet dans le groupe \(V=1\) : \(\small DR (X | V=1) = 0,90 - 0,20 = +0,70\)
+  effet dans le groupe \(\small V=1\) : \(\small DR (X | V=1) = 0,90 - 0,20 = +0,70\)
 \item
   donc \(\small DR (X | V=0) \neq DR (X | V=1)\)
 \end{itemize}
@@ -470,9 +470,9 @@ En multiplicatif :
 \begin{itemize}
 \tightlist
 \item
-  effet dans le groupe \(V=0\) : \(\small RR(X | V=0) = \frac{0,40}{0,10} = \times 4,0\)
+  effet dans le groupe \(\small V=0\) : \(\small RR(X | V=0) = \frac{0,40}{0,10} = \times 4,0\)
 \item
-  effet dans le groupe \(V=1\) : \(\small RR(X | V=1) = \frac{0,90}{0,20} = \times 4,5\)
+  effet dans le groupe \(\small V=1\) : \(\small RR(X | V=1) = \frac{0,90}{0,20} = \times 4,5\)
 \item
   donc \(\small RR(X | V=0) \neq RR(X | V=1)\)
 \end{itemize}
@@ -488,16 +488,16 @@ Quand on s'intéresse à l'interaction, on s'intéresse plutôt à l'effet conjo
 Si l'on compare avec un essai d'intervention, c'est comme s'il y avait plusieurs interventions, selon le nombre de combinaisons. On analyse donc l'effet du scénario \(\small do(X, V)\). Ici l'effet causal d'intérêt est vraiment l'effet conjoint des deux variables.
 
 Dans un schéma observationnel, l'effet causal qui nous intéresse est donc celui de l'interaction \(\small X*V\). On ajustera sur les facteurs de confusion des deux relations \(\small X \rightarrow Y\) et \(\small V \rightarrow Y\).
-On fait l'hypothèse que les mécanismes de l'effet conjoint de \(X\) et \(V\) sont causaux.
+On fait l'hypothèse que les mécanismes de l'effet conjoint de \(\small X\) et \(\small V\) sont causaux.
 
-Par définition, on a une interaction si l'effet conjoint de \(X\) et \(V\) sur \(Y\) (\(DR(X,V)\)) est différent de la somme (ou du produit sur l'échelle multiplicative) :
+Par définition, on a une interaction si l'effet conjoint de \(\small X\) et \(\small V\) sur \(\small Y\) (\(\small DR(X,V)\)) est différent de la somme (ou du produit sur l'échelle multiplicative) :
 
 \begin{itemize}
 \tightlist
 \item
-  de l'effet isolé de \(X\) sur \(Y\) (où \(V\) est constant, fixé à \(V=0\)), noté \(DR(X,V=0)\) (ou \(RR(X,V=0)\))
+  de l'effet isolé de \(\small X\) sur \(\small Y\) (où \(\small V\) est constant, fixé à \(\small V=0\)), noté \(\small DR(X,V=0)\) (ou \(\small RR(X,V=0)\))
 \item
-  et de l'effet isolé de \(V\) sur \(Y\) (où \(X\) est constant, fixé à \(X=0\)), noté \(DR(V,X=0)\) (ou \(RR(V,X=0)\))
+  et de l'effet isolé de \(\small V\) sur \(\small Y\) (où \(\small X\) est constant, fixé à \(\small X=0\)), noté \(\small DR(V,X=0)\) (ou \(\small RR(V,X=0)\))
 \end{itemize}
 
 On a ainsi,
@@ -595,11 +595,17 @@ Il existe des cas où l'identification d'une interaction ou d'une modification d
 
 Dans ce cas, il n'y a pas d'interaction entre \(\small A1\) et \(\small A2\), car il n'y a pas d'effet direct ni indirect de \(\small A2 \rightarrow Y\). L'effet de \(\small A1 \rightarrow Y\) restera le même quelle que soit la valeur que l'on pourrait attribuer à \(\small A2\) :
 
-\(\small P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] - P\left[Y=1|do(A1=0, A2=1)\right]\)
+\begin{multline*}
+\scriptsize P\left[Y=1|do(A1=1, A2=0)\right] - P\left[Y=1|do(A1=0, A2=0)\right] = P\left[Y=1|do(A1=1, A2=1)\right] \\
+\scriptsize - P\left[Y=1|do(A1=0, A2=1)\right]
+\end{multline*}
 
-Par contre, il peut y avoir une modification de l'effet de \(A1\) par \(A2\), en particulier s'il existe une interaction \(\small A1 * L2 \rightarrow Y\) ou \(\small A1 * L3 \rightarrow Y\), on s'attend à ce que les contrastes suivants soient différents :
+Par contre, il peut y avoir une modification de l'effet de \(\small A1\) par \(\small A2\), en particulier s'il existe une interaction \(\small A1 * L2 \rightarrow Y\) ou \(\small A1 * L3 \rightarrow Y\), on s'attend à ce que les contrastes suivants soient différents :
 
-\(\small P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] - P[Y=1|do(A1=2),A2=0]\).
+\begin{multline*}
+\scriptsize P[Y=1|do(A1=1),A2=1] - P[Y=1|do(A1=2),A2=1] \neq P[Y=1|do(A1=1),A2=0] \\
+\scriptsize - P[Y=1|do(A1=2),A2=0]
+\end{multline*}
 
 \hypertarget{echelle}{%
 \chapter{La question des échelles}\label{echelle}}
@@ -740,11 +746,11 @@ Dans ce continuum, deux cas particuliers d'interaction peuvent être retrouvées
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Interaction pure} de \(X\) en fonction de \(V\), si \(X\) n'a un effet que dans une seule strate de \(V\). Par exemple, \(\small p_{10} = p_{00}\) et \(\small p_{11} \neq p_{01}\).
+  \textbf{Interaction pure} de \(\small X\) en fonction de \(\small V\), si \(\small X\) n'a un effet que dans une seule strate de \(\small V\). Par exemple, \(\small p_{10} = p_{00}\) et \(\small p_{11} \neq p_{01}\).
 \end{itemize}
 
 \begin{quote}
-Par exemple ici, V a un effet si X=0 mais pas si X=1 :
+Par exemple ici, \(\small V\) a un effet si \(\small X=0\) mais pas si \(\small X=1\) :
 
 \includegraphics[width=0.9\textwidth,height=\textheight]{img/Image8.png}
 \end{quote}
@@ -752,11 +758,11 @@ Par exemple ici, V a un effet si X=0 mais pas si X=1 :
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Interaction qualitative} de \(X\) en fonction de V, si l'effet de \(X\) dans une strate de \(V\) va dans la direction opposée de l'autre strate de \(V\).
+  \textbf{Interaction qualitative} de \(\small X\) en fonction de V, si l'effet de \(\small X\) dans une strate de \(\small V\) va dans la direction opposée de l'autre strate de \(\small V\).
 \end{itemize}
 
 \begin{quote}
-Par exemple ici, V a un effet positif si X=0 mais négatif si X=1 :
+Par exemple ici, \(\small V\) a un effet positif si \(\small X=0\) mais négatif si \(\small X=1\) :
 
 \includegraphics[width=0.9\textwidth,height=\textheight]{img/Image9.png}
 \end{quote}
@@ -773,13 +779,13 @@ Si on reprend l'exemple ci dessous :
 
 \includegraphics[width=0.9\textwidth,height=\textheight]{img/Image4.png}
 
-\(X\) représente un traitement dont on ne dispose que de 100 doses et \(Y\) un outcome de santé favorable (guérison).
-Il faut choisir si on donne 100 doses au groupe \(V = 0\) ou au groupe \(V = 1\).
+\(\small X\) représente un traitement dont on ne dispose que de 100 doses et \(\small Y\) un outcome de santé favorable (guérison).
+Il faut choisir si on donne 100 doses au groupe \(\small V = 0\) ou au groupe \(\small V = 1\).
 
-Si on donne 100 doses au groupe \(V = 0\), 30 personnes seront guéries grace au traitement (30 personnes de plus que l'évolution naturelle, \(X=0\)) contre 50 personnes si on les donne au groupe \(V = 1\).
-Donc il est préférable d'allouer les doses au groupe \(V=1\).
+Si on donne 100 doses au groupe \(\small V = 0\), 30 personnes seront guéries grace au traitement (30 personnes de plus que l'évolution naturelle, \(\small X=0\)) contre 50 personnes si on les donne au groupe \(\small V = 1\).
+Donc il est préférable d'allouer les doses au groupe \(\small V=1\).
 
-Pourtant si on avait réfléchi à partir de l'échelle multiplicative, on aurait choisi le groupe \(V=0\) car l'effet du traitement est de RR=4 dans le groupe \(V = 0\) et RR=3,5 dans le groupe \(V = 1\)\ldots{}
+Pourtant si on avait réfléchi à partir de l'échelle multiplicative, on aurait choisi le groupe \(\small V=0\) car l'effet du traitement est de RR=4 dans le groupe \(V = 0\) et RR=3,5 dans le groupe \(\small V = 1\)\ldots{}
 \end{quote}
 
 On peut donc conclure à un effet multiplicatif plus fort d'un traitement dans un groupe alors qu'en terme d'utilité (nombre de personnes favorablement impactées), l'échelle additive nous conduirait à choisir l'autre groupe\ldots{}
@@ -826,7 +832,7 @@ On a aussi défini un paramètre d'interaction sur l'échelle multiplicative (MI
 
 Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mesurés par des odds ratios estimés à partir de modèles de régression logistique.
 
-Un paramètre d'interaction sur l'echelle multiplicative (\(MI_{OR}\)) peut être estimé à partir de ces OR \citet{vanderweele_tutorial_2014} :
+Un paramètre d'interaction sur l'echelle multiplicative (\(\small MI_{OR}\)) peut être estimé à partir de ces OR \citet{vanderweele_tutorial_2014} :
 
 \begin{itemize}
 \tightlist
@@ -881,7 +887,7 @@ Pour rappel, l'augmentation relative du risque liée à l'exposition jointe corr
 
 \(ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)
 
-L'augmentation relative du risque liée à l'exposition \(X\) ou \(V\), exprimées en pourcentage par rapport au risque de base \(p_{00}\) sont respectivement :
+L'augmentation relative du risque liée à l'exposition \(\small X\) ou \(\small V\), exprimées en pourcentage par rapport au risque de base \(p_{00}\) sont respectivement :
 
 \begin{itemize}
 \tightlist
@@ -891,7 +897,7 @@ L'augmentation relative du risque liée à l'exposition \(X\) ou \(V\), exprimé
   et \(ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1\)
 \end{itemize}
 
-Une autre façon d'interpréter le ``Synergie index'' est d'indiquer que la différence liée à l'effet joint \(DR(X,V)\) est égale à \(S\) fois la somme des différences liées aux effets individuels \(DR(X|V=0) + DR(V|X=0)\) :
+Une autre façon d'interpréter le ``Synergie index'' est d'indiquer que la différence liée à l'effet joint \(\small DR(X,V)\) est égale à \(S\) fois la somme des différences liées aux effets individuels \(\small DR(X|V=0) + DR(V|X=0)\) :
 
 \(\small S = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}\)
 
@@ -943,9 +949,9 @@ En fait \(\small AP = \frac{RERI_{RR}}{RR_{11}-1}\).
 
 Knol et VanderWeele ont émis des recommendations concernant la présentation des résutalts d'une analyses d'intéractions \citet{knol_recommendations_2012}. Ces recommandations sont :
 
-\hypertarget{pour-une-analyse-dune-modification-deffet-de-a1-sur-y-par-a2}{%
-\subsection*{Pour une analyse d'une modification d'effet de A1 sur Y par A2}\label{pour-une-analyse-dune-modification-deffet-de-a1-sur-y-par-a2}}
-\addcontentsline{toc}{subsection}{Pour une analyse d'une modification d'effet de A1 sur Y par A2}
+\hypertarget{pour-une-analyse-dune-modification-deffet-de-small-a1-sur-small-y-par-small-a2}{%
+\subsection*{\texorpdfstring{Pour une analyse d'une modification d'effet de \(\small A1\) sur \(\small Y\) par \(\small A2\)}{Pour une analyse d'une modification d'effet de \textbackslash small A1 sur \textbackslash small Y par \textbackslash small A2}}\label{pour-une-analyse-dune-modification-deffet-de-small-a1-sur-small-y-par-small-a2}}
+\addcontentsline{toc}{subsection}{Pour une analyse d'une modification d'effet de \(\small A1\) sur \(\small Y\) par \(\small A2\)}
 
 \begin{itemize}
 \tightlist
@@ -955,7 +961,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
   \begin{itemize}
   \tightlist
   \item
-    avec et sans l'outcome (\(\small N_{a1,a2}(Y=1)\) et \(N_{a1,a2}(Y=0)\))
+    avec et sans l'outcome (\(\small N_{a1,a2}(Y=1)\) et \(\small N_{a1,a2}(Y=0)\))
   \end{itemize}
 \item
   Présenter les risques relatifs (RR), les OR ou les différences de risques (RD)
@@ -965,9 +971,9 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
   \item
     avec les intervalles de confiance (IC)
   \item
-    pour chaque strate de A1 et de A2 avec une seule catégorie de référence
+    pour chaque strate de \(\small A1\) et de \(\small A2\) avec une seule catégorie de référence
   \item
-    (éventuellement prise comme la strate A1.A2 présentant le plus faible risque de Y).
+    (éventuellement prise comme la strate \(\small A1 \cap A2\) présentant le plus faible risque de \(\small Y\)).
   \end{itemize}
 \item
   Présenter les RR, OR ou RD avec les IC
@@ -975,7 +981,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
   \begin{itemize}
   \tightlist
   \item
-    de l'effet de A1 sur Y dans les strates de A2
+    de l'effet de \(\small A1\) sur \(\small Y\) dans les strates de \(\small A2\)
   \end{itemize}
 \item
   Présenter les mesures de la modification de l'effet avec les IC, sur des échelles
@@ -988,12 +994,12 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
     et multiplicatives.
   \end{itemize}
 \item
-  Énumérez les facteurs de confusion pour lesquels la relation entre A1 et Y a été ajustée.
+  Énumérez les facteurs de confusion pour lesquels la relation entre \(\small A1\) et \(\small Y\) a été ajustée.
 \end{itemize}
 
-\hypertarget{interaction-a1a2-sur-y}{%
-\subsection*{\texorpdfstring{Interaction A1\(*\)A2 sur Y}{Interaction A1*A2 sur Y}}\label{interaction-a1a2-sur-y}}
-\addcontentsline{toc}{subsection}{Interaction A1\(*\)A2 sur Y}
+\hypertarget{interaction-small-a1a2-sur-small-y}{%
+\subsection*{\texorpdfstring{Interaction \(\small A1*A2\) sur \(\small Y\)}{Interaction \textbackslash small A1*A2 sur \textbackslash small Y}}\label{interaction-small-a1a2-sur-small-y}}
+\addcontentsline{toc}{subsection}{Interaction \(\small A1*A2\) sur \(\small Y\)}
 
 \begin{itemize}
 \tightlist
@@ -1003,7 +1009,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
   \begin{itemize}
   \tightlist
   \item
-    avec et sans l'outcome (\(\small N_{a1,a2}(Y=1) et N_{a1,a2}(Y=0)\))
+    avec et sans l'outcome (\(\small N_{a1,a2}(Y=1)\) et \(\small N_{a1,a2}(Y=0)\))
   \end{itemize}
 \item
   Présenter les risques relatifs (RR), les OR ou les différences de risques (RD)
@@ -1013,9 +1019,9 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
   \item
     avec les intervalles de confiance (IC)
   \item
-    pour chaque strate de A1 et de A2 avec une seule catégorie de référence
+    pour chaque strate de \(\small A1\) et de \(\small A2\) avec une seule catégorie de référence
   \item
-    (éventuellement prise comme la strate A1.A2 présentant le plus faible risque de Y).
+    (éventuellement prise comme la strate \(\small A1 \cap A2\) présentant le plus faible risque de \(\small Y\)).
   \end{itemize}
 \item
   Présenter les RR, OR ou RD avec les IC
@@ -1023,9 +1029,9 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
   \begin{itemize}
   \tightlist
   \item
-    de l'effet de A1 sur Y dans les strates de A2
+    de l'effet de \(\small A1\) sur \(\small Y\) dans les strates de \(\small A2\)
   \item
-    \textbf{et de A2 sur Y dans les strates de A1}.
+    \textbf{et de \(\small A2\) sur \(\small Y\) dans les strates de \(\small A1\)}.
   \end{itemize}
 \item
   Présenter les mesures de la modification de l'effet d'interaction avec les IC sur des échelles
@@ -1038,7 +1044,7 @@ Knol et VanderWeele ont émis des recommendations concernant la présentation de
     et multiplicatives.
   \end{itemize}
 \item
-  Énumérez les facteurs de confusion pour lesquels la relation entre A1 et Y \textbf{et la relation entre A2 et Y} ont été ajustées.
+  Énumérez les facteurs de confusion pour lesquels la relation entre \(\small A1\) et \(\small Y\) \textbf{et la relation entre \(\small A2\) et \(\small Y\)} ont été ajustées.
 \end{itemize}
 
 \hypertarget{proposition}{%
@@ -1051,7 +1057,7 @@ En inférence causale, des assocations marginales plutôt que conditionnelles so
 \begin{itemize}
 \tightlist
 \item
-  De présenter les effets marginaux ou proportions prédites de Y dans chaque strate A1.A2,
+  De présenter les effets marginaux ou proportions prédites de \(\small Y\) dans chaque strate \(\small A1 \cap A2\),
 
   \begin{itemize}
   \tightlist
@@ -1064,7 +1070,7 @@ En inférence causale, des assocations marginales plutôt que conditionnelles so
   \begin{itemize}
   \tightlist
   \item
-    pour chaque strate de A1 et de A2 avec une seule catégorie de référence
+    pour chaque strate de \(\small A1\) et de \(\small A2\) avec une seule catégorie de référence
   \end{itemize}
 \item
   Mais présenter les effets
@@ -1072,9 +1078,9 @@ En inférence causale, des assocations marginales plutôt que conditionnelles so
   \begin{itemize}
   \tightlist
   \item
-    de A1 dans chaque strate de A2
+    de \(\small A1\) dans chaque strate de \(\small A2\)
   \item
-    et de A2 dans chaque strate de A1 (si analyse d'interaction)
+    et de \(\small A2\) dans chaque strate de \(\small A1\) (si analyse d'interaction)
   \item
     dans une échelle multiplicative \textbf{et} additive.
   \end{itemize}

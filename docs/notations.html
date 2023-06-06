@@ -217,8 +217,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="7.1" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#recommendations"><i class="fa fa-check"></i><b>7.1</b> Recommendations</a>
 <ul>
-<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#pour-une-analyse-dune-modification-deffet-de-a1-sur-y-par-a2"><i class="fa fa-check"></i>Pour une analyse d’une modification d’effet de A1 sur Y par A2</a></li>
-<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#interaction-a1a2-sur-y"><i class="fa fa-check"></i>Interaction A1<span class="math inline">\(*\)</span>A2 sur Y</a></li>
+<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#pour-une-analyse-dune-modification-deffet-de-small-a1-sur-small-y-par-small-a2"><i class="fa fa-check"></i>Pour une analyse d’une modification d’effet de <span class="math inline">\(\small A1\)</span> sur <span class="math inline">\(\small Y\)</span> par <span class="math inline">\(\small A2\)</span></a></li>
+<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#interaction-small-a1a2-sur-small-y"><i class="fa fa-check"></i>Interaction <span class="math inline">\(\small A1*A2\)</span> sur <span class="math inline">\(\small Y\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#proposition"><i class="fa fa-check"></i><b>7.2</b> Proposition</a></li>
 </ul></li>
@@ -303,7 +303,7 @@ div.csl-indent {
 <li>un outcome : <span class="math inline">\(\small Y\)</span>,</li>
 <li>deux expositions : <span class="math inline">\(\small X\)</span> et <span class="math inline">\(\small V\)</span></li>
 </ul>
-<p>La probabilité de l’outcome <span class="math inline">\(Y\)</span> dans chaque strate définie par les 2 expositions est notée :</p>
+<p>La probabilité de l’outcome <span class="math inline">\(\small Y\)</span> dans chaque strate définie par les 2 expositions est notée :</p>
 <ul>
 <li><span class="math inline">\(\small p_{xv} = P(Y = 1|X = x,V = v)\)</span></li>
 </ul>
@@ -322,16 +322,16 @@ Exemple
 <p>L’effet d’une variable <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> peut être mesuré sur deux échelles : additive (différence de risques ou de probabilités) ou multiplicative (rapport de risques ou de probabilités).</p>
 <div id="concernant-les-différences-de-risques-dr-effets-additifs" class="section level3 unnumbered hasAnchor">
 <h3>Concernant les différences de risques (DR, effets additifs)<a href="notations.html#concernant-les-différences-de-risques-dr-effets-additifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>On va noter <span class="math inline">\(P(Y = 1|do(X = 1))\)</span> la probabilité d’observer <span class="math inline">\(Y=1\)</span> sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à <span class="math inline">\(X=1\)</span> (notée <span class="math inline">\(do(X=1)\)</span>).</p>
-<p>De même, on va noter <span class="math inline">\(P(Y = 1|do(X=1,V=1))\)</span> la probabilité d’observer <span class="math inline">\(Y=1\)</span> sous une intervention contrefactuelle conjointe à la fois sur <span class="math inline">\(X\)</span> et sur <span class="math inline">\(V\)</span> où la totalité de la population étudiée est exposée à <span class="math inline">\(X=1\)</span> et <span class="math inline">\(V=1\)</span> (notée <span class="math inline">\(do(X=1,V=1)\)</span>).</p>
+<p>On va noter <span class="math inline">\(\small P(Y = 1|do(X = 1))\)</span> la probabilité d’observer <span class="math inline">\(\small Y=1\)</span> sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à <span class="math inline">\(\small X=1\)</span> (notée <span class="math inline">\(\small do(X=1)\)</span>).</p>
+<p>De même, on va noter <span class="math inline">\(\small P(Y = 1|do(X=1,V=1))\)</span> la probabilité d’observer <span class="math inline">\(\small Y=1\)</span> sous une intervention contrefactuelle conjointe à la fois sur <span class="math inline">\(\small X\)</span> et sur <span class="math inline">\(\small V\)</span> où la totalité de la population étudiée est exposée à <span class="math inline">\(\small X=1\)</span> et <span class="math inline">\(\small V=1\)</span> (notée <span class="math inline">\(\small do(X=1,V=1)\)</span>).</p>
 <ul>
 <li>L’effet d’une exposition <span class="math inline">\(X\)</span> binaire sur <span class="math inline">\(Y\)</span> est : <span class="math inline">\(\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))\)</span>
 <ul>
 <li>qu’on peut estimer, si les conditions d’identifiabilité sont réunies,</li>
 <li>par <span class="math inline">\(\small P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0\)</span></li>
 </ul></li>
-<li>L’effet conjoint de <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span> est : <span class="math inline">\(\small DR(X,V) = p_{11}-p_{00}\)</span></li>
-<li>L’effet de <span class="math inline">\(X\)</span> sur <span class="math inline">\(Y\)</span> pour chaque valeur fixée de <span class="math inline">\(V\)</span> est : <span class="math inline">\(\small DR(X,V=0) = p_{10}-p_{00}\)</span> et <span class="math inline">\(\small DR(X,V=1) = p_{11}-p_{01}\)</span></li>
+<li>L’effet conjoint de <span class="math inline">\(\small X\)</span> et <span class="math inline">\(\small V\)</span> est : <span class="math inline">\(\small DR(X,V) = p_{11}-p_{00}\)</span></li>
+<li>L’effet de <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> pour chaque valeur fixée de <span class="math inline">\(\small V\)</span> est : <span class="math inline">\(\small DR(X,V=0) = p_{10}-p_{00}\)</span> et <span class="math inline">\(\small DR(X,V=1) = p_{11}-p_{01}\)</span></li>
 </ul>
 <blockquote>
 <ins>
@@ -351,14 +351,14 @@ Exemple
 <h3>Concernant, les rapports de risques (effets multiplicatifs)<a href="notations.html#concernant-les-rapports-de-risques-effets-multiplicatifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>on peut notamment utiliser les <strong>risques relatifs</strong> (RR). On donc :</p>
 <ul>
-<li>L’effet d’une exposition <span class="math inline">\(X\)</span> binaire sur <span class="math inline">\(Y\)</span> est :
+<li>L’effet d’une exposition <span class="math inline">\(\small X\)</span> binaire sur <span class="math inline">\(\small Y\)</span> est :
 <ul>
 <li><span class="math inline">\(\small RR(X) = \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))}\)</span></li>
 <li>qu’on peut estimer, si les conditions d’identifiabilité sont réunies, par :</li>
 <li><span class="math inline">\(\small \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))} = \frac{p_1}{p_0}\)</span></li>
 </ul></li>
-<li>L’effet conjoint de <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span> est : <span class="math inline">\(\small RR(X,V) = \frac{p_{11}}{p_{00}}\)</span></li>
-<li>L’effet de <span class="math inline">\(X\)</span> sur <span class="math inline">\(Y\)</span> pour chaque valeur fixée de <span class="math inline">\(V\)</span> est :
+<li>L’effet conjoint de <span class="math inline">\(\small X\)</span> et <span class="math inline">\(\small V\)</span> est : <span class="math inline">\(\small RR(X,V) = \frac{p_{11}}{p_{00}}\)</span></li>
+<li>L’effet de <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> pour chaque valeur fixée de <span class="math inline">\(\small V\)</span> est :
 <ul>
 <li><span class="math inline">\(\small RR(X,V=0) = \frac{p_{10}}{p_{00}}\)</span></li>
 <li>et <span class="math inline">\(\small RR(X,V=1) = \frac{p_{11}}{p_{01}}\)</span></li>
