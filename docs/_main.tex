@@ -740,11 +740,11 @@ Dans ce continuum, deux cas particuliers d'interaction peuvent être retrouvées
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Interaction pure} de \(X\) en fonction de \(V\), si \(X\) n'a un effet que dans une seule strate de \(V\). Par exemple, \(\small p_{10} = p_{00}\) et \(\small p_{11} \neq p_{01}\).
+  \textbf{Interaction pure} de \(\small X\) en fonction de \(\small V\), si \(\small X\) n'a un effet que dans une seule strate de \(\small V\). Par exemple, \(\small p_{10} = p_{00}\) et \(\small p_{11} \neq p_{01}\).
 \end{itemize}
 
 \begin{quote}
-Par exemple ici, V a un effet si X=0 mais pas si X=1 :
+Par exemple ici, \(\small V\) a un effet si \(\small X=0\) mais pas si \(\small X=1\) :
 
 \includegraphics[width=0.9\textwidth,height=\textheight]{img/Image8.png}
 \end{quote}
@@ -752,11 +752,11 @@ Par exemple ici, V a un effet si X=0 mais pas si X=1 :
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Interaction qualitative} de \(X\) en fonction de V, si l'effet de \(X\) dans une strate de \(V\) va dans la direction opposée de l'autre strate de \(V\).
+  \textbf{Interaction qualitative} de \(\small X\) en fonction de V, si l'effet de \(\small X\) dans une strate de \(\small V\) va dans la direction opposée de l'autre strate de \(\small V\).
 \end{itemize}
 
 \begin{quote}
-Par exemple ici, V a un effet positif si X=0 mais négatif si X=1 :
+Par exemple ici, \(\small V\) a un effet positif si \(\small X=0\) mais négatif si \(\small X=1\) :
 
 \includegraphics[width=0.9\textwidth,height=\textheight]{img/Image9.png}
 \end{quote}
@@ -773,13 +773,13 @@ Si on reprend l'exemple ci dessous :
 
 \includegraphics[width=0.9\textwidth,height=\textheight]{img/Image4.png}
 
-\(X\) représente un traitement dont on ne dispose que de 100 doses et \(Y\) un outcome de santé favorable (guérison).
-Il faut choisir si on donne 100 doses au groupe \(V = 0\) ou au groupe \(V = 1\).
+\(\small X\) représente un traitement dont on ne dispose que de 100 doses et \(\small Y\) un outcome de santé favorable (guérison).
+Il faut choisir si on donne 100 doses au groupe \(\small V = 0\) ou au groupe \(\small V = 1\).
 
-Si on donne 100 doses au groupe \(V = 0\), 30 personnes seront guéries grace au traitement (30 personnes de plus que l'évolution naturelle, \(X=0\)) contre 50 personnes si on les donne au groupe \(V = 1\).
-Donc il est préférable d'allouer les doses au groupe \(V=1\).
+Si on donne 100 doses au groupe \(\small V = 0\), 30 personnes seront guéries grace au traitement (30 personnes de plus que l'évolution naturelle, \(\small X=0\)) contre 50 personnes si on les donne au groupe \(\small V = 1\).
+Donc il est préférable d'allouer les doses au groupe \(\small V=1\).
 
-Pourtant si on avait réfléchi à partir de l'échelle multiplicative, on aurait choisi le groupe \(V=0\) car l'effet du traitement est de RR=4 dans le groupe \(V = 0\) et RR=3,5 dans le groupe \(V = 1\)\ldots{}
+Pourtant si on avait réfléchi à partir de l'échelle multiplicative, on aurait choisi le groupe \(\small V=0\) car l'effet du traitement est de RR=4 dans le groupe \(V = 0\) et RR=3,5 dans le groupe \(\small V = 1\)\ldots{}
 \end{quote}
 
 On peut donc conclure à un effet multiplicatif plus fort d'un traitement dans un groupe alors qu'en terme d'utilité (nombre de personnes favorablement impactées), l'échelle additive nous conduirait à choisir l'autre groupe\ldots{}
@@ -826,7 +826,7 @@ On a aussi défini un paramètre d'interaction sur l'échelle multiplicative (MI
 
 Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mesurés par des odds ratios estimés à partir de modèles de régression logistique.
 
-Un paramètre d'interaction sur l'echelle multiplicative (\(MI_{OR}\)) peut être estimé à partir de ces OR \citet{vanderweele_tutorial_2014} :
+Un paramètre d'interaction sur l'echelle multiplicative (\(\small MI_{OR}\)) peut être estimé à partir de ces OR \citet{vanderweele_tutorial_2014} :
 
 \begin{itemize}
 \tightlist
@@ -881,7 +881,7 @@ Pour rappel, l'augmentation relative du risque liée à l'exposition jointe corr
 
 \(ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)
 
-L'augmentation relative du risque liée à l'exposition \(X\) ou \(V\), exprimées en pourcentage par rapport au risque de base \(p_{00}\) sont respectivement :
+L'augmentation relative du risque liée à l'exposition \(\small X\) ou \(\small V\), exprimées en pourcentage par rapport au risque de base \(p_{00}\) sont respectivement :
 
 \begin{itemize}
 \tightlist
@@ -891,7 +891,7 @@ L'augmentation relative du risque liée à l'exposition \(X\) ou \(V\), exprimé
   et \(ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1\)
 \end{itemize}
 
-Une autre façon d'interpréter le ``Synergie index'' est d'indiquer que la différence liée à l'effet joint \(DR(X,V)\) est égale à \(S\) fois la somme des différences liées aux effets individuels \(DR(X|V=0) + DR(V|X=0)\) :
+Une autre façon d'interpréter le ``Synergie index'' est d'indiquer que la différence liée à l'effet joint \(\small DR(X,V)\) est égale à \(S\) fois la somme des différences liées aux effets individuels \(\small DR(X|V=0) + DR(V|X=0)\) :
 
 \(\small S = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}\)
 

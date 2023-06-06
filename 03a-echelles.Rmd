@@ -91,16 +91,16 @@ Par exemple, avec deux expositions ayant un effet positif (qui augmentent le ris
 
 Dans ce continuum, deux cas particuliers d'interaction peuvent être retrouvées :
 
--	**Interaction pure** de $X$ en fonction de $V$, si $X$ n’a un effet que dans une seule strate de $V$. Par exemple, $\small p_{10} = p_{00}$ et $\small p_{11} \neq p_{01}$.
+-	**Interaction pure** de $\small X$ en fonction de $\small V$, si $\small X$ n’a un effet que dans une seule strate de $\small V$. Par exemple, $\small p_{10} = p_{00}$ et $\small p_{11} \neq p_{01}$.
 
-> Par exemple ici, V a un effet si X=0 mais pas si X=1 :
+> Par exemple ici, $\small V$ a un effet si $\small X=0$ mais pas si $\small X=1$ :
 >
 > ![](img\Image8.png){width=90%}
 
 
--	**Interaction qualitative** de $X$ en fonction de V, si l’effet de $X$ dans une strate de $V$ va dans la direction opposée de l’autre strate de $V$.
+-	**Interaction qualitative** de $\small X$ en fonction de V, si l’effet de $\small X$ dans une strate de $\small V$ va dans la direction opposée de l’autre strate de $\small V$.
 
-> Par exemple ici, V a un effet positif si X=0 mais négatif si X=1 :
+> Par exemple ici, $\small V$ a un effet positif si $\small X=0$ mais négatif si $\small X=1$ :
 >
 > ![](img\Image9.png){width=90%}
 
@@ -114,13 +114,13 @@ Même si en pratique l’échelle multiplicative est plus utilisée, car les out
 >
 > ![](img\Image4.png){width=90%}
 >
-> $X$ représente un traitement dont on ne dispose que de 100 doses et $Y$ un outcome de santé favorable (guérison). 
-> Il faut choisir si on donne 100 doses au groupe $V = 0$ ou au groupe $V = 1$. 
+> $\small X$ représente un traitement dont on ne dispose que de 100 doses et $\small Y$ un outcome de santé favorable (guérison). 
+> Il faut choisir si on donne 100 doses au groupe $\small V = 0$ ou au groupe $\small V = 1$. 
 >
-> Si on donne 100 doses au groupe $V = 0$, 30 personnes seront guéries grace au traitement (30 personnes de plus que l'évolution naturelle, $X=0$) contre 50 personnes si on les donne au groupe $V = 1$. 
-> Donc il est préférable d'allouer les doses au groupe $V=1$. 
+> Si on donne 100 doses au groupe $\small V = 0$, 30 personnes seront guéries grace au traitement (30 personnes de plus que l'évolution naturelle, $\small X=0$) contre 50 personnes si on les donne au groupe $\small V = 1$. 
+> Donc il est préférable d'allouer les doses au groupe $\small V=1$. 
 >
-> Pourtant si on avait réfléchi à partir de l'échelle multiplicative, on aurait choisi le groupe $V=0$ car l'effet du traitement est de RR=4 dans le groupe $V = 0$ et RR=3,5 dans le groupe $V = 1$...
+> Pourtant si on avait réfléchi à partir de l'échelle multiplicative, on aurait choisi le groupe $\small V=0$ car l'effet du traitement est de RR=4 dans le groupe $V = 0$ et RR=3,5 dans le groupe $\small V = 1$...
 
 On peut donc conclure à un effet multiplicatif plus fort d'un traitement dans un groupe alors qu'en terme d'utilité (nombre de personnes favorablement impactées), l'échelle additive nous conduirait à choisir l'autre groupe...
 

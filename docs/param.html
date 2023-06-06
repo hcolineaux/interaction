@@ -318,7 +318,7 @@ div.csl-indent {
 <div id="avec-les-odds-ratio-or" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Avec les Odds Ratio (OR)<a href="param.html#avec-les-odds-ratio-or" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Souvent en épidémiologie, lorsque l’outcome Y est binaire, les effets sont mesurés par des odds ratios estimés à partir de modèles de régression logistique.</p>
-<p>Un paramètre d’interaction sur l’echelle multiplicative (<span class="math inline">\(MI_{OR}\)</span>) peut être estimé à partir de ces OR <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
+<p>Un paramètre d’interaction sur l’echelle multiplicative (<span class="math inline">\(\small MI_{OR}\)</span>) peut être estimé à partir de ces OR <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
 <ul>
 <li><span class="math inline">\(\small MI_{OR} = \frac{OR_{11}}{OR_{10} \times OR_{01}}\)</span></li>
 </ul>
@@ -350,12 +350,12 @@ RERI =&amp; RR_{11} - RR_{10} - RR_{01} + 1
 <p>Il mesure l’augmentation relative du risque liée à l’exposition jointe, rapportée à la somme des augmentations relatives du risque liées à la 1ère et la 2ème exposition.</p>
 <p>Pour rappel, l’augmentation relative du risque liée à l’exposition jointe correspond à l’augmentation absolue du risque (différence de risques), exprimée en pourcentage par rapport au risque de base <span class="math inline">\(p_{00}\)</span>.</p>
 <p><span class="math inline">\(ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)</span></p>
-<p>L’augmentation relative du risque liée à l’exposition <span class="math inline">\(X\)</span> ou <span class="math inline">\(V\)</span>, exprimées en pourcentage par rapport au risque de base <span class="math inline">\(p_{00}\)</span> sont respectivement :</p>
+<p>L’augmentation relative du risque liée à l’exposition <span class="math inline">\(\small X\)</span> ou <span class="math inline">\(\small V\)</span>, exprimées en pourcentage par rapport au risque de base <span class="math inline">\(p_{00}\)</span> sont respectivement :</p>
 <ul>
 <li><span class="math inline">\(ARR(X|V=0) = \frac{p_{10}-p_{00}}{p_{00}}= RR_{10}-1\)</span></li>
 <li>et <span class="math inline">\(ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1\)</span></li>
 </ul>
-<p>Une autre façon d’interpréter le “Synergie index” est d’indiquer que la différence liée à l’effet joint <span class="math inline">\(DR(X,V)\)</span> est égale à <span class="math inline">\(S\)</span> fois la somme des différences liées aux effets individuels <span class="math inline">\(DR(X|V=0) + DR(V|X=0)\)</span> :</p>
+<p>Une autre façon d’interpréter le “Synergie index” est d’indiquer que la différence liée à l’effet joint <span class="math inline">\(\small DR(X,V)\)</span> est égale à <span class="math inline">\(S\)</span> fois la somme des différences liées aux effets individuels <span class="math inline">\(\small DR(X|V=0) + DR(V|X=0)\)</span> :</p>
 <p><span class="math inline">\(\small S = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}\)</span></p>
 <p>Si le dénominateur est positif:</p>
 <ul>
