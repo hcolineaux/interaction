@@ -7,40 +7,40 @@ output:
 
 # Présentation des résultats
 
-## Recommendations
+## Recommandations
 
-Knol et VanderWeele ont émis des recommendations concernant la présentation des résutalts d'une analyses d'intéractions @knol_recommendations_2012. Ces recommandations sont : 
+Knol et VanderWeele ont émis des recommandations concernant la présentation des résultats d'une analyse d'interaction @knol_recommendations_2012. Ces recommandations sont : 
 
-### Pour une analyse d'une modification d’effet de $\small A1$ sur $\small Y$ par $\small A2$ {-}
+### Pour une analyse d'une modification d’effet de $\small X$ sur $\small Y$ par $\small V$ {-}
 
 -	Présenter les effectifs dans chaque catégorie
-    + avec et sans l'outcome ($\small N_{a1,a2}(Y=1)$ et $\small N_{a1,a2}(Y=0)$)
+    + avec et sans l'outcome ($\small N_{x,v}(Y=1)$ et $\small N_{x,v}(Y=0)$)
 -	Présenter les risques relatifs (RR), les OR ou les différences de risques (RD) 
     + avec les intervalles de confiance (IC) 
-    + pour chaque strate de $\small A1$ et de $\small A2$ avec une seule catégorie de référence 
-    + (éventuellement prise comme la strate $\small A1 \cap A2$ présentant le plus faible risque de $\small Y$).
+    + pour chaque strate de $\small X$ et de $\small V$ avec une seule catégorie de référence 
+    + (éventuellement prise comme la strate $\small X \cap V$ présentant le plus faible risque de $\small Y$).
 -	Présenter les RR, OR ou RD avec les IC 
-    + de l'effet de $\small A1$ sur $\small Y$ dans les strates de $\small A2$ 
+    + de l'effet de $\small X$ sur $\small Y$ dans les strates de $\small V$ 
 -	Présenter les mesures de la modification de l'effet avec les IC, sur des échelles 
     + additives (par exemple, RERI) 
     + et multiplicatives.
--	Énumérez les facteurs de confusion pour lesquels la relation entre $\small A1$ et $\small Y$ a été ajustée. 
+-	Énumérer les facteurs de confusion pour lesquels la relation entre $\small X$ et $\small Y$ a été ajustée. 
 
-### Interaction $\small A1*A2$ sur $\small Y$ {-}
+### Interaction $\small X*V$ sur $\small Y$ {-}
 
 -	Présenter les effectifs dans chaque catégorie
-    + avec et sans l'outcome ($\small N_{a1,a2}(Y=1)$ et $\small N_{a1,a2}(Y=0)$)
+    + avec et sans l'outcome ($\small N_{x,v}(Y=1)$ et $\small N_{x,v}(Y=0)$)
 -	Présenter les risques relatifs (RR), les OR ou les différences de risques (RD) 
     + avec les intervalles de confiance (IC) 
-    + pour chaque strate de $\small A1$ et de $\small A2$ avec une seule catégorie de référence 
-    + (éventuellement prise comme la strate $\small A1 \cap A2$ présentant le plus faible risque de $\small Y$).
+    + pour chaque strate de $\small X$ et de $\small V$ avec une seule catégorie de référence 
+    + (éventuellement prise comme la strate $\small X \cap V$ présentant le plus faible risque de $\small Y$).
 -	Présenter les RR, OR ou RD avec les IC 
-    + de l'effet de $\small A1$ sur $\small Y$ dans les strates de $\small A2$ 
-    + **et de $\small A2$ sur $\small Y$ dans les strates de $\small A1$**.
+    + de l'effet de $\small X$ sur $\small Y$ dans les strates de $\small V$ 
+    + **et de $\small V$ sur $\small Y$ dans les strates de $\small X$**.
 -	Présenter les mesures de la modification de l'effet d'interaction avec les IC sur des échelles
     + additives (par exemple, RERI) 
     + et multiplicatives.
--	Énumérez les facteurs de confusion pour lesquels la relation entre $\small A1$ et $\small Y$ **et la relation entre $\small A2$ et $\small Y$** ont été ajustées.
+-	Énumérer les facteurs de confusion pour lesquels la relation entre $\small X$ et $\small Y$ **et la relation entre $\small V$ et $\small Y$** ont été ajustées.
 
 ## Proposition
 
@@ -48,12 +48,12 @@ Ces recommandations sont très utiles lorsque les interactions ont été évalu�
 
 En inférence causale, des assocations marginales plutôt que conditionnelles sont souvent estimées (que ce soit en termes de difference de risques, de risques relatifs ou d'odds ratio). Dans la suite de ce document, nous proposons une variante des recommandations de Knol et VanderWeele, adaptée à des estimations marginales. Nous proposons en effet : 
 
-- De présenter les effets marginaux ou proportions prédites de $\small Y$ dans chaque strate $\small A1 \cap A2$, 
+- De présenter les effets marginaux ou proportions prédites de $\small Y$ dans chaque strate $\small X \cap V$, 
     + plutôt les effectifs avec et sans l'outcome
 - Ne pas forcément présenter une différence de risques ou un rapport de risques 
-    + pour chaque strate de $\small A1$ et de $\small A2$ avec une seule catégorie de référence 
+    + pour chaque strate de $\small X$ et de $\small V$ avec une seule catégorie de référence 
 - Mais présenter les effets 
-    + de $\small A1$ dans chaque strate de $\small A2$ 
-    + et de $\small A2$ dans chaque strate de $\small A1$ (si analyse d'interaction)
-    + dans une échelle multiplicative **et** additive.
+    + de $\small X$ dans chaque strate de $\small V$ 
+    + et de $\small V$ dans chaque strate de $\small X$ (si analyse d'interaction)
+    + sur une échelle multiplicative **et** additive.
 

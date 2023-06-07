@@ -40,7 +40,7 @@ Lorsque seulement les risques relatifs sont donnés mais que l'on souhaite éval
 
 \begin{align*}\small
 RERI =& \frac{AI}{p_{00}} = \frac{p_{11} - p_{10} - p_{01} + p_{00}}{p_{00}}\\ 
-RERI =& RR_{11} - RR_{10} - RR_{01} + 1
+\small RERI =& RR_{11} - RR_{10} - RR_{01} + 1
 \end{align*}
 
 On voit que le RERI correspond à l'interaction mesurée sur l'échelle additive, rapportée au risque de base $p_{00}$.
@@ -65,12 +65,12 @@ Il mesure l'augmentation relative du risque liée à l'exposition jointe, rappor
 
 Pour rappel, l'augmentation relative du risque liée à l'exposition jointe correspond à l'augmentation absolue du risque (différence de risques), exprimée en pourcentage par rapport au risque de base $p_{00}$. 
 
-$ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1$
+$\small  ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1$
 
 L'augmentation relative du risque liée à l'exposition $\small X$ ou $\small V$, exprimées en pourcentage par rapport au risque de base $p_{00}$ sont respectivement :
 
-- $ARR(X|V=0) = \frac{p_{10}-p_{00}}{p_{00}}= RR_{10}-1$
-- et $ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1$
+- $\small  ARR(X|V=0) = \frac{p_{10}-p_{00}}{p_{00}}= RR_{10}-1$
+- et $\small ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1$
 
 Une autre façon d'interpréter le "Synergie index" est d'indiquer que la différence liée à l'effet joint $\small DR(X,V)$ est égale à $S$ fois la somme des différences liées aux effets individuels $\small DR(X|V=0) + DR(V|X=0)$ : 
 
@@ -78,8 +78,8 @@ $\small S = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}$
 
 Si le dénominateur est positif: 
 
-- si $S > 1$, alors $\small AI > 0$ et $\small RERI_{RR} > 0$ 
-- si $S < 1$, alors $\small AI < 0$ et $\small RERI_{RR} < 0$ 
+- si $\small S > 1$, alors $\small AI > 0$ et $\small RERI_{RR} > 0$ 
+- si $\small S < 1$, alors $\small AI < 0$ et $\small RERI_{RR} < 0$ 
 
 L'interprétation de l'indice de synergie devient difficile dans les cas où l'effet de l'une des expositions a un effet négatif et que le dénominateur de $S$ est inférieur à 1.
 

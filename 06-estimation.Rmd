@@ -141,17 +141,15 @@ df %>%
   group_modify(~ summary_factorlist(.x, dependent, explanatory, digits = c(2,2,2,2,2))) %>%
   ff_stratify_helper(df) -> t
 
-t %>%  
+library(knitr)
+  t %>% 
   select(-4) %>% 
-   kable(row.names=FALSE,
+   knitr::kable(row.names=FALSE,
        booktabs = T,
        linesep = "",
-       align=c("l", "r", "l", "r", "r")) -> t9
-
-  kable_styling(t9, font_size = 9, 
-                latex_options = "hold_position") 
-
-
+       align=c("l", "r", "l", "r", "r")) %>%
+       kable_classic() 
+  
 ```
 
 Les paramètres utilisés pour simuler les données ont été choisis de sorte que les "vraies" valeurs des paramètres de la distribution correspondent au tableau présenté au paragraphe \@ref(echelle) "Mesure des interactions".

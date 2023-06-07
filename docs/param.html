@@ -215,10 +215,10 @@ div.csl-indent {
 <li class="part"><span><b>II Estimations, Interprétations, Présentations</b></span></li>
 <li class="chapter" data-level="7" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html"><i class="fa fa-check"></i><b>7</b> Présentation des résultats</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#recommendations"><i class="fa fa-check"></i><b>7.1</b> Recommendations</a>
+<li class="chapter" data-level="7.1" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#recommandations"><i class="fa fa-check"></i><b>7.1</b> Recommandations</a>
 <ul>
-<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#pour-une-analyse-dune-modification-deffet-de-small-a1-sur-small-y-par-small-a2"><i class="fa fa-check"></i>Pour une analyse d’une modification d’effet de <span class="math inline">\(\small A1\)</span> sur <span class="math inline">\(\small Y\)</span> par <span class="math inline">\(\small A2\)</span></a></li>
-<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#interaction-small-a1a2-sur-small-y"><i class="fa fa-check"></i>Interaction <span class="math inline">\(\small A1*A2\)</span> sur <span class="math inline">\(\small Y\)</span></a></li>
+<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#pour-une-analyse-dune-modification-deffet-de-small-x-sur-small-y-par-small-v"><i class="fa fa-check"></i>Pour une analyse d’une modification d’effet de <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> par <span class="math inline">\(\small V\)</span></a></li>
+<li class="chapter" data-level="" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#interaction-small-xv-sur-small-y"><i class="fa fa-check"></i>Interaction <span class="math inline">\(\small X*V\)</span> sur <span class="math inline">\(\small Y\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="présentation-des-résultats.html"><a href="présentation-des-résultats.html#proposition"><i class="fa fa-check"></i><b>7.2</b> Proposition</a></li>
 </ul></li>
@@ -329,7 +329,7 @@ div.csl-indent {
 <p>Lorsque seulement les risques relatifs sont donnés mais que l’on souhaite évaluer l’interaction sur l’échelle additive, “l’excès de risque du à l’interaction” (RERI) ou “interaction contrast ratio” (ICR), peut être estimé à partir des risques relatifs <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> :</p>
 <p><span class="math display">\[\begin{align*}\small
 RERI =&amp; \frac{AI}{p_{00}} = \frac{p_{11} - p_{10} - p_{01} + p_{00}}{p_{00}}\\
-RERI =&amp; RR_{11} - RR_{10} - RR_{01} + 1
+\small RERI =&amp; RR_{11} - RR_{10} - RR_{01} + 1
 \end{align*}\]</span></p>
 <p>On voit que le RERI correspond à l’interaction mesurée sur l’échelle additive, rapportée au risque de base <span class="math inline">\(p_{00}\)</span>.</p>
 <p>Il faut noter que, bien que le RERI donne la direction (positive, négative ou nulle) de l’interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l’ampleur de l’interaction additive, à moins de connaître au moins <span class="math inline">\(\small p_{00}\)</span>.</p>
@@ -349,18 +349,18 @@ RERI =&amp; RR_{11} - RR_{10} - RR_{01} + 1
 </ul>
 <p>Il mesure l’augmentation relative du risque liée à l’exposition jointe, rapportée à la somme des augmentations relatives du risque liées à la 1ère et la 2ème exposition.</p>
 <p>Pour rappel, l’augmentation relative du risque liée à l’exposition jointe correspond à l’augmentation absolue du risque (différence de risques), exprimée en pourcentage par rapport au risque de base <span class="math inline">\(p_{00}\)</span>.</p>
-<p><span class="math inline">\(ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)</span></p>
+<p><span class="math inline">\(\small ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)</span></p>
 <p>L’augmentation relative du risque liée à l’exposition <span class="math inline">\(\small X\)</span> ou <span class="math inline">\(\small V\)</span>, exprimées en pourcentage par rapport au risque de base <span class="math inline">\(p_{00}\)</span> sont respectivement :</p>
 <ul>
-<li><span class="math inline">\(ARR(X|V=0) = \frac{p_{10}-p_{00}}{p_{00}}= RR_{10}-1\)</span></li>
-<li>et <span class="math inline">\(ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1\)</span></li>
+<li><span class="math inline">\(\small ARR(X|V=0) = \frac{p_{10}-p_{00}}{p_{00}}= RR_{10}-1\)</span></li>
+<li>et <span class="math inline">\(\small ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1\)</span></li>
 </ul>
 <p>Une autre façon d’interpréter le “Synergie index” est d’indiquer que la différence liée à l’effet joint <span class="math inline">\(\small DR(X,V)\)</span> est égale à <span class="math inline">\(S\)</span> fois la somme des différences liées aux effets individuels <span class="math inline">\(\small DR(X|V=0) + DR(V|X=0)\)</span> :</p>
 <p><span class="math inline">\(\small S = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}\)</span></p>
 <p>Si le dénominateur est positif:</p>
 <ul>
-<li>si <span class="math inline">\(S &gt; 1\)</span>, alors <span class="math inline">\(\small AI &gt; 0\)</span> et <span class="math inline">\(\small RERI_{RR} &gt; 0\)</span></li>
-<li>si <span class="math inline">\(S &lt; 1\)</span>, alors <span class="math inline">\(\small AI &lt; 0\)</span> et <span class="math inline">\(\small RERI_{RR} &lt; 0\)</span></li>
+<li>si <span class="math inline">\(\small S &gt; 1\)</span>, alors <span class="math inline">\(\small AI &gt; 0\)</span> et <span class="math inline">\(\small RERI_{RR} &gt; 0\)</span></li>
+<li>si <span class="math inline">\(\small S &lt; 1\)</span>, alors <span class="math inline">\(\small AI &lt; 0\)</span> et <span class="math inline">\(\small RERI_{RR} &lt; 0\)</span></li>
 </ul>
 <p>L’interprétation de l’indice de synergie devient difficile dans les cas où l’effet de l’une des expositions a un effet négatif et que le dénominateur de <span class="math inline">\(S\)</span> est inférieur à 1.</p>
 </div>
