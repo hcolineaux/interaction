@@ -593,6 +593,10 @@ Lorsqu'on utilise les approches causales pour estimer l'effet de \(\small X\) su
 \NormalTok{       Y.X1V0.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1V0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
 \NormalTok{       Y.X0V1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X0V1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
 \NormalTok{       Y.X1V1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1V1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+       
+       \CommentTok{\# Interaction}
+
+\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.Y0\_30[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Y.S2A30.pred),}\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

@@ -402,7 +402,11 @@ Exemple
 <span id="cb1-12"><a href="intmodif.html#cb1-12" aria-hidden="true" tabindex="-1"></a>       Y.X0V0.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Q.model, <span class="at">newdata =</span> data.X0V0, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
 <span id="cb1-13"><a href="intmodif.html#cb1-13" aria-hidden="true" tabindex="-1"></a>       Y.X1V0.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Q.model, <span class="at">newdata =</span> data.X1V0, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
 <span id="cb1-14"><a href="intmodif.html#cb1-14" aria-hidden="true" tabindex="-1"></a>       Y.X0V1.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Q.model, <span class="at">newdata =</span> data.X0V1, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb1-15"><a href="intmodif.html#cb1-15" aria-hidden="true" tabindex="-1"></a>       Y.X1V1.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Q.model, <span class="at">newdata =</span> data.X1V1, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<span id="cb1-15"><a href="intmodif.html#cb1-15" aria-hidden="true" tabindex="-1"></a>       Y.X1V1.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Q.model, <span class="at">newdata =</span> data.X1V1, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb1-16"><a href="intmodif.html#cb1-16" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb1-17"><a href="intmodif.html#cb1-17" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Interaction</span></span>
+<span id="cb1-18"><a href="intmodif.html#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="intmodif.html#cb1-19" aria-hidden="true" tabindex="-1"></a>         simu.base<span class="sc">$</span>est.Y0_30[simu.base<span class="sc">$</span>i.simu<span class="sc">==</span>i] <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(Y.S2A30.pred),<span class="dv">4</span>)</span></code></pre></div>
 </div>
 <div id="synthèse" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Synthèse<a href="intmodif.html#synthèse" class="anchor-section" aria-label="Anchor link to header"></a></h2>

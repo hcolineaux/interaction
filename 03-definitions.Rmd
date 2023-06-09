@@ -113,7 +113,10 @@ Lorsqu'on utilise les approches causales pour estimer l'effet de  $\small X$ sur
        Y.X1V0.pred <- predict(Q.model, newdata = data.X1V0, type = "response")
        Y.X0V1.pred <- predict(Q.model, newdata = data.X0V1, type = "response")
        Y.X1V1.pred <- predict(Q.model, newdata = data.X1V1, type = "response")
+       
+       # Interaction
 
+         simu.base$est.Y0_30[simu.base$i.simu==i] = round(mean(Y.S2A30.pred),4)
 
 ```
 
