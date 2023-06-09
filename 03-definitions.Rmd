@@ -4,7 +4,7 @@ output:
   html_document: default
 ---
 
-# Interaction vs modification d'effets {#intmodif}
+# Interaction ou modification d'effets {#intmodif}
 
 Dans le champ des analyses d'interaction, deux termes peuvent être rencontrés : "interaction" et "modification d'effet". Quel est la différence entre ces deux termes ?
 
@@ -27,7 +27,7 @@ On a une modification de l'effet de $\small X$ par $\small V$ si l'effet de $\sm
 -	en additif : $\small DR(X | V=0) \neq DR(X | V=1)$ 
 	 - soit	$\small p_{10}-p_{00} \neq p_{11}-p_{01}$  
 -	en multiplicatif : $\small RR(X | V=0) \neq RR(X | V=1)$ 
-	 - soit $\small   \frac{p_{10}}{p_{00}} \neq \frac{{11}}{p_{01}}$  
+	 - soit $\small   \frac{p_{10}}{p_{00}} \neq \frac{p_{11}}{p_{01}}$  
 	
 > <ins>Exemple</ins>
 Modification d'effet dans l'exemple 1
@@ -45,6 +45,10 @@ Modification d'effet dans l'exemple 1
 - donc $\small RR(X | V=0) \neq RR(X | V=1)$ 
 >
 > Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
+
+
+Lorsqu'on utilise les approches causales pour estimer l'effet de  $\small X$ sur $\small Y$, on va intervenir seulement sur X. En G-computation, le code serait : 
+
 
 
 ## Interaction
@@ -88,10 +92,30 @@ Interaction dans l'exemple 1
 - produit des effets individuels : $\small RR(X,V=0) \times RR(V,X=0) = 4 \times 2 = \times 8$
 - donc $\small DR(X,V) \neq DR(X,V=0) \times DR(V,X=0)$
 >
-> Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions.
+> Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions. On peut conclure que l'expérience d'un événement traumatique et le tabagisme se potentialise pour aboutir à une augmentation du risque de maladies chroniques : ces expositions ont un effet plus fort lorsqu'elles sont présentes toutes les deux.
+
+Lorsqu'on utilise les approches causales pour estimer l'effet de  $\small X$ sur $\small Y$, on va intervenir seulement sur X. En G-computation, le code serait : 
+
+```{r code_interaction_ex, eval=FALSE}
+
+       #modèle
+       Q.model <- glm(data=bootData, formula = Y ~ X + V + X*V ,family = binomial)
+       
+       # Scénarios #
+       data.X0V0 <-  data.X0V1 <-  data.X1V0 <-  data.X1V1 <- bootData
+       data.X0V0$X <-  data.X0V1$X <- 0
+       data.X1V0$X <-  data.X1V1$X <- 1
+       data.X0V0$V <-  data.X1V0$V <- 0
+       data.X0V1$V <-  data.X1V1$V <- 1
+
+       # Y contrefactuel
+       Y.X0V0.pred <- predict(Q.model, newdata = data.X0V0, type = "response")
+       Y.X1V0.pred <- predict(Q.model, newdata = data.X1V0, type = "response")
+       Y.X0V1.pred <- predict(Q.model, newdata = data.X0V1, type = "response")
+       Y.X1V1.pred <- predict(Q.model, newdata = data.X1V1, type = "response")
 
 
-
+```
 
 ## Synthèse
 

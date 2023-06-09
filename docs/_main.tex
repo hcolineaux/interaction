@@ -131,7 +131,7 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
-\date{Last compiled on 07 June, 2023}
+\date{Last compiled on 09 June, 2023}
 
 \begin{document}
 \maketitle
@@ -261,11 +261,16 @@ Ensuite, de \textbf{nombreuses questions} se posent pour réaliser une analyse d
   Comment représenter cette interaction graphiquement ? (Chapitre \ref{graph})
 \end{itemize}
 
+\hypertarget{avertissements}{%
+\section{Avertissements}\label{avertissements}}
+
+\textbf{Puissance/sample size}
+
 \hypertarget{part-synthuxe8se-de-la-littuxe9rature}{%
 \part{Synthèse de la littérature}\label{part-synthuxe8se-de-la-littuxe9rature}}
 
-\hypertarget{notations}{%
-\chapter{Notations}\label{notations}}
+\hypertarget{duxe9finitions-pruxe9alables}{%
+\chapter{Définitions préalables}\label{duxe9finitions-pruxe9alables}}
 
 \hypertarget{variables-et-probabilituxe9s}{%
 \section{Variables et probabilités}\label{variables-et-probabilituxe9s}}
@@ -405,8 +410,13 @@ Risques relatifs pour l'exemple 1
 Le risque d'avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 9. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.
 \end{quote}
 
+\hypertarget{effets-conditionnels-et-marginaux}{%
+\section{Effets conditionnels et marginaux}\label{effets-conditionnels-et-marginaux}}
+
+\textbf{A compléter}
+
 \hypertarget{intmodif}{%
-\chapter{Interaction vs modification d'effets}\label{intmodif}}
+\chapter{Interaction ou modification d'effets}\label{intmodif}}
 
 Dans le champ des analyses d'interaction, deux termes peuvent être rencontrés : ``interaction'' et ``modification d'effet''. Quel est la différence entre ces deux termes ?
 
@@ -444,7 +454,7 @@ On a une modification de l'effet de \(\small X\) par \(\small V\) si l'effet de 
   \begin{itemize}
   \tightlist
   \item
-    soit \(\small \frac{p_{10}}{p_{00}} \neq \frac{{11}}{p_{01}}\)
+    soit \(\small \frac{p_{10}}{p_{00}} \neq \frac{p_{11}}{p_{01}}\)
   \end{itemize}
 \end{itemize}
 
@@ -479,6 +489,8 @@ En multiplicatif :
 
 Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
 \end{quote}
+
+Lorsqu'on utilise les approches causales pour estimer l'effet de \(\small X\) sur \(\small Y\), on va intervenir seulement sur X. En G-computation, le code serait :
 
 \hypertarget{interaction}{%
 \section{Interaction}\label{interaction}}
@@ -559,8 +571,30 @@ En multiplicatif :
   donc \(\small DR(X,V) \neq DR(X,V=0) \times DR(V,X=0)\)
 \end{itemize}
 
-Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions.
+Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions. On peut conclure que l'expérience d'un événement traumatique et le tabagisme se potentialise pour aboutir à une augmentation du risque de maladies chroniques : ces expositions ont un effet plus fort lorsqu'elles sont présentes toutes les deux.
 \end{quote}
+
+Lorsqu'on utilise les approches causales pour estimer l'effet de \(\small X\) sur \(\small Y\), on va intervenir seulement sur X. En G-computation, le code serait :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+       \CommentTok{\#modèle}
+\NormalTok{       Q.model }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\AttributeTok{data=}\NormalTok{bootData, }\AttributeTok{formula =}\NormalTok{ Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ X }\SpecialCharTok{+}\NormalTok{ V }\SpecialCharTok{+}\NormalTok{ X}\SpecialCharTok{*}\NormalTok{V ,}\AttributeTok{family =}\NormalTok{ binomial)}
+       
+       \CommentTok{\# Scénarios \#}
+\NormalTok{       data.X0V0 }\OtherTok{\textless{}{-}}\NormalTok{  data.X0V1 }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V0 }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1 }\OtherTok{\textless{}{-}}\NormalTok{ bootData}
+\NormalTok{       data.X0V0}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{  data.X0V1}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{       data.X1V0}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{       data.X0V0}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V0}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{       data.X0V1}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}} \DecValTok{1}
+
+       \CommentTok{\# Y contrefactuel}
+\NormalTok{       Y.X0V0.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X0V0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       Y.X1V0.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1V0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       Y.X0V1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X0V1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{       Y.X1V1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1V1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{synthuxe8se}{%
 \section{Synthèse}\label{synthuxe8se}}
@@ -774,9 +808,9 @@ Par exemple, dans l'exemple 1, l'interaction additive et multiplicative sont pos
 \includegraphics[width=1\textwidth,height=\textheight]{img/Image6.png}
 \end{quote}
 
-\hypertarget{interaction-pure-et-qualitative}{%
-\subsection*{Interaction pure et qualitative}\label{interaction-pure-et-qualitative}}
-\addcontentsline{toc}{subsection}{Interaction pure et qualitative}
+\hypertarget{interactions-pures-et-qualitatives-interactions-inversuxe9es}{%
+\subsection*{Interactions pures et qualitatives, interactions inversées}\label{interactions-pures-et-qualitatives-interactions-inversuxe9es}}
+\addcontentsline{toc}{subsection}{Interactions pures et qualitatives, interactions inversées}
 
 Dans ce continuum, si l'on continue à faire varier \(\small p_{11}\), des cas particuliers d'interaction peuvent être retrouvés :
 
@@ -811,10 +845,26 @@ Par exemple (ligne 7), \(\small V\) a un effet positif si \(\small X=0\) mais n�
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Antagonisme parfait} (ligne 10): l'effet joint est nul \(\small p_{11} - p_{00} = 0\), alors que les effets individuels sont positifs.
+  \textbf{Antagonisme parfait} : l'effet joint est nul \(\small p_{11} - p_{00} = 0\), alors que les effets individuels sont positifs.
+\end{itemize}
+
+\begin{quote}
+Par exemple (ligne 10), \(\small p_{11} - p_{00} = 0\) alors que \(\small p_{01} - p_{00} > 0\) et \(\small p_{10} - p_{00} > 0\)
+
+\includegraphics[width=0.9\textwidth,height=\textheight]{img/Image9b.png}
+\end{quote}
+
+\begin{itemize}
+\tightlist
 \item
   \textbf{Interaction inversée} (ligne 11): l'effet joint est négatif, alors que les effets individuels sont positifs.
 \end{itemize}
+
+\begin{quote}
+Par exemple (ligne 10), \(\small p_{11} - p_{00} < 0\) alors que \(\small p_{01} - p_{00} > 0\) et \(\small p_{10} - p_{00} > 0\)
+
+\includegraphics[width=0.9\textwidth,height=\textheight]{img/Image9c.png}
+\end{quote}
 
 \hypertarget{synthuxe8se-1}{%
 \section{Synthèse}\label{synthuxe8se-1}}

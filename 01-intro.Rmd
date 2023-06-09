@@ -62,3 +62,6 @@ Ensuite, de **nombreuses questions** se posent pour réaliser une analyse d'inte
 - Comment estimer ces paramètres ? (Chapitre \@ref(regression) et Chapitre \@ref(conf))
 - Comment représenter cette interaction graphiquement ? (Chapitre \@ref(graph))
 
+## Avertissements
+
+**Puissance/sample size**

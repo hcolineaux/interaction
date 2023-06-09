@@ -115,7 +115,7 @@ Dans un article de 2019 @vanderweele_interaction_2019, Vanderweele décrit le co
 >
 
 
-### Interaction pure et qualitative {-}
+### Interactions pures et qualitatives, interactions inversées {-}
 
 Dans ce continuum, si l'on continue à faire varier $\small p_{11}$,  des cas particuliers d'interaction peuvent être retrouvés :
 
@@ -139,9 +139,21 @@ Dans ce continuum, si l'on continue à faire varier $\small p_{11}$,  des cas pa
 > ![](img\Image9.png){width=90%}
 >
 
--	**Antagonisme parfait** (ligne 10): l'effet joint est nul $\small p_{11} - p_{00} = 0$, alors que les effets individuels sont positifs.
+-	**Antagonisme parfait** : l'effet joint est nul $\small p_{11} - p_{00} = 0$, alors que les effets individuels sont positifs.
+
+> Par exemple (ligne 10), $\small p_{11} - p_{00} = 0$ alors que $\small p_{01} - p_{00} > 0$ et $\small p_{10} - p_{00} > 0$
+>
+> ![](img\Image9b.png){width=90%}
+>
+
+
+
 -	**Interaction inversée** (ligne 11): l'effet joint est négatif, alors que les effets individuels sont positifs.
 
+> Par exemple (ligne 10), $\small p_{11} - p_{00} < 0$ alors que $\small p_{01} - p_{00} > 0$ et $\small p_{10} - p_{00} > 0$
+>
+> ![](img\Image9c.png){width=90%}
+>
 
 ## Synthèse
 Quelle échelle choisir pour mesurer un effet d'interaction ?

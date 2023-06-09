@@ -5,7 +5,7 @@ output:
 ---
 # (PART) Synthèse de la littérature {-}
 
-# Notations
+# Définitions préalables
 
 ## Variables et probabilités
 
@@ -83,3 +83,6 @@ Risques relatifs pour l'exemple 1
 >
 > Le risque d'avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 9. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.
 
+## Effets conditionnels et marginaux
+
+**A compléter**
