@@ -26,6 +26,11 @@ Knol et VanderWeele ont émis des recommandations concernant la présentation de
     + et multiplicatives.
 -	Énumérer les facteurs de confusion pour lesquels la relation entre $\small X$ et $\small Y$ a été ajustée. 
 
+> Exemple de présentation avec les données fictives de l'exemple 1, modification de l'effet de X par V :
+>
+> ![](img/ex_knol_modif.png){width=90%}
+>
+
 ### Interaction $\small X*V$ sur $\small Y$ {-}
 
 -	Présenter les effectifs dans chaque catégorie
@@ -42,6 +47,12 @@ Knol et VanderWeele ont émis des recommandations concernant la présentation de
     + et multiplicatives.
 -	Énumérer les facteurs de confusion pour lesquels la relation entre $\small X$ et $\small Y$ **et la relation entre $\small V$ et $\small Y$** ont été ajustées.
 
+> Exemple de présentation avec les données fictives de l'exemple 1, interaction entre X et V :
+>
+> ![](img/ex_knol_interaction.png){width=90%}
+>
+
+
 ## Proposition
 
 Ces recommandations sont très utiles lorsque les interactions ont été évaluées à partir de modèles de régression (logistiques, log-linéaires ou linéaires) permettant d'estimer directement des OR, des RR ou des DR, condionnellement aux facteurs de confusion.
@@ -57,3 +68,7 @@ En inférence causale, des assocations marginales plutôt que conditionnelles so
     + et de $\small V$ dans chaque strate de $\small X$ (si analyse d'interaction)
     + sur une échelle multiplicative **et** additive.
 
+> Exemple de présentation avec les données fictives de l'exemple 1, interaction entre X et V :
+>
+> ![](img/ex_knol_proposition.png){width=90%}
+>

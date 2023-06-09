@@ -33,17 +33,16 @@ output:
         + il est possible en exploratoire, d'estimer l'effet de X sur Y
         + de façon stratifiée sur V (on découpe la population)
         + les effets ne seront directement pas comparables
+5. **Analyses confirmatoires**, voir Chapitre \@ref(conf)
     - Régressions avec terme d'interaction
         + un modèle dans la population totale peut être utilisé
         + avec un terme d'interaction entre X et V
         + les différents paramètres peuvent être déduits des résultats du modèle
         + voir Chapitre \@ref(regression)
-    - Marges/ Effets prédits
-        + .
-5. **Analyses confirmatoires**, voir Chapitre \@ref(conf)
-    - G-computation
-    - MSM
-    - TMLE
+    - Approches causales 
+        + G-computation
+        + MSM
+        + TMLE
 
 
 # Exemple 1 - Y binaire

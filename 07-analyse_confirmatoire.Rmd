@@ -4,7 +4,7 @@ output:
   html_document: default
 ---
 
-# Analyses confirmatoires {#conf}
+# Approches causales {#conf}
 
 ```{r simul_2, cache=TRUE, include=FALSE}
 

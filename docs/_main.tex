@@ -300,7 +300,7 @@ On a deux expositions \(\small X\), le tabagisme actif à 20 ans, et \(\small V\
 
 On décrit (données complètement fictives) :
 
-\includegraphics[width=0.4\textwidth,height=\textheight]{img/Image1.png}
+\includegraphics[width=0.3\textwidth,height=\textheight]{img/Image1.png}
 
 Interprétation : La probabilité d'avoir au moins une pathologie chronique à 60 ans quand on n'a pas vécu d'événement traumatique pendant l'enfance et pas fumé à 20 ans est de 10\%, tandis qu'elle est de 90\% quand on a vécu un événement traumatique et fumé.
 \end{quote}
@@ -321,7 +321,7 @@ De même, on va noter \(\small P(Y = 1|do(X=1,V=1))\) la probabilité d'observer
 \begin{itemize}
 \tightlist
 \item
-  L'effet d'une exposition \(X\) binaire sur \(Y\) est : \(\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))\)
+  L'effet d'une exposition \(\small X\) binaire sur \(\small Y\) est : \(\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))\)
 
   \begin{itemize}
   \tightlist
@@ -1167,6 +1167,12 @@ Knol et VanderWeele ont émis des recommandations concernant la présentation de
   Énumérer les facteurs de confusion pour lesquels la relation entre \(\small X\) et \(\small Y\) a été ajustée.
 \end{itemize}
 
+\begin{quote}
+Exemple de présentation avec les données fictives de l'exemple 1, modification de l'effet de X par V :
+
+\includegraphics[width=0.9\textwidth,height=\textheight]{img/ex_knol_modif.png}
+\end{quote}
+
 \hypertarget{interaction-small-xv-sur-small-y}{%
 \subsection*{\texorpdfstring{Interaction \(\small X*V\) sur \(\small Y\)}{Interaction \textbackslash small X*V sur \textbackslash small Y}}\label{interaction-small-xv-sur-small-y}}
 \addcontentsline{toc}{subsection}{Interaction \(\small X*V\) sur \(\small Y\)}
@@ -1217,6 +1223,12 @@ Knol et VanderWeele ont émis des recommandations concernant la présentation de
   Énumérer les facteurs de confusion pour lesquels la relation entre \(\small X\) et \(\small Y\) \textbf{et la relation entre \(\small V\) et \(\small Y\)} ont été ajustées.
 \end{itemize}
 
+\begin{quote}
+Exemple de présentation avec les données fictives de l'exemple 1, interaction entre X et V :
+
+\includegraphics[width=0.9\textwidth,height=\textheight]{img/ex_knol_interaction.png}
+\end{quote}
+
 \hypertarget{proposition}{%
 \section{Proposition}\label{proposition}}
 
@@ -1255,6 +1267,12 @@ En inférence causale, des assocations marginales plutôt que conditionnelles so
     sur une échelle multiplicative \textbf{et} additive.
   \end{itemize}
 \end{itemize}
+
+\begin{quote}
+Exemple de présentation avec les données fictives de l'exemple 1, interaction entre X et V :
+
+\includegraphics[width=0.9\textwidth,height=\textheight]{img/ex_knol_proposition.png}
+\end{quote}
 
 \hypertarget{simulations}{%
 \chapter{Simulations}\label{simulations}}
@@ -1655,7 +1673,7 @@ Interaction & 0.39 (0.36 to 0.43, p<0.001)\\
 \end{table}
 
 \hypertarget{conf}{%
-\chapter{Analyses confirmatoires}\label{conf}}
+\chapter{Approches causales}\label{conf}}
 
 \hypertarget{estimation-par-g-computation}{%
 \section{Estimation par G-computation}\label{estimation-par-g-computation}}
@@ -2895,6 +2913,12 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
     \item
       les effets ne seront directement pas comparables
     \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Analyses confirmatoires}, voir Chapitre \ref{conf}
+
+  \begin{itemize}
+  \tightlist
   \item
     Régressions avec terme d'interaction
 
@@ -2910,25 +2934,17 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
       voir Chapitre \ref{regression}
     \end{itemize}
   \item
-    Marges/ Effets prédits
+    Approches causales
 
     \begin{itemize}
     \tightlist
     \item
-      .
+      G-computation
+    \item
+      MSM
+    \item
+      TMLE
     \end{itemize}
-  \end{itemize}
-\item
-  \textbf{Analyses confirmatoires}, voir Chapitre \ref{conf}
-
-  \begin{itemize}
-  \tightlist
-  \item
-    G-computation
-  \item
-    MSM
-  \item
-    TMLE
   \end{itemize}
 \end{enumerate}
 

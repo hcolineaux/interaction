@@ -24,7 +24,7 @@ On a deux expositions $\small X$, le tabagisme actif à 20 ans, et $\small V$, l
 >
 > On décrit (données complètement fictives) :
 >
->![](img/Image1.png){width=40%}
+>![](img/Image1.png){width=30%}
 >
 > Interprétation : La probabilité d'avoir au moins une pathologie chronique à 60 ans quand on n'a pas vécu d'événement traumatique pendant l'enfance et pas fumé à 20 ans est de 10%, tandis qu'elle est de 90% quand on a vécu un événement traumatique et fumé.
 
@@ -40,7 +40,7 @@ On va noter $\small P(Y = 1|do(X = 1))$ la probabilité d'observer $\small Y=1$ 
 
 De même, on va noter $\small P(Y = 1|do(X=1,V=1))$ la probabilité d'observer $\small Y=1$ sous une intervention contrefactuelle conjointe à la fois sur $\small X$ et sur $\small V$ où la totalité de la population étudiée est exposée à $\small X=1$ et $\small V=1$ (notée $\small do(X=1,V=1)$).
 
--	L'effet d'une exposition $X$ binaire sur $Y$ est : $\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))$ 
+-	L'effet d'une exposition $\small X$ binaire sur $\small Y$ est : $\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))$ 
     + qu'on peut estimer, si les conditions d'identifiabilité sont réunies, 
     + par $\small  P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0$
 -	L'effet conjoint de $\small X$ et $\small V$ est : $\small DR(X,V) = p_{11}-p_{00}$ 

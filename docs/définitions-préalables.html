@@ -233,7 +233,7 @@ div.csl-indent {
 <li class="chapter" data-level="9.1" data-path="regression.html"><a href="regression.html#régression-logistique"><i class="fa fa-check"></i><b>9.1</b> Régression logistique</a></li>
 <li class="chapter" data-level="9.2" data-path="regression.html"><a href="regression.html#régression-lineaire"><i class="fa fa-check"></i><b>9.2</b> Régression lineaire</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="conf.html"><a href="conf.html"><i class="fa fa-check"></i><b>10</b> Analyses confirmatoires</a>
+<li class="chapter" data-level="10" data-path="conf.html"><a href="conf.html"><i class="fa fa-check"></i><b>10</b> Approches causales</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="conf.html"><a href="conf.html#estimation-par-g-computation"><i class="fa fa-check"></i><b>10.1</b> Estimation par G-computation</a></li>
 <li class="chapter" data-level="10.2" data-path="conf.html"><a href="conf.html#estimation-par-modèle-structurel-marginal"><i class="fa fa-check"></i><b>10.2</b> Estimation par Modèle Structurel Marginal</a></li>
@@ -317,7 +317,7 @@ Exemple
 </ins>
 <p>On a deux expositions <span class="math inline">\(\small X\)</span>, le tabagisme actif à 20 ans, et <span class="math inline">\(\small V\)</span>, le fait d’avoir vécu un évènement traumatique pendant l’enfance. L’outcome <span class="math inline">\(\small Y\)</span> est binaire et représente le fait d’avoir au moins une pathologie chronique à 60 ans (<span class="math inline">\(\small Y=1\)</span>) ou aucune (<span class="math inline">\(\small Y=0\)</span>).</p>
 <p>On décrit (données complètement fictives) :</p>
-<p><img src="img/Image1.png" style="width:40.0%" /></p>
+<p><img src="img/Image1.png" style="width:30.0%" /></p>
 <p>Interprétation : La probabilité d’avoir au moins une pathologie chronique à 60 ans quand on n’a pas vécu d’événement traumatique pendant l’enfance et pas fumé à 20 ans est de 10%, tandis qu’elle est de 90% quand on a vécu un événement traumatique et fumé.</p>
 </blockquote>
 </div>
@@ -329,7 +329,7 @@ Exemple
 <p>On va noter <span class="math inline">\(\small P(Y = 1|do(X = 1))\)</span> la probabilité d’observer <span class="math inline">\(\small Y=1\)</span> sous une intervention contrefactuelle où la totalité de la population étudiée est exposée à <span class="math inline">\(\small X=1\)</span> (notée <span class="math inline">\(\small do(X=1)\)</span>).</p>
 <p>De même, on va noter <span class="math inline">\(\small P(Y = 1|do(X=1,V=1))\)</span> la probabilité d’observer <span class="math inline">\(\small Y=1\)</span> sous une intervention contrefactuelle conjointe à la fois sur <span class="math inline">\(\small X\)</span> et sur <span class="math inline">\(\small V\)</span> où la totalité de la population étudiée est exposée à <span class="math inline">\(\small X=1\)</span> et <span class="math inline">\(\small V=1\)</span> (notée <span class="math inline">\(\small do(X=1,V=1)\)</span>).</p>
 <ul>
-<li>L’effet d’une exposition <span class="math inline">\(X\)</span> binaire sur <span class="math inline">\(Y\)</span> est : <span class="math inline">\(\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))\)</span>
+<li>L’effet d’une exposition <span class="math inline">\(\small X\)</span> binaire sur <span class="math inline">\(\small Y\)</span> est : <span class="math inline">\(\small DR(X) = P(Y = 1|do(X = 1)) - P(Y = 1|do(X = 0))\)</span>
 <ul>
 <li>qu’on peut estimer, si les conditions d’identifiabilité sont réunies,</li>
 <li>par <span class="math inline">\(\small P(Y = 1|X = 1) - P(Y = 1|X = 0) = p_1-p_0\)</span></li>
