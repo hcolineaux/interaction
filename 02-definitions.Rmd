@@ -60,7 +60,7 @@ Différences de risques pour l'exemple 1
 
 ### Concernant, les rapports de risques (effets multiplicatifs) {-}
 
-on peut notamment utiliser les **risques relatifs** (RR). On  donc :
+On peut notamment utiliser les **risques relatifs** (RR). On  donc :
 
 -	L'effet d'une exposition $\small X$ binaire sur $\small Y$ est : 
     + $\small RR(X) = \frac{P(Y = 1| do(X = 1)) }{ P(Y = 1|do(X = 0))}$ 

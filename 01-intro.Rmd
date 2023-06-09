@@ -31,9 +31,9 @@ Finalement, pour répondre à la question "quand doit-on prendre en compte les i
 
 - **Démarche prédictive** : on ajoutera alors les interactions dans le modèle de prédiction, pour le rendre plus *flexible*, si cela améliore les performances de la prédiction @vanderweele_tutorial_2014.
 - **Démarche explicative/étiologique** : on étudiera les interactions ou modifications d'effet, si cela répond directement à l'objectif. Par exemple :
-  + Si l'objectif est du type "l'effet de $X$ sur $Y$ varie-t-il en fonction de $V$ ?", on prendra en compte l'interaction entre $X$ et $V$.
-  + Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : "Quel est l'effet conjoint de $X$ et $V$ sur $Y$ ?" ou "Quel part de l'effet de $X$ sur $Y$ disparaît quand $V$ est modifié ?", etc.
-  + Par contre, si l'objectif est simplement d'estimer l'effet de $X$ sur $Y$, ou l'effet médié par un médiateur $M$, la prise en compte des interactions entre $X$ et des covariables (facteurs de confusion ou médiateurs) n'est pas indispensable pour répondre à la question scientifique. Un effet "moyen" pourra être estimé. Des termes d’interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l'estimation (enjeu d'optimisation du modèle).
+  + Si l'objectif est du type "l'effet de $\small X$ sur $\small Y$ varie-t-il en fonction de $\small V$ ?", on prendra en compte l'interaction entre $\small X$ et $\small V$.
+  + Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : "Quel est l'effet conjoint de $\small X$ et $\small V$ sur $\small Y$ ?" ou "Quel part de l'effet de $\small X$ sur $\small Y$ disparaît quand $\small V$ est modifié ?", etc.
+  + Par contre, si l'objectif est simplement d'estimer l'effet de $\small X$ sur $\small Y$, ou l'effet médié par un médiateur $\small M$, la prise en compte des interactions entre $\small X$ et des covariables (facteurs de confusion ou médiateurs) n'est pas indispensable pour répondre à la question scientifique. Un effet "moyen" pourra être estimé. Des termes d’interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l'estimation (enjeu d'optimisation du modèle).
 
 
 ### Types d'objectifs
@@ -62,6 +62,6 @@ Ensuite, de **nombreuses questions** se posent pour réaliser une analyse d'inte
 - Comment estimer ces paramètres ? (Chapitre \@ref(regression) et Chapitre \@ref(conf))
 - Comment représenter cette interaction graphiquement ? (Chapitre \@ref(graph))
 
-## Avertissements
+## Avertissement
 
 **Puissance/sample size**

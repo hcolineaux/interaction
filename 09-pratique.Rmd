@@ -182,8 +182,6 @@ En réalité, on a réalisé cette analyse par g-computation (voir chapitre \@re
  ![](img/result_quanti.png){width=100%}
 
 
-# Exemple 3 - Y multinomial
-
 # Exemple 4 - X quantitatif
 
 Les articles qui se consacrent aux interactions présentent souvent des méthodes applicables lorsque les deux expositions X et V sont binaires. Or, en épidémiologie, les expositions peuvent aussi être continues et, si dichotomiser ces variables peut simplifier l'approche de l'interaction, cela conduit à une perte d'information qui n'est pas souhaitable et pose la question complexe du choix des seuils @royston2006dichotomizing @knol2007estimating @cadarso2006effect.

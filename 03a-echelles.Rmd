@@ -23,22 +23,20 @@ Mesure de l'interaction dans l'exemple 1
 > 
 > On retrouve l'effet d'interaction, calculé/exprimé de différentes façon, 
 > 
-> Soit : 
+> Soit la différence entre l'effet joint et la somme des effets individuels (flèche rouge) : 
 >
     + $\small DR(X, V) - [DR(X|V=0) + DR(V|X=0)] = 0.8 - (0,3 + 0,1)  = +0,4$
     + $\small p_{11} - p_{10} - p_{01} + p_{00} = 0,9 - 0,4 - 0,2 + 0,1 = +0,4$ 
-    + la différence entre l'effet joint et la somme des effets individuels (flèche rouge)
 >    
-> Soit :
+> Soit la différence entre l'effet de X quand V = 1 et quand V = 0 (flèche verte) :
 >
     + $\small (p_{11} - p_{01}) - (p_{10} - p_{00}) = (0,9 - 0,2) - (0,4 - 0,1) = 0,7 - 0,3 = +0,4$  
-    + la différence entre l'effet de X quand V = 1 et quand V = 0 (flèche verte)
 >    
-> Soit : 
+> Soit la différence entre l'effet de V quand X = 1 et quand X = 0 (flèche bleue) : 
 >
     + $\small (p_{11} - p_{10}) - (p_{01} - p_{00}) = (0,9 - 0,4) - (0,2 - 0,1) = 0,5 - 0,1 = +0,4$  
-    + la différence entre l'effet de V quand X = 1 et quand X = 0 (flèche bleue)
 >
+> On peut l'interpréter ainsi : la probabilité d'avoir une maladie chronique quand on fume augmente de +30% quand on n'a pas vécu d'évémement traumatique (40% contre 10%), et de +70% quand on a vécu un événement traumatique (de 20 à 90%). Donc l'effet du tabac est augmenté de +40% (0,70 - 0,30) quand on a vécu un événement traumatique par rapport à l'effet du tabac quand on n'a pas vécu d'événement traumatique. 
 >
 
 
@@ -58,22 +56,21 @@ Mesure de l'nteraction dans l'exemple 1
 >
 > On retrouve l'effet d'interaction, calculé/exprimé de différentes façon, 
 > 
-> Soit : 
+> Soit le rapport entre l'effet joint et le produit des effets individuels (flèche rouge) : 
 >
   -	$\small \frac{RR(X, V)}{RR(X| V=0)*RR(V|X=0)} = \frac{9}{4 \times 2} = \times 1,1$
   - $\small\frac{p_{11} / p_{00}}{(p_{10} + p_{01}) / p_{00}} = \frac{0,9 / 0,1}{(0,4 \times 0,2) / 0,1} = \times 1,1$
-  - le rapport entre l'effet joint et le produit des effets individuels (flèche rouge)
 > 
-> Soit :
+> Soit le produit de l'effet de X quand V = 1 et quand V = 0 (flèche verte) :
 >
   - $\small \frac{p_{11} / p_{01}}{p_{10} / p_{00}} = \frac{0,9 / 0,2}{0,4 / 0,1} = \frac{\times 4,5 }{\times 4} = \times 1,1$
-  - le produit de l'effet de X quand V = 1 et quand V = 0 (flèche verte)
 >
-> Soit :
+> Soit le produit de l'effet de V quand X = 1 et quand X = 0 (flèche bleue):
 >
 - ou $\small \frac{p_{11} / p_{10}}{p_{01} / p_{00}} = \frac{0,9 / 0,4}{0,2 / 0,1} = \frac{\times 2,25}{\times 2} = \times 1,1$
-  - le produit de l'effet de V quand X = 1 et quand X = 0 (flèche bleue)
 > 
+> On peut l'interpréter ainsi : la probabilité d'avoir une maladie chronique quand on fume est multiplier par 4 quand on n'a pas vécu d'évémement traumatique (40% contre 10%), et par 4,5 quand on a vécu un événement traumatique (90% contre 20%). Donc l'effet du tabac est multiplié par 1,1 ($\small \frac{4,5}{4}$) quand on a vécu un événement traumatique par rapport à l'effet du tabac quand on n'a pas vécu d'événement traumatique. 
+>
 
 
 ## Lien entre les deux échelles
@@ -88,7 +85,7 @@ Mesurer l'interaction sur une seule échelle peut être trompeur @mathur2018r. O
 >
 > ![](img/Image4.png){width=90%}
 >
-> *Remarque : on retrouverait les mêmes résultats en comparant les effets de V dans les strates de X ou les effets conjoints et somme/produit des effets individuels.*
+> *Remarque : on retrouverait les mêmes résultats en comparant les effets de $\small V$ dans les strates de $\small X$ ou les effets conjoints et somme/produit des effets individuels.*
 >
 
 

@@ -207,11 +207,11 @@ Finalement, pour répondre à la question ``quand doit-on prendre en compte les 
   \begin{itemize}
   \tightlist
   \item
-    Si l'objectif est du type ``l'effet de \(X\) sur \(Y\) varie-t-il en fonction de \(V\) ?'', on prendra en compte l'interaction entre \(X\) et \(V\).
+    Si l'objectif est du type ``l'effet de \(\small X\) sur \(\small Y\) varie-t-il en fonction de \(\small V\) ?'', on prendra en compte l'interaction entre \(\small X\) et \(\small V\).
   \item
-    Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : ``Quel est l'effet conjoint de \(X\) et \(V\) sur \(Y\) ?'' ou ``Quel part de l'effet de \(X\) sur \(Y\) disparaît quand \(V\) est modifié ?'', etc.
+    Les objectifs qui nécessitent la prise en compte de l'interaction peuvent aussi être du type : ``Quel est l'effet conjoint de \(\small X\) et \(\small V\) sur \(\small Y\) ?'' ou ``Quel part de l'effet de \(\small X\) sur \(\small Y\) disparaît quand \(\small V\) est modifié ?'', etc.
   \item
-    Par contre, si l'objectif est simplement d'estimer l'effet de \(X\) sur \(Y\), ou l'effet médié par un médiateur \(M\), la prise en compte des interactions entre \(X\) et des covariables (facteurs de confusion ou médiateurs) n'est pas indispensable pour répondre à la question scientifique. Un effet ``moyen'' pourra être estimé. Des termes d'interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l'estimation (enjeu d'optimisation du modèle).
+    Par contre, si l'objectif est simplement d'estimer l'effet de \(\small X\) sur \(\small Y\), ou l'effet médié par un médiateur \(\small M\), la prise en compte des interactions entre \(\small X\) et des covariables (facteurs de confusion ou médiateurs) n'est pas indispensable pour répondre à la question scientifique. Un effet ``moyen'' pourra être estimé. Des termes d'interactions peuvent cependant être ajoutés (mais non interprétés), si cela améliore la précision de l'estimation (enjeu d'optimisation du modèle).
   \end{itemize}
 \end{itemize}
 
@@ -261,8 +261,8 @@ Ensuite, de \textbf{nombreuses questions} se posent pour réaliser une analyse d
   Comment représenter cette interaction graphiquement ? (Chapitre \ref{graph})
 \end{itemize}
 
-\hypertarget{avertissements}{%
-\section{Avertissements}\label{avertissements}}
+\hypertarget{avertissement}{%
+\section{Avertissement}\label{avertissement}}
 
 \textbf{Puissance/sample size}
 
@@ -360,7 +360,7 @@ Le fait d'être doublement exposé (tabagisme + événement traumatique) par rap
 \subsection*{Concernant, les rapports de risques (effets multiplicatifs)}\label{concernant-les-rapports-de-risques-effets-multiplicatifs}}
 \addcontentsline{toc}{subsection}{Concernant, les rapports de risques (effets multiplicatifs)}
 
-on peut notamment utiliser les \textbf{risques relatifs} (RR). On donc :
+On peut notamment utiliser les \textbf{risques relatifs} (RR). On donc :
 
 \begin{itemize}
 \tightlist
@@ -462,6 +462,11 @@ On a une modification de l'effet de \(\small X\) par \(\small V\) si l'effet de 
 Exemple
 
 Modification d'effet dans l'exemple 1
+L'objectif serait formulé ainsi : l'effet du tabagisme X sur le risque de maladie chronique Y est-il différent lorsqu'on a ou non vécu un événement traumatique V antérieurement ?
+
+Les données (fictives) :
+
+\includegraphics[width=0.3\textwidth,height=\textheight]{img/Image1.png}
 
 En additif :
 
@@ -487,10 +492,37 @@ En multiplicatif :
   donc \(\small RR(X | V=0) \neq RR(X | V=1)\)
 \end{itemize}
 
-Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
+Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome Y, ce qui est en réalité peu probable.
 \end{quote}
 
-Lorsqu'on utilise les approches causales pour estimer l'effet de \(\small X\) sur \(\small Y\), on va intervenir seulement sur X. En G-computation, le code serait :
+Lorsqu'on utilise les approches causales pour estimer l'effet de \(\small X\) sur \(\small Y\), on va intervenir seulement sur \(\small X\). En G-computation, le code serait :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#modèle}
+\NormalTok{Q.model }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\AttributeTok{data=}\NormalTok{bootData, }\AttributeTok{formula =}\NormalTok{ Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ X }\SpecialCharTok{+}\NormalTok{ V }\SpecialCharTok{+}\NormalTok{ X}\SpecialCharTok{*}\NormalTok{V }\SpecialCharTok{+}\NormalTok{ L,}\AttributeTok{family =}\NormalTok{ binomial)}
+
+\CommentTok{\# Scénarios \#}
+\NormalTok{data.X0 }\OtherTok{\textless{}{-}}\NormalTok{  data.X1 }\OtherTok{\textless{}{-}}\NormalTok{ bootData}
+\NormalTok{data.X0}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{data.X1}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \DecValTok{1}
+
+\CommentTok{\# Y contrefactuel}
+\NormalTok{bootData}\SpecialCharTok{$}\NormalTok{Y.X0.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{bootData}\SpecialCharTok{$}\NormalTok{Y.X1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+
+\CommentTok{\# Modification d\textquotesingle{}effet, échelle additive}
+\NormalTok{simu.base}\SpecialCharTok{$}\NormalTok{est.AI[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}
+ \CommentTok{\# effet de X quand V==1}
+ \FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{Y.X1.pred[}\FunctionTok{which}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{V }\SpecialCharTok{==} \DecValTok{1}\NormalTok{),]) }\SpecialCharTok{{-}} 
+\NormalTok{   bootData}\SpecialCharTok{$}\NormalTok{Y.X0.pred[}\FunctionTok{which}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{V }\SpecialCharTok{==} \DecValTok{1}\NormalTok{),]) }\SpecialCharTok{{-}}
+ \CommentTok{\# effet de X quand V==0}
+ \FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{Y.X1.pred[}\FunctionTok{which}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{V }\SpecialCharTok{==} \DecValTok{0}\NormalTok{),]) }\SpecialCharTok{{-}} 
+\NormalTok{  bootData}\SpecialCharTok{$}\NormalTok{Y.X0.pred[}\FunctionTok{which}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{V }\SpecialCharTok{==} \DecValTok{0}\NormalTok{),]}\ErrorTok{)}\NormalTok{,}\DecValTok{4}\ErrorTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Remarque} : on ne peut pas considérer \(\small V\) comme un modificateur de l'effet de \(\small X\) si \(\small X\) est une cause de \(\small V\). Par exemple, si \(\small X\) était le tabagisme à 20 ans, \(\small V\) le fait de souffrir de bronchite chronique obstructive à 50 ans et \(\small Y\) la mortalité. Ca n'aurait pas de sens de demander si l'effet du tabac sur la mortalité varie en fonction de la présence ou non de BPCO, car \(\small V\) est un descendant de \(\small X\) (le tabagisme augmente le risque de BPCO). Lorsqu'on intervient sur \(\small X\), \(\small do(X)\), on modifie donc aussi \(\small V\) car \(\small X \rightarrow V\) , on est donc obligé d'intervenir aussi sur \(\small V\) (en faisant une analyse de médiation ou d'interaction) pour étudier l'effet de \(\small X\) en fonction de \(\small V\), nous ne sommes donc plus dans le cadre d'une modification d'effet.
 
 \hypertarget{interaction}{%
 \section{Interaction}\label{interaction}}
@@ -546,6 +578,7 @@ On a ainsi,
 Exemple
 
 Interaction dans l'exemple 1
+L'objectif serait formulé ainsi : le tabagisme X et le vécu d'un événement traumatique V se potentialisent-il l'un autre pour augmenter le risque de maladie chronique Y ?
 
 En additif :
 
@@ -571,32 +604,36 @@ En multiplicatif :
   donc \(\small DR(X,V) \neq DR(X,V=0) \times DR(V,X=0)\)
 \end{itemize}
 
-Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions. On peut conclure que l'expérience d'un événement traumatique et le tabagisme se potentialise pour aboutir à une augmentation du risque de maladies chroniques : ces expositions ont un effet plus fort lorsqu'elles sont présentes toutes les deux.
+Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions. On peut conclure que l'expérience d'un événement traumatique et le tabagisme \emph{se potentialisent} pour aboutir à une augmentation du risque de maladies chroniques : ces expositions ont un effet plus fort lorsqu'elles sont présentes toutes les deux que la somme/le produit des deux.
 \end{quote}
 
-Lorsqu'on utilise les approches causales pour estimer l'effet de \(\small X\) sur \(\small Y\), on va intervenir seulement sur X. En G-computation, le code serait :
+Lorsqu'on utilise les approches causales pour estimer l'effet de \(\small X\) sur \(\small Y\), on va intervenir sur \(\small X\) et sur \(\small Y\), contrairement à l'approche précédente ou l'on intervenait seulement sur \(\small X\). En G-computation, le code serait :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-       \CommentTok{\#modèle}
-\NormalTok{       Q.model }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\AttributeTok{data=}\NormalTok{bootData, }\AttributeTok{formula =}\NormalTok{ Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ X }\SpecialCharTok{+}\NormalTok{ V }\SpecialCharTok{+}\NormalTok{ X}\SpecialCharTok{*}\NormalTok{V ,}\AttributeTok{family =}\NormalTok{ binomial)}
-       
-       \CommentTok{\# Scénarios \#}
-\NormalTok{       data.X0V0 }\OtherTok{\textless{}{-}}\NormalTok{  data.X0V1 }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V0 }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1 }\OtherTok{\textless{}{-}}\NormalTok{ bootData}
-\NormalTok{       data.X0V0}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{  data.X0V1}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \DecValTok{0}
-\NormalTok{       data.X1V0}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \DecValTok{1}
-\NormalTok{       data.X0V0}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V0}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}} \DecValTok{0}
-\NormalTok{       data.X0V1}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\#modèle}
+\NormalTok{Q.model }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\AttributeTok{data=}\NormalTok{bootData, }\AttributeTok{formula =}\NormalTok{ Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ X }\SpecialCharTok{+}\NormalTok{ V }\SpecialCharTok{+}\NormalTok{ X}\SpecialCharTok{*}\NormalTok{V }\SpecialCharTok{+}\NormalTok{ L,}\AttributeTok{family =}\NormalTok{ binomial)}
 
-       \CommentTok{\# Y contrefactuel}
-\NormalTok{       Y.X0V0.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X0V0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{       Y.X1V0.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1V0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{       Y.X0V1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X0V1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{       Y.X1V1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1V1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-       
-       \CommentTok{\# Interaction}
+\CommentTok{\# Scénarios \#}
+\NormalTok{data.X0V0 }\OtherTok{\textless{}{-}}\NormalTok{  data.X0V1 }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V0 }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1 }\OtherTok{\textless{}{-}}\NormalTok{ bootData}
+\NormalTok{data.X0V0}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{  data.X0V1}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{data.X1V0}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{data.X0V0}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V0}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{data.X0V1}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}}\NormalTok{  data.X1V1}\SpecialCharTok{$}\NormalTok{V }\OtherTok{\textless{}{-}} \DecValTok{1}
 
-\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.Y0\_30[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Y.S2A30.pred),}\DecValTok{4}\NormalTok{)}
+\CommentTok{\# Y contrefactuel}
+\NormalTok{Y.X0V0.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X0V0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{Y.X1V0.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1V0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{Y.X0V1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X0V1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{Y.X1V1.pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(Q.model, }\AttributeTok{newdata =}\NormalTok{ data.X1V1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+
+\CommentTok{\# Interaction additive}
+\NormalTok{simu.base}\SpecialCharTok{$}\NormalTok{est.AI[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}
+ \CommentTok{\# effet joint }
+ \FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{Y.X1V1.pred }\SpecialCharTok{{-}}\NormalTok{ bootData}\SpecialCharTok{$}\NormalTok{Y.X0V0.pred) }\SpecialCharTok{{-}}
+ \CommentTok{\# somme des effets individuels}
+ \FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{Y.X0V1.pred }\SpecialCharTok{{-}}\NormalTok{ bootData}\SpecialCharTok{$}\NormalTok{Y.X0V0.pred) }\SpecialCharTok{+}
+ \FunctionTok{mean}\NormalTok{(bootData}\SpecialCharTok{$}\NormalTok{Y.X1V0.pred }\SpecialCharTok{{-}}\NormalTok{ bootData}\SpecialCharTok{$}\NormalTok{Y.X0V0.pred),}\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -622,7 +659,9 @@ La différence se joue plutôt sur :
 \item
   les hypothèses causales formulées (scénario \(\small do(X)|V\) \emph{versus} \(\small do(X,V)\))
 \item
-  et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation \(\small X \rightarrow Y\) \emph{versus} les deux relations \(\small X \rightarrow Y\) et \(\small V \rightarrow Y\)).
+  et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation \(\small X \rightarrow Y\) \emph{versus} les deux relations \(\small X \rightarrow Y\) et \(\small V \rightarrow Y\))
+\item
+  et sur l'intervention contrefactuelle que l'on va réalisée si l'on utilise des approches causales (\(\small do(X)|V\) \emph{versus} \(\small do(X,V)\)).
 \end{itemize}
 
 Il existe des cas où l'identification d'une interaction ou d'une modification d'effet ne conduira pas à la même démarche et donc au même résultat \citet{vanderweele_distinction_2009}. Prenons le DAG suivant :
@@ -676,7 +715,7 @@ Mesure de l'interaction dans l'exemple 1
 
 On retrouve l'effet d'interaction, calculé/exprimé de différentes façon,
 
-Soit :
+Soit la différence entre l'effet joint et la somme des effets individuels (flèche rouge) :
 
 \begin{itemize}
 \tightlist
@@ -684,29 +723,25 @@ Soit :
   \(\small DR(X, V) - [DR(X|V=0) + DR(V|X=0)] = 0.8 - (0,3 + 0,1) = +0,4\)
 \item
   \(\small p_{11} - p_{10} - p_{01} + p_{00} = 0,9 - 0,4 - 0,2 + 0,1 = +0,4\)
-\item
-  la différence entre l'effet joint et la somme des effets individuels (flèche rouge)
 \end{itemize}
 
-Soit :
+Soit la différence entre l'effet de X quand V = 1 et quand V = 0 (flèche verte) :
 
 \begin{itemize}
 \tightlist
 \item
-  \(\small (p_{11} - p_{01}) - (p_{10} - p_{00}) = (0,9 - 0,2) - (0,4 - 0,1) = 0,7 - 0,3 = +0,4\)\\
-\item
-  la différence entre l'effet de X quand V = 1 et quand V = 0 (flèche verte)
+  \(\small (p_{11} - p_{01}) - (p_{10} - p_{00}) = (0,9 - 0,2) - (0,4 - 0,1) = 0,7 - 0,3 = +0,4\)
 \end{itemize}
 
-Soit :
+Soit la différence entre l'effet de V quand X = 1 et quand X = 0 (flèche bleue) :
 
 \begin{itemize}
 \tightlist
 \item
-  \(\small (p_{11} - p_{10}) - (p_{01} - p_{00}) = (0,9 - 0,4) - (0,2 - 0,1) = 0,5 - 0,1 = +0,4\)\\
-\item
-  la différence entre l'effet de V quand X = 1 et quand X = 0 (flèche bleue)
+  \(\small (p_{11} - p_{10}) - (p_{01} - p_{00}) = (0,9 - 0,4) - (0,2 - 0,1) = 0,5 - 0,1 = +0,4\)
 \end{itemize}
+
+On peut l'interpréter ainsi : la probabilité d'avoir une maladie chronique quand on fume augmente de +30\% quand on n'a pas vécu d'évémement traumatique (40\% contre 10\%), et de +70\% quand on a vécu un événement traumatique (de 20 à 90\%). Donc l'effet du tabac est augmenté de +40\% (0,70 - 0,30) quand on a vécu un événement traumatique par rapport à l'effet du tabac quand on n'a pas vécu d'événement traumatique.
 \end{quote}
 
 \hypertarget{echelle-multiplicative}{%
@@ -734,7 +769,7 @@ Mesure de l'nteraction dans l'exemple 1
 
 On retrouve l'effet d'interaction, calculé/exprimé de différentes façon,
 
-Soit :
+Soit le rapport entre l'effet joint et le produit des effets individuels (flèche rouge) :
 
 \begin{itemize}
 \tightlist
@@ -742,29 +777,25 @@ Soit :
   \(\small \frac{RR(X, V)}{RR(X| V=0)*RR(V|X=0)} = \frac{9}{4 \times 2} = \times 1,1\)
 \item
   \(\small\frac{p_{11} / p_{00}}{(p_{10} + p_{01}) / p_{00}} = \frac{0,9 / 0,1}{(0,4 \times 0,2) / 0,1} = \times 1,1\)
-\item
-  le rapport entre l'effet joint et le produit des effets individuels (flèche rouge)
 \end{itemize}
 
-Soit :
+Soit le produit de l'effet de X quand V = 1 et quand V = 0 (flèche verte) :
 
 \begin{itemize}
 \tightlist
 \item
   \(\small \frac{p_{11} / p_{01}}{p_{10} / p_{00}} = \frac{0,9 / 0,2}{0,4 / 0,1} = \frac{\times 4,5 }{\times 4} = \times 1,1\)
-\item
-  le produit de l'effet de X quand V = 1 et quand V = 0 (flèche verte)
 \end{itemize}
 
-Soit :
+Soit le produit de l'effet de V quand X = 1 et quand X = 0 (flèche bleue):
 
 \begin{itemize}
 \tightlist
 \item
   ou \(\small \frac{p_{11} / p_{10}}{p_{01} / p_{00}} = \frac{0,9 / 0,4}{0,2 / 0,1} = \frac{\times 2,25}{\times 2} = \times 1,1\)
-\item
-  le produit de l'effet de V quand X = 1 et quand X = 0 (flèche bleue)
 \end{itemize}
+
+On peut l'interpréter ainsi : la probabilité d'avoir une maladie chronique quand on fume est multiplier par 4 quand on n'a pas vécu d'évémement traumatique (40\% contre 10\%), et par 4,5 quand on a vécu un événement traumatique (90\% contre 20\%). Donc l'effet du tabac est multiplié par 1,1 (\(\small \frac{4,5}{4}\)) quand on a vécu un événement traumatique par rapport à l'effet du tabac quand on n'a pas vécu d'événement traumatique.
 \end{quote}
 
 \hypertarget{lien-entre-les-deux-uxe9chelles}{%
@@ -783,7 +814,7 @@ Dans cet exemple (on modifie seulement la probabilité \(\small p_{11}\), en jau
 
 \includegraphics[width=0.9\textwidth,height=\textheight]{img/Image4.png}
 
-\emph{Remarque : on retrouverait les mêmes résultats en comparant les effets de V dans les strates de X ou les effets conjoints et somme/produit des effets individuels.}
+\emph{Remarque : on retrouverait les mêmes résultats en comparant les effets de \(\small V\) dans les strates de \(\small X\) ou les effets conjoints et somme/produit des effets individuels.}
 \end{quote}
 
 Il a même été démontré que si on n'observe pas d'interaction sur une échelle, alors on en observera obligatoirement sur l'autre échelle\ldots{} \citet{vanderweele_tutorial_2014}.
@@ -919,8 +950,47 @@ Idéalement, les interactions devraient cependant être reportées sur les 2 éc
 
 Plusieurs paramètres peuvent être utilisés pour décrire une interaction, sur l'échelle additive ou multiplicative.
 
-\hypertarget{avec-les-diffuxe9rences-de-risques-dr}{%
-\section{Avec les différences de risques (DR)}\label{avec-les-diffuxe9rences-de-risques-dr}}
+\hypertarget{sur-luxe9chelle-multiplicative}{%
+\section{Sur l'échelle multiplicative}\label{sur-luxe9chelle-multiplicative}}
+
+\hypertarget{avec-les-risques-relatifs-mi}{%
+\subsection*{Avec les risques relatifs (MI)}\label{avec-les-risques-relatifs-mi}}
+\addcontentsline{toc}{subsection}{Avec les risques relatifs (MI)}
+
+On a déjà défini précédemment un paramètre d'interaction sur l'échelle multiplicative (MI),défini à partir des risques relatifs \citet{vanderweele_tutorial_2014} :
+
+\begin{itemize}
+\tightlist
+\item
+  \(\small MI = \frac{RR_{11}}{RR_{10} \times RR_{01}}\)
+\item
+  soit \(\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}\)
+\item
+  soit \(\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}\)
+\end{itemize}
+
+\hypertarget{avec-les-odds-ratio-mi}{%
+\subsection*{Avec les Odds Ratio (MI)}\label{avec-les-odds-ratio-mi}}
+\addcontentsline{toc}{subsection}{Avec les Odds Ratio (MI)}
+
+Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mesurés par des odds ratios estimés à partir de modèles de régression logistique.
+
+Un paramètre d'interaction sur l'échelle multiplicative (\(\small MI_{OR}\)) peut être estimé à partir de ces OR \citet{vanderweele_tutorial_2014} :
+
+\begin{itemize}
+\tightlist
+\item
+  \(\small MI_{OR} = \frac{OR_{11}}{OR_{10} \times OR_{01}}\)
+\end{itemize}
+
+En général, la mesure \(\small MI_{OR}\) et \(\small MI_{RR}\) seront proches si l'outcome est rare \citet{vanderweele_tutorial_2014}.
+
+\hypertarget{sur-luxe9chelle-additive}{%
+\section{Sur l'échelle additive}\label{sur-luxe9chelle-additive}}
+
+\hypertarget{avec-les-diffuxe9rences-de-risques-ai}{%
+\subsection*{Avec les différences de risques (AI)}\label{avec-les-diffuxe9rences-de-risques-ai}}
+\addcontentsline{toc}{subsection}{Avec les différences de risques (AI)}
 
 On a déjà défini un paramètre d'interaction sur l'échelle additive (AI) à partir des différences d'effets \citet{vanderweele_tutorial_2014} :
 
@@ -934,49 +1004,23 @@ On a déjà défini un paramètre d'interaction sur l'échelle additive (AI) à 
   soit \(\small AI =p_{11} - p_{10} - p_{01} + p_{00}\)
 \end{itemize}
 
-\hypertarget{avec-les-risques-relatifs-rr}{%
-\section{Avec les risques relatifs (RR)}\label{avec-les-risques-relatifs-rr}}
-
-On a aussi défini un paramètre d'interaction sur l'échelle multiplicative (MI) à partir des risques relatifs \citet{vanderweele_tutorial_2014} :
-
-\begin{itemize}
-\tightlist
-\item
-  \(\small MI = \frac{RR_{11}}{RR_{10} \times RR_{01}}\)
-\item
-  soit \(\small MI = \frac{p_{11} / p_{00}}{(p_{10} / p_{00}) \times (p_{01} / p_{00})}\)
-\item
-  soit \(\small MI = \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}}\)
-\end{itemize}
-
-\hypertarget{avec-les-odds-ratio-or}{%
-\section{Avec les Odds Ratio (OR)}\label{avec-les-odds-ratio-or}}
-
-Souvent en épidémiologie, lorsque l'outcome Y est binaire, les effets sont mesurés par des odds ratios estimés à partir de modèles de régression logistique.
-
-Un paramètre d'interaction sur l'echelle multiplicative (\(\small MI_{OR}\)) peut être estimé à partir de ces OR \citet{vanderweele_tutorial_2014} :
-
-\begin{itemize}
-\tightlist
-\item
-  \(\small MI_{OR} = \frac{OR_{11}}{OR_{10} \times OR_{01}}\)
-\end{itemize}
-
-En général, la mesure \(\small MI_{OR}\) et \(\small MI_{RR}\) seront proches si l'outcome est rare \citet{vanderweele_tutorial_2014}.
-
 \hypertarget{excuxe8s-de-risque-uxe0-partir-des-rr-reri}{%
-\section{Excès de risque à partir des RR (RERI)}\label{excuxe8s-de-risque-uxe0-partir-des-rr-reri}}
+\subsection*{Excès de risque, à partir des RR (RERI)}\label{excuxe8s-de-risque-uxe0-partir-des-rr-reri}}
+\addcontentsline{toc}{subsection}{Excès de risque, à partir des RR (RERI)}
 
 Lorsque seulement les risques relatifs sont donnés mais que l'on souhaite évaluer l'interaction sur l'échelle additive, ``l'excès de risque du à l'interaction'' (RERI) ou ``interaction contrast ratio'' (ICR), peut être estimé à partir des risques relatifs \citet{vanderweele_tutorial_2014} :
 
-\begin{align*}\small
-RERI =& \frac{AI}{p_{00}} = \frac{p_{11} - p_{10} - p_{01} + p_{00}}{p_{00}}\\ 
-\small RERI =& RR_{11} - RR_{10} - RR_{01} + 1
-\end{align*}
+\begin{itemize}
+\tightlist
+\item
+  \(\small RERI = \frac{AI}{p_{00}} = \frac{p_{11} - p_{10} - p_{01} + p_{00}}{p_{00}}\)
+\item
+  \(\small RERI = RR_{11} - RR_{10} - RR_{01} + 1\)
+\end{itemize}
 
 On voit que le RERI correspond à l'interaction mesurée sur l'échelle additive, rapportée au risque de base \(p_{00}\).
 
-Il faut noter que, bien que le RERI donne la direction (positive, négative ou nulle) de l'interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l'ampleur de l'interaction additive, à moins de connaître au moins \(\small p_{00}\).
+Il faut noter que, bien que le RERI donne la direction (positive, négative ou nulle) de l'interaction additive, nous ne pouvons pas utiliser le RERI pour évaluer l'ampleur de l'interaction additive, à moins de connaître au moins \(\small p_{00}\), dans ce cas on retrouve \(\small AI = p_{00} \times RERI\).
 
 Si l'on a seulement l'OR et que l'outcome est rare, les OR peuvent approximer les RR, on a donc :
 
@@ -986,28 +1030,19 @@ Si l'on a seulement l'OR et que l'outcome est rare, les OR peuvent approximer le
   \(\small RERI_{OR} = OR_{11} - OR_{10} - OR_{01} + 1 \approx RERI_{RR}\)
 \end{itemize}
 
-\hypertarget{autres}{%
-\section{Autres}\label{autres}}
-
-D'autres paramètres ont aussi été proposés \citet{vanderweele_tutorial_2014}, tels que :
-
 \hypertarget{le-synergie-index-si}{%
 \subsection*{Le ``Synergie index'' (SI)}\label{le-synergie-index-si}}
 \addcontentsline{toc}{subsection}{Le ``Synergie index'' (SI)}
 
-Il s'agit d'un paramètre explorant l'interaction additive :
+Il s'agit d'un paramètre explorant aussi l'interaction additive \citet{vanderweele_tutorial_2014}. Il est définit à partir des Augmentation Relatif du Risque (ARR).
+
+Pour rappel, \textbf{l'Augmentation Relative du Risque} liée à l'exposition jointe correspond à l'augmentation absolue du risque (différence de risques), exprimée en pourcentage par rapport au risque de base \(p_{00}\).
 
 \begin{itemize}
 \tightlist
 \item
-  \(\small S = \frac{RR_{11} - 1}{(RR_{10} - 1) + (RR_{01}-1)}\).
+  \(\small ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)
 \end{itemize}
-
-Il mesure l'augmentation relative du risque liée à l'exposition jointe, rapportée à la somme des augmentations relatives du risque liées à la 1ère et la 2ème exposition.
-
-Pour rappel, l'augmentation relative du risque liée à l'exposition jointe correspond à l'augmentation absolue du risque (différence de risques), exprimée en pourcentage par rapport au risque de base \(p_{00}\).
-
-\(\small ARR(X,V) = \frac{DR(X,V)}{p_{00}} = \frac{p_{11}-p_{00}}{p_{00}}= RR_{11}-1\)
 
 L'augmentation relative du risque liée à l'exposition \(\small X\) ou \(\small V\), exprimées en pourcentage par rapport au risque de base \(p_{00}\) sont respectivement :
 
@@ -1019,24 +1054,37 @@ L'augmentation relative du risque liée à l'exposition \(\small X\) ou \(\small
   et \(\small ARR(V|X=0) = \frac{p_{01}-p_{00}}{p_{00}}= RR_{01}-1\)
 \end{itemize}
 
-Une autre façon d'interpréter le ``Synergie index'' est d'indiquer que la différence liée à l'effet joint \(\small DR(X,V)\) est égale à \(S\) fois la somme des différences liées aux effets individuels \(\small DR(X|V=0) + DR(V|X=0)\) :
+L'index synergique correspond à l'augmentation relative du risque liée à l'exposition jointe, rapportée à la somme des augmentations relatives du risque liées à la 1ère et la 2ème exposition.
 
-\(\small S = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}\)
+\begin{itemize}
+\tightlist
+\item
+  \(\small SI = \frac{RR_{11} - 1}{(RR_{10} - 1) + (RR_{01}-1)}\).
+\end{itemize}
+
+On peut aussi l'interpréter ainsi : la différence liée à l'effet joint \(\small DR(X,V)\) est égale à \(SI\) fois la somme des différences liées aux effets individuels \(\small DR(X|V=0) + DR(V|X=0)\), car :
+
+\begin{itemize}
+\tightlist
+\item
+  \(\small SI = \frac{p_{11}-p_{00}}{(p_{10}-p_{00}) + (p_{01} - p_{00})}\)
+\end{itemize}
 
 Si le dénominateur est positif:
 
 \begin{itemize}
 \tightlist
 \item
-  si \(\small S > 1\), alors \(\small AI > 0\) et \(\small RERI_{RR} > 0\)
+  si \(\small SI > 1\), alors \(\small AI > 0\) et \(\small RERI_{RR} > 0\)
 \item
-  si \(\small S < 1\), alors \(\small AI < 0\) et \(\small RERI_{RR} < 0\)
+  si \(\small SI < 1\), alors \(\small AI < 0\) et \(\small RERI_{RR} < 0\)
 \end{itemize}
 
 L'interprétation de l'indice de synergie devient difficile dans les cas où l'effet de l'une des expositions a un effet négatif et que le dénominateur de \(S\) est inférieur à 1.
 
 \hypertarget{proportion-attribuable-ap}{%
-\subsection{Proportion attribuable (AP)}\label{proportion-attribuable-ap}}
+\subsection*{Proportion attribuable (AP)}\label{proportion-attribuable-ap}}
+\addcontentsline{toc}{subsection}{Proportion attribuable (AP)}
 
 Il s'agit aussi d'un paramètre explorant l'interaction additive :
 
@@ -3087,9 +3135,6 @@ On retrouve des résulats qui peuvent être intérprétés ainsi :
 En réalité, on a réalisé cette analyse par g-computation (voir chapitre \ref{conf}) sur des données imputées et boostrappées (l'exemple ci-dessus a été réalisé sur une seule des bases bootstrappées, ce qui explique les différences), et les résultats, présentées selon les recommandations modifiées de Knol et VanderWeele, étaient:
 
 \includegraphics[width=1\textwidth,height=\textheight]{img/result_quanti.png}
-
-\hypertarget{exemple-3---y-multinomial}{%
-\chapter{Exemple 3 - Y multinomial}\label{exemple-3---y-multinomial}}
 
 \hypertarget{exemple-4---x-quantitatif}{%
 \chapter{Exemple 4 - X quantitatif}\label{exemple-4---x-quantitatif}}

@@ -19,7 +19,6 @@ On ajustera sur les facteurs de confusion de la relation $\small X \rightarrow Y
 
 On ne fait pas d'hypothèse sur les mécanismes de la modification d'effet, qui peut être causale (de façon directe ou indirecte), ou non-causale (présence d'une modification d'effet par proxy ou cause commune, sans qu'il existe d'effet direct ou indirect du modificateur d'effet vers le critère de jugement, comme dans la figure en bas de page) @vanderweele_four_2007.
 
-
 > Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou explorer si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc. 
 
 On a une modification de l'effet de $\small X$ par $\small V$ si l'effet de $\small X$ est différent dans deux strates définies par $\small V$:
@@ -30,7 +29,12 @@ On a une modification de l'effet de $\small X$ par $\small V$ si l'effet de $\sm
 	 - soit $\small   \frac{p_{10}}{p_{00}} \neq \frac{p_{11}}{p_{01}}$  
 	
 > <ins>Exemple</ins>
-Modification d'effet dans l'exemple 1
+Modification d'effet dans l'exemple 1 
+> L'objectif serait formulé ainsi : l'effet du tabagisme X sur le risque de maladie chronique Y est-il différent lorsqu'on a ou non vécu un événement traumatique V antérieurement ?
+>
+> Les données (fictives) :
+>
+>![](img/Image1.png){width=30%}
 >
 > En additif : 
 >
@@ -44,10 +48,37 @@ Modification d'effet dans l'exemple 1
 - effet dans le groupe $\small V=1$ : $\small RR(X | V=1) = \frac{0,90}{0,20} = \times 4,5$
 - donc $\small RR(X | V=0) \neq RR(X | V=1)$ 
 >
-> Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome, ce qui est en réalité peu probable.
+> Ici l'effet du tabagisme est différent selon que les personnes ont vécu un événement traumatique ou non, sur l'échelle additive et multiplicative (données fictives). On peut donc dire que le fait d'avoir vécu un événement traumatique modifie l'effet du tabac. Attention, dans cet exemple, on fait l'hypothèse de l'absence de facteurs de confusion entre le tabagisme et l'outcome Y, ce qui est en réalité peu probable.
 
 
-Lorsqu'on utilise les approches causales pour estimer l'effet de  $\small X$ sur $\small Y$, on va intervenir seulement sur X. En G-computation, le code serait : 
+Lorsqu'on utilise les approches causales pour estimer l'effet de  $\small X$ sur $\small Y$, on va intervenir seulement sur $\small X$. En G-computation, le code serait : 
+
+```{r code_modification_ex, eval=FALSE}
+
+#modèle
+Q.model <- glm(data=bootData, formula = Y ~ X + V + X*V + L,family = binomial)
+
+# Scénarios #
+data.X0 <-  data.X1 <- bootData
+data.X0$X <- 0
+data.X1$X <- 1
+
+# Y contrefactuel
+bootData$Y.X0.pred <- predict(Q.model, newdata = data.X0, type = "response")
+bootData$Y.X1.pred <- predict(Q.model, newdata = data.X1, type = "response")
+
+# Modification d'effet, échelle additive
+simu.base$est.AI[simu.base$i.simu==i] = round(
+ # effet de X quand V==1
+ mean(bootData$Y.X1.pred[which(bootData$V == 1),]) - 
+   bootData$Y.X0.pred[which(bootData$V == 1),]) -
+ # effet de X quand V==0
+ mean(bootData$Y.X1.pred[which(bootData$V == 0),]) - 
+  bootData$Y.X0.pred[which(bootData$V == 0),]),4)
+
+```
+
+**Remarque** : on ne peut pas considérer $\small V$ comme un modificateur de l'effet de $\small X$ si $\small X$ est une cause de $\small V$. Par exemple, si $\small X$ était le tabagisme à 20 ans, $\small V$ le fait de souffrir de bronchite chronique obstructive à 50 ans et $\small Y$ la mortalité. Ca n'aurait pas de sens de demander si l'effet du tabac sur la mortalité varie en fonction de la présence ou non de BPCO, car $\small V$ est un descendant de $\small X$ (le tabagisme augmente le risque de BPCO). Lorsqu'on intervient sur $\small X$, $\small do(X)$, on modifie donc aussi $\small V$ car $\small X \rightarrow V$ , on est donc obligé d'intervenir aussi sur $\small V$ (en faisant une analyse de médiation ou d'interaction) pour étudier l'effet de $\small X$ en fonction de $\small V$, nous ne sommes donc plus dans le cadre d'une modification d'effet.
 
 
 
@@ -79,6 +110,7 @@ On a ainsi,
 
 > <ins>Exemple</ins>
 Interaction dans l'exemple 1
+> L'objectif serait formulé ainsi : le tabagisme X et le vécu d'un événement traumatique V se potentialisent-il l'un autre pour augmenter le risque de maladie chronique Y ?
 >
 > En additif : 
 >
@@ -92,31 +124,35 @@ Interaction dans l'exemple 1
 - produit des effets individuels : $\small RR(X,V=0) \times RR(V,X=0) = 4 \times 2 = \times 8$
 - donc $\small DR(X,V) \neq DR(X,V=0) \times DR(V,X=0)$
 >
-> Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions. On peut conclure que l'expérience d'un événement traumatique et le tabagisme se potentialise pour aboutir à une augmentation du risque de maladies chroniques : ces expositions ont un effet plus fort lorsqu'elles sont présentes toutes les deux.
+> Ici l'effet joint des 2 expositions est supérieur à la somme ou au produit des effets individuels, il y a donc une interaction synergique entre les deux expositions. On peut conclure que l'expérience d'un événement traumatique et le tabagisme *se potentialisent* pour aboutir à une augmentation du risque de maladies chroniques : ces expositions ont un effet plus fort lorsqu'elles sont présentes toutes les deux que la somme/le produit des deux.
 
-Lorsqu'on utilise les approches causales pour estimer l'effet de  $\small X$ sur $\small Y$, on va intervenir seulement sur X. En G-computation, le code serait : 
+Lorsqu'on utilise les approches causales pour estimer l'effet de  $\small X$ sur $\small Y$, on va intervenir sur $\small X$ et sur $\small Y$, contrairement à l'approche précédente ou l'on intervenait seulement sur $\small X$. En G-computation, le code serait : 
 
 ```{r code_interaction_ex, eval=FALSE}
 
-       #modèle
-       Q.model <- glm(data=bootData, formula = Y ~ X + V + X*V ,family = binomial)
-       
-       # Scénarios #
-       data.X0V0 <-  data.X0V1 <-  data.X1V0 <-  data.X1V1 <- bootData
-       data.X0V0$X <-  data.X0V1$X <- 0
-       data.X1V0$X <-  data.X1V1$X <- 1
-       data.X0V0$V <-  data.X1V0$V <- 0
-       data.X0V1$V <-  data.X1V1$V <- 1
+#modèle
+Q.model <- glm(data=bootData, formula = Y ~ X + V + X*V + L,family = binomial)
 
-       # Y contrefactuel
-       Y.X0V0.pred <- predict(Q.model, newdata = data.X0V0, type = "response")
-       Y.X1V0.pred <- predict(Q.model, newdata = data.X1V0, type = "response")
-       Y.X0V1.pred <- predict(Q.model, newdata = data.X0V1, type = "response")
-       Y.X1V1.pred <- predict(Q.model, newdata = data.X1V1, type = "response")
-       
-       # Interaction
+# Scénarios #
+data.X0V0 <-  data.X0V1 <-  data.X1V0 <-  data.X1V1 <- bootData
+data.X0V0$X <-  data.X0V1$X <- 0
+data.X1V0$X <-  data.X1V1$X <- 1
+data.X0V0$V <-  data.X1V0$V <- 0
+data.X0V1$V <-  data.X1V1$V <- 1
 
-         simu.base$est.Y0_30[simu.base$i.simu==i] = round(mean(Y.S2A30.pred),4)
+# Y contrefactuel
+Y.X0V0.pred <- predict(Q.model, newdata = data.X0V0, type = "response")
+Y.X1V0.pred <- predict(Q.model, newdata = data.X1V0, type = "response")
+Y.X0V1.pred <- predict(Q.model, newdata = data.X0V1, type = "response")
+Y.X1V1.pred <- predict(Q.model, newdata = data.X1V1, type = "response")
+
+# Interaction additive
+simu.base$est.AI[simu.base$i.simu==i] = round(
+ # effet joint 
+ mean(bootData$Y.X1V1.pred - bootData$Y.X0V0.pred) -
+ # somme des effets individuels
+ mean(bootData$Y.X0V1.pred - bootData$Y.X0V0.pred) +
+ mean(bootData$Y.X1V0.pred - bootData$Y.X0V0.pred),4)
 
 ```
 
@@ -131,7 +167,8 @@ La différence se joue plutôt sur :
 
 - la façon dont la question est posée (effet de $\small X$ selon $\small V$, _versus_ effet conjoint de $\small X$ et $\small V$), 
 - les hypothèses causales formulées (scénario $\small do(X)|V$ _versus_ $\small do(X,V)$) 
-- et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation $\small X \rightarrow Y$ _versus_ les deux relations $\small X \rightarrow Y$ et $\small V \rightarrow Y$).
+- et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation $\small X \rightarrow Y$ _versus_ les deux relations $\small X \rightarrow Y$ et $\small V \rightarrow Y$)
+- et sur l'intervention contrefactuelle que l'on va réalisée si l'on utilise des approches causales ($\small do(X)|V$ _versus_ $\small do(X,V)$).
 
 
 Il existe des cas où l'identification d'une interaction ou d'une modification d'effet ne conduira pas à la même démarche et donc au même résultat @vanderweele_distinction_2009. Prenons le DAG suivant : 
