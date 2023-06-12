@@ -21,7 +21,7 @@ output:
     - Elaborer l'estimateur, notamment : 
         + quelles est(sont) l'exposition(s) d'intérêt ? 
         + quels sont les facteurs de confusion +/- les médiateurs si besoin ?
-        + quels types de modèlisation va être utilisée ?
+        + quels types de modélisation va être utilisée (linéaire, logistique, autre) ?
 3. **Analyses descriptives** 
     - Description habituelle de la population
     - Décrire, dans un tableau croisé, 
@@ -33,13 +33,12 @@ output:
         + il est possible en exploratoire, d'estimer l'effet de X sur Y
         + de façon stratifiée sur V (on découpe la population)
         + les effets ne seront directement pas comparables
-5. **Analyses confirmatoires**, voir Chapitre \@ref(conf)
-    - Régressions avec terme d'interaction
+5. **Analyses confirmatoires**
+    - Régressions avec terme d'interaction (voir Chapitre \@ref(regression))
         + un modèle dans la population totale peut être utilisé
         + avec un terme d'interaction entre X et V
         + les différents paramètres peuvent être déduits des résultats du modèle
-        + voir Chapitre \@ref(regression)
-    - Approches causales 
+    - Approches causales ( voir Chapitre \@ref(conf))
         + G-computation
         + MSM
         + TMLE
@@ -344,9 +343,9 @@ On retrouve une interaction additive significative et positive. Les expositions 
 Ainsi : globalement, la probabilité d'avoir déjà fumer du cannabis diminue avec l'âge chez les hommes (-1,8% par an) et chez les femmes (-1,4% par an). Cette probabilité est plus élevée chez les hommes (de 16% par exemple à 40 ans), mais cet écart diminue avec l'âge, de 4,4% tous les 10 ans.
 
 
-### Effets marginaux
+### Effets prédits
 
-A partir des modèles, on peut déduire les effets marginaux pour certaines catégories. Par exemple, avec le modèle logistique : 
+A partir des modèles, on peut déduire les effets prédits pour certaines catégories. Par exemple, avec le modèle logistique : 
 
   - $\small Y_{S=0,A=30} = \frac{exp(3,914 - 0,088 \times 30)}{1+exp(3,914 - 0,088 \times 30)} =$ `r round((exp(3.914 - 0.088*30)/(1+exp(3.914 - 0.088*30)))*100,1)`%
   - $\small Y_{S=0,A=50} = \frac{exp(3,914 - 0,088 \times 50)}{1+exp(3,914 - 0,088 \times 50)} =$ `r round((exp(3.914 - 0.088*50)/(1+exp(3.914 - 0.088*50)))*100,1)`%
@@ -407,7 +406,7 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
                         age+  sexe*age,family = binomial)
        
        # Scénarios #
-       data.S1 <-  data.S2 <- predict_data
+       data.S1 <-  data.S2 <- bootData
        data.S1$sexe <- "Women"
        data.S2$sexe <- "Men"
        data.S1A30 <-  data.S1A40 <- data.S1A50 <- data.S1A60 <- data.S1A70 <- data.S1
@@ -509,14 +508,20 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
          
          simu.base$est.RD_Sm[simu.base$i.simu==i] = round(msm.lm$coefficients["age"]*10,4)
          simu.base$est.RR_Sm[simu.base$i.simu==i] = round(exp(msm.glm$coefficients["age"]*10),4)
-         simu.base$est.RD_Sw[simu.base$i.simu==i] = round(msm.lm$coefficients["age"]*10+ msm.lm$coefficients["age:sexeWomen"]*10,4)
-         simu.base$est.RR_Sw[simu.base$i.simu==i] = round(exp(msm.glm$coefficients["age"]*10 + msm.glm$coefficients["age:sexeWomen"]*10),4)
+         simu.base$est.RD_Sw[simu.base$i.simu==i] = round(msm.lm$coefficients["age"]*10 +
+                                                          msm.lm$coefficients["age:sexeWomen"]*10,4)
+         simu.base$est.RR_Sw[simu.base$i.simu==i] = round(exp(msm.glm$coefficients["age"]*10 +
+                                                               msm.glm$coefficients["age:sexeWomen"]*10),4)
          
          simu.base$est.AI[simu.base$i.simu==i] = round(msm.lm$coefficients["age:sexeWomen"]*10,4)
-         simu.base$est.MI[simu.base$i.simu==i] = round(exp(msm.lm$coefficients["age:sexeWomen"]*10),4)
-         simu.base$est.RERI[simu.base$i.simu==i] = round(exp(msm.glm$coefficients["age"]*10 + msm.glm$coefficients["sexeWomen"] + msm.glm$coefficients["age:sexeWomen"]*10) - 
-                                               exp(msm.glm$coefficients["age"]*10 + msm.glm$coefficients["age:sexeWomen"]*10) - 
-                                               exp(msm.glm$coefficients["sexeWomen"] + msm.glm$coefficients["age:sexeWomen"]*10) + 1, 4) 
+         simu.base$est.MI[simu.base$i.simu==i] = round(exp(msm.glm$coefficients["age:sexeWomen"]*10),4)
+         simu.base$est.RERI[simu.base$i.simu==i] = round(exp(msm.glm$coefficients["age"]*10 +
+                                                               msm.glm$coefficients["sexeWomen"] +
+                                                               msm.glm$coefficients["age:sexeWomen"]*10) - 
+                                                         exp(msm.glm$coefficients["age"]*10 +
+                                                               msm.glm$coefficients["age:sexeWomen"]*10) - 
+                                                            exp(msm.glm$coefficients["sexeWomen"] +
+                                                                  msm.glm$coefficients["age:sexeWomen"]*10) + 1, 4) 
          
          }
      
