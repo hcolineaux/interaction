@@ -64,4 +64,12 @@ Ensuite, de **nombreuses questions** se posent pour réaliser une analyse d'inte
 
 ## Avertissement
 
-**Puissance/sample size**
+Les analyses  d'effets d'interaction (ou de modifications d'effets) sont peu puissantes. Pour observer un effet d'interaction "statistiquement signitificatif", le nombre de sujets nécessaire est habituellement beaucoup plus élevé que le nombre de sujets nécessaire permettant d'observer une différence global entre 2 ou moyennes ou pourcentages.
+
+A titre d'exemple, Brookes S et al (2004) @brookes_JCE_2004 décrivent que dans un contexte d'essai contrôlé randomisé à deux bras parallèles, équilibré, incluant un nombre de sujets $N$ optimisé pour observer une différence $\Delta$ significative entre un groupe exposé et un groupe non-exposé avec une puissance de 80%, la puissance pour observer un effet d'interaction de taille similaire ($\approx \Delta$) ne sera que de 29%.
+
+Pour observer une effet de taille similaire ($\approx \Delta$) de manière significative, le nombre de sujets à recruter sera 4 fois plus élevé ($4 \times N$). Si l'on cherche à mesurer de manière significative des effets d'interaction plus petits que l'effet global entre groupe exposé et non-exposé, le nombre de sujets nécessaires augmente de manière spéctaculaire : 
+
+ - 6 fois plus élevé ($6 \times N$) pour rechercher une interaction un peu plus petite correspondant à 80% de l'effet global ($0,80 \times \Delta$),
+ - 15 fois plus élevé ($15 \times N$) pour rechercher une interaction égale à la moitié de l'effet global ($\frac{\Delta}{2}$),
+ - 100 fois plus élevé ($100 \times N$) pour rechercher une petite interaction égale à 20% de l'effet global ($\frac{\Delta}{5}$).

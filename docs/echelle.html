@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 5 La question des échelles | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 5 La question des échelles | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -265,7 +265,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="15.4.1" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#régression-logistique-1"><i class="fa fa-check"></i><b>15.4.1</b> Régression logistique</a></li>
 <li class="chapter" data-level="15.4.2" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#régression-linéaire"><i class="fa fa-check"></i><b>15.4.2</b> Régression linéaire</a></li>
-<li class="chapter" data-level="15.4.3" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#effets-marginaux"><i class="fa fa-check"></i><b>15.4.3</b> Effets marginaux</a></li>
+<li class="chapter" data-level="15.4.3" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#effets-prédits"><i class="fa fa-check"></i><b>15.4.3</b> Effets prédits</a></li>
 </ul></li>
 <li class="chapter" data-level="15.5" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#analyse-confirmatoire-1"><i class="fa fa-check"></i><b>15.5</b> Analyse confirmatoire</a></li>
 </ul></li>
@@ -369,7 +369,7 @@ Exemple
 <h2><span class="header-section-number">5.2</span> Lien entre les deux échelles<a href="echelle.html#lien-entre-les-deux-échelles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="un-apparent-paradoxe" class="section level3 unnumbered hasAnchor">
 <h3>Un apparent paradoxe<a href="echelle.html#un-apparent-paradoxe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Mesurer l’interaction sur une seule échelle peut être trompeur <span class="citation">[<a href="#ref-mathur2018r" role="doc-biblioref">6</a>]</span>. On peut régulièrement observer une interaction positive dans une échelle (par exemple <span class="math inline">\(\small p11 - p10 - p01 + p00 &gt; 0\)</span>) et négative dans l’autre (par exemple <span class="math inline">\(\small (p11 \times p00) / (p10 \times p01) &lt;1\)</span>).</p>
+<p>Mesurer l’interaction sur une seule échelle peut être trompeur <span class="citation">[<a href="#ref-mathur2018r" role="doc-biblioref">7</a>]</span>. On peut régulièrement observer une interaction positive dans une échelle (par exemple <span class="math inline">\(\small p11 - p10 - p01 + p00 &gt; 0\)</span>) et négative dans l’autre (par exemple <span class="math inline">\(\small (p11 \times p00) / (p10 \times p01) &lt;1\)</span>).</p>
 <blockquote>
 <ins>
 Exemple
@@ -391,7 +391,7 @@ Exemple
 </div>
 <div id="le-continuum" class="section level3 unnumbered hasAnchor">
 <h3>Le continuum<a href="echelle.html#le-continuum" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Dans un article de 2019 <span class="citation">[<a href="#ref-vanderweele_interaction_2019" role="doc-biblioref">7</a>]</span>, Vanderweele décrit le continuum existant entre les 2 échelles.</p>
+<p>Dans un article de 2019 <span class="citation">[<a href="#ref-vanderweele_interaction_2019" role="doc-biblioref">8</a>]</span>, Vanderweele décrit le continuum existant entre les 2 échelles.</p>
 <blockquote>
 <p>Par exemple, dans l’exemple 1, l’interaction additive et multiplicative sont positives. Mais si l’on fait varier la probabilité <span class="math inline">\(\small p_{11}\)</span> en la diminuant, l’interaction multiplicative devient négative alors que l’interaction additive reste positive. Puis, lorsque la probabilité diminue encore, l’interaction devient négative sur les deux échelles :</p>
 <p><img src="img/Image6.png" style="width:100.0%" /></p>
@@ -436,7 +436,7 @@ Exemple
 <div id="synthèse-1" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Synthèse<a href="echelle.html#synthèse-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Quelle échelle choisir pour mesurer un effet d’interaction ?</p>
-<p>Même si en pratique l’échelle multiplicative est plus utilisée, car les outcomes sont souvent binaires en épidémiologie et donc les modèles logistiques sont souvent utilisés <span class="citation">[<a href="#ref-knol_recommendations_2012" role="doc-biblioref">8</a>]</span>, il semble y avoir un consensus pour privilégier plutôt l’échelle additive, plus appropriée pour évaluer l’utilité en santé publique <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> <span class="citation">[<a href="#ref-knol_recommendations_2012" role="doc-biblioref">8</a>]</span>.</p>
+<p>Même si en pratique l’échelle multiplicative est plus utilisée, car les outcomes sont souvent binaires en épidémiologie et donc les modèles logistiques sont souvent utilisés <span class="citation">[<a href="#ref-knol_recommendations_2012" role="doc-biblioref">9</a>]</span>, il semble y avoir un consensus pour privilégier plutôt l’échelle additive, plus appropriée pour évaluer l’utilité en santé publique <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span> <span class="citation">[<a href="#ref-knol_recommendations_2012" role="doc-biblioref">9</a>]</span>.</p>
 <blockquote>
 <p>Si on reprend l’exemple ci dessous :</p>
 <p><img src="img/Image4b.png" style="width:90.0%" /></p>
@@ -456,7 +456,7 @@ Il faut choisir si on donne 100 doses au groupe <span class="math inline">\(\sma
 </ul>
 <p>On peut donc conclure à un effet multiplicatif plus fort d’un traitement dans un groupe alors qu’en terme d’utilité (nombre de personnes favorablement impactées), l’échelle additive nous conduirait à choisir l’autre groupe…</p>
 </blockquote>
-<p>Idéalement, les interactions devraient cependant être reportées sur les 2 échelles <span class="citation">[<a href="#ref-knol_recommendations_2012" role="doc-biblioref">8</a>]</span> <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</p>
+<p>Idéalement, les interactions devraient cependant être reportées sur les 2 échelles <span class="citation">[<a href="#ref-knol_recommendations_2012" role="doc-biblioref">9</a>]</span> <span class="citation">[<a href="#ref-vanderweele_tutorial_2014" role="doc-biblioref">2</a>]</span>.</p>
 
 </div>
 </div>
@@ -466,13 +466,13 @@ Il faut choisir si on donne 100 doses au groupe <span class="math inline">\(\sma
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline">VanderWeele TJ, Knol MJ. A <span>Tutorial</span> on <span>Interaction</span>. Epidemiologic Methods 2014;3:33–72. <a href="https://doi.org/10.1515/em-2013-0005">https://doi.org/10.1515/em-2013-0005</a>.</div>
 </div>
 <div id="ref-mathur2018r" class="csl-entry">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Mathur MB, VanderWeele TJ. R function for additive interaction measures. Epidemiology (Cambridge, Mass) 2018;29:e5.</div>
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Mathur MB, VanderWeele TJ. R function for additive interaction measures. Epidemiology (Cambridge, Mass) 2018;29:e5.</div>
 </div>
 <div id="ref-vanderweele_interaction_2019" class="csl-entry">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline">VanderWeele TJ. The <span>Interaction</span> <span>Continuum</span>. Epidemiology 2019;30:648–58. <a href="https://doi.org/10.1097/EDE.0000000000001054">https://doi.org/10.1097/EDE.0000000000001054</a>.</div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">VanderWeele TJ. The <span>Interaction</span> <span>Continuum</span>. Epidemiology 2019;30:648–58. <a href="https://doi.org/10.1097/EDE.0000000000001054">https://doi.org/10.1097/EDE.0000000000001054</a>.</div>
 </div>
 <div id="ref-knol_recommendations_2012" class="csl-entry">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. International Journal of Epidemiology 2012;41:514–20. <a href="https://doi.org/10.1093/ije/dyr218">https://doi.org/10.1093/ije/dyr218</a>.</div>
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. International Journal of Epidemiology 2012;41:514–20. <a href="https://doi.org/10.1093/ije/dyr218">https://doi.org/10.1093/ije/dyr218</a>.</div>
 </div>
 </div>
             </section>

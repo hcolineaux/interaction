@@ -131,7 +131,7 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
-\date{Last compiled on 09 June, 2023}
+\date{Last compiled on 29 juin, 2023}
 
 \begin{document}
 \maketitle
@@ -264,7 +264,21 @@ Ensuite, de \textbf{nombreuses questions} se posent pour réaliser une analyse d
 \hypertarget{avertissement}{%
 \section{Avertissement}\label{avertissement}}
 
-\textbf{Puissance/sample size}
+Les analyses d'effets d'interaction (ou de modifications d'effets) sont peu puissantes. Pour observer un effet d'interaction ``statistiquement signitificatif'', le nombre de sujets nécessaire est habituellement beaucoup plus élevé que le nombre de sujets nécessaire permettant d'observer une différence global entre 2 ou moyennes ou pourcentages.
+
+A titre d'exemple, Brookes S et al (2004) \citet{brookes_JCE_2004} décrivent que dans un contexte d'essai contrôlé randomisé à deux bras parallèles, équilibré, incluant un nombre de sujets \(N\) optimisé pour observer une différence \(\Delta\) significative entre un groupe exposé et un groupe non-exposé avec une puissance de 80\%, la puissance pour observer un effet d'interaction de taille similaire (\(\approx \Delta\)) ne sera que de 29\%.
+
+Pour observer une effet de taille similaire (\(\approx \Delta\)) de manière significative, le nombre de sujets à recruter sera 4 fois plus élevé (\(4 \times N\)). Si l'on cherche à mesurer de manière significative des effets d'interaction plus petits que l'effet global entre groupe exposé et non-exposé, le nombre de sujets nécessaires augmente de manière spéctaculaire :
+
+\begin{itemize}
+\tightlist
+\item
+  6 fois plus élevé (\(6 \times N\)) pour rechercher une interaction un peu plus petite correspondant à 80\% de l'effet global (\(0,80 \times \Delta\)),
+\item
+  15 fois plus élevé (\(15 \times N\)) pour rechercher une interaction égale à la moitié de l'effet global (\(\frac{\Delta}{2}\)),
+\item
+  100 fois plus élevé (\(100 \times N\)) pour rechercher une petite interaction égale à 20\% de l'effet global (\(\frac{\Delta}{5}\)).
+\end{itemize}
 
 \hypertarget{part-synthuxe8se-de-la-littuxe9rature}{%
 \part{Synthèse de la littérature}\label{part-synthuxe8se-de-la-littuxe9rature}}
@@ -2873,7 +2887,7 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
     \item
       quels sont les facteurs de confusion +/- les médiateurs si besoin ?
     \item
-      quels types de modèlisation va être utilisée ?
+      quels types de modélisation va être utilisée (linéaire, logistique, autre) ?
     \end{itemize}
   \end{itemize}
 \item
@@ -2915,12 +2929,12 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
     \end{itemize}
   \end{itemize}
 \item
-  \textbf{Analyses confirmatoires}, voir Chapitre \ref{conf}
+  \textbf{Analyses confirmatoires}
 
   \begin{itemize}
   \tightlist
   \item
-    Régressions avec terme d'interaction
+    Régressions avec terme d'interaction (voir Chapitre \ref{regression})
 
     \begin{itemize}
     \tightlist
@@ -2930,11 +2944,9 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
       avec un terme d'interaction entre X et V
     \item
       les différents paramètres peuvent être déduits des résultats du modèle
-    \item
-      voir Chapitre \ref{regression}
     \end{itemize}
   \item
-    Approches causales
+    Approches causales ( voir Chapitre \ref{conf})
 
     \begin{itemize}
     \tightlist
@@ -3427,10 +3439,10 @@ On retrouve une interaction additive significative et positive. Les expositions 
 
 Ainsi : globalement, la probabilité d'avoir déjà fumer du cannabis diminue avec l'âge chez les hommes (-1,8\% par an) et chez les femmes (-1,4\% par an). Cette probabilité est plus élevée chez les hommes (de 16\% par exemple à 40 ans), mais cet écart diminue avec l'âge, de 4,4\% tous les 10 ans.
 
-\hypertarget{effets-marginaux}{%
-\subsection{Effets marginaux}\label{effets-marginaux}}
+\hypertarget{effets-pruxe9dits}{%
+\subsection{Effets prédits}\label{effets-pruxe9dits}}
 
-A partir des modèles, on peut déduire les effets marginaux pour certaines catégories. Par exemple, avec le modèle logistique :
+A partir des modèles, on peut déduire les effets prédits pour certaines catégories. Par exemple, avec le modèle logistique :
 
 \begin{itemize}
 \tightlist
@@ -3481,7 +3493,7 @@ Le code était :
 \NormalTok{                        age}\SpecialCharTok{+}\NormalTok{  sexe}\SpecialCharTok{*}\NormalTok{age,}\AttributeTok{family =}\NormalTok{ binomial)}
        
        \CommentTok{\# Scénarios \#}
-\NormalTok{       data.S1 }\OtherTok{\textless{}{-}}\NormalTok{  data.S2 }\OtherTok{\textless{}{-}}\NormalTok{ predict\_data}
+\NormalTok{       data.S1 }\OtherTok{\textless{}{-}}\NormalTok{  data.S2 }\OtherTok{\textless{}{-}}\NormalTok{ bootData}
 \NormalTok{       data.S1}\SpecialCharTok{$}\NormalTok{sexe }\OtherTok{\textless{}{-}} \StringTok{"Women"}
 \NormalTok{       data.S2}\SpecialCharTok{$}\NormalTok{sexe }\OtherTok{\textless{}{-}} \StringTok{"Men"}
 \NormalTok{       data.S1A30 }\OtherTok{\textless{}{-}}\NormalTok{  data.S1A40 }\OtherTok{\textless{}{-}}\NormalTok{ data.S1A50 }\OtherTok{\textless{}{-}}\NormalTok{ data.S1A60 }\OtherTok{\textless{}{-}}\NormalTok{ data.S1A70 }\OtherTok{\textless{}{-}}\NormalTok{ data.S1}
@@ -3583,14 +3595,20 @@ Le code était :
          
 \NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.RD\_Sm[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(msm.lm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{,}\DecValTok{4}\NormalTok{)}
 \NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.RR\_Sm[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{),}\DecValTok{4}\NormalTok{)}
-\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.RD\_Sw[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(msm.lm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\SpecialCharTok{+}\NormalTok{ msm.lm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{,}\DecValTok{4}\NormalTok{)}
-\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.RR\_Sw[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10} \SpecialCharTok{+}\NormalTok{ msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{),}\DecValTok{4}\NormalTok{)}
+\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.RD\_Sw[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(msm.lm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10} \SpecialCharTok{+}
+\NormalTok{                                                          msm.lm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.RR\_Sw[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10} \SpecialCharTok{+}
+\NormalTok{                                                               msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{),}\DecValTok{4}\NormalTok{)}
          
 \NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.AI[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(msm.lm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{,}\DecValTok{4}\NormalTok{)}
-\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.MI[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(msm.lm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{),}\DecValTok{4}\NormalTok{)}
-\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.RERI[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10} \SpecialCharTok{+}\NormalTok{ msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"sexeWomen"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{) }\SpecialCharTok{{-}} 
-                                               \FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10} \SpecialCharTok{+}\NormalTok{ msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{) }\SpecialCharTok{{-}} 
-                                               \FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"sexeWomen"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{) }\SpecialCharTok{+} \DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{) }
+\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.MI[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{),}\DecValTok{4}\NormalTok{)}
+\NormalTok{         simu.base}\SpecialCharTok{$}\NormalTok{est.RERI[simu.base}\SpecialCharTok{$}\NormalTok{i.simu}\SpecialCharTok{==}\NormalTok{i] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10} \SpecialCharTok{+}
+\NormalTok{                                                               msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"sexeWomen"}\NormalTok{] }\SpecialCharTok{+}
+\NormalTok{                                                               msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{) }\SpecialCharTok{{-}} 
+                                                         \FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10} \SpecialCharTok{+}
+\NormalTok{                                                               msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{) }\SpecialCharTok{{-}} 
+                                                            \FunctionTok{exp}\NormalTok{(msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"sexeWomen"}\NormalTok{] }\SpecialCharTok{+}
+\NormalTok{                                                                  msm.glm}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"age:sexeWomen"}\NormalTok{]}\SpecialCharTok{*}\DecValTok{10}\NormalTok{) }\SpecialCharTok{+} \DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{) }
          
 \NormalTok{         \}}
      
@@ -3609,22 +3627,22 @@ Au final, les résultats étaient :
 \hline
   & Sex = Men & Sex = Women & RD within strata of Age & OR within strata of Age\\
 \hline
-Age = 30 & 0.61 [0.61 to 0.62] & 0.78 [0.78 to 0.78] & -0.17 [-0.18 to -0.16] & 0.78 [0.78 to 0.79]\\
+Age = 30 & 0.62 [0.61 to 0.62] & 0.78 [0.78 to 0.79] & -0.16 [-0.17 to -0.16] & 0.79 [0.78 to 0.8]\\
 \hline
-Age = 40 & 0.42 [0.42 to 0.43] & 0.59 [0.59 to 0.6] & -0.17 [-0.18 to -0.17] & 0.71 [0.7 to 0.72]\\
+Age = 40 & 0.42 [0.42 to 0.43] & 0.6 [0.59 to 0.6] & -0.17 [-0.18 to -0.17] & 0.71 [0.7 to 0.72]\\
 \hline
-Age = 50 & 0.25 [0.25 to 0.26] & 0.38 [0.37 to 0.38] & -0.12 [-0.13 to -0.12] & 0.67 [0.66 to 0.68]\\
+Age = 50 & 0.25 [0.25 to 0.25] & 0.38 [0.37 to 0.38] & -0.13 [-0.13 to -0.12] & 0.66 [0.65 to 0.67]\\
 \hline
-Age = 60 & 0.14 [0.13 to 0.14] & 0.2 [0.2 to 0.2] & -0.06 [-0.07 to -0.06] & 0.68 [0.66 to 0.7]\\
+Age = 60 & 0.13 [0.13 to 0.13] & 0.2 [0.19 to 0.2] & -0.07 [-0.07 to -0.06] & 0.66 [0.65 to 0.68]\\
 \hline
-Age = 70 & 0.07 [0.07 to 0.07] & 0.09 [0.09 to 0.1] & -0.03 [-0.03 to -0.02] & 0.73 [0.7 to 0.76]\\
+Age = 70 & 0.06 [0.06 to 0.07] & 0.09 [0.09 to 0.09] & -0.03 [-0.03 to -0.02] & 0.7 [0.67 to 0.73]\\
 \hline
 RD (10 y) within strata of Sex & -0.18 [-0.18 to -0.18] & -0.14 [-0.14 to -0.14] & NA & NA\\
 \hline
-OR (10 y) within strata of Sex & 0.41 [0.41 to 0.42] & 0.46 [0.46 to 0.47] & NA & NA\\
+OR (10 y) within strata of Sex & 0.41 [0.4 to 0.41] & 0.45 [0.45 to 0.46] & NA & NA\\
 \hline
 \multicolumn{5}{l}{\textsuperscript{a} Additive interaction (10 years) =0.04 [0.04 to 0.04]}\\
-\multicolumn{5}{l}{\textsuperscript{b} Multiplicative Interaction (10 years) =1.04 [1.04 to 1.05]}\\
+\multicolumn{5}{l}{\textsuperscript{b} Multiplicative Interaction (10 years) =1.11 [1.09 to 1.13]}\\
 \multicolumn{5}{l}{\textsuperscript{c} RERI (10 years) =0.33 [0.32 to 0.34]}\\
 \end{tabular}
 \end{table}

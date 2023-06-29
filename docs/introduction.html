@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 2 Introduction | Interactions et modifications d’effet   en Epidémiologie</title>
   <meta name="description" content="." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 2 Introduction | Interactions et modifications d’effet   en Epidémiologie" />
   <meta property="og:type" content="book" />
@@ -93,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -265,7 +265,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="15.4.1" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#régression-logistique-1"><i class="fa fa-check"></i><b>15.4.1</b> Régression logistique</a></li>
 <li class="chapter" data-level="15.4.2" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#régression-linéaire"><i class="fa fa-check"></i><b>15.4.2</b> Régression linéaire</a></li>
-<li class="chapter" data-level="15.4.3" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#effets-marginaux"><i class="fa fa-check"></i><b>15.4.3</b> Effets marginaux</a></li>
+<li class="chapter" data-level="15.4.3" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#effets-prédits"><i class="fa fa-check"></i><b>15.4.3</b> Effets prédits</a></li>
 </ul></li>
 <li class="chapter" data-level="15.5" data-path="exemple-4---x-quantitatif.html"><a href="exemple-4---x-quantitatif.html#analyse-confirmatoire-1"><i class="fa fa-check"></i><b>15.5</b> Analyse confirmatoire</a></li>
 </ul></li>
@@ -352,7 +352,14 @@ div.csl-indent {
 </div>
 <div id="avertissement" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Avertissement<a href="introduction.html#avertissement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Puissance/sample size</strong></p>
+<p>Les analyses d’effets d’interaction (ou de modifications d’effets) sont peu puissantes. Pour observer un effet d’interaction “statistiquement signitificatif”, le nombre de sujets nécessaire est habituellement beaucoup plus élevé que le nombre de sujets nécessaire permettant d’observer une différence global entre 2 ou moyennes ou pourcentages.</p>
+<p>A titre d’exemple, Brookes S et al (2004) <span class="citation">[<a href="#ref-brookes_JCE_2004" role="doc-biblioref">3</a>]</span> décrivent que dans un contexte d’essai contrôlé randomisé à deux bras parallèles, équilibré, incluant un nombre de sujets <span class="math inline">\(N\)</span> optimisé pour observer une différence <span class="math inline">\(\Delta\)</span> significative entre un groupe exposé et un groupe non-exposé avec une puissance de 80%, la puissance pour observer un effet d’interaction de taille similaire (<span class="math inline">\(\approx \Delta\)</span>) ne sera que de 29%.</p>
+<p>Pour observer une effet de taille similaire (<span class="math inline">\(\approx \Delta\)</span>) de manière significative, le nombre de sujets à recruter sera 4 fois plus élevé (<span class="math inline">\(4 \times N\)</span>). Si l’on cherche à mesurer de manière significative des effets d’interaction plus petits que l’effet global entre groupe exposé et non-exposé, le nombre de sujets nécessaires augmente de manière spéctaculaire :</p>
+<ul>
+<li>6 fois plus élevé (<span class="math inline">\(6 \times N\)</span>) pour rechercher une interaction un peu plus petite correspondant à 80% de l’effet global (<span class="math inline">\(0,80 \times \Delta\)</span>),</li>
+<li>15 fois plus élevé (<span class="math inline">\(15 \times N\)</span>) pour rechercher une interaction égale à la moitié de l’effet global (<span class="math inline">\(\frac{\Delta}{2}\)</span>),</li>
+<li>100 fois plus élevé (<span class="math inline">\(100 \times N\)</span>) pour rechercher une petite interaction égale à 20% de l’effet global (<span class="math inline">\(\frac{\Delta}{5}\)</span>).</li>
+</ul>
 
 </div>
 </div>
@@ -366,6 +373,9 @@ div.csl-indent {
 </div>
 <div id="ref-vanderweele_tutorial_2014" class="csl-entry">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline">VanderWeele TJ, Knol MJ. A <span>Tutorial</span> on <span>Interaction</span>. Epidemiologic Methods 2014;3:33–72. <a href="https://doi.org/10.1515/em-2013-0005">https://doi.org/10.1515/em-2013-0005</a>.</div>
+</div>
+<div id="ref-brookes_JCE_2004" class="csl-entry">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Brookes ST, Whitely E, Egger M, Davey Smith G, Mulheran PA, Peters TJ. Subgroup analyses in randomized trials: Risks of subgroup-specific analyses; power and sample size for the interaction test. Journal of Clinical Epidemiology 2004;47:229–36.</div>
 </div>
 </div>
             </section>
