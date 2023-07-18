@@ -131,7 +131,7 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
-\date{Last compiled on 29 juin, 2023}
+\date{Last compiled on 18 July, 2023}
 
 \begin{document}
 \maketitle
@@ -2963,11 +2963,185 @@ Au final, on a (présentation selon recommandation Knol et al. \citet{knol_recom
 \hypertarget{exemple-1---y-binaire}{%
 \chapter{Exemple 1 - Y binaire}\label{exemple-1---y-binaire}}
 
+\hypertarget{formuler-les-objectifs}{%
+\section{Formuler les objectifs}\label{formuler-les-objectifs}}
+
+Dans cet exemple, on s'intéresse à :
+
+\begin{itemize}
+\tightlist
+\item
+  Comment l'effet du niveau d'études (X) sur le surpoids/obésité à l'âge adulte (Y) varie en fonction de la défavorisation sociale précoce (D), mesurée par la situation financière du foyer pendant l'enfance.
+\end{itemize}
+
+La démarche ici est explicative : on cherche à comprendre des mécanismes causaux.
+
+A partir de la formulation des objectifs, on pourrait dire qu'on s'intéresse ici plutôt à une modification d'effets: on analyse l'effet du scénario \(\small do(X)\) dans chaque groupe de défavorisation sociale précoce (D). On ajustera sur les facteurs de confusion de la relation X \(\rightarrow\) Y
+
+\hypertarget{stratuxe9gies-et-muxe9thodes}{%
+\section{Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes}}
+
+\textbf{Le DAG} (sans les médiateurs) était :
+
+\begin{quote}
+\includegraphics[width=0.8\textwidth,height=\textheight]{img/DAG_DefChild-Educ-Obesity.png}
+\end{quote}
+
+Avec :
+
+\begin{itemize}
+\tightlist
+\item
+  X, le Niveau d'études : 0 = élevé / 1 = faible (réf)
+\item
+  D, la Situation financière pendant l'enfance : 0 = bonne / 1 = difficile (réf)
+\item
+  Y, le Surpoids/obésité : 0 = IMC \textless{} 25kg/m² / 1 = IMC ≥ 25kg/m²
+\end{itemize}
+
+\textbf{Les estimands} étaient définis sur l'échelle multiplicative par :
+
+\begin{itemize}
+\tightlist
+\item
+  La modification de l'effet du niveau d'études sur le surpoids/obésité en fonction par la défavorisation sociale précoce :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\small (Y_{x=1|d=1} / Y_{x=0|d=1}) / (Y_{x=1|d=0} / Y_{x=0|d=0})\)
+  \item
+    Ce qui est équivalent à \(\small (Y_{x=1|d=1} \times Y_{x=0|d=0}) / (Y_{x=1|d=0} \times Y_{x=0|d=1})\)
+  \end{itemize}
+\end{itemize}
+
+\textbf{L'estimateur} : Les effets ont été estimés par g-computation (\emph{standardisation par régression}) \citet{hernan2020causal}. Des régressions linéaires ont été utilisées pour estimer les \emph{potential outcomes} pour chaque scénario. A partir des fonctions estimées, nous avons prédit la valeur de l'outcome Y pour chaque individu i pour chaque scénario. Les valeurs moyennes de Y dans chaque scénario vont ensuite nous permettre d'estimer les \emph{estimands} selon leurs définitions précisées ci-dessus.Ces modèles vont comprendre 4 variables : le niveau d'études et la défavorisation sociale précoce, ainsi que deux facteurs de confusion, le sexe et l'âge.
+
+\hypertarget{analyse-descriptive}{%
+\section{Analyse descriptive}\label{analyse-descriptive}}
+
+Dans cette population (N=23 495), il y avait 61.1\% d'individus avec un niveau d'études faible et 31.1\% de personnes ayant été précocement défavorisées.
+
+On peut commencer par décrire les proportions de personnes en surpoids/obésité dans chaque catégorie de niveau d'études et de défavorisation sociale :
+
+\begin{table}
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+Niveau d'études & Défavorisation & \% surpoids/obésité\\
+\hline
+Elevé & Non & 38.4\\
+\hline
+Elevé & Oui & 45.2\\
+\hline
+Faible & Non & 50.2\\
+\hline
+Faible & Oui & 54.6\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{analyse-exploratoire}{%
+\section{Analyse exploratoire}\label{analyse-exploratoire}}
+
+La sortie d'un modèle logistique simple serait :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Call:}
+\CommentTok{\# glm(formula = overw\_obesity \textasciitilde{} EDUCATION\_2CL.f * CHILDHOOD\_ECONOMY\_2CL.f + SEX.f + }
+\CommentTok{\#    AGE, family = binomial(link = "logit"))}
+\CommentTok{\# }
+\CommentTok{\# Coefficients:}
+\CommentTok{\#                                                     Estimate Std. Error t value   Pr(\textgreater{}|t|)    }
+\CommentTok{\# (Intercept)                                       {-}1.3731389  0.0621930 {-}22.079  \textless{} 2e{-}16 ***}
+\CommentTok{\# EDUCATION\_2CL.fHigh                               {-}0.1752537  0.0537373  {-}3.261  0.00111 ** }
+\CommentTok{\# CHILDHOOD\_ECONOMY\_2CL.fGood                       {-}0.0190075  0.0361206  {-}0.526  0.59873    }
+\CommentTok{\# SEX.fMale                                          0.5882549  0.0270502  21.747  \textless{} 2e{-}16 ***}
+\CommentTok{\# AGE                                                0.0234627  0.0009856  23.807  \textless{} 2e{-}16 ***}
+\CommentTok{\# EDUCATION\_2CL.fHigh:CHILDHOOD\_ECONOMY\_2CL.fGood   {-}0.1312722  0.0623235  {-}2.106  0.03518 *}
+\CommentTok{\# {-}{-}{-}}
+\CommentTok{\# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1}
+\CommentTok{\# }
+\end{Highlighting}
+\end{Shaded}
+
+On peut en déduire (échelle multiplicative) que :
+
+\begin{itemize}
+\tightlist
+\item
+  L'effet du niveau d'études (élevé plutôt que faible) sur le risque de surpoids/obésité est :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Quand on est défavorisé pendant l'enfance: \(\small OR(X|D=0) = exp(-0.175) = 0.84\)
+  \item
+    Quand on est favorisé pendant l'enfance: \(\small OR(X|D=1) = exp(-0.175 - 0.131) = 0.74\)
+  \end{itemize}
+\item
+  L'effet d'avoir un niveau d'étude élevé et d'être favorisé pendant l'enfance
+
+  \begin{itemize}
+  \tightlist
+  \item
+    plutot qu'avoir un niveau d'étude faible et être défavorisé pendant l'enfance est
+  \item
+    \(\small OR(X,D) = exp(-0.175 - 0.019 - 0.131) =0.72\)
+  \end{itemize}
+\item
+  \textbf{La modification d'effet} est de:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sur l'échelle multiplicative: \(\small MI = exp(-0.131) = 0.88\) (interaction multiplicative \textless1 donc négative)
+  \item
+    Sur l'échelle additive: \(\small RERI = exp(-0.175-0.019-0.131) - exp(-0.175) – exp(-0.019) + 1 = -0.098\) (interaction additive négative)
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{analyse-confirmatoire}{%
+\section{Analyse confirmatoire}\label{analyse-confirmatoire}}
+
+Si l'on utilise le \href{https://github.com/benoitlepage/MargIntTmle}{package proposé par B Lepage} pour réaliser cette analyse avec la g-computation, les résultats sont :
+
+\begin{table}
+\centering
+\begin{tabular}{l|l|l|l|l}
+\hline
+  & A2=0 & A2=1 & RD.A2|A1 & RR.A2|A1\\
+\hline
+A1=0 & \$p\_\{00\}\$=0.5 [0.487,0.513] & \$p\_\{01\}\$=0.496 [0.486,0.506] & -0.005 [-0.021,0.012] & 0.99 [0.96,1.02]\\
+\hline
+A1=1 & \$p\_\{10\}\$=0.459 [0.438,0.479] & \$p\_\{11\}\$=0.423 [0.412,0.435] & -0.035 [-0.059,-0.012] & 0.92 [0.88,0.97]\\
+\hline
+RD.A1|A2 & -0.042 [-0.065,-0.018] & -0.072 [-0.088,-0.057] &  & \\
+\hline
+RR.A1|A2 & 0.92 [0.87,0.96] & 0.85 [0.83,0.88] &  & \\
+\hline
+\multicolumn{5}{l}{\textsuperscript{a} additive Interaction = -0.031 [-0.059;-0.003]}\\
+\multicolumn{5}{l}{\textsuperscript{b} RERI = -0.061 [-0.123;4e-04]}\\
+\multicolumn{5}{l}{\textsuperscript{c} multiplicative Interaction = 0.932 [0.877;0.989]}\\
+\end{tabular}
+\end{table}
+
+Les résulats peuvent être intérprétés ainsi :
+
+\begin{itemize}
+\tightlist
+\item
+  l'effet d'un niveau d'études élevé (par rapport à faible) sur le risque de surpoids/obésité est moins fort de 3\% lorsqu'on est défavorisé précocement
+\item
+  ou encore, un niveau d'études élevé joue un rôle protecteur contre le surpoids/obésité moins important chez les personnes ayant grandi dans un foyer défavorisé
+\end{itemize}
+
 \hypertarget{exemple-2---y-quantitatif}{%
 \chapter{Exemple 2 - Y quantitatif}\label{exemple-2---y-quantitatif}}
 
-\hypertarget{formuler-les-objectifs}{%
-\section{Formuler les objectifs}\label{formuler-les-objectifs}}
+\hypertarget{formuler-les-objectifs-1}{%
+\section{Formuler les objectifs}\label{formuler-les-objectifs-1}}
 
 Dans cette étude \citet{colineaux2023explaining}, on s'est intéressé à :
 
@@ -2985,8 +3159,8 @@ A partir de la formulation des objectifs, on pourrait dire qu'on s'intéresse ic
 On va donc devoir à la fois agir sur le sexe \(\small do(S)\) et sur la défavorisation sociale \(\small do(D)\).
 Donc la démarche, en fait, sera plutôt une analyse d'interaction \(\small do(S,D)\)
 
-\hypertarget{stratuxe9gies-et-muxe9thodes}{%
-\section{Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes}}
+\hypertarget{stratuxe9gies-et-muxe9thodes-1}{%
+\section{Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes-1}}
 
 \textbf{Le DAG} (sans les médiateurs) était :
 
@@ -3028,8 +3202,8 @@ Des régressions linéaires ont été utilisées pour estimer les \emph{potentia
 A partir des fonctions \(\small \overline{Q}(S, D)\) estimées, nous avons prédit la valeur de l'outcome Y pour chaque individu i pour chaque scénario. Les valeurs moyennes de Y dans chaque scénario vont ensuite nous permettre d'estimer les estimands selon leurs définitions précisées ci-dessus.
 Ces modèles\(\small \overline{Q}(S, D)\) vont comprendre 2 variables : le sexe et la défavorisation sociale précoce (il n'y a pas ici de facteurs de confusion).
 
-\hypertarget{analyse-descriptive}{%
-\section{Analyse descriptive}\label{analyse-descriptive}}
+\hypertarget{analyse-descriptive-1}{%
+\section{Analyse descriptive}\label{analyse-descriptive-1}}
 
 Dans cette population (N=17 272), il y avait 51,4\% d'hommes et 60,5\% de personnes ayant été précocement défavorisées.
 
@@ -3052,8 +3226,8 @@ Female & Oui & 3.37\\
 \end{tabular}
 \end{table}
 
-\hypertarget{analyse-exploratoire}{%
-\section{Analyse exploratoire}\label{analyse-exploratoire}}
+\hypertarget{analyse-exploratoire-1}{%
+\section{Analyse exploratoire}\label{analyse-exploratoire-1}}
 
 La sortie d'une modèle linéaire simple serait :
 
@@ -3127,8 +3301,8 @@ On pourrait aussi déduire :
   \(\small Y_{11} = 3.243 + 0.326 + 0.126 - 0.095 =\) 3.6 mmol/L
 \end{itemize}
 
-\hypertarget{analyse-confirmatoire}{%
-\section{Analyse confirmatoire}\label{analyse-confirmatoire}}
+\hypertarget{analyse-confirmatoire-1}{%
+\section{Analyse confirmatoire}\label{analyse-confirmatoire-1}}
 
 Si l'on utilise le \href{https://github.com/benoitlepage/MargIntTmle}{package proposé par B Lepage} pour réaliser cet analyse avec la TMLE (effets d'intéraction calculés à partir des paramètres d'une modèle structurel marginal estimé à l'aide du package R ltmle), les résultats sont :
 
@@ -3171,8 +3345,8 @@ Les articles qui se consacrent aux interactions présentent souvent des méthode
 
 Nous présentons ici un exemple dans lequel l'une des expositions, l'âge, est analysée en tant que variable quantitative continue.
 
-\hypertarget{formuler-les-objectifs-1}{%
-\section{Formuler les objectifs}\label{formuler-les-objectifs-1}}
+\hypertarget{formuler-les-objectifs-2}{%
+\section{Formuler les objectifs}\label{formuler-les-objectifs-2}}
 
 Dans cette étude fictive, on s'est intéressé à la consommation de cannabis : comment le fait d'avoir déjà fumé du cannabis Y varie avec l'âge A et le sexe S.
 
@@ -3180,8 +3354,8 @@ La démarche est explicative : on cherche à comprendre les mécanismes causaux 
 
 Ici, on adoptera une démarche d'analyse d'interaction \(\small do(S,A)\)
 
-\hypertarget{stratuxe9gies-et-muxe9thodes-1}{%
-\section{Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes-1}}
+\hypertarget{stratuxe9gies-et-muxe9thodes-2}{%
+\section{Stratégies et méthodes}\label{stratuxe9gies-et-muxe9thodes-2}}
 
 \textbf{Le DAG} (sans les médiateurs) était :
 
@@ -3225,8 +3399,8 @@ Ici, on adoptera une démarche d'analyse d'interaction \(\small do(S,A)\)
   \end{itemize}
 \end{itemize}
 
-\hypertarget{analyse-descriptive-1}{%
-\section{Analyse descriptive}\label{analyse-descriptive-1}}
+\hypertarget{analyse-descriptive-2}{%
+\section{Analyse descriptive}\label{analyse-descriptive-2}}
 
 Dans cette population (N=202 768), il y avait 53,7\% d'hommes et la moyenne d'âge était de 47,1 ans.
 
@@ -3267,8 +3441,8 @@ Pour simplifier les analyses, nous n'allons inclure que les plus de 30 ans (N = 
 
 Le modèle de régression logistique (\(\cdot\cdot\cdot\)) semble être plus proche de la modélisation non paramétrique sur données observées (loess, -----) que la modélisation linaire (\(---\)) . D'ailleurs, le R² du modèle logistique est de 0,168 contre 0,139 pour le modèle linéaire.
 
-\hypertarget{analyse-exploratoire-1}{%
-\section{Analyse exploratoire}\label{analyse-exploratoire-1}}
+\hypertarget{analyse-exploratoire-2}{%
+\section{Analyse exploratoire}\label{analyse-exploratoire-2}}
 
 \hypertarget{ruxe9gression-logistique-1}{%
 \subsection{Régression logistique}\label{ruxe9gression-logistique-1}}
@@ -3470,8 +3644,8 @@ Avec le modèle linéaire, on aurait :
   \(\small Y_{S=1,A=50} = 131,97 -33,73 - 1,84 \times 50 + 0,44 \times 50 =\) 28.2\%
 \end{itemize}
 
-\hypertarget{analyse-confirmatoire-1}{%
-\section{Analyse confirmatoire}\label{analyse-confirmatoire-1}}
+\hypertarget{analyse-confirmatoire-2}{%
+\section{Analyse confirmatoire}\label{analyse-confirmatoire-2}}
 
 Nous avons calculé les effets d'intérêt avec une méthode de modèle structurel marginal (Intervalles de confiance estimé par bootstrap, 200 répétitions), le modèle utilisé pour prédire les outcomes contrefactuels étaient un modèle de régression logistique.
 
@@ -3654,7 +3828,7 @@ On retrouve :
 \item
   une interaction additive significative et positive : l'écart entre les hommes et les femmes diminue avec l'âge, de 4\% tous les 10 ans, ou l'effet d'avoir 10 ans est plus faible de 4\% chez les hommes par rapport au femmes. Le RERI est aussi positif et significatif (l'OR augmente de 33\% tous les 10 ans).
 \item
-  une interaction multiplicative significative et positive : l'effet d'être un homme plutôt qu'une femme sur le risque d'avoir consommer du cannabis est moins fort quand l'âge augmente, ou l'effet d'avoir 10 ans est multiplié par 1,04 chez les femmes par rapport aux hommes
+  une interaction multiplicative significative et positive : l'effet d'être un homme plutôt qu'une femme sur le risque d'avoir consommer du cannabis est moins fort quand l'âge augmente, ou l'effet d'avoir 10 ans est multiplié par 1,11 chez les femmes par rapport aux hommes
 \end{itemize}
 
 \hypertarget{part-conclusion}{%
