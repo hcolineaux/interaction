@@ -458,14 +458,23 @@ p_{00} = \sum_{l_1,l_2,l_3} P(Y=1 \mid X = 0, V = 0, L_1 = l_1, L_2 = l_2, L_3 =
 <li>l’<strong>odds-ratio marginal</strong> peut-être obtenu à partir de ces deux probabilités populationnelles <span class="math inline">\(OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00} / (1-p_{00})}\)</span>. C’est la méthode qui est appliquée en <em>G-computation</em> (cf. paragraphe <a href="conf.html#gcomputation">10.1</a>). Si l’on a bien pris en compte les facteurs de confusion , l’interprétation se fait comme une mesure d’association causale moyennée au niveau de l’ensemble de la population (“toutes choses égales par ailleurs au niveau populationnel”, la population étant caractérisée par sa distribution de sexe, d’âge et de comorbidités).</li>
 </ul>
 <p>Selon le même principe, on peut calculer des risques relatifs (RR) conditionnels ou marginaux, et des différences de risques (DR) conditionnelles ou marginales.</p>
-<p>Une propriété intéressantes des RR et des DR est que se sont des mesures d’associations <strong>collapsibles</strong> (anglicisme venant du terme anglais <em>collapsibility</em>) : la mesure conditionnelle est la même que la mesure marginale.@whitcomb2021</p>
+<p>Une propriété intéressantes des RR et des DR est que se sont des mesures d’associations <strong>collapsibles</strong> (anglicisme venant du terme anglais <em>collapsibility</em>) : la mesure conditionnelle est la même que la mesure marginale. <span class="citation">[<a href="#ref-whitcomb2021" role="doc-biblioref">4</a>]</span></p>
 <p>En revanche, les odds-ratios (OR) sont des mesures d’associations <strong>non-collapsibles</strong>, c’est-à-dire qu’un OR conditionnel sera différent d’un OR marginal (en dehors de cas particuliers où l’association est nulle ou bien lorsqu’aucun des facteurs de confusion potentiel n’a d’effet sur l’outcome <span class="math inline">\(Y\)</span>). Cela est parfois source de confusion car :</p>
 <ul>
 <li>il s’agit de deux <em>estimands</em> différents (par définition <span class="math inline">\(OR_\text{marginal} \neq OR_\text{conditionnel}\)</span>, sauf cas particulier),</li>
-<li>mais l’OR marginal comme l’OR conditionnel sont tous les deux des mesures d’association causales valides (à partir du moment où les facteurs de confusion ont bien été pris en compte dans le calcul de l’OR conditionnel ou de l’OR marginal).@daniel2021</li>
+<li>mais l’OR marginal comme l’OR conditionnel sont tous les deux des mesures d’association causales valides (à partir du moment où les facteurs de confusion ont bien été pris en compte dans le calcul de l’OR conditionnel ou de l’OR marginal). <span class="citation">[<a href="#ref-daniel2021" role="doc-biblioref">5</a>]</span></li>
 </ul>
 <p>Le choix de présenter une association marginale ou une association conditionnelle va donc influencer la valeur du résultat présenté, en particulier si l’on présente des mesures d’association “non-collapsibles” comme les OR.</p>
 
+</div>
+</div>
+<h3> Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-whitcomb2021" class="csl-entry">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Whitcomb BW, Naimi AI. Defining, quantifying, and interpreting "noncollapsibility" in epidemiologic studies of measures of "effect". American Journal of Epidemiology 2021;190:697–700. <a href="https://doi.org/10.1093/aje/kwaa267">https://doi.org/10.1093/aje/kwaa267</a>.</div>
+</div>
+<div id="ref-daniel2021" class="csl-entry">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Daniel R, Zhang J, Farewell D. Making apples from oranges: Comparing noncollapsible effect estimators and their standard errors after adjustment for different covariate sets. Biometrical Journal 2021;63:528–57. <a href="https://doi.org/10.1002/bimj.201900297">https://doi.org/10.1002/bimj.201900297</a>.</div>
 </div>
 </div>
             </section>

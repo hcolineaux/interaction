@@ -311,11 +311,11 @@ div.csl-indent {
 <p>Dans le champ des analyses d’interaction, deux termes peuvent être rencontrés : “interaction” et “modification d’effet”. Quel est la différence entre ces deux termes ?</p>
 <div id="modification-deffets" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Modification d’effets<a href="intmodif.html#modification-deffets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La question de la modification d’effet consiste à identifier si un scénario contrefactuel modifiant le traitement ou l’exposition <span class="math inline">\(\small X\)</span> donne un résultat différent dans différents groupes <span class="math inline">\(\small V\)</span> de patients (estimer l’effet d’une exposition séparément en fonction d’une autre variable) <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">4</a>]</span>.</p>
+<p>La question de la modification d’effet consiste à identifier si un scénario contrefactuel modifiant le traitement ou l’exposition <span class="math inline">\(\small X\)</span> donne un résultat différent dans différents groupes <span class="math inline">\(\small V\)</span> de patients (estimer l’effet d’une exposition séparément en fonction d’une autre variable) <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">6</a>]</span>.</p>
 <p>Si l’on compare avec un essai d’intervention, c’est comme s’il y avait une seule intervention <span class="math inline">\(\small X\)</span> et que l’analyse était stratifiée sur <span class="math inline">\(\small V\)</span>. On analyse donc l’effet du scénario <span class="math inline">\(\small do(X)\)</span> dans chaque groupe de <span class="math inline">\(\small V\)</span>.</p>
 <p>En observationnel, l’effet causal qui nous intéresse est donc celui de <span class="math inline">\(\small X\)</span> mais pas celui de <span class="math inline">\(\small V\)</span>.
 On ajustera sur les facteurs de confusion de la relation <span class="math inline">\(\small X \rightarrow Y\)</span>.</p>
-<p>On ne fait pas d’hypothèse sur les mécanismes de la modification d’effet, qui peut être causale (de façon directe ou indirecte), ou non-causale (présence d’une modification d’effet par proxy ou cause commune, sans qu’il existe d’effet direct ou indirect du modificateur d’effet vers le critère de jugement, comme dans la figure en bas de page) <span class="citation">[<a href="#ref-vanderweele_four_2007" role="doc-biblioref">5</a>]</span>.</p>
+<p>On ne fait pas d’hypothèse sur les mécanismes de la modification d’effet, qui peut être causale (de façon directe ou indirecte), ou non-causale (présence d’une modification d’effet par proxy ou cause commune, sans qu’il existe d’effet direct ou indirect du modificateur d’effet vers le critère de jugement, comme dans la figure en bas de page) <span class="citation">[<a href="#ref-vanderweele_four_2007" role="doc-biblioref">7</a>]</span>.</p>
 <blockquote>
 <p>Exemples d’objectifs : identifier des groupes pour lesquels le traitement ne serait pas utile, ou explorer si l’effet du traitement est homogène/hétérogène en fonction de l’âge, du sexe, etc.</p>
 </blockquote>
@@ -378,7 +378,7 @@ L’objectif serait formulé ainsi : l’effet du tabagisme X sur le risque de m
 </div>
 <div id="interaction" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Interaction<a href="intmodif.html#interaction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoint de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l’effet conjoint est supérieur à la somme de l’effet individuels. Il y a une interaction antagoniste lorsque l’effet conjoint est inférieur à la somme des effets individuels <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">4</a>]</span>.</p>
+<p>Quand on s’intéresse à l’interaction, on s’intéresse plutôt à l’effet conjoint de 2 expositions (ou plus) sur un outcome. Il y a une interaction synergique si l’effet conjoint est supérieur à la somme de l’effet individuels. Il y a une interaction antagoniste lorsque l’effet conjoint est inférieur à la somme des effets individuels <span class="citation">[<a href="#ref-corraini_effect_2017" role="doc-biblioref">6</a>]</span>.</p>
 <p>Si l’on compare avec un essai d’intervention, c’est comme s’il y avait plusieurs interventions, selon le nombre de combinaisons. On analyse donc l’effet du scénario <span class="math inline">\(\small do(X, V)\)</span>. Ici l’effet causal d’intérêt est vraiment l’effet conjoint des deux variables.</p>
 <p>Dans un schéma observationnel, l’effet causal qui nous intéresse est donc celui de l’interaction <span class="math inline">\(\small X*V\)</span>. On ajustera sur les facteurs de confusion des deux relations <span class="math inline">\(\small X \rightarrow Y\)</span> et <span class="math inline">\(\small V \rightarrow Y\)</span>.
 On fait l’hypothèse que les mécanismes de l’effet conjoint de <span class="math inline">\(\small X\)</span> et <span class="math inline">\(\small V\)</span> sont causaux.</p>
@@ -461,7 +461,7 @@ L’objectif serait formulé ainsi : le tabagisme X et le vécu d’un événeme
 <li>et donc sur les sets de facteurs de confusion à considérer (seulement sur la relation <span class="math inline">\(\small X \rightarrow Y\)</span> <em>versus</em> les deux relations <span class="math inline">\(\small X \rightarrow Y\)</span> et <span class="math inline">\(\small V \rightarrow Y\)</span>)</li>
 <li>et sur l’intervention contrefactuelle que l’on va réalisée si l’on utilise des approches causales (<span class="math inline">\(\small do(X)|V\)</span> <em>versus</em> <span class="math inline">\(\small do(X,V)\)</span>).</li>
 </ul>
-<p>Il existe des cas où l’identification d’une interaction ou d’une modification d’effet ne conduira pas à la même démarche et donc au même résultat <span class="citation">[<a href="#ref-vanderweele_distinction_2009" role="doc-biblioref">6</a>]</span>. Prenons le DAG suivant :</p>
+<p>Il existe des cas où l’identification d’une interaction ou d’une modification d’effet ne conduira pas à la même démarche et donc au même résultat <span class="citation">[<a href="#ref-vanderweele_distinction_2009" role="doc-biblioref">8</a>]</span>. Prenons le DAG suivant :</p>
 <blockquote>
 <p><img src="img/Image12.png" style="width:30.0%" /></p>
 </blockquote>
@@ -482,13 +482,13 @@ L’objectif serait formulé ainsi : le tabagisme X et le vécu d’un événeme
 <h3> Références<a href="références.html#références" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-corraini_effect_2017" class="csl-entry">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Corraini P, Olsen M, Pedersen L, Dekkers OM, Vandenbroucke JP. Effect modification, interaction and mediation: An overview of theoretical insights for clinical investigators. Clinical Epidemiology 2017;9:331–8. <a href="https://doi.org/10.2147/CLEP.S129728">https://doi.org/10.2147/CLEP.S129728</a>.</div>
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Corraini P, Olsen M, Pedersen L, Dekkers OM, Vandenbroucke JP. Effect modification, interaction and mediation: An overview of theoretical insights for clinical investigators. Clinical Epidemiology 2017;9:331–8. <a href="https://doi.org/10.2147/CLEP.S129728">https://doi.org/10.2147/CLEP.S129728</a>.</div>
 </div>
 <div id="ref-vanderweele_four_2007" class="csl-entry">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">VanderWeele TJ, Robins JM. Four types of effect modification: A classification based on directed acyclic graphs. Epidemiology (Cambridge, Mass) 2007;18:561–8. <a href="https://doi.org/10.1097/EDE.0b013e318127181b">https://doi.org/10.1097/EDE.0b013e318127181b</a>.</div>
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">VanderWeele TJ, Robins JM. Four types of effect modification: A classification based on directed acyclic graphs. Epidemiology (Cambridge, Mass) 2007;18:561–8. <a href="https://doi.org/10.1097/EDE.0b013e318127181b">https://doi.org/10.1097/EDE.0b013e318127181b</a>.</div>
 </div>
 <div id="ref-vanderweele_distinction_2009" class="csl-entry">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">VanderWeele TJ. On the distinction between interaction and effect modification. Epidemiology (Cambridge, Mass) 2009;20:863–71. <a href="https://doi.org/10.1097/EDE.0b013e3181ba333c">https://doi.org/10.1097/EDE.0b013e3181ba333c</a>.</div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">VanderWeele TJ. On the distinction between interaction and effect modification. Epidemiology (Cambridge, Mass) 2009;20:863–71. <a href="https://doi.org/10.1097/EDE.0b013e3181ba333c">https://doi.org/10.1097/EDE.0b013e3181ba333c</a>.</div>
 </div>
 </div>
             </section>
