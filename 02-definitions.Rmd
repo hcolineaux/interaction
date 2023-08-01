@@ -58,7 +58,7 @@ Différences de risques pour l'exemple 1
 > Le fait d'être doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout augmente le risque d'avoir au moins une pathologie chronique à 60 ans de +80%. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans augmente le risque d'avoir au moins une pathologie chronique à 60 ans de +30%, alors que dans une population ayant vécu un événement traumatique, il est augmenté de +70%.
 
 
-### Concernant, les rapports de risques (effets multiplicatifs) {-}
+### Concernant les rapports de risques (RR, effets multiplicatifs) {-}
 
 On peut notamment utiliser les **risques relatifs** (RR). On  donc :
 
@@ -83,6 +83,74 @@ Risques relatifs pour l'exemple 1
 >
 > Le risque d'avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 9. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.
 
+### Une autre échelle multiplicative fréquemment utilisée est l'échelle des odds-ratios (OR) {-}
+
+L'échelle des **Odds-Ratios** (OR) est fréquemment utilisée car on peut l'obtenir facilement à partir d'un modèle de régression logistique (en utilisant l'exponentielle des coefficients de la régression logistique). L'**odds** correspond à la cote d'une probabilité $p$ et est définie par $\text{odds}(p) = \frac{p}{1-p}$. L'odds-ratio est le rapport de la cote dans le groupe exposé divisée par la cote dans le groupe non-exposé.
+
+Si on reprend l'exemple précédent : 
+
+-	L'effet d'une exposition $\small X$ binaire sur $\small Y$ est : 
+    + $\small OR(X) = \frac{P(Y = 1| do(X = 1)) / [1 - P(Y=1 | do(X=1))] }{ P(Y = 1|do(X = 0)) / [1 - P(Y = 1|do(X = 0))]}$ 
+    + qu'on peut estimer, si les conditions d'identifiabilité sont réunies, par :
+    + $\small \frac{P(Y = 1| do(X = 1)) / [1 - P(Y=1 | do(X=1))] }{ P(Y = 1|do(X = 0)) / [1 - P(Y = 1|do(X = 0))]} = \frac{p_1 / (1-p_1)}{p_0 / (1-p_0)}$
+-	L'effet conjoint de $\small X$ et $\small V$ est : $\small OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00}/(1 - p_{00})}$ 
+- L'effet de $\small X$ sur $\small Y$ pour chaque valeur fixée de $\small V$ est : 
+    + $\small OR(X,V=0) = \frac{p_{10} / (1-p_{10})}{p_{00} / (1-p_{00})}$ 
+    + et $\small OR(X,V=1) = \frac{p_{11} / (1-p_{11})}{p_{01} / (1-p_{01})}$
+
+> <ins> Exemple </ins> 
+Odds-ratios pour l'exemple 1
+>
+>![](img/Image1.png){width=30%}
+>
+-	$\small OR(X,V) = \frac{0,9 / (1-0,9)}{0,1 / (1-0,1)} = \times 81$
+-	$\small OR(X,V=0) = \frac{0,4 / (1-0,4)}{0,1/(1-0,1)} = \times 6$
+-	$\small OR(X,V=1) = \frac{0,9/(1-0,9)}{0,2/(1-0,2)} = \times 36$
+>
+> La cote d'avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 81. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie par 6 la cote d'avoir au moins une pathologie chronique à 60 ans, alors que dans une population ayant vécu un événement traumatique, elle est multipliée par 36.
+
 ## Effets conditionnels et marginaux
 
-**A compléter**
+Dans une analyse de l'effet d'interaction entre deux expositions binaires $X$ et $V$ sur un outcome $Y$, il sera parfois nécessaire de prendre en compte un ensemble de facteurs de confusion pour estimer les effets causaux. On note $L$ cet ensemble qui peut être constitué par exemple de 3 facteurs de confusion $L = \{L_1 = age, L_2 = sexe, L_3 = comorbidités\}$.
+
+Au-delà de l'échelle des mesures d'association (additive pour les DR, multiplicative pour les RR et OR), il faudra choisir si on présente des mesures d'associations :
+
+- **conditionnelles** c'est-à-dire estimées dans des strates définies par l'ensemble (ou par un sous-ensemble) des facteurs de confusion
+- ou **marginales**, c'est à dire un effet moyen estimé pour l'ensemble de la population (une moyenne pondérée des associations observées dans les différentes strates de la population).
+
+Par exemple, sur l'échelle des odds-ratios, une méthode classiquement utilisée pour estimer l'effet d'interaction entre $X$ et $V$ est d'appliquer une régression logistique de $Y$ en fonction de $X$ et $V$, de leur interaction, ajustée sur les 3 facteurs de confusion (et on suppose que le modèle est correctement spécifié) : 
+\begin{equation*}
+  \text{logit} P(Y=1 \mid X,V,L_1,L_2,L_3) = \beta_0 + \beta_X X + \beta_V V + \beta_{X \ast V} X \ast V + \beta_{L1} L_1 + \beta_{L2} L_2 + \beta_{L3} L_3
+\end{equation*}
+
+A partir de ce modèle, il est possible d'estimer directement : 
+
+- l'interaction conjointe de $\small X$ et $\small V$ : $OR(X,V) \big| L_1,L_2,L_3 = \exp(\beta_X + \beta_V + \beta_{X \ast V})$
+- L'effet de $\small X$ sur $\small Y$ pour chaque valeur fixée de $\small V$ : 
+  + $OR(X,V=0) \big| L_1,L_2,L_3 = \exp(\beta_X)$
+  + $OR(X,V=1) \big| L_1,L_2,L_3 = \exp(\beta_X + \beta_{X \ast V})$
+
+Il s'agit d'**OR conditionnels**, c'est-à-dire "toutes choses égales par ailleurs au niveau individuel", conditionnellement au sexe, à l'âge et aux comorbidités de chaque individu : d'après ce modèle, l'odds ratio obtenu est indépendant du sexe, de l'âge et des comorbidités. Sa valeur sera identique chez un homme de 35 ans sans comorbidités et chez une femmes de 60 ans avec comorbidités.
+
+A partir du même modèle, on peut également estimer des associations **marginales**, en calculant l'effet moyen observé dans la population. Par exemple pour l'interaction conjointe de $\small X$ et $\small V$, 
+
+- on calcule d'abord l'effet populationnel associé à une double exposition $X=1$ et $V=1$, comme une moyenne pondérée des probabilités attendues dans chaque strate $\{l_1,l_2,l_3\}$ définie par les facteurs de confusion : 
+\begin{equation*}
+  p_{11} = \sum_{l_1,l_2,l_3} P(Y=1 \mid X = 1, V = 1, L_1 = l_1, L_2 = l_2, L_3 = l_3) \times P(L_1 = l_1, L_2 = l_2, L_3 = l_3)
+\end{equation*}
+- puis on calcul l'effet populationnel associé à une double absence d'exposition $X=0$ et $V=0$ :
+\begin{equation*}
+  p_{00} = \sum_{l_1,l_2,l_3} P(Y=1 \mid X = 0, V = 0, L_1 = l_1, L_2 = l_2, L_3 = l_3) \times P(L_1 = l_1, L_2 = l_2, L_3 = l_3)
+\end{equation*}
+- l'**odds-ratio marginal** peut-être obtenu à partir de ces deux probabilités populationnelles $OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00} / (1-p_{00})}$. C'est la méthode qui est appliquée en _G-computation_ (cf. paragraphe \@ref(gcomputation)). Si l'on a bien pris en compte les facteurs de confusion , l'interprétation se fait comme une mesure d'association causale moyennée au niveau de l'ensemble de la population ("toutes choses égales par ailleurs au niveau populationnel", la population étant caractérisée par sa distribution de sexe, d'âge et de comorbidités).
+
+Selon le même principe, on peut calculer des risques relatifs (RR) conditionnels ou marginaux, et des différences de risques (DR) conditionnelles ou marginales.
+
+Une propriété intéressantes des RR et des DR est que se sont des mesures d'associations **collapsibles** (anglicisme venant du terme anglais _collapsibility_) : la mesure conditionnelle est la même que la mesure marginale.@whitcomb2021
+
+En revanche, les odds-ratios (OR) sont des mesures d'associations **non-collapsibles**, c'est-à-dire qu'un OR conditionnel sera différent d'un OR marginal (en dehors de cas particuliers où l'association est nulle ou bien lorsqu'aucun des facteurs de confusion potentiel n'a d'effet sur l'outcome $Y$). Cela est parfois source de confusion car : 
+
+- il s'agit de deux _estimands_ différents (par définition $OR_\text{marginal} \neq OR_\text{conditionnel}$, sauf cas particulier), 
+- mais l'OR marginal comme l'OR conditionnel sont tous les deux des mesures d'association causales valides (à partir du moment où les facteurs de confusion ont bien été pris en compte dans le calcul de l'OR conditionnel ou de l'OR marginal).@daniel2021
+
+Le choix de présenter une association marginale ou une association conditionnelle va donc influencer la valeur du résultat présenté, en particulier si l'on présente des mesures d'association "non-collapsibles" comme les OR.

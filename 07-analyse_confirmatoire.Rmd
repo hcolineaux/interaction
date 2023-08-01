@@ -74,7 +74,7 @@ generate.data <- function(N, b =  param.causal.model()) {
 
 ```
 
-## Estimation par G-computation 
+## Estimation par G-computation {#gcomputation}
 
 Il s'agit d'une "G-method" qui peut être décrite comme une "standardisation" par régression (Hernàn @hernan2020causal). Le principe est le suivant :
 

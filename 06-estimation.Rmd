@@ -7,7 +7,7 @@ output:
 
 # Simulations
 
-Pour la description des différents types d'estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires):
+Pour la description des différents types d'estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires). Les deux expositions d'intérêt sont $A_1$ et $A_2$, l'outcome est $Y$, et $L_1$, $L_2$ et $L_3$ sont 3 facteurs de confusion :
 
 > ![](img/Image10.png){width=50%}
 

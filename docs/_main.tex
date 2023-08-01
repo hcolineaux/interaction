@@ -264,9 +264,9 @@ Ensuite, de \textbf{nombreuses questions} se posent pour réaliser une analyse d
 \hypertarget{avertissement}{%
 \section{Avertissement}\label{avertissement}}
 
-Les analyses d'effets d'interaction (ou de modifications d'effets) sont peu puissantes. Pour observer un effet d'interaction ``statistiquement signitificatif'', le nombre de sujets nécessaire est habituellement beaucoup plus élevé que le nombre de sujets nécessaire permettant d'observer une différence global entre 2 ou moyennes ou pourcentages.
+Les analyses d'effets d'interaction (ou de modifications d'effets) sont peu puissantes. Pour observer un effet d'interaction ``statistiquement signitificatif'', le nombre de sujets nécessaire est habituellement beaucoup plus élevé que le nombre de sujets nécessaire permettant d'observer une différence global entre 2 moyennes ou pourcentages.
 
-A titre d'exemple, Brookes S et al (2004) \citet{brookes_JCE_2004} décrivent que dans un contexte d'essai contrôlé randomisé à deux bras parallèles, équilibré, incluant un nombre de sujets \(N\) optimisé pour observer une différence \(\Delta\) significative entre un groupe exposé et un groupe non-exposé avec une puissance de 80\%, la puissance pour observer un effet d'interaction de taille similaire (\(\approx \Delta\)) ne sera que de 29\%.
+A titre d'exemple, Brookes S et al (2004) \citet{brookes_JCE_2004} décrivent que dans un contexte d'essai contrôlé randomisé à deux bras parallèles, équilibrés, incluant un nombre de sujets \(N\) optimisé pour observer une différence \(\Delta\) significative entre un groupe exposé et un groupe non-exposé avec une puissance de 80\%, la puissance pour observer un effet d'interaction de taille similaire (\(\approx \Delta\)) ne sera que de 29\%.
 
 Pour observer une effet de taille similaire (\(\approx \Delta\)) de manière significative, le nombre de sujets à recruter sera 4 fois plus élevé (\(4 \times N\)). Si l'on cherche à mesurer de manière significative des effets d'interaction plus petits que l'effet global entre groupe exposé et non-exposé, le nombre de sujets nécessaires augmente de manière spéctaculaire :
 
@@ -275,9 +275,9 @@ Pour observer une effet de taille similaire (\(\approx \Delta\)) de manière sig
 \item
   6 fois plus élevé (\(6 \times N\)) pour rechercher une interaction un peu plus petite correspondant à 80\% de l'effet global (\(0,80 \times \Delta\)),
 \item
-  15 fois plus élevé (\(15 \times N\)) pour rechercher une interaction égale à la moitié de l'effet global (\(\frac{\Delta}{2}\)),
+  15 fois plus élevé (\(15 \times N\)) pour rechercher une interaction égale à la moitié de l'effet global \(\left(\frac{\Delta}{2}\right)\),
 \item
-  100 fois plus élevé (\(100 \times N\)) pour rechercher une petite interaction égale à 20\% de l'effet global (\(\frac{\Delta}{5}\)).
+  100 fois plus élevé (\(100 \times N\)) pour rechercher une petite interaction égale à 20\% de l'effet global (\(\left(\frac{\Delta}{5}\right)\)).
 \end{itemize}
 
 \hypertarget{part-synthuxe8se-de-la-littuxe9rature}{%
@@ -370,9 +370,9 @@ Différences de risques pour l'exemple 1
 Le fait d'être doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout augmente le risque d'avoir au moins une pathologie chronique à 60 ans de +80\%. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans augmente le risque d'avoir au moins une pathologie chronique à 60 ans de +30\%, alors que dans une population ayant vécu un événement traumatique, il est augmenté de +70\%.
 \end{quote}
 
-\hypertarget{concernant-les-rapports-de-risques-effets-multiplicatifs}{%
-\subsection*{Concernant, les rapports de risques (effets multiplicatifs)}\label{concernant-les-rapports-de-risques-effets-multiplicatifs}}
-\addcontentsline{toc}{subsection}{Concernant, les rapports de risques (effets multiplicatifs)}
+\hypertarget{concernant-les-rapports-de-risques-rr-effets-multiplicatifs}{%
+\subsection*{Concernant les rapports de risques (RR, effets multiplicatifs)}\label{concernant-les-rapports-de-risques-rr-effets-multiplicatifs}}
+\addcontentsline{toc}{subsection}{Concernant les rapports de risques (RR, effets multiplicatifs)}
 
 On peut notamment utiliser les \textbf{risques relatifs} (RR). On donc :
 
@@ -424,10 +424,135 @@ Risques relatifs pour l'exemple 1
 Le risque d'avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 9. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.
 \end{quote}
 
+\hypertarget{une-autre-uxe9chelle-multiplicative-fruxe9quemment-utilisuxe9e-est-luxe9chelle-des-odds-ratios-or}{%
+\subsection*{Une autre échelle multiplicative fréquemment utilisée est l'échelle des odds-ratios (OR)}\label{une-autre-uxe9chelle-multiplicative-fruxe9quemment-utilisuxe9e-est-luxe9chelle-des-odds-ratios-or}}
+\addcontentsline{toc}{subsection}{Une autre échelle multiplicative fréquemment utilisée est l'échelle des odds-ratios (OR)}
+
+L'échelle des \textbf{Odds-Ratios} (OR) est fréquemment utilisée car on peut l'obtenir facilement à partir d'un modèle de régression logistique (en utilisant l'exponentielle des coefficients de la régression logistique). L'\textbf{odds} correspond à la cote d'une probabilité \(p\) et est définie par \(\text{odds}(p) = \frac{p}{1-p}\). L'odds-ratio est le rapport de la cote dans le groupe exposé divisée par la cote dans le groupe non-exposé.
+
+Si on reprend l'exemple précédent :
+
+\begin{itemize}
+\tightlist
+\item
+  L'effet d'une exposition \(\small X\) binaire sur \(\small Y\) est :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\small OR(X) = \frac{P(Y = 1| do(X = 1)) / [1 - P(Y=1 | do(X=1))] }{ P(Y = 1|do(X = 0)) / [1 - P(Y = 1|do(X = 0))]}\)
+  \item
+    qu'on peut estimer, si les conditions d'identifiabilité sont réunies, par :
+  \item
+    \(\small \frac{P(Y = 1| do(X = 1)) / [1 - P(Y=1 | do(X=1))] }{ P(Y = 1|do(X = 0)) / [1 - P(Y = 1|do(X = 0))]} = \frac{p_1 / (1-p_1)}{p_0 / (1-p_0)}\)
+  \end{itemize}
+\item
+  L'effet conjoint de \(\small X\) et \(\small V\) est : \(\small OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00}/(1 - p_{00})}\)
+\item
+  L'effet de \(\small X\) sur \(\small Y\) pour chaque valeur fixée de \(\small V\) est :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\small OR(X,V=0) = \frac{p_{10} / (1-p_{10})}{p_{00} / (1-p_{00})}\)
+  \item
+    et \(\small OR(X,V=1) = \frac{p_{11} / (1-p_{11})}{p_{01} / (1-p_{01})}\)
+  \end{itemize}
+\end{itemize}
+
+\begin{quote}
+Exemple
+
+Odds-ratios pour l'exemple 1
+
+\includegraphics[width=0.3\textwidth,height=\textheight]{img/Image1.png}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\small OR(X,V) = \frac{0,9 / (1-0,9)}{0,1 / (1-0,1)} = \times 81\)
+\item
+  \(\small OR(X,V=0) = \frac{0,4 / (1-0,4)}{0,1/(1-0,1)} = \times 6\)
+\item
+  \(\small OR(X,V=1) = \frac{0,9/(1-0,9)}{0,2/(1-0,2)} = \times 36\)
+\end{itemize}
+
+La cote d'avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 81. Dans une population n'ayant pas vécu d'événement traumatique, le fait de fumer à 20 ans multiplie par 6 la cote d'avoir au moins une pathologie chronique à 60 ans, alors que dans une population ayant vécu un événement traumatique, elle est multipliée par 36.
+\end{quote}
+
 \hypertarget{effets-conditionnels-et-marginaux}{%
 \section{Effets conditionnels et marginaux}\label{effets-conditionnels-et-marginaux}}
 
-\textbf{A compléter}
+Dans une analyse de l'effet d'interaction entre deux expositions binaires \(X\) et \(V\) sur un outcome \(Y\), il sera parfois nécessaire de prendre en compte un ensemble de facteurs de confusion pour estimer les effets causaux. On note \(L\) cet ensemble qui peut être constitué par exemple de 3 facteurs de confusion \(L = \{L_1 = age, L_2 = sexe, L_3 = comorbidités\}\).
+
+Au-delà de l'échelle des mesures d'association (additive pour les DR, multiplicative pour les RR et OR), il faudra choisir si on présente des mesures d'associations :
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{conditionnelles} c'est-à-dire estimées dans des strates définies par l'ensemble (ou par un sous-ensemble) des facteurs de confusion
+\item
+  ou \textbf{marginales}, c'est à dire un effet moyen estimé pour l'ensemble de la population (une moyenne pondérée des associations observées dans les différentes strates de la population).
+\end{itemize}
+
+Par exemple, sur l'échelle des odds-ratios, une méthode classiquement utilisée pour estimer l'effet d'interaction entre \(X\) et \(V\) est d'appliquer une régression logistique de \(Y\) en fonction de \(X\) et \(V\), de leur interaction, ajustée sur les 3 facteurs de confusion (et on suppose que le modèle est correctement spécifié) :
+\begin{equation*}
+  \text{logit} P(Y=1 \mid X,V,L_1,L_2,L_3) = \beta_0 + \beta_X X + \beta_V V + \beta_{X \ast V} X \ast V + \beta_{L1} L_1 + \beta_{L2} L_2 + \beta_{L3} L_3
+\end{equation*}
+
+A partir de ce modèle, il est possible d'estimer directement :
+
+\begin{itemize}
+\tightlist
+\item
+  l'interaction conjointe de \(\small X\) et \(\small V\) : \(OR(X,V) \big| L_1,L_2,L_3 = \exp(\beta_X + \beta_V + \beta_{X \ast V})\)
+\item
+  L'effet de \(\small X\) sur \(\small Y\) pour chaque valeur fixée de \(\small V\) :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(OR(X,V=0) \big| L_1,L_2,L_3 = \exp(\beta_X)\)
+  \item
+    \(OR(X,V=1) \big| L_1,L_2,L_3 = \exp(\beta_X + \beta_{X \ast V})\)
+  \end{itemize}
+\end{itemize}
+
+Il s'agit d'\textbf{OR conditionnels}, c'est-à-dire ``toutes choses égales par ailleurs au niveau individuel'', conditionnellement au sexe, à l'âge et aux comorbidités de chaque individu : d'après ce modèle, l'odds ratio obtenu est indépendant du sexe, de l'âge et des comorbidités. Sa valeur sera identique chez un homme de 35 ans sans comorbidités et chez une femmes de 60 ans avec comorbidités.
+
+A partir du même modèle, on peut également estimer des associations \textbf{marginales}, en calculant l'effet moyen observé dans la population. Par exemple pour l'interaction conjointe de \(\small X\) et \(\small V\),
+
+\begin{itemize}
+\tightlist
+\item
+  on calcule d'abord l'effet populationnel associé à une double exposition \(X=1\) et \(V=1\), comme une moyenne pondérée des probabilités attendues dans chaque strate \(\{l_1,l_2,l_3\}\) définie par les facteurs de confusion :
+  \begin{equation*}
+  p_{11} = \sum_{l_1,l_2,l_3} P(Y=1 \mid X = 1, V = 1, L_1 = l_1, L_2 = l_2, L_3 = l_3) \times P(L_1 = l_1, L_2 = l_2, L_3 = l_3)
+  \end{equation*}
+\item
+  puis on calcul l'effet populationnel associé à une double absence d'exposition \(X=0\) et \(V=0\) :
+  \begin{equation*}
+  p_{00} = \sum_{l_1,l_2,l_3} P(Y=1 \mid X = 0, V = 0, L_1 = l_1, L_2 = l_2, L_3 = l_3) \times P(L_1 = l_1, L_2 = l_2, L_3 = l_3)
+  \end{equation*}
+\item
+  l'\textbf{odds-ratio marginal} peut-être obtenu à partir de ces deux probabilités populationnelles \(OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00} / (1-p_{00})}\). C'est la méthode qui est appliquée en \emph{G-computation} (cf.~paragraphe \ref{gcomputation}). Si l'on a bien pris en compte les facteurs de confusion , l'interprétation se fait comme une mesure d'association causale moyennée au niveau de l'ensemble de la population (``toutes choses égales par ailleurs au niveau populationnel'', la population étant caractérisée par sa distribution de sexe, d'âge et de comorbidités).
+\end{itemize}
+
+Selon le même principe, on peut calculer des risques relatifs (RR) conditionnels ou marginaux, et des différences de risques (DR) conditionnelles ou marginales.
+
+Une propriété intéressantes des RR et des DR est que se sont des mesures d'associations \textbf{collapsibles} (anglicisme venant du terme anglais \emph{collapsibility}) : la mesure conditionnelle est la même que la mesure marginale.@whitcomb2021
+
+En revanche, les odds-ratios (OR) sont des mesures d'associations \textbf{non-collapsibles}, c'est-à-dire qu'un OR conditionnel sera différent d'un OR marginal (en dehors de cas particuliers où l'association est nulle ou bien lorsqu'aucun des facteurs de confusion potentiel n'a d'effet sur l'outcome \(Y\)). Cela est parfois source de confusion car :
+
+\begin{itemize}
+\tightlist
+\item
+  il s'agit de deux \emph{estimands} différents (par définition \(OR_\text{marginal} \neq OR_\text{conditionnel}\), sauf cas particulier),
+\item
+  mais l'OR marginal comme l'OR conditionnel sont tous les deux des mesures d'association causales valides (à partir du moment où les facteurs de confusion ont bien été pris en compte dans le calcul de l'OR conditionnel ou de l'OR marginal).@daniel2021
+\end{itemize}
+
+Le choix de présenter une association marginale ou une association conditionnelle va donc influencer la valeur du résultat présenté, en particulier si l'on présente des mesures d'association ``non-collapsibles'' comme les OR.
 
 \hypertarget{intmodif}{%
 \chapter{Interaction ou modification d'effets}\label{intmodif}}
@@ -1291,7 +1416,7 @@ Exemple de présentation avec les données fictives de l'exemple 1, interaction 
 \hypertarget{simulations}{%
 \chapter{Simulations}\label{simulations}}
 
-Pour la description des différents types d'estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires):
+Pour la description des différents types d'estimation, on a simulé des données selon le DAG suivant (toutes les variables sont binaires). Les deux expositions d'intérêt sont \(A_1\) et \(A_2\), l'outcome est \(Y\), et \(L_1\), \(L_2\) et \(L_3\) sont 3 facteurs de confusion :
 
 \begin{quote}
 \includegraphics[width=0.5\textwidth,height=\textheight]{img/Image10.png}
@@ -1689,8 +1814,8 @@ Interaction & 0.39 (0.36 to 0.43, p<0.001)\\
 \hypertarget{conf}{%
 \chapter{Approches causales}\label{conf}}
 
-\hypertarget{estimation-par-g-computation}{%
-\section{Estimation par G-computation}\label{estimation-par-g-computation}}
+\hypertarget{gcomputation}{%
+\section{Estimation par G-computation}\label{gcomputation}}
 
 Il s'agit d'une ``G-method'' qui peut être décrite comme une ``standardisation'' par régression (Hernàn \citet{hernan2020causal}). Le principe est le suivant :
 

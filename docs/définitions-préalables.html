@@ -177,7 +177,8 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="définitions-préalables.html"><a href="définitions-préalables.html#mesures-deffets"><i class="fa fa-check"></i><b>3.2</b> Mesures d’effets</a>
 <ul>
 <li class="chapter" data-level="" data-path="définitions-préalables.html"><a href="définitions-préalables.html#concernant-les-différences-de-risques-dr-effets-additifs"><i class="fa fa-check"></i>Concernant les différences de risques (DR, effets additifs)</a></li>
-<li class="chapter" data-level="" data-path="définitions-préalables.html"><a href="définitions-préalables.html#concernant-les-rapports-de-risques-effets-multiplicatifs"><i class="fa fa-check"></i>Concernant, les rapports de risques (effets multiplicatifs)</a></li>
+<li class="chapter" data-level="" data-path="définitions-préalables.html"><a href="définitions-préalables.html#concernant-les-rapports-de-risques-rr-effets-multiplicatifs"><i class="fa fa-check"></i>Concernant les rapports de risques (RR, effets multiplicatifs)</a></li>
+<li class="chapter" data-level="" data-path="définitions-préalables.html"><a href="définitions-préalables.html#une-autre-échelle-multiplicative-fréquemment-utilisée-est-léchelle-des-odds-ratios-or"><i class="fa fa-check"></i>Une autre échelle multiplicative fréquemment utilisée est l’échelle des odds-ratios (OR)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="définitions-préalables.html"><a href="définitions-préalables.html#effets-conditionnels-et-marginaux"><i class="fa fa-check"></i><b>3.3</b> Effets conditionnels et marginaux</a></li>
 </ul></li>
@@ -235,7 +236,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="10" data-path="conf.html"><a href="conf.html"><i class="fa fa-check"></i><b>10</b> Approches causales</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="conf.html"><a href="conf.html#estimation-par-g-computation"><i class="fa fa-check"></i><b>10.1</b> Estimation par G-computation</a></li>
+<li class="chapter" data-level="10.1" data-path="conf.html"><a href="conf.html#gcomputation"><i class="fa fa-check"></i><b>10.1</b> Estimation par G-computation</a></li>
 <li class="chapter" data-level="10.2" data-path="conf.html"><a href="conf.html#estimation-par-modèle-structurel-marginal"><i class="fa fa-check"></i><b>10.2</b> Estimation par Modèle Structurel Marginal</a></li>
 <li class="chapter" data-level="10.3" data-path="conf.html"><a href="conf.html#estimation-avec-tmle"><i class="fa fa-check"></i><b>10.3</b> Estimation avec TMLE</a>
 <ul>
@@ -358,8 +359,8 @@ Exemple
 <p>Le fait d’être doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout augmente le risque d’avoir au moins une pathologie chronique à 60 ans de +80%. Dans une population n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 ans augmente le risque d’avoir au moins une pathologie chronique à 60 ans de +30%, alors que dans une population ayant vécu un événement traumatique, il est augmenté de +70%.</p>
 </blockquote>
 </div>
-<div id="concernant-les-rapports-de-risques-effets-multiplicatifs" class="section level3 unnumbered hasAnchor">
-<h3>Concernant, les rapports de risques (effets multiplicatifs)<a href="définitions-préalables.html#concernant-les-rapports-de-risques-effets-multiplicatifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="concernant-les-rapports-de-risques-rr-effets-multiplicatifs" class="section level3 unnumbered hasAnchor">
+<h3>Concernant les rapports de risques (RR, effets multiplicatifs)<a href="définitions-préalables.html#concernant-les-rapports-de-risques-rr-effets-multiplicatifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>On peut notamment utiliser les <strong>risques relatifs</strong> (RR). On donc :</p>
 <ul>
 <li>L’effet d’une exposition <span class="math inline">\(\small X\)</span> binaire sur <span class="math inline">\(\small Y\)</span> est :
@@ -389,10 +390,81 @@ Exemple
 <p>Le risque d’avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 9. Dans une population n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 ans multiplie le risque par 4, alors que dans une population ayant vécu un événement traumatique, il est multiplié par 4,5.</p>
 </blockquote>
 </div>
+<div id="une-autre-échelle-multiplicative-fréquemment-utilisée-est-léchelle-des-odds-ratios-or" class="section level3 unnumbered hasAnchor">
+<h3>Une autre échelle multiplicative fréquemment utilisée est l’échelle des odds-ratios (OR)<a href="définitions-préalables.html#une-autre-échelle-multiplicative-fréquemment-utilisée-est-léchelle-des-odds-ratios-or" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’échelle des <strong>Odds-Ratios</strong> (OR) est fréquemment utilisée car on peut l’obtenir facilement à partir d’un modèle de régression logistique (en utilisant l’exponentielle des coefficients de la régression logistique). L’<strong>odds</strong> correspond à la cote d’une probabilité <span class="math inline">\(p\)</span> et est définie par <span class="math inline">\(\text{odds}(p) = \frac{p}{1-p}\)</span>. L’odds-ratio est le rapport de la cote dans le groupe exposé divisée par la cote dans le groupe non-exposé.</p>
+<p>Si on reprend l’exemple précédent :</p>
+<ul>
+<li>L’effet d’une exposition <span class="math inline">\(\small X\)</span> binaire sur <span class="math inline">\(\small Y\)</span> est :
+<ul>
+<li><span class="math inline">\(\small OR(X) = \frac{P(Y = 1| do(X = 1)) / [1 - P(Y=1 | do(X=1))] }{ P(Y = 1|do(X = 0)) / [1 - P(Y = 1|do(X = 0))]}\)</span></li>
+<li>qu’on peut estimer, si les conditions d’identifiabilité sont réunies, par :</li>
+<li><span class="math inline">\(\small \frac{P(Y = 1| do(X = 1)) / [1 - P(Y=1 | do(X=1))] }{ P(Y = 1|do(X = 0)) / [1 - P(Y = 1|do(X = 0))]} = \frac{p_1 / (1-p_1)}{p_0 / (1-p_0)}\)</span></li>
+</ul></li>
+<li>L’effet conjoint de <span class="math inline">\(\small X\)</span> et <span class="math inline">\(\small V\)</span> est : <span class="math inline">\(\small OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00}/(1 - p_{00})}\)</span></li>
+<li>L’effet de <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> pour chaque valeur fixée de <span class="math inline">\(\small V\)</span> est :
+<ul>
+<li><span class="math inline">\(\small OR(X,V=0) = \frac{p_{10} / (1-p_{10})}{p_{00} / (1-p_{00})}\)</span></li>
+<li>et <span class="math inline">\(\small OR(X,V=1) = \frac{p_{11} / (1-p_{11})}{p_{01} / (1-p_{01})}\)</span></li>
+</ul></li>
+</ul>
+<blockquote>
+<ins>
+Exemple
+</ins>
+<p>Odds-ratios pour l’exemple 1</p>
+<p><img src="img/Image1.png" style="width:30.0%" /></p>
+<ul>
+<li><span class="math inline">\(\small OR(X,V) = \frac{0,9 / (1-0,9)}{0,1 / (1-0,1)} = \times 81\)</span></li>
+<li><span class="math inline">\(\small OR(X,V=0) = \frac{0,4 / (1-0,4)}{0,1/(1-0,1)} = \times 6\)</span></li>
+<li><span class="math inline">\(\small OR(X,V=1) = \frac{0,9/(1-0,9)}{0,2/(1-0,2)} = \times 36\)</span></li>
+</ul>
+<p>La cote d’avoir au moins une pathologie chronique à 60 ans quand on est doublement exposé (tabagisme + événement traumatique) par rapport à pas du tout est multiplié par 81. Dans une population n’ayant pas vécu d’événement traumatique, le fait de fumer à 20 ans multiplie par 6 la cote d’avoir au moins une pathologie chronique à 60 ans, alors que dans une population ayant vécu un événement traumatique, elle est multipliée par 36.</p>
+</blockquote>
+</div>
 </div>
 <div id="effets-conditionnels-et-marginaux" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Effets conditionnels et marginaux<a href="définitions-préalables.html#effets-conditionnels-et-marginaux" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>A compléter</strong></p>
+<p>Dans une analyse de l’effet d’interaction entre deux expositions binaires <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span> sur un outcome <span class="math inline">\(Y\)</span>, il sera parfois nécessaire de prendre en compte un ensemble de facteurs de confusion pour estimer les effets causaux. On note <span class="math inline">\(L\)</span> cet ensemble qui peut être constitué par exemple de 3 facteurs de confusion <span class="math inline">\(L = \{L_1 = age, L_2 = sexe, L_3 = comorbidités\}\)</span>.</p>
+<p>Au-delà de l’échelle des mesures d’association (additive pour les DR, multiplicative pour les RR et OR), il faudra choisir si on présente des mesures d’associations :</p>
+<ul>
+<li><strong>conditionnelles</strong> c’est-à-dire estimées dans des strates définies par l’ensemble (ou par un sous-ensemble) des facteurs de confusion</li>
+<li>ou <strong>marginales</strong>, c’est à dire un effet moyen estimé pour l’ensemble de la population (une moyenne pondérée des associations observées dans les différentes strates de la population).</li>
+</ul>
+<p>Par exemple, sur l’échelle des odds-ratios, une méthode classiquement utilisée pour estimer l’effet d’interaction entre <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span> est d’appliquer une régression logistique de <span class="math inline">\(Y\)</span> en fonction de <span class="math inline">\(X\)</span> et <span class="math inline">\(V\)</span>, de leur interaction, ajustée sur les 3 facteurs de confusion (et on suppose que le modèle est correctement spécifié) :
+<span class="math display">\[\begin{equation*}
+  \text{logit} P(Y=1 \mid X,V,L_1,L_2,L_3) = \beta_0 + \beta_X X + \beta_V V + \beta_{X \ast V} X \ast V + \beta_{L1} L_1 + \beta_{L2} L_2 + \beta_{L3} L_3
+\end{equation*}\]</span></p>
+<p>A partir de ce modèle, il est possible d’estimer directement :</p>
+<ul>
+<li>l’interaction conjointe de <span class="math inline">\(\small X\)</span> et <span class="math inline">\(\small V\)</span> : <span class="math inline">\(OR(X,V) \big| L_1,L_2,L_3 = \exp(\beta_X + \beta_V + \beta_{X \ast V})\)</span></li>
+<li>L’effet de <span class="math inline">\(\small X\)</span> sur <span class="math inline">\(\small Y\)</span> pour chaque valeur fixée de <span class="math inline">\(\small V\)</span> :
+<ul>
+<li><span class="math inline">\(OR(X,V=0) \big| L_1,L_2,L_3 = \exp(\beta_X)\)</span></li>
+<li><span class="math inline">\(OR(X,V=1) \big| L_1,L_2,L_3 = \exp(\beta_X + \beta_{X \ast V})\)</span></li>
+</ul></li>
+</ul>
+<p>Il s’agit d’<strong>OR conditionnels</strong>, c’est-à-dire “toutes choses égales par ailleurs au niveau individuel”, conditionnellement au sexe, à l’âge et aux comorbidités de chaque individu : d’après ce modèle, l’odds ratio obtenu est indépendant du sexe, de l’âge et des comorbidités. Sa valeur sera identique chez un homme de 35 ans sans comorbidités et chez une femmes de 60 ans avec comorbidités.</p>
+<p>A partir du même modèle, on peut également estimer des associations <strong>marginales</strong>, en calculant l’effet moyen observé dans la population. Par exemple pour l’interaction conjointe de <span class="math inline">\(\small X\)</span> et <span class="math inline">\(\small V\)</span>,</p>
+<ul>
+<li>on calcule d’abord l’effet populationnel associé à une double exposition <span class="math inline">\(X=1\)</span> et <span class="math inline">\(V=1\)</span>, comme une moyenne pondérée des probabilités attendues dans chaque strate <span class="math inline">\(\{l_1,l_2,l_3\}\)</span> définie par les facteurs de confusion :
+<span class="math display">\[\begin{equation*}
+p_{11} = \sum_{l_1,l_2,l_3} P(Y=1 \mid X = 1, V = 1, L_1 = l_1, L_2 = l_2, L_3 = l_3) \times P(L_1 = l_1, L_2 = l_2, L_3 = l_3)
+\end{equation*}\]</span></li>
+<li>puis on calcul l’effet populationnel associé à une double absence d’exposition <span class="math inline">\(X=0\)</span> et <span class="math inline">\(V=0\)</span> :
+<span class="math display">\[\begin{equation*}
+p_{00} = \sum_{l_1,l_2,l_3} P(Y=1 \mid X = 0, V = 0, L_1 = l_1, L_2 = l_2, L_3 = l_3) \times P(L_1 = l_1, L_2 = l_2, L_3 = l_3)
+\end{equation*}\]</span></li>
+<li>l’<strong>odds-ratio marginal</strong> peut-être obtenu à partir de ces deux probabilités populationnelles <span class="math inline">\(OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00} / (1-p_{00})}\)</span>. C’est la méthode qui est appliquée en <em>G-computation</em> (cf. paragraphe <a href="conf.html#gcomputation">10.1</a>). Si l’on a bien pris en compte les facteurs de confusion , l’interprétation se fait comme une mesure d’association causale moyennée au niveau de l’ensemble de la population (“toutes choses égales par ailleurs au niveau populationnel”, la population étant caractérisée par sa distribution de sexe, d’âge et de comorbidités).</li>
+</ul>
+<p>Selon le même principe, on peut calculer des risques relatifs (RR) conditionnels ou marginaux, et des différences de risques (DR) conditionnelles ou marginales.</p>
+<p>Une propriété intéressantes des RR et des DR est que se sont des mesures d’associations <strong>collapsibles</strong> (anglicisme venant du terme anglais <em>collapsibility</em>) : la mesure conditionnelle est la même que la mesure marginale.@whitcomb2021</p>
+<p>En revanche, les odds-ratios (OR) sont des mesures d’associations <strong>non-collapsibles</strong>, c’est-à-dire qu’un OR conditionnel sera différent d’un OR marginal (en dehors de cas particuliers où l’association est nulle ou bien lorsqu’aucun des facteurs de confusion potentiel n’a d’effet sur l’outcome <span class="math inline">\(Y\)</span>). Cela est parfois source de confusion car :</p>
+<ul>
+<li>il s’agit de deux <em>estimands</em> différents (par définition <span class="math inline">\(OR_\text{marginal} \neq OR_\text{conditionnel}\)</span>, sauf cas particulier),</li>
+<li>mais l’OR marginal comme l’OR conditionnel sont tous les deux des mesures d’association causales valides (à partir du moment où les facteurs de confusion ont bien été pris en compte dans le calcul de l’OR conditionnel ou de l’OR marginal).@daniel2021</li>
+</ul>
+<p>Le choix de présenter une association marginale ou une association conditionnelle va donc influencer la valeur du résultat présenté, en particulier si l’on présente des mesures d’association “non-collapsibles” comme les OR.</p>
 
 </div>
 </div>
