@@ -142,13 +142,13 @@ A partir du même modèle, on peut également estimer des associations **margina
 \begin{equation*}
   p_{00} = \sum_{l_1,l_2,l_3} P(Y=1 \mid X = 0, V = 0, L_1 = l_1, L_2 = l_2, L_3 = l_3) \times P(L_1 = l_1, L_2 = l_2, L_3 = l_3)
 \end{equation*}
-- l'**odds-ratio marginal** peut-être obtenu à partir de ces deux probabilités populationnelles $OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00} / (1-p_{00})}$. C'est la méthode qui est appliquée en _G-computation_ (cf. paragraphe \@ref(gcomputation)). Si l'on a bien pris en compte les facteurs de confusion , l'interprétation se fait comme une mesure d'association causale moyennée au niveau de l'ensemble de la population ("toutes choses égales par ailleurs au niveau populationnel", la population étant caractérisée par sa distribution de sexe, d'âge et de comorbidités).
+- l'**odds-ratio marginal** peut-être obtenu à partir de ces deux probabilités populationnelles $OR(X,V) = \frac{p_{11} / (1-p_{11})}{p_{00} / (1-p_{00})}$. C'est la méthode qui est appliquée en _G-computation_ (cf. paragraphe \@ref(gcomputation)). Si l'on a bien pris en compte les facteurs de confusion, l'interprétation se fait comme une mesure d'association causale moyennée au niveau de l'ensemble de la population ("toutes choses égales par ailleurs au niveau populationnel", la population étant caractérisée par sa distribution de sexe, d'âge et de comorbidités).
 
 Selon le même principe, on peut calculer des risques relatifs (RR) conditionnels ou marginaux, et des différences de risques (DR) conditionnelles ou marginales.
 
 Une propriété intéressantes des RR et des DR est que se sont des mesures d'associations **collapsibles** (anglicisme venant du terme anglais _collapsibility_) : la mesure conditionnelle est la même que la mesure marginale. @whitcomb2021
 
-En revanche, les odds-ratios (OR) sont des mesures d'associations **non-collapsibles**, c'est-à-dire qu'un OR conditionnel sera différent d'un OR marginal (en dehors de cas particuliers où l'association est nulle ou bien lorsqu'aucun des facteurs de confusion potentiel n'a d'effet sur l'outcome $Y$). Cela est parfois source de confusion car : 
+En revanche, les odds-ratios (OR) sont des mesures d'associations **non-collapsibles**, c'est-à-dire qu'un OR conditionnel sera différent d'un OR marginal (en dehors de cas particuliers où l'exposition n'a aucun effet causal sur l'outcome ou bien lorsqu'aucun des facteurs de confusion potentiel n'a d'effet sur l'outcome $Y$). Cela est parfois source de confusion car : 
 
 - il s'agit de deux _estimands_ différents (par définition $OR_\text{marginal} \neq OR_\text{conditionnel}$, sauf cas particulier), 
 - mais l'OR marginal comme l'OR conditionnel sont tous les deux des mesures d'association causales valides (à partir du moment où les facteurs de confusion ont bien été pris en compte dans le calcul de l'OR conditionnel ou de l'OR marginal). @daniel2021
