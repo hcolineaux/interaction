@@ -379,25 +379,25 @@ div.csl-indent {
 </ul></li>
 </ul>
 <p>En résumé, (le package <code>finalfit</code> permet de sortir quelques résultats proprement) :</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="regression.html#cb5-1" aria-hidden="true" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
-<span id="cb5-2"><a href="regression.html#cb5-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
-<span id="cb5-3"><a href="regression.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
-<span id="cb5-4"><a href="regression.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L1)&quot;</span>,</span>
-<span id="cb5-5"><a href="regression.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L2)&quot;</span>, </span>
-<span id="cb5-6"><a href="regression.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L3)&quot;</span>)</span>
-<span id="cb5-7"><a href="regression.html#cb5-7" aria-hidden="true" tabindex="-1"></a>dependent <span class="ot">=</span> <span class="st">&quot;Y&quot;</span></span>
-<span id="cb5-8"><a href="regression.html#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="regression.html#cb5-9" aria-hidden="true" tabindex="-1"></a>df_f <span class="sc">%&gt;%</span></span>
-<span id="cb5-10"><a href="regression.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
-<span id="cb5-11"><a href="regression.html#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="regression.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># le tableau t entier peut être imprimé, mais ici je sélectionne seulement les effets d&#39;intéret </span></span>
-<span id="cb5-13"><a href="regression.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># pour éviter la table 2 fallacy (les coefficient des facteurs de confusion L ne sont pas interprétables)</span></span>
-<span id="cb5-14"><a href="regression.html#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="regression.html#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), </span>
-<span id="cb5-16"><a href="regression.html#cb5-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">OR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb5-17"><a href="regression.html#cb5-17" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
-<span id="cb5-18"><a href="regression.html#cb5-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-19"><a href="regression.html#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="regression.html#cb5-1" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
+<span id="cb5-2"><a href="regression.html#cb5-2" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
+<span id="cb5-3"><a href="regression.html#cb5-3" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
+<span id="cb5-4"><a href="regression.html#cb5-4" tabindex="-1"></a>                <span class="st">&quot;as.factor(L1)&quot;</span>,</span>
+<span id="cb5-5"><a href="regression.html#cb5-5" tabindex="-1"></a>                <span class="st">&quot;as.factor(L2)&quot;</span>, </span>
+<span id="cb5-6"><a href="regression.html#cb5-6" tabindex="-1"></a>                <span class="st">&quot;as.factor(L3)&quot;</span>)</span>
+<span id="cb5-7"><a href="regression.html#cb5-7" tabindex="-1"></a>dependent <span class="ot">=</span> <span class="st">&quot;Y&quot;</span></span>
+<span id="cb5-8"><a href="regression.html#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="regression.html#cb5-9" tabindex="-1"></a>df_f <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="regression.html#cb5-10" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
+<span id="cb5-11"><a href="regression.html#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="regression.html#cb5-12" tabindex="-1"></a><span class="co"># le tableau t entier peut être imprimé, mais ici je sélectionne seulement les effets d&#39;intéret </span></span>
+<span id="cb5-13"><a href="regression.html#cb5-13" tabindex="-1"></a><span class="co"># pour éviter la table 2 fallacy (les coefficient des facteurs de confusion L ne sont pas interprétables)</span></span>
+<span id="cb5-14"><a href="regression.html#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="regression.html#cb5-15" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), </span>
+<span id="cb5-16"><a href="regression.html#cb5-16" tabindex="-1"></a>      <span class="at">OR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="regression.html#cb5-17" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb5-18"><a href="regression.html#cb5-18" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-19"><a href="regression.html#cb5-19" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -497,20 +497,20 @@ Interaction
 </ul></li>
 </ul>
 <p>En résumé, (le package <code>finalfit</code> permet de sortir quelques résultats proprement) :</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="regression.html#cb7-1" aria-hidden="true" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
-<span id="cb7-2"><a href="regression.html#cb7-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
-<span id="cb7-3"><a href="regression.html#cb7-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
-<span id="cb7-4"><a href="regression.html#cb7-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L1)&quot;</span>,</span>
-<span id="cb7-5"><a href="regression.html#cb7-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L2)&quot;</span>, </span>
-<span id="cb7-6"><a href="regression.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;as.factor(L3)&quot;</span>)</span>
-<span id="cb7-7"><a href="regression.html#cb7-7" aria-hidden="true" tabindex="-1"></a>dependent <span class="ot">=</span> <span class="st">&quot;Y&quot;</span></span>
-<span id="cb7-8"><a href="regression.html#cb7-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="regression.html#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
-<span id="cb7-10"><a href="regression.html#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="regression.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), <span class="at">DR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb7-12"><a href="regression.html#cb7-12" aria-hidden="true" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
-<span id="cb7-13"><a href="regression.html#cb7-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-14"><a href="regression.html#cb7-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="regression.html#cb7-1" tabindex="-1"></a>explanatory <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;as.factor(A1)&quot;</span>,</span>
+<span id="cb7-2"><a href="regression.html#cb7-2" tabindex="-1"></a>                <span class="st">&quot;as.factor(A2)&quot;</span>,</span>
+<span id="cb7-3"><a href="regression.html#cb7-3" tabindex="-1"></a>                <span class="st">&quot;as.factor(A1)*as.factor(A2)&quot;</span>, </span>
+<span id="cb7-4"><a href="regression.html#cb7-4" tabindex="-1"></a>                <span class="st">&quot;as.factor(L1)&quot;</span>,</span>
+<span id="cb7-5"><a href="regression.html#cb7-5" tabindex="-1"></a>                <span class="st">&quot;as.factor(L2)&quot;</span>, </span>
+<span id="cb7-6"><a href="regression.html#cb7-6" tabindex="-1"></a>                <span class="st">&quot;as.factor(L3)&quot;</span>)</span>
+<span id="cb7-7"><a href="regression.html#cb7-7" tabindex="-1"></a>dependent <span class="ot">=</span> <span class="st">&quot;Y&quot;</span></span>
+<span id="cb7-8"><a href="regression.html#cb7-8" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="regression.html#cb7-9" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent, explanatory)<span class="ot">-&gt;</span> t</span>
+<span id="cb7-10"><a href="regression.html#cb7-10" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="regression.html#cb7-11" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;A1|A2=0&quot;</span>, <span class="st">&quot;A2|A1=0&quot;</span>, <span class="st">&quot;Interaction&quot;</span>), <span class="at">DR =</span> t[<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">13</span>),<span class="dv">6</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="regression.html#cb7-12" tabindex="-1"></a>  as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb7-13"><a href="regression.html#cb7-13" tabindex="-1"></a>      <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="regression.html#cb7-14" tabindex="-1"></a>      <span class="fu">kable_classic</span>() </span></code></pre></div>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>

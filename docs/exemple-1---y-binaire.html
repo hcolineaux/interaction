@@ -337,7 +337,7 @@ div.csl-indent {
 <li>Ce qui est équivalent à <span class="math inline">\(\small (Y_{x=1|d=1} \times Y_{x=0|d=0}) / (Y_{x=1|d=0} \times Y_{x=0|d=1})\)</span></li>
 </ul></li>
 </ul>
-<p><strong>L’estimateur</strong> : Les effets ont été estimés par g-computation (<em>standardisation par régression</em>) <span class="citation">[<a href="#ref-hernan2020causal" role="doc-biblioref">12</a>]</span>. Des régressions linéaires ont été utilisées pour estimer les <em>potential outcomes</em> pour chaque scénario. A partir des fonctions estimées, nous avons prédit la valeur de l’outcome Y pour chaque individu i pour chaque scénario. Les valeurs moyennes de Y dans chaque scénario vont ensuite nous permettre d’estimer les <em>estimands</em> selon leurs définitions précisées ci-dessus.Ces modèles vont comprendre 4 variables : le niveau d’études et la défavorisation sociale précoce, ainsi que deux facteurs de confusion, le sexe et l’âge.</p>
+<p><strong>L’estimateur</strong> : Les effets ont été estimés par g-computation (<em>standardisation par régression</em>) <span class="citation">[<a href="#ref-hernan2020causal">12</a>]</span>. Des régressions linéaires ont été utilisées pour estimer les <em>potential outcomes</em> pour chaque scénario. A partir des fonctions estimées, nous avons prédit la valeur de l’outcome Y pour chaque individu i pour chaque scénario. Les valeurs moyennes de Y dans chaque scénario vont ensuite nous permettre d’estimer les <em>estimands</em> selon leurs définitions précisées ci-dessus.Ces modèles vont comprendre 4 variables : le niveau d’études et la défavorisation sociale précoce, ainsi que deux facteurs de confusion, le sexe et l’âge.</p>
 </div>
 <div id="analyse-descriptive" class="section level2 hasAnchor" number="13.3">
 <h2><span class="header-section-number">13.3</span> Analyse descriptive<a href="exemple-1---y-binaire.html#analyse-descriptive" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -408,21 +408,21 @@ Oui
 <div id="analyse-exploratoire" class="section level2 hasAnchor" number="13.4">
 <h2><span class="header-section-number">13.4</span> Analyse exploratoire<a href="exemple-1---y-binaire.html#analyse-exploratoire" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La sortie d’un modèle logistique simple serait :</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="exemple-1---y-binaire.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Call:</span></span>
-<span id="cb16-2"><a href="exemple-1---y-binaire.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># glm(formula = overw_obesity ~ EDUCATION_2CL.f * CHILDHOOD_ECONOMY_2CL.f + SEX.f + </span></span>
-<span id="cb16-3"><a href="exemple-1---y-binaire.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    AGE, family = binomial(link = &quot;logit&quot;))</span></span>
-<span id="cb16-4"><a href="exemple-1---y-binaire.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb16-5"><a href="exemple-1---y-binaire.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
-<span id="cb16-6"><a href="exemple-1---y-binaire.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                     Estimate Std. Error t value   Pr(&gt;|t|)    </span></span>
-<span id="cb16-7"><a href="exemple-1---y-binaire.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept)                                       -1.3731389  0.0621930 -22.079  &lt; 2e-16 ***</span></span>
-<span id="cb16-8"><a href="exemple-1---y-binaire.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># EDUCATION_2CL.fHigh                               -0.1752537  0.0537373  -3.261  0.00111 ** </span></span>
-<span id="cb16-9"><a href="exemple-1---y-binaire.html#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># CHILDHOOD_ECONOMY_2CL.fGood                       -0.0190075  0.0361206  -0.526  0.59873    </span></span>
-<span id="cb16-10"><a href="exemple-1---y-binaire.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># SEX.fMale                                          0.5882549  0.0270502  21.747  &lt; 2e-16 ***</span></span>
-<span id="cb16-11"><a href="exemple-1---y-binaire.html#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># AGE                                                0.0234627  0.0009856  23.807  &lt; 2e-16 ***</span></span>
-<span id="cb16-12"><a href="exemple-1---y-binaire.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># EDUCATION_2CL.fHigh:CHILDHOOD_ECONOMY_2CL.fGood   -0.1312722  0.0623235  -2.106  0.03518 *</span></span>
-<span id="cb16-13"><a href="exemple-1---y-binaire.html#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ---</span></span>
-<span id="cb16-14"><a href="exemple-1---y-binaire.html#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
-<span id="cb16-15"><a href="exemple-1---y-binaire.html#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="exemple-1---y-binaire.html#cb17-1" tabindex="-1"></a><span class="co"># Call:</span></span>
+<span id="cb17-2"><a href="exemple-1---y-binaire.html#cb17-2" tabindex="-1"></a><span class="co"># glm(formula = overw_obesity ~ EDUCATION_2CL.f * CHILDHOOD_ECONOMY_2CL.f + SEX.f + </span></span>
+<span id="cb17-3"><a href="exemple-1---y-binaire.html#cb17-3" tabindex="-1"></a><span class="co">#    AGE, family = binomial(link = &quot;logit&quot;))</span></span>
+<span id="cb17-4"><a href="exemple-1---y-binaire.html#cb17-4" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-5"><a href="exemple-1---y-binaire.html#cb17-5" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
+<span id="cb17-6"><a href="exemple-1---y-binaire.html#cb17-6" tabindex="-1"></a><span class="co">#                                                     Estimate Std. Error t value   Pr(&gt;|t|)    </span></span>
+<span id="cb17-7"><a href="exemple-1---y-binaire.html#cb17-7" tabindex="-1"></a><span class="co"># (Intercept)                                       -1.3731389  0.0621930 -22.079  &lt; 2e-16 ***</span></span>
+<span id="cb17-8"><a href="exemple-1---y-binaire.html#cb17-8" tabindex="-1"></a><span class="co"># EDUCATION_2CL.fHigh                               -0.1752537  0.0537373  -3.261  0.00111 ** </span></span>
+<span id="cb17-9"><a href="exemple-1---y-binaire.html#cb17-9" tabindex="-1"></a><span class="co"># CHILDHOOD_ECONOMY_2CL.fGood                       -0.0190075  0.0361206  -0.526  0.59873    </span></span>
+<span id="cb17-10"><a href="exemple-1---y-binaire.html#cb17-10" tabindex="-1"></a><span class="co"># SEX.fMale                                          0.5882549  0.0270502  21.747  &lt; 2e-16 ***</span></span>
+<span id="cb17-11"><a href="exemple-1---y-binaire.html#cb17-11" tabindex="-1"></a><span class="co"># AGE                                                0.0234627  0.0009856  23.807  &lt; 2e-16 ***</span></span>
+<span id="cb17-12"><a href="exemple-1---y-binaire.html#cb17-12" tabindex="-1"></a><span class="co"># EDUCATION_2CL.fHigh:CHILDHOOD_ECONOMY_2CL.fGood   -0.1312722  0.0623235  -2.106  0.03518 *</span></span>
+<span id="cb17-13"><a href="exemple-1---y-binaire.html#cb17-13" tabindex="-1"></a><span class="co"># ---</span></span>
+<span id="cb17-14"><a href="exemple-1---y-binaire.html#cb17-14" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
+<span id="cb17-15"><a href="exemple-1---y-binaire.html#cb17-15" tabindex="-1"></a><span class="co"># </span></span></code></pre></div>
 <p>On peut en déduire (échelle multiplicative) que :</p>
 <ul>
 <li>L’effet du niveau d’études (élevé plutôt que faible) sur le risque de surpoids/obésité est :

@@ -5,16 +5,19 @@
 \documentclass[
 ]{book}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -44,13 +47,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -58,7 +61,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -67,7 +70,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -122,7 +125,7 @@
 \bibliographystyle{plainnat}
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Interactions et modifications d'effet   en Epidémiologie},
   pdfauthor={CERPOP, INSERM, EQUITY Team},
@@ -131,7 +134,7 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
-\date{Last compiled on 02 août, 2023}
+\date{Last compiled on 18 septembre, 2023}
 
 \begin{document}
 \maketitle
@@ -1817,11 +1820,71 @@ Interaction & 0.39 (0.36 to 0.43, p<0.001)\\
 \hypertarget{gcomputation}{%
 \section{Estimation par G-computation}\label{gcomputation}}
 
-Il s'agit d'une ``G-method'' qui peut être décrite comme une ``standardisation'' par régression (Hernàn \citet{hernan2020causal}). Le principe est le suivant :
+Il s'agit d'une ``G-méthode'' qui peut être décrite comme une ``standardisation'' par régression (Hernàn \citet{hernan2020causal}).
+Le principe est le suivant :
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\tightlist
+\item
+  Modéliser le critère de jugement en fonction des deux expositions d'intérêt, de leur interaction et des facteurs de confusion
+  \begin{equation*}
+    \overline{Q}(A_1,A_2,L) = \mathbb{E}(Y | A_1, A_2, L_1,L_2,L_3)
+  \end{equation*}
+\item
+  A partir de ce modèle \(\overline{Q}\), estimer pour chaque individu \(i\) les valeurs moyennes attendues (contrefactuelles) \(\overline{Q}_i(0,0,L)\), \(\overline{Q}_i(1,0,L)\), \(\overline{Q}_i(0,1,L)\) et \(\overline{Q}_i(1,1,L)\), sous les 4 scénarios possibles \(\{A_1 = 0, A_2 = 0\}\), \(\{A_1 = 1, A_2 = 0\}\), \(\{A_1 = 0, A_2 = 1\}\) et \(\{A_1 = 1, A_2 = 1\}\).
+\item
+  Utiliser les moyennes contrefactuelles estimées pour calculer les différents indicateurs d'intérêt pour l'analyse d'interaction :
+\end{enumerate}
+
+\begin{itemize}
+\item
+  Les moyennes marginales pour chaque case du tableau d'interaction
+  \begin{align*}
+  p_{00} &= \frac{1}{n} \sum \overline{Q}_i(0,0,L) \\
+  p_{10} &= \frac{1}{n} \sum \overline{Q}_i(1,0,L) \\
+  p_{01} &= \frac{1}{n} \sum \overline{Q}_i(0,1,L) \\
+  p_{11} &= \frac{1}{n} \sum \overline{Q}_i(1,1,L) 
+  \end{align*}
+\item
+  Les différences de risques marginales
+  \begin{align*}
+  DR(A_1, A_2 = 0) &= p_{10} - p_{00} \\
+  DR(A_1, A_2 = 1) &= p_{11} - p_{01} \\
+  DR(A_2, A_1 = 0) &= p_{01} - p_{00} \\
+  DR(A_2, A_1 = 1) &= p_{11} - p_{10}
+  \end{align*}
+\item
+  Les risques relatifs marginaux
+  \begin{align*}
+  RR(A_1, A_2 = 0) &= p_{10} / p_{00} \\
+  RR(A_1, A_2 = 1) &= p_{11} / p_{01} \\
+  RR(A_2, A_1 = 0) &= p_{01} / p_{00} \\
+  RR(A_2, A_1 = 1) &= p_{11} / p_{10}
+  \end{align*}
+\item
+  Les mesures d'interaction
+  \begin{align*}
+  MI &= \frac{p_{11} \times p_{00}}{p_{10} \times p_{01}} \\
+  AI &= p_{11} - p_{10} - p_{01} + p_{00} \\
+  RERI &= \frac{p_{11} - p_{10} - p_{01} + p_{00}}{p_{00}}
+  \end{align*}
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 1.a) on crée 4 tables correspondant aux 4 interventions contrefactuelles}
+\DocumentationTok{\#\# i) Modéliser le critère de jugement en fonction des deux expositions d\textquotesingle{}intérêt, }
+\DocumentationTok{\#\#    de leur interaction et des facteurs de confusion}
+\NormalTok{    model.Y }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ L1 }\SpecialCharTok{+}\NormalTok{ L2 }\SpecialCharTok{+}\NormalTok{ L3 }\SpecialCharTok{+}\NormalTok{ A1 }\SpecialCharTok{+}\NormalTok{ A2 }\SpecialCharTok{+}\NormalTok{ A1}\SpecialCharTok{:}\NormalTok{A2, }\AttributeTok{data =}\NormalTok{ df, }\AttributeTok{family =} \StringTok{"binomial"}\NormalTok{)}
+
+    \CommentTok{\# dans cette exemple, les données étaient simulées à partir d\textquotesingle{}un modèle additif, }
+    \CommentTok{\# le modèle plus adapté serait donc plutôt le suivant : }
+    \CommentTok{\# model.Y \textless{}{-} glm(Y \textasciitilde{} L1 + L2 + L3 + A1 + A2 + A1:A2, data = df,}
+    \CommentTok{\#                family = "gaussian") }
+    \CommentTok{\# (en pratique, on ne connaît pas la nature du modèle générateur des données)}
+
+\DocumentationTok{\#\# ii) Estimer les valeurs attendues sous les 4 scenarios contrefactuels}
+\DocumentationTok{\#\# ii.a) on crée 4 bases de données correspondant aux 4 scenarios contrefactuels}
 \NormalTok{    df.A1\_0.A2\_0 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_1.A2\_0 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_0.A2\_1 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_1.A2\_1 }\OtherTok{\textless{}{-}}\NormalTok{ df}
 
     \CommentTok{\# scénario do(A1 = 0, A2 = 0) pour toute la population}
@@ -1838,22 +1901,17 @@ Il s'agit d'une ``G-method'' qui peut être décrite comme une ``standardisation
     \CommentTok{\# scénario do(A1 = 1, A2 = 1) pour toute la population}
 \NormalTok{    df.A1\_1.A2\_1}\SpecialCharTok{$}\NormalTok{A1 }\OtherTok{\textless{}{-}}\NormalTok{ df.A1\_1.A2\_1}\SpecialCharTok{$}\NormalTok{A2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
 
-\DocumentationTok{\#\# 1.b) on modélise le critère de jugement}
-    \CommentTok{\# model.Y \textless{}{-} glm(Y \textasciitilde{} L1 + L2 + L3 + A1 + A2 + A1:A2, data = df, family = "binomial")}
-    \CommentTok{\# modèle logistique biaisé (il y a des interactions avec les baseline)}
-\NormalTok{    model.Y }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ L1 }\SpecialCharTok{+}\NormalTok{ L2 }\SpecialCharTok{+}\NormalTok{ L3 }\SpecialCharTok{+}\NormalTok{ A1 }\SpecialCharTok{+}\NormalTok{ A2 }\SpecialCharTok{+}\NormalTok{ A1}\SpecialCharTok{:}\NormalTok{A2, }\AttributeTok{data =}\NormalTok{ df,}
-                   \AttributeTok{family =} \StringTok{"gaussian"}\NormalTok{) }\CommentTok{\# modèle non biaisé}
-    \CommentTok{\# en pratique la régression logistique n\textquotesingle{}est pas tellement biaisée,}
-    \CommentTok{\# mais peut être car il n\textquotesingle{}y a pas la place de mettre beaucoup de confusion}
-    \CommentTok{\# par rapport aux effets importants de A1 et A2 ? (10 fois plus grands)}
+\DocumentationTok{\#\# ii.b) on prédit le critère de jugement sous les scenarios contrefactuels}
+\NormalTok{    Qbar\_00 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ df.A1\_0.A2\_0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{    Qbar\_10 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ df.A1\_1.A2\_0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{    Qbar\_01 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ df.A1\_0.A2\_1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{    Qbar\_11 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ df.A1\_1.A2\_1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
 
-\DocumentationTok{\#\# 1.c) on prédit le critère de jugement sous les interventions contrefactuelles}
-\NormalTok{    Y.A1\_0.A2\_0 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ df.A1\_0.A2\_0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{    Y.A1\_1.A2\_0 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ df.A1\_1.A2\_0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{    Y.A1\_0.A2\_1 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ df.A1\_0.A2\_1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{    Y.A1\_1.A2\_1 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ df.A1\_1.A2\_1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-
-\DocumentationTok{\#\# 1.d) on va enregistrer l\textquotesingle{}ensemble des résultats pertinents dans une table de longueur k1 x k2}
+    
+\DocumentationTok{\#\# iii) Utiliser les moyennes contrefactuelles estimées pour calculer les différents }
+\DocumentationTok{\#\#      indicateurs d\textquotesingle{}intérêt pour l\textquotesingle{}analyse d\textquotesingle{}interaction}
+\DocumentationTok{\#\# iii.a) on va enregistrer l\textquotesingle{}ensemble des résultats pertinents dans une table \textquotesingle{}int.r\textquotesingle{}}
+\DocumentationTok{\#\#        de longueur 2 x 2}
 \NormalTok{    int.r }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\ConstantTok{NA}\NormalTok{,}
                     \AttributeTok{ncol =} \DecValTok{26}\NormalTok{,}
                     \AttributeTok{nrow =} \FunctionTok{nlevels}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{A1)) }\SpecialCharTok{*} \FunctionTok{nlevels}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{A2)))}
@@ -1865,76 +1923,83 @@ Il s'agit d'une ``G-method'' qui peut être décrite comme une ``standardisation
                       \StringTok{"m.INT"}\NormalTok{, }\StringTok{"m.INT.lo"}\NormalTok{, }\StringTok{"m.INT.up"}\NormalTok{ )}
 \NormalTok{    int.r[,}\FunctionTok{c}\NormalTok{(}\StringTok{"A1"}\NormalTok{,}\StringTok{"A2"}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))}
 
-\CommentTok{\# marginal effects (Y moyen dans chaque scénario) in the k1 x k2 table}
+\DocumentationTok{\#\# iii.b) Les moyennes marginales pour chaque case du tableau d’interaction}
+\CommentTok{\# dans chaque case de la table 2 x 2}
     \CommentTok{\# A1 = 0 et A2 = 0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_00)}
     \CommentTok{\# A1 = 1 et A2 = 0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_10)}
     \CommentTok{\# A1 = 0 et A2 = 1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01)}
     \CommentTok{\# A1 = 1 et A2 = 1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11)}
 
-\CommentTok{\# risk difference (contrastes entre Y contrefactuels)}
+\DocumentationTok{\#\# iii.c) Les différences de risques marginales}
     \CommentTok{\# RD.A1.A2is0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_00)}
     \CommentTok{\# RD.A1.A2is1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01)}
     \CommentTok{\# RD.A2.A1is0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_00)}
     \CommentTok{\# RD.A2.A1is1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_10)}
 
-\CommentTok{\# relative risk (rapports entre Y contrefactuels)}
+\DocumentationTok{\#\# iii.d) Les risques relatifs marginaux}
     \CommentTok{\# RR.A1.A2is0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_00)}
     \CommentTok{\# RR.A1.A2is1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_01)}
     \CommentTok{\# RR.A2.A1is0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_00)}
     \CommentTok{\# RR.A2.A1is1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_10)}
 
-\CommentTok{\# additive interaction}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{a.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{{-}}
-                                                  \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{{-}}
-                                                  \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1) }\SpecialCharTok{+}
-                                                  \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
+\DocumentationTok{\#\# iii.e) Les mesures d\textquotesingle{}interaction}
+    \CommentTok{\# additive interaction}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{a.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{{-}}
+                                                  \FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{{-}}
+                                                  \FunctionTok{mean}\NormalTok{(Qbar\_01) }\SpecialCharTok{+}
+                                                  \FunctionTok{mean}\NormalTok{(Qbar\_00)}
     \CommentTok{\# RERI}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RERI[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{{-}}
-                                                    \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{{-}}
-                                                    \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1) }\SpecialCharTok{+}
-                                                    \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)) }\SpecialCharTok{/}
-                                                    \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RERI[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{{-}}
+                                                    \FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{{-}}
+                                                    \FunctionTok{mean}\NormalTok{(Qbar\_01) }\SpecialCharTok{+}
+                                                    \FunctionTok{mean}\NormalTok{(Qbar\_00)) }\SpecialCharTok{/}
+                                                    \FunctionTok{mean}\NormalTok{(Qbar\_00)}
     \CommentTok{\# multiplicative interaction}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{m.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{*}
-                                                   \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)) }\SpecialCharTok{/}
-\NormalTok{                                                   (}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{*}
-                                                    \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{m.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{*}
+                                                   \FunctionTok{mean}\NormalTok{(Qbar\_00)) }\SpecialCharTok{/}
+\NormalTok{                                                   (}\FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{*}
+                                                    \FunctionTok{mean}\NormalTok{(Qbar\_01))}
 
 
-\DocumentationTok{\#\# 1.e) Intervalles de confiance par bootstrap}
+\DocumentationTok{\#\# iii.f) Calcul des intervalles de confiance }
+    \CommentTok{\# Le script ci{-}dessous présente une méthode de bootstrap }
+    \CommentTok{\# pour calculer les intervalles de confiance à 95\% des différents indicateurs}
     \FunctionTok{set.seed}\NormalTok{(}\DecValTok{5678}\NormalTok{)}
-\NormalTok{    B }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{    B }\OtherTok{\textless{}{-}} \DecValTok{1000} \CommentTok{\# on utilise 1000 échantillons boostrap dans cet exemple}
 \NormalTok{    bootstrap.est }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ B, }\AttributeTok{ncol =} \DecValTok{15}\NormalTok{))}
-    \FunctionTok{colnames}\NormalTok{(bootstrap.est) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"p.A1is0.A2is0"}\NormalTok{, }\StringTok{"p.A1is1.A2is0"}\NormalTok{, }\StringTok{"p.A1is0.A2is1"}\NormalTok{, }\StringTok{"p.A1is1.A2is1"}\NormalTok{,}
-                                 \StringTok{"RD.A1.A2is0"}\NormalTok{, }\StringTok{"RD.A1.A2is1"}\NormalTok{, }\StringTok{"RD.A2.A1is0"}\NormalTok{, }\StringTok{"RD.A2.A1is1"}\NormalTok{,}
-                                 \StringTok{"lnRR.A1.A2is0"}\NormalTok{, }\StringTok{"lnRR.A1.A2is1"}\NormalTok{, }\StringTok{"lnRR.A2.A1is0"}\NormalTok{, }\StringTok{"lnRR.A2.A1is1"}\NormalTok{,}
+    \FunctionTok{colnames}\NormalTok{(bootstrap.est) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"p.A1is0.A2is0"}\NormalTok{, }\StringTok{"p.A1is1.A2is0"}\NormalTok{, }
+                                 \StringTok{"p.A1is0.A2is1"}\NormalTok{, }\StringTok{"p.A1is1.A2is1"}\NormalTok{,}
+                                 \StringTok{"RD.A1.A2is0"}\NormalTok{, }\StringTok{"RD.A1.A2is1"}\NormalTok{, }
+                                 \StringTok{"RD.A2.A1is0"}\NormalTok{, }\StringTok{"RD.A2.A1is1"}\NormalTok{,}
+                                 \StringTok{"lnRR.A1.A2is0"}\NormalTok{, }\StringTok{"lnRR.A1.A2is1"}\NormalTok{, }
+                                 \StringTok{"lnRR.A2.A1is0"}\NormalTok{, }\StringTok{"lnRR.A2.A1is1"}\NormalTok{,}
                                  \StringTok{"INT.a"}\NormalTok{, }\StringTok{"lnRERI"}\NormalTok{, }\StringTok{"lnINT.m"}\NormalTok{)}
 
-    \ControlFlowTok{for}\NormalTok{ (b }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B)\{}
-      \CommentTok{\# sample the indices 1 to n with replacement}
+    \ControlFlowTok{for}\NormalTok{ (b }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B)\{ }\CommentTok{\# on refait toute l\textquotesingle{}analyse dans chaque échantillon bootstrap}
+      \CommentTok{\# constituer un échantillon bootstrap (échantillonnage avec remise)}
 \NormalTok{      bootIndices }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(df), }\AttributeTok{replace=}\NormalTok{T)}
 \NormalTok{      bootData }\OtherTok{\textless{}{-}}\NormalTok{ df[bootIndices,]}
 
       \ControlFlowTok{if}\NormalTok{ ( }\FunctionTok{round}\NormalTok{(b}\SpecialCharTok{/}\DecValTok{100}\NormalTok{, }\DecValTok{0}\NormalTok{) }\SpecialCharTok{==}\NormalTok{ b}\SpecialCharTok{/}\DecValTok{100}\NormalTok{ ) }\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"bootstrap number "}\NormalTok{,b))}
 
-      \CommentTok{\# model (unbiased in this case)}
+      \CommentTok{\# étape (i) de modélisation du critère de jugement}
 \NormalTok{      model.Y }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ L1 }\SpecialCharTok{+}\NormalTok{ L2 }\SpecialCharTok{+}\NormalTok{ L3 }\SpecialCharTok{+}\NormalTok{ A1 }\SpecialCharTok{+}\NormalTok{ A2 }\SpecialCharTok{+}\NormalTok{ A1}\SpecialCharTok{:}\NormalTok{A2,}
                      \AttributeTok{data =}\NormalTok{ bootData,                    }\CommentTok{\# use BootData here +++}
-                     \AttributeTok{family =} \StringTok{"gaussian"}\NormalTok{)}
+                     \AttributeTok{family =} \StringTok{"binomial"}\NormalTok{)}
 
-      \CommentTok{\# conterfactual data sets}
+      \CommentTok{\# étape (ii) d\textquotesingle{}estimation des valeurs attendus sous les 4 scénarios contrefactuels}
 \NormalTok{      boot.A1\_0.A2\_0 }\OtherTok{\textless{}{-}}\NormalTok{ boot.A1\_1.A2\_0 }\OtherTok{\textless{}{-}}\NormalTok{ boot.A1\_0.A2\_1 }\OtherTok{\textless{}{-}}\NormalTok{ boot.A1\_1.A2\_1 }\OtherTok{\textless{}{-}}\NormalTok{ bootData}
 \NormalTok{      boot.A1\_0.A2\_0}\SpecialCharTok{$}\NormalTok{A1 }\OtherTok{\textless{}{-}}\NormalTok{ boot.A1\_0.A2\_0}\SpecialCharTok{$}\NormalTok{A2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
 \NormalTok{      boot.A1\_1.A2\_0}\SpecialCharTok{$}\NormalTok{A1 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
@@ -1943,38 +2008,44 @@ Il s'agit d'une ``G-method'' qui peut être décrite comme une ``standardisation
 \NormalTok{      boot.A1\_0.A2\_1}\SpecialCharTok{$}\NormalTok{A2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
 \NormalTok{      boot.A1\_1.A2\_1}\SpecialCharTok{$}\NormalTok{A1 }\OtherTok{\textless{}{-}}\NormalTok{ boot.A1\_1.A2\_1}\SpecialCharTok{$}\NormalTok{A2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(df))}
 
-      \CommentTok{\# predict potential outcomes under counterfactual scenarios}
-\NormalTok{      Y.A1\_0.A2\_0 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ boot.A1\_0.A2\_0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{      Y.A1\_1.A2\_0 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ boot.A1\_1.A2\_0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{      Y.A1\_0.A2\_1 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ boot.A1\_0.A2\_1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{      Y.A1\_1.A2\_1 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ boot.A1\_1.A2\_1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+      \CommentTok{\# prédire les résultats contrefactuels sous les différents scénarios}
+\NormalTok{      Qbar\_00 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ boot.A1\_0.A2\_0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{      Qbar\_10 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ boot.A1\_1.A2\_0, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{      Qbar\_01 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ boot.A1\_0.A2\_1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{      Qbar\_11 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.Y, }\AttributeTok{newdata =}\NormalTok{ boot.A1\_1.A2\_1, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
 
-      \CommentTok{\# save results in the bootstrap table}
-\NormalTok{      bootstrap.est[b,}\StringTok{"p.A1is0.A2is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
-\NormalTok{      bootstrap.est[b,}\StringTok{"p.A1is1.A2is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0)}
-\NormalTok{      bootstrap.est[b,}\StringTok{"p.A1is0.A2is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1)}
-\NormalTok{      bootstrap.est[b,}\StringTok{"p.A1is1.A2is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1)}
+      \CommentTok{\# étape (iii) de calcul des différents indicateurs d\textquotesingle{}intérêt}
+      \CommentTok{\# on sauve les résultats dans la table bootstrap.est}
+\NormalTok{      bootstrap.est[b,}\StringTok{"p.A1is0.A2is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_00)}
+\NormalTok{      bootstrap.est[b,}\StringTok{"p.A1is1.A2is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_10)}
+\NormalTok{      bootstrap.est[b,}\StringTok{"p.A1is0.A2is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01)}
+\NormalTok{      bootstrap.est[b,}\StringTok{"p.A1is1.A2is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11)}
 
-\NormalTok{      bootstrap.est[b,}\StringTok{"RD.A1.A2is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
-\NormalTok{      bootstrap.est[b,}\StringTok{"RD.A1.A2is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1)}
-\NormalTok{      bootstrap.est[b,}\StringTok{"RD.A2.A1is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
-\NormalTok{      bootstrap.est[b,}\StringTok{"RD.A2.A1is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0)}
+\NormalTok{      bootstrap.est[b,}\StringTok{"RD.A1.A2is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_00)}
+\NormalTok{      bootstrap.est[b,}\StringTok{"RD.A1.A2is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01)}
+\NormalTok{      bootstrap.est[b,}\StringTok{"RD.A2.A1is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_00)}
+\NormalTok{      bootstrap.est[b,}\StringTok{"RD.A2.A1is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_10)}
+      
+      \CommentTok{\# les Ic95\% des RR sont d\textquotesingle{}abord calculés sur une échelle logarithmique}
+\NormalTok{      bootstrap.est[b,}\StringTok{"lnRR.A1.A2is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_00))}
+\NormalTok{      bootstrap.est[b,}\StringTok{"lnRR.A1.A2is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_01))}
+\NormalTok{      bootstrap.est[b,}\StringTok{"lnRR.A2.A1is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Qbar\_01) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_00))}
+\NormalTok{      bootstrap.est[b,}\StringTok{"lnRR.A2.A1is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_10))}
 
-\NormalTok{      bootstrap.est[b,}\StringTok{"lnRR.A1.A2is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0))}
-\NormalTok{      bootstrap.est[b,}\StringTok{"lnRR.A1.A2is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1))}
-\NormalTok{      bootstrap.est[b,}\StringTok{"lnRR.A2.A1is0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0))}
-\NormalTok{      bootstrap.est[b,}\StringTok{"lnRR.A2.A1is1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0))}
-
-\NormalTok{      bootstrap.est[b,}\StringTok{"INT.a"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{{-}}
-        \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1) }\SpecialCharTok{+} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)}
-\NormalTok{      bootstrap.est[b,}\StringTok{"lnRERI"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{((}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{{-}}
-        \FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1) }\SpecialCharTok{+} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0))}
-\NormalTok{      bootstrap.est[b,}\StringTok{"lnINT.m"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{( (}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_1) }\SpecialCharTok{*}
-        \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_0)) }\SpecialCharTok{/}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(Y.A1\_1.A2\_0) }\SpecialCharTok{*} \FunctionTok{mean}\NormalTok{(Y.A1\_0.A2\_1)))}
+\NormalTok{      bootstrap.est[b,}\StringTok{"INT.a"}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{{-}}
+                                     \FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01) }\SpecialCharTok{+} \FunctionTok{mean}\NormalTok{(Qbar\_00))}
+      \CommentTok{\# les IC95\% du RERI et de l\textquotesingle{}interaction multiplicative sont d\textquotesingle{}abord calculés}
+      \CommentTok{\# sur une échelle logarithmique}
+\NormalTok{      bootstrap.est[b,}\StringTok{"lnRERI"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{((}\FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{{-}}
+                                          \FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Qbar\_01) }\SpecialCharTok{+} \FunctionTok{mean}\NormalTok{(Qbar\_00)) }
+                                       \SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(Qbar\_00))}
+\NormalTok{      bootstrap.est[b,}\StringTok{"lnINT.m"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{((}\FunctionTok{mean}\NormalTok{(Qbar\_11) }\SpecialCharTok{*} \FunctionTok{mean}\NormalTok{(Qbar\_00)) }\SpecialCharTok{/} 
+\NormalTok{                                           (}\FunctionTok{mean}\NormalTok{(Qbar\_10) }\SpecialCharTok{*} \FunctionTok{mean}\NormalTok{(Qbar\_01)))}
 \NormalTok{    \}}
-
-    \CommentTok{\# head(bootstrap.est)}
-    \CommentTok{\# summary(bootstrap.est)}
+    
+    \DocumentationTok{\#\# On peut vérifier la normalité des distributions bootstrap avec le script }
+    \DocumentationTok{\#\# proposé en commentaire ci{-}dessous :}
+    
     \CommentTok{\# par(mfrow = c(4,4))}
     \CommentTok{\# for(c in 1:ncol(bootstrap.est)) \{}
     \CommentTok{\#   hist(bootstrap.est[,c], freq = FALSE, main = names(bootstrap.est)[c])}
@@ -1983,12 +2054,14 @@ Il s'agit d'une ``G-method'' qui peut être décrite comme une ``standardisation
     \CommentTok{\#           exp({-}1/2 * ((x{-}mean(bootstrap.est[,c])) / sd(bootstrap.est[,c]))\^{}2),}
     \CommentTok{\#         col = 1, lwd = 2, lty = 2, add = TRUE)}
     \CommentTok{\# par(mfrow = c(1,1))}
-    \CommentTok{\# ok, on a des belles lois normales dans les distributions bootstrap, tout va bien !}
-    \CommentTok{\# pour les IC95\%, je peux utiliser la déviation standard des distributions}
-    \CommentTok{\# pour des distributions plus asymétriques, on utiliserait plutôt les percentiles 2.5\% et 97.5\%}
     \CommentTok{\# \}}
+    
+    \CommentTok{\# Les distributions ont bien une allure normale, on peut donc utiliser la }
+    \CommentTok{\# déviation standard des distributions pour calculer les IC95\%.}
+    \CommentTok{\# En cas de distributions asymétriques, il serait préférable d\textquotesingle{}utiliser les }
+    \CommentTok{\# percentiles 2.5\% et 97.5\% (ou un méthode bootstrap BCa)}
 
-\CommentTok{\# marginal effects in the k1 x k2 table}
+\DocumentationTok{\#\# on calcule les IC95\% et on les intègre dans la table de synthèse \textquotesingle{}int.r\textquotesingle{}}
     \CommentTok{\# A1 = 0 et A2 = 0}
 \NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{p.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{p[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\SpecialCharTok{{-}}
       \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{p.A1is0.A2is0)}
@@ -2012,67 +2085,281 @@ Il s'agit d'une ``G-method'' qui peut être décrite comme une ``standardisation
 
 \CommentTok{\# risk difference}
     \CommentTok{\# RD.A1.A2is0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\SpecialCharTok{{-}}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A1.A2is0)}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\SpecialCharTok{+}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A1.A2is0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\SpecialCharTok{{-}}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A1.A2is0))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\SpecialCharTok{+}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A1.A2is0))}
     \CommentTok{\# RD.A1.A2is1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A1.A2is1)}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A1.A2is1)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A1.A2is1))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A1.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{RD.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A1.A2is1))}
     \CommentTok{\# RD.A2.A1is0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A2.A1is0)}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A2.A1is0)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A2.A1is0))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A2.A1is0))}
     \CommentTok{\# RD.A2.A1is1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A2.A1is1)}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A2.A1is1)}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A2.A1is1))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RD.A2.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{RD.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{RD.A2.A1is1))}
 
 \CommentTok{\# relative risk}
     \CommentTok{\# RR.A1.A2is0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]) }\SpecialCharTok{{-}}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A1.A2is0))}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]) }\SpecialCharTok{+}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A1.A2is0))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]) }\SpecialCharTok{{-}}
+                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} 
+                                             \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A1.A2is0))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]) }\SpecialCharTok{+}
+                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} 
+                                             \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A1.A2is0))}
     \CommentTok{\# RR.A1.A2is1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A1.A2is1))}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A1.A2is1))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
+                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} 
+                                             \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A1.A2is1))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A1.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
+                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} 
+                                             \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A1.A2is1))}
     \CommentTok{\# RR.A2.A1is0}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A2.A1is0))}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A2.A1is0))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
+                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} 
+                                             \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A2.A1is0))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
+                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} 
+                                             \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A2.A1is0))}
     \CommentTok{\# RR.A2.A1is1}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A2.A1is1))}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A2.A1is1))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
+                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} 
+                                             \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A2.A1is1))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RR.A2.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
+                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} 
+                                             \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRR.A2.A1is1))}
 
 \CommentTok{\# additive interaction}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{a.INT.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{a.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{INT.a)}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{a.INT.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{a.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+}
-      \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{INT.a)}
-    \CommentTok{\# RERI}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RERI.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
-                                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRERI))}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RERI.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
-                                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRERI))}
-    \CommentTok{\# multiplicative interaction}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{m.INT.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnINT.m))}
-\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{m.INT.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
-                                                           \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnINT.m))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{a.INT.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{a.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{INT.a))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{a.INT.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (int.r}\SpecialCharTok{$}\NormalTok{a.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+}
+                                          \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{INT.a))}
+\CommentTok{\# RERI}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RERI.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                    int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
+                                            \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRERI))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{RERI.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                    int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
+                                            \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnRERI))}
+\CommentTok{\# multiplicative interaction}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{m.INT.lo[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}}
+                                             \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnINT.m))}
+\NormalTok{    int.r}\SpecialCharTok{$}\NormalTok{m.INT.up[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                     int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{log}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT[int.r}\SpecialCharTok{$}\NormalTok{A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2 }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{+}
+                                             \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(bootstrap.est}\SpecialCharTok{$}\NormalTok{lnINT.m))}
 \end{Highlighting}
 \end{Shaded}
 
 Au final, on a :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# On peut présenter les différents résultats dans un tableau des effets marginaux}
+\NormalTok{    out.table }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{c1 =} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{,}\DecValTok{4}\NormalTok{), }\AttributeTok{c2 =} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{,}\DecValTok{4}\NormalTok{), }\AttributeTok{c3 =} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{,}\DecValTok{4}\NormalTok{), }\AttributeTok{c4 =} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{,}\DecValTok{4}\NormalTok{))}
+    \FunctionTok{names}\NormalTok{(out.table) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"A2=0"}\NormalTok{, }\StringTok{"A2=1"}\NormalTok{, }\StringTok{"RD.A2|A1"}\NormalTok{, }\StringTok{"RR.A2|A1"}\NormalTok{)}
+    \FunctionTok{rownames}\NormalTok{(out.table) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"A1=0"}\NormalTok{, }\StringTok{"A1=1"}\NormalTok{, }\StringTok{"RD.A1|A2"}\NormalTok{, }\StringTok{"RR.A1|A2"}\NormalTok{)}
+\CommentTok{\# p}
+\NormalTok{    out.table[}\StringTok{"A1=0"}\NormalTok{,}\StringTok{"A2=0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"$p\_\{00\}$="}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{" ["}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{","}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"A1=0"}\NormalTok{,}\StringTok{"A2=1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"$p\_\{01\}$="}\NormalTok{,}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                                                                         int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{" ["}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{","}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"A1=1"}\NormalTok{,}\StringTok{"A2=0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"$p\_\{10\}$="}\NormalTok{,}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                         int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
+                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{" ["}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{","}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"A1=1"}\NormalTok{,}\StringTok{"A2=1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"$p\_\{11\}$="}\NormalTok{,}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                         int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{" ["}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{","}\NormalTok{,}
+                                       \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                       \StringTok{"]"}\NormalTok{)}
+\CommentTok{\# RD}
+\NormalTok{    out.table[}\StringTok{"A1=0"}\NormalTok{,}\StringTok{"RD.A2|A1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{" ["}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{","}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"A1=1"}\NormalTok{,}\StringTok{"RD.A2|A1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{" ["}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{","}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"RD.A1|A2"}\NormalTok{,}\StringTok{"A2=0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{" ["}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{","}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"RD.A1|A2"}\NormalTok{,}\StringTok{"A2=1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{" ["}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{","}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                           \StringTok{"]"}\NormalTok{)}
+
+\CommentTok{\# RR}
+\NormalTok{    out.table[}\StringTok{"A1=0"}\NormalTok{,}\StringTok{"RR.A2|A1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{" ["}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{","}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"A1=1"}\NormalTok{,}\StringTok{"RR.A2|A1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{" ["}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{","}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"RR.A1|A2"}\NormalTok{,}\StringTok{"A2=0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{" ["}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{","}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{"]"}\NormalTok{)}
+\NormalTok{    out.table[}\StringTok{"RR.A1|A2"}\NormalTok{,}\StringTok{"A2=1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{" ["}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{","}\NormalTok{,}
+                                           \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
+\NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                           \StringTok{"]"}\NormalTok{)}
+\NormalTok{    interaction.effects }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"additive Interaction = "}\NormalTok{,}
+                                   \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{a.INT[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                   \StringTok{" ["}\NormalTok{,}
+                                   \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{a.INT.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                   \StringTok{";"}\NormalTok{,}
+                                   \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{a.INT.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
+                                   \StringTok{"]"}\NormalTok{),}
+                              \FunctionTok{paste0}\NormalTok{(}\StringTok{"RERI = "}\NormalTok{,}
+                                     \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                     \StringTok{" ["}\NormalTok{,}
+                                     \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                     \StringTok{";"}\NormalTok{,}
+                                     \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                     \StringTok{"]"}\NormalTok{),}
+                              \FunctionTok{paste0}\NormalTok{(}\StringTok{"multiplicative Interaction = "}\NormalTok{,}
+                                     \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                     \StringTok{" ["}\NormalTok{,}
+                                     \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                     \StringTok{";"}\NormalTok{,}
+                                     \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
+                                     \StringTok{"]"}\NormalTok{))}
+
+    \FunctionTok{library}\NormalTok{(kableExtra)}
+    \FunctionTok{kbl}\NormalTok{(out.table) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{kable\_classic}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{footnote}\NormalTok{(}\AttributeTok{general =}\NormalTok{ interaction.effects)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{table}
 \centering
@@ -2080,18 +2367,18 @@ Au final, on a :
 \hline
   & A2=0 & A2=1 & RD.A2|A1 & RR.A2|A1\\
 \hline
-A1=0 & \$p\_\{00\}\$=0.104 [0.095,0.114] & \$p\_\{01\}\$=0.197 [0.182,0.211] & 0.092 [0.075,0.109] & 1.89 [1.68,2.11]\\
+A1=0 & \$p\_\{00\}\$=0.104 [0.094,0.113] & \$p\_\{01\}\$=0.197 [0.182,0.212] & 0.093 [0.076,0.11] & 1.9 [1.7,2.13]\\
 \hline
-A1=1 & \$p\_\{10\}\$=0.405 [0.379,0.431] & \$p\_\{11\}\$=0.891 [0.87,0.913] & 0.486 [0.453,0.52] & 2.2 [2.05,2.36]\\
+A1=1 & \$p\_\{10\}\$=0.4 [0.373,0.427] & \$p\_\{11\}\$=0.893 [0.872,0.915] & 0.494 [0.46,0.527] & 2.23 [2.08,2.4]\\
 \hline
-RD.A1|A2 & 0.301 [0.272,0.329] & 0.695 [0.669,0.721] &  & \\
+RD.A1|A2 & 0.296 [0.268,0.325] & 0.697 [0.67,0.723] &  & \\
 \hline
-RR.A1|A2 & 3.89 [3.47,4.35] & 4.54 [4.19,4.91] &  & \\
+RR.A1|A2 & 3.86 [3.44,4.33] & 4.54 [4.19,4.91] &  & \\
 \hline
 \multicolumn{5}{l}{\rule{0pt}{1em}\textit{Note: }}\\
-\multicolumn{5}{l}{\rule{0pt}{1em}additive Interaction = 0.394 [0.357;0.431]}\\
-\multicolumn{5}{l}{\rule{0pt}{1em}RERI = 3.78 [3.36;4.25]}\\
-\multicolumn{5}{l}{\rule{0pt}{1em}multiplicative Interaction = 1.17 [1.02;1.33]}\\
+\multicolumn{5}{l}{\rule{0pt}{1em}additive Interaction = 0.4 [0.362;0.438]}\\
+\multicolumn{5}{l}{\rule{0pt}{1em}RERI = 3.86 [3.45;4.33]}\\
+\multicolumn{5}{l}{\rule{0pt}{1em}multiplicative Interaction = 1.18 [1.03;1.34]}\\
 \end{tabular}
 \end{table}
 

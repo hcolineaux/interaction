@@ -6,3 +6,4 @@ nnls
 foreach
 gam
 SuperLearner
+knitr
