@@ -134,7 +134,7 @@
 
 \title{Interactions et modifications d'effet en Epidémiologie}
 \author{CERPOP, INSERM, EQUITY Team}
-\date{Last compiled on 18 septembre, 2023}
+\date{Last compiled on 19 septembre, 2023}
 
 \begin{document}
 \maketitle
@@ -2186,173 +2186,128 @@ Au final, on a :
 \CommentTok{\# p}
 \NormalTok{    out.table[}\StringTok{"A1=0"}\NormalTok{,}\StringTok{"A2=0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"$p\_\{00\}$="}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{" ["}\NormalTok{,}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{","}\NormalTok{,}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{"]"}\NormalTok{)}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"A1=0"}\NormalTok{,}\StringTok{"A2=1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"$p\_\{01\}$="}\NormalTok{,}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
 \NormalTok{                                                                         int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{" ["}\NormalTok{,}
+                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{","}\NormalTok{,}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{"]"}\NormalTok{)}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"A1=1"}\NormalTok{,}\StringTok{"A2=0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"$p\_\{10\}$="}\NormalTok{,}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                         int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
-                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{" ["}\NormalTok{,}
+                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{","}\NormalTok{,}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{"]"}\NormalTok{)}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"A1=1"}\NormalTok{,}\StringTok{"A2=1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"$p\_\{11\}$="}\NormalTok{,}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                         int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{" ["}\NormalTok{,}
+                                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{","}\NormalTok{,}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                        \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{p.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                       \StringTok{"]"}\NormalTok{)}
+                                             \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \CommentTok{\# RD}
 \NormalTok{    out.table[}\StringTok{"A1=0"}\NormalTok{,}\StringTok{"RD.A2|A1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
 \NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{" ["}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{","}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{"]"}\NormalTok{)}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"A1=1"}\NormalTok{,}\StringTok{"RD.A2|A1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{" ["}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{","}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A2.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{"]"}\NormalTok{)}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"RD.A1|A2"}\NormalTok{,}\StringTok{"A2=0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{" ["}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{","}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{"]"}\NormalTok{)}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"RD.A1|A2"}\NormalTok{,}\StringTok{"A2=1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{" ["}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{","}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RD.A1.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                           \StringTok{"]"}\NormalTok{)}
+                                                 \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 
 \CommentTok{\# RR}
 \NormalTok{    out.table[}\StringTok{"A1=0"}\NormalTok{,}\StringTok{"RR.A2|A1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
 \NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{" ["}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{","}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{0} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{"]"}\NormalTok{)}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"A1=1"}\NormalTok{,}\StringTok{"RR.A2|A1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{" ["}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{","}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A2.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{"]"}\NormalTok{)}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"RR.A1|A2"}\NormalTok{,}\StringTok{"A2=0"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{" ["}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{","}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{"]"}\NormalTok{)}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    out.table[}\StringTok{"RR.A1|A2"}\NormalTok{,}\StringTok{"A2=1"}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                     int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{" ["}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{","}\NormalTok{,}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{","}\NormalTok{,}
                                            \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RR.A1.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&} 
 \NormalTok{                                                                        int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)],}
-                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                           \StringTok{"]"}\NormalTok{)}
+                                                 \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{"]"}\NormalTok{)}
 \NormalTok{    interaction.effects }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"additive Interaction = "}\NormalTok{,}
                                    \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{a.INT[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                   \StringTok{" ["}\NormalTok{,}
+                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                    \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{a.INT.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                   \StringTok{";"}\NormalTok{,}
+                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{";"}\NormalTok{,}
                                    \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{a.INT.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{),}
-                                   \StringTok{"]"}\NormalTok{),}
+                                         \AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"]"}\NormalTok{),}
                               \FunctionTok{paste0}\NormalTok{(}\StringTok{"RERI = "}\NormalTok{,}
                                      \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                     \StringTok{" ["}\NormalTok{,}
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                      \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                     \StringTok{";"}\NormalTok{,}
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{";"}\NormalTok{,}
                                      \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{RERI.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                     \StringTok{"]"}\NormalTok{),}
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{"]"}\NormalTok{),}
                               \FunctionTok{paste0}\NormalTok{(}\StringTok{"multiplicative Interaction = "}\NormalTok{,}
                                      \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                     \StringTok{" ["}\NormalTok{,}
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{" ["}\NormalTok{,}
                                      \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT.lo[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                     \StringTok{";"}\NormalTok{,}
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{";"}\NormalTok{,}
                                      \FunctionTok{round}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{m.INT.up[}\FunctionTok{which}\NormalTok{(int.r}\SpecialCharTok{$}\NormalTok{A1}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ int.r}\SpecialCharTok{$}\NormalTok{A2}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)], }
-                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{),}
-                                     \StringTok{"]"}\NormalTok{))}
+                                           \AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\StringTok{"]"}\NormalTok{))}
 
     \FunctionTok{library}\NormalTok{(kableExtra)}
     \FunctionTok{kbl}\NormalTok{(out.table) }\SpecialCharTok{\%\textgreater{}\%}
@@ -2384,6 +2339,42 @@ RR.A1|A2 & 3.86 [3.44,4.33] & 4.54 [4.19,4.91] &  & \\
 
 \hypertarget{estimation-par-moduxe8le-structurel-marginal}{%
 \section{Estimation par Modèle Structurel Marginal}\label{estimation-par-moduxe8le-structurel-marginal}}
+
+Les différentes quantités causales d'intérêt dans une analyse d'interaction peuvent être définies à partir des paramètres d'un modèle structurel marginal (\emph{marginal structural model}, noté MSM).
+
+Un modèle structurel marginal est un modèle qui permet de synthétiser le lien entre les potential outcomes (critères de jugement contrefactuels) et les différentes variables d'exposition d'intérêt. Ils sont particulièrement utiles dès que l'exposition a une dimensionnalité qui est plus grande que la dimensionnalité d'une variable binaire (par exemple si l'exposition est une variable quantitative continue, ou lorsqu'il existe plusieurs variables d'exposition à prendre en compte, comme dans les analyses de la médiation ou les expositions longitudinales répétées dans le temps).
+
+Dans l'analyse d'interaction entre deux variables binaires, on s'intéresse à 4 niveaux d'exposition \(\{A_1 = 0, A_2 = 0\}\), \(\{A_1 = 1, A_2 = 0\}\), \(\{A_1 = 0, A_2 = 1\}\) et \(\{A_1 = 1, A_2 = 1\}\). On peut synthétiser les liens entre le potential outcome \(Y_{A_1,A_2}\) et les deux variables d'exposition à l'aide du MSM suivant, défini à partir de 4 paramètres \(\beta\) :
+\begin{equation}
+  \mathbb{E}(Y_{A_1,A_2}) = \beta_0 + \beta_1 A_1 + \beta_2 A_2 + \beta_3 (A_1 \times A_2) \label{eq:MSMinteraction}
+\end{equation}
+
+On peut redéfinir nos quantités d'intérêt pour l'analyse d'interaction en fonction des paramètres de ce modèles structurel marginal :
+
+\begin{itemize}
+\item
+  Les moyennes marginales pour chaque case du tableau d'interaction
+  \begin{align*}
+  p_{00} &= \beta_0 \\
+  p_{10} &= \beta_0 + \beta_1 \\
+  p_{01} &= \beta_0 + \beta_2 \\
+  p_{11} &= \beta_0 + \beta_1 + \beta_2 + \beta_3
+  \end{align*}
+\item
+  Les différences de risque, risques relatifs et mesures d'interaction peuvent ensuite se calculer comme indiqué précédemment pour la g-computation.
+\end{itemize}
+
+Les potential outcomes \(Y_{A_1,A_2}\) ne peuvent pas être observés directement dans une étude observationnelles, on ne peut pas appliquer directement l'équation \eqref{eq:MSMinteraction} du MSM pour estimer les paramètres \(\beta\). Différentes méthodes peuvent être appliquées pour estimer ces coefficients \(\beta\), tout en prenant en compte les biais de confusion :
+
+\begin{itemize}
+\tightlist
+\item
+  estimation par IPTW (\emph{Inverse probability of Treatment Weighting}), il s'agit probablement de la méthode la plus utilisée dans la littérature. Les biais de confusion sont pris en compte en appliquant une méthode de pondération aux différents participants. La pondération repose sur l'estimation des scores de propension \(g(A_1)\) et \(g(A_2)\) (les probabilités d'exposition à chaque variable d'intérêt \(A_1\) et \(A_2\)).
+\item
+  estimation par g-computation. Elle repose sur l'estimation de fonctions \(\overline{Q}\) (modèles du critère de jugement)
+\item
+  estimation par TMLE (\emph{Targeted maximum likelihood estimation}), il s'agit d'une méthode à double robustesse qui repose à la fois l'estimation des fonctions \(\overline{Q}\) et des scores de propension (\(g(A_1)\) et \(g(A_2)\)). Cette méthode sera non-biaisée si au moins les fonctions \(\overline{Q}\) ou les fonction \(g\) ont été correctement estimées. L'approche par TMLE utilise des méthodes de machine learning pour estimer ces fonctions.
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
