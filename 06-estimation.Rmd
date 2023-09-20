@@ -159,7 +159,7 @@ Les paramètres utilisés pour simuler les données ont été choisis de sorte q
 Dans une première étape exploratoire, on peut simplement utiliser les modèles de régression habituels : les modèles de régression logistique et linéaire.
 
 
-## Régression logistique
+## Régression logistique {#regressionlogistique}
 
 Lorsque l'on étudie un outcome binaire, on utilise souvent les modèles de régression logistique.  
 

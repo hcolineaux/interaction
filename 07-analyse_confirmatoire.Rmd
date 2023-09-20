@@ -634,11 +634,24 @@ On peut redéfinir nos quantités d'intérêt pour l'analyse d'interaction en fo
 
 - Les différences de risque, risques relatifs et mesures d'interaction peuvent ensuite se calculer comme indiqué précédemment pour la g-computation.
 
-Les potential outcomes $Y_{A_1,A_2}$ ne peuvent pas être observés directement dans une étude observationnelles, on ne peut pas appliquer directement l'équation \@ref(eq:MSMinteraction) du MSM pour estimer les paramètres $\beta$. Différentes méthodes peuvent être appliquées pour estimer ces coefficients $\beta$, tout en prenant en compte les biais de confusion : 
+Les _potential outcomes_ $Y_{A_1,A_2}$ ne peuvent pas être observés directement dans une étude observationnelles, on n'est pas possible d'appliquer directement l'équation \@ref(eq:MSMinteraction) du MSM sur la base de donnée observée pour estimer les paramètres $\beta$. Différentes méthodes peuvent être appliquées pour estimer ces coefficients $\beta$, tout en prenant en compte les biais de confusion : 
 
   - estimation par IPTW (_Inverse probability of Treatment Weighting_), il s'agit probablement de la méthode la plus utilisée dans la littérature. Les biais de confusion sont pris en compte en appliquant une méthode de pondération aux différents participants. La pondération repose sur l'estimation des scores de propension $g(A_1)$ et $g(A_2)$ (les probabilités d'exposition à chaque variable d'intérêt $A_1$ et $A_2$). 
   - estimation par g-computation. Elle repose sur l'estimation de fonctions $\overline{Q}$ (modèles du critère de jugement) 
   - estimation par TMLE (_Targeted maximum likelihood estimation_), il s'agit d'une méthode à double robustesse qui repose à la fois l'estimation des fonctions $\overline{Q}$ et des scores de propension ($g(A_1)$ et $g(A_2)$). Cette méthode sera non-biaisée si au moins les fonctions $\overline{Q}$ ou les fonction $g$ ont été correctement estimées. L'approche par TMLE utilise des méthodes de machine learning pour estimer ces fonctions.
+
+### Estimation du MSM par g-computation
+
+Nous pouvons utiliser l'estimation de la fonction $\overline{Q}(A_1,A_2,L)$ réalisée précédemment au paragraphe \@ref(gcomputation) ainsi que les valeurs estimées sous les 4 scénarios contrefactuels.
+
+1) Pour estimer les paramètres d'un MSM par g-computation, il est d'abord nécessaire de constituer une base de données constituée : 
+
+  - d'une colonne contenant les estimations individuelles de $\mathbb{E}(Y_{A_1=a_1,A_2 = a_2})(i) = \overline{Q}_i(a_1,a_2,L)$ pour chaque scénario $\{A_1 = a_1, A_2 = a_2\}$
+  - d'une colonne pour chaque variable d'exposition d'intérêt. Ici, on a besoin de deux colonnes : une colonne où $A_1 = a_1$ pour tous les individus, et une colonne où $A_2 = a_2$ pour tous les individus.
+  
+Initialement, la base de données contient 10 000 individus. Les _potential outcomes_ $\overline{Q}_i(a_1,a_2,L)$ ont été estimés à partir de 4 scénarios contrefactuels. On va donc constituer une base de données de 40 000 lignes.
+
+2) On peut ensuite estimer les paramètres $\beta$ du MSM en appliquant directement l'équation \@ref(eq:MSMinteraction) sur la nouvelle base de données de 40000 lignes.
 
 <script type="text/javascript">
 
@@ -667,70 +680,80 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 
 ```{r msm, results ='hide', cache = TRUE}
 
- # On récupère les Y prédit précédents, que l'on fusionne
-    Y <- c(Y.A1_0.A2_0, Y.A1_1.A2_0, Y.A1_0.A2_1, Y.A1_1.A2_1)
-    length(Y)
-    # on aura une base de données de 40000 lignes
+## 1) Constituer la base de données pour estimer les paramètres du MSM
+# On récupère les Qbar_i prédits précédents, que l'on fusionne dans un
+# même vecteur 
+Y <- c(Qbar_00, Qbar_10, Qbar_01, Qbar_11)
+length(Y)
+# on a un vecteur de 40000 lignes
 
 # On récupère les valeurs d'exposition qui ont servi dans les scénarios contrefactuels
-    # (garder le même ordre que pour les Y.A1.A2)
-    X <- rbind(subset(df.A1_0.A2_0, select = c("A1", "A2")),
-               subset(df.A1_1.A2_0, select = c("A1", "A2")),
-               subset(df.A1_0.A2_1, select = c("A1", "A2")),
-               subset(df.A1_1.A2_1, select = c("A1", "A2")))
-   #  dim(X)
+# (garder le même ordre que pour les Qbar)
+X <- rbind(subset(df.A1_0.A2_0, select = c("A1", "A2")), # A1 = 0, A2 = 0
+           subset(df.A1_1.A2_0, select = c("A1", "A2")), # A1 = 1, A2 = 0
+           subset(df.A1_0.A2_1, select = c("A1", "A2")), # A1 = 0, A2 = 1
+           subset(df.A1_1.A2_1, select = c("A1", "A2"))) # A1 = 1, A2 = 1
+#  dim(X) # il s'agit d'une matrice de 40000 lignes et 2 colonnes
 
-## Modèle structurel marginal
-    msm.RD <- glm(Y ~ A1 + A2 + A1:A2,
-                  data = data.frame(Y,X),
-                  family = "gaussian") # ne pas ajuster sur les facteurs de confusion
-    msm.RD
+## 2) Estimer les paramètres du MSM en appliquant l'équation (1.10) sur cette 
+##    nouvelle base de donnée 'data.frame(Y,X)'
+# Modèle structurel marginal
+msm <- glm(Y ~ A1 + A2 + A1:A2,
+           data = data.frame(Y,X),
+           family = "gaussian") 
+# note : il n'est pas utile d'ajuster sur les facteurs de confusion L
+# car les Y ont été prédits à partir de modèles qui les déjà ont pris en compte
+msm
 
-## tableau des effets marignaux
-    results.MSM <- matrix(NA, ncol = 4, nrow = 4)
-    colnames(results.MSM) <- c("A2 = 0", "A2 = 1",
-                               "RD within strata of A1",
-                               "RR within strata of A1")
-    rownames(results.MSM) <- c("A1 = 0", "A1 = 1",
-                               "RD within strata of A2",
-                               "RR within strata of A2")
+## 3) Utilisation des paramètres du MSM afin d'estimer les quantités d'intérêt
+##    pour l'analyse d'interaction
+# présentation des résultats dans un tableau des effets marginaux
+results.MSM <- matrix(NA, ncol = 4, nrow = 4)
+colnames(results.MSM) <- c("A2 = 0", "A2 = 1",
+                           "RD within strata of A1",
+                           "RR within strata of A1")
+rownames(results.MSM) <- c("A1 = 0", "A1 = 1",
+                           "RD within strata of A2",
+                           "RR within strata of A2")
 
-# 4 risques marginaux
-    results.MSM["A1 = 0","A2 = 0"] <- msm.RD$coefficients["(Intercept)"]
-    results.MSM["A1 = 0","A2 = 1"] <- msm.RD$coefficients["(Intercept)"] +
-      msm.RD$coefficients["A2"]
-    results.MSM["A1 = 1","A2 = 0"] <- msm.RD$coefficients["(Intercept)"] +
-      msm.RD$coefficients["A1"]
-    results.MSM["A1 = 1","A2 = 1"] <- msm.RD$coefficients["(Intercept)"] +
-      msm.RD$coefficients["A2"] + msm.RD$coefficients["A1"] + msm.RD$coefficients["A1:A2"]
+# Estimation de p_00, p_10, p_01 et p_11 à partir des coefficients du MSM
+results.MSM["A1 = 0","A2 = 0"] <- msm$coefficients["(Intercept)"]
+results.MSM["A1 = 0","A2 = 1"] <- (msm$coefficients["(Intercept)"] +
+                                     msm$coefficients["A2"])
+results.MSM["A1 = 1","A2 = 0"] <- (msm$coefficients["(Intercept)"] +
+                                     msm$coefficients["A1"])
+results.MSM["A1 = 1","A2 = 1"] <- (msm$coefficients["(Intercept)"] +
+                                     msm$coefficients["A2"] + msm$coefficients["A1"] + 
+                                     msm$coefficients["A1:A2"])
 
-# within strata of A2
-    results.MSM["RR within strata of A2", "A2 = 0"] <- results.MSM["A1 = 1","A2 = 0"] /
-      results.MSM["A1 = 0","A2 = 0"]
-    results.MSM["RD within strata of A2", "A2 = 0"] <- results.MSM["A1 = 1","A2 = 0"] -
-      results.MSM["A1 = 0","A2 = 0"]
-    results.MSM["RR within strata of A2", "A2 = 1"] <- results.MSM["A1 = 1","A2 = 1"] /
-      results.MSM["A1 = 0","A2 = 1"]
-    results.MSM["RD within strata of A2", "A2 = 1"] <- results.MSM["A1 = 1","A2 = 1"] -
-      results.MSM["A1 = 0","A2 = 1"]
+# RD et RR dans les strates de A2
+results.MSM["RR within strata of A2", "A2 = 0"] <- (results.MSM["A1 = 1","A2 = 0"] /
+                                                      results.MSM["A1 = 0","A2 = 0"])
+results.MSM["RD within strata of A2", "A2 = 0"] <- (results.MSM["A1 = 1","A2 = 0"] -
+                                                      results.MSM["A1 = 0","A2 = 0"])
+results.MSM["RR within strata of A2", "A2 = 1"] <- (results.MSM["A1 = 1","A2 = 1"] /
+                                                      results.MSM["A1 = 0","A2 = 1"])
+results.MSM["RD within strata of A2", "A2 = 1"] <- (results.MSM["A1 = 1","A2 = 1"] -
+                                                      results.MSM["A1 = 0","A2 = 1"])
 
-# within strata of A1
-    results.MSM["A1 = 0", "RR within strata of A1"] <- results.MSM["A1 = 0","A2 = 1"] /
-      results.MSM["A1 = 0","A2 = 0"]
-    results.MSM["A1 = 0", "RD within strata of A1"] <- results.MSM["A1 = 0","A2 = 1"] -
-      results.MSM["A1 = 0","A2 = 0"]
-    results.MSM["A1 = 1", "RR within strata of A1"] <- results.MSM["A1 = 1","A2 = 1"] /
-      results.MSM["A1 = 1","A2 = 0"]
-    results.MSM["A1 = 1", "RD within strata of A1"] <- results.MSM["A1 = 1","A2 = 1"] -
-      results.MSM["A1 = 1","A2 = 0"]
+# RD et RR dans les strates de A1
+results.MSM["A1 = 0", "RR within strata of A1"] <- (results.MSM["A1 = 0","A2 = 1"] /
+                                                      results.MSM["A1 = 0","A2 = 0"])
+results.MSM["A1 = 0", "RD within strata of A1"] <- (results.MSM["A1 = 0","A2 = 1"] -
+                                                      results.MSM["A1 = 0","A2 = 0"])
+results.MSM["A1 = 1", "RR within strata of A1"] <- (results.MSM["A1 = 1","A2 = 1"] /
+                                                      results.MSM["A1 = 1","A2 = 0"])
+results.MSM["A1 = 1", "RD within strata of A1"] <- (results.MSM["A1 = 1","A2 = 1"] -
+                                                      results.MSM["A1 = 1","A2 = 0"])
 
-    results.MSM <- round(results.MSM,3)
-    RD.interaction <- msm.RD$coefficients["A1:A2"]
-    RR.interaction <- (results.MSM["A1 = 1","A2 = 1"] *
-                         results.MSM["A1 = 0","A2 = 0"]) /
-                      ( results.MSM["A1 = 0","A2 = 1"] *
-                          results.MSM["A1 = 1","A2 = 0"] )
-
+results.MSM <- round(results.MSM,3)
+RD.interaction <- msm$coefficients["A1:A2"]
+RR.interaction <- ((results.MSM["A1 = 1","A2 = 1"] * results.MSM["A1 = 0","A2 = 0"]) / 
+                     (results.MSM["A1 = 0","A2 = 1"] * results.MSM["A1 = 1","A2 = 0"]))
+RERI <- ((results.MSM["A1 = 0","A2 = 0"] - results.MSM["A1 = 1","A2 = 0"] - 
+           results.MSM["A1 = 0","A2 = 1"] + results.MSM["A1 = 1","A2 = 1"]) / 
+           results.MSM["A1 = 0","A2 = 0"])
+                         
 ```
 
 Au final, on a (sans les IC):
@@ -738,19 +761,158 @@ Au final, on a (sans les IC):
 ```{r t_msm, echo=FALSE, warning=FALSE, message=FALSE}
 
 interaction.effects <- c(paste0("additive Interaction = ",
-                                   round(RD.interaction, digits = 3)),
-                              paste0("multiplicative Interaction = ",
-                                     round(RR.interaction, digits = 2)))
+                                round(RD.interaction, digits = 3)),
+                         paste0("RERI = ",
+                                round(RERI, digits = 3)),
+                         paste0("multiplicative Interaction = ",
+                                round(RR.interaction, digits = 2)))
 
-   kbl(results.MSM) %>%
-      kable_classic() %>%
-      footnote(general = interaction.effects)
- 
-
+kbl(results.MSM) %>%
+  kable_classic() %>%
+  footnote(general = interaction.effects)
 ```
 
 
+### Estimation du MSM par IPTW
+
+Les paramètres du MSM de l'équation \@ref(eq:MSMinteraction) peuvent également être estimée par une méthode de pondération inverse (IPTW).
+
+Pour cela, il suffit d'appliquer une régression pondérée correspondant à l'équation \@ref(eq:MSMinteraction), où chaque individu $i$ est pondéré par $w_i$ le produit l'inverse des scores de propension de l'exposition $A_1$ et de l'exposition $A_2$ (pour rappel, d'après le DAG simulant les données, les parents de $A_1$ sont $L_1$ et $L_2$, et les parents de $A_2$ sont $L_2$ et $L_3$) :
+\begin{equation*}
+  w_i = \frac{g^*(A_{1,i})}{g(A_{1,i} \mid L_1, L_2)} \times \frac{g^*(A_{2,i})}{g(A_{2,i} \mid L_2, L_3)}
+\end{equation*}
+où 
+
+  - $g^*(A_i)$ sont des fonctions choisies par l'utilisateur, par exemple $g^*(A_i) = 1$ correspondant à une pondération IPTW simple, ou encore $g^*(A_i) = g(A_i)$ qui permet de stabiliser les estimations (_stabilized IPTW_)
+  - $g(A_i \mid L)$ sont les scores de propension : ils modélisent la probabilité d'observer sa propre exposition. 
+
+\begin{equation*}
+ g(A_i \mid L) = \left\{
+  \begin{array}{ll}
+    P(A = 1 \mid L_i) & \mbox{ si } A_i = 1 \\
+    1 - P(A = 1 \mid L_i) & \mbox{ si } A_i = 0 
+  \end{array}
+ \right.
+\end{equation*}
+  
+Cette pondération permet de créer une "pseudo-population" dans laquelle les facteurs de confusion des relations $A_1 \rightarrow Y$ et $A_2 \rightarrow Y$ sont équilibrés entre les strates d'exposition.
+
+```{r msm_iptw, results ='hide', cache = TRUE}
+
+### Par exemple pour calculer des poids stabilisés : 
+## 1) estimer les fonctions g(A_1)*, g(A_1 | L1, L2), g(A_2*), g(A_2 | L2, L3)
+model_gA1_star <- glm(A1 ~ 1, data = df, family = "binomial")
+model_gA1 <- glm(A1 ~ L1 + L2, data = df, family = "binomial")
+p_A1is1_star <- predict(model_gA1_star, type = "response")
+p_A1is1 <- predict(model_gA1, type = "response")
+
+model_gA2_star <- glm(A2 ~ 1, data = df, family = "binomial")
+model_gA2 <- glm(A2 ~ L2 + L3, data = df, family = "binomial")
+p_A2is1_star <- predict(model_gA2_star, type = "response")
+p_A2is1 <- predict(model_gA2, type = "response")
+
+gA1_star <- gA1 <- rep(NA, nrow(df))
+gA1_star[df$A1 == 1] <- p_A1is1_star[df$A1 == 1]
+gA1_star[df$A1 == 0] <- 1 - p_A1is1_star[df$A1 == 0]
+gA1[df$A1 == 1] <- p_A1is1[df$A1 == 1]
+gA1[df$A1 == 0] <- 1 - p_A1is1[df$A1 == 0]
+
+gA2_star <- gA2 <- rep(NA, nrow(df))
+gA2_star[df$A2 == 1] <- p_A2is1_star[df$A2 == 1]
+gA2_star[df$A2 == 0] <- 1 - p_A2is1_star[df$A2 == 0]
+gA2[df$A2 == 1] <- p_A2is1[df$A2 == 1]
+gA2[df$A2 == 0] <- 1 - p_A2is1[df$A2 == 0]
+
+# On peut alors calculer les poids individuels stabilisés
+sw <- (gA1_star / gA1) * (gA2_star / gA2)
+
+## 2) Estimer les coefficients du MSM à l'aide d'une régression pondérée
+# L'équation (1.10) correspond à un modèle additif, 
+# nous allons utiliser une régression linéaire (family = gaussian)
+msm_iptw <- glm(Y ~ A1 + A2 + A1:A2, data = df, family = "gaussian",
+                weights = sw)
+
+msm_iptw
+
+## 3) Utilisation des paramètres du MSM afin d'estimer les quantités d'intérêt
+##    pour l'analyse d'interaction
+# présentation des résultats dans un tableau des effets marginaux
+results.MSM <- matrix(NA, ncol = 4, nrow = 4)
+colnames(results.MSM) <- c("A2 = 0", "A2 = 1",
+                           "RD within strata of A1",
+                           "RR within strata of A1")
+rownames(results.MSM) <- c("A1 = 0", "A1 = 1",
+                           "RD within strata of A2",
+                           "RR within strata of A2")
+
+# Estimation de p_00, p_10, p_01 et p_11 à partir des coefficients du MSM
+results.MSM["A1 = 0","A2 = 0"] <- msm_iptw$coefficients["(Intercept)"]
+results.MSM["A1 = 0","A2 = 1"] <- (msm_iptw$coefficients["(Intercept)"] +
+                                     msm_iptw$coefficients["A2"])
+results.MSM["A1 = 1","A2 = 0"] <- (msm_iptw$coefficients["(Intercept)"] +
+                                     msm_iptw$coefficients["A1"])
+results.MSM["A1 = 1","A2 = 1"] <- (msm_iptw$coefficients["(Intercept)"] +
+                                     msm_iptw$coefficients["A2"] + 
+                                     msm_iptw$coefficients["A1"] + 
+                                     msm_iptw$coefficients["A1:A2"])
+
+# RD et RR dans les strates de A2
+results.MSM["RR within strata of A2", "A2 = 0"] <- (results.MSM["A1 = 1","A2 = 0"] /
+                                                      results.MSM["A1 = 0","A2 = 0"])
+results.MSM["RD within strata of A2", "A2 = 0"] <- (results.MSM["A1 = 1","A2 = 0"] -
+                                                      results.MSM["A1 = 0","A2 = 0"])
+results.MSM["RR within strata of A2", "A2 = 1"] <- (results.MSM["A1 = 1","A2 = 1"] /
+                                                      results.MSM["A1 = 0","A2 = 1"])
+results.MSM["RD within strata of A2", "A2 = 1"] <- (results.MSM["A1 = 1","A2 = 1"] -
+                                                      results.MSM["A1 = 0","A2 = 1"])
+
+# RD et RR dans les strates de A1
+results.MSM["A1 = 0", "RR within strata of A1"] <- (results.MSM["A1 = 0","A2 = 1"] /
+                                                      results.MSM["A1 = 0","A2 = 0"])
+results.MSM["A1 = 0", "RD within strata of A1"] <- (results.MSM["A1 = 0","A2 = 1"] -
+                                                      results.MSM["A1 = 0","A2 = 0"])
+results.MSM["A1 = 1", "RR within strata of A1"] <- (results.MSM["A1 = 1","A2 = 1"] /
+                                                      results.MSM["A1 = 1","A2 = 0"])
+results.MSM["A1 = 1", "RD within strata of A1"] <- (results.MSM["A1 = 1","A2 = 1"] -
+                                                      results.MSM["A1 = 1","A2 = 0"])
+
+results.MSM <- round(results.MSM,3)
+RD.interaction <- msm_iptw$coefficients["A1:A2"]
+RR.interaction <- ((results.MSM["A1 = 1","A2 = 1"] * results.MSM["A1 = 0","A2 = 0"]) / 
+                     (results.MSM["A1 = 0","A2 = 1"] * results.MSM["A1 = 1","A2 = 0"]))
+RERI <- ((results.MSM["A1 = 0","A2 = 0"] - results.MSM["A1 = 1","A2 = 0"] - 
+           results.MSM["A1 = 0","A2 = 1"] + results.MSM["A1 = 1","A2 = 1"]) / 
+           results.MSM["A1 = 0","A2 = 0"])
+                         
+```
+
+Au final, on a (sans les IC):
+
+```{r t_msm_itpw, echo=FALSE, message=FALSE, warning=FALSE}
+
+interaction.effects <- c(paste0("additive Interaction = ",
+                                round(RD.interaction, digits = 3)),
+                         paste0("RERI = ",
+                                round(RERI, digits = 3)),
+                         paste0("multiplicative Interaction = ",
+                                round(RR.interaction, digits = 2)))
+
+kbl(results.MSM) %>%
+  kable_classic() %>%
+  footnote(general = interaction.effects)
+```
+
+
+
 ## Estimation avec TMLE
+
+Le package R `ltmle` contient la fonction `ltmleMSM` qui permet d'estimer les paramètres d'un modèle structurel marginal par TMLE, par IPTW ou par g-computation. Par contre, le MSM utilisé est nécessairement une régression logistique. Les résultats que l'on peut en déduire sont donc des Odds Ratios ou une approximation du RERI, comme cela a été fait au paragraphe \@ref(regressionlogistique).
+
+Il est possible d'estimer les différences de risque, risques relatifs, et les différentes mesures d'interaction à partir de ce MSM défini sous forme de régression logistique, mais les calculs manuels sont plus fastidieux. Par ailleurs, les calculs d'intervalles de confiance reposent sur une delta-méthode.
+
+Nous avons développé un package `MargIntTmle` disponible sur cette [page Github](https://github.com/benoitlepage/MargIntTmle), qui permet de faire ces calculs automatiquement. Vous trouverez la documentation complète du package sur la page.
+
+Ci-dessous nous illustrons l'utilisation du package `MargIntTmle` pour obtenir des estimations par g-computation, IPTW, ou TMLE. 
 
 <script type="text/javascript">
 
@@ -777,911 +939,122 @@ document.write('<input onclick="toggle_R();" type="button" value="Hide Code" id=
 
 </script>
 
-```{r tmle, results ='hide', cache = TRUE}
-## 3- int.ltmleMSM()          pour estimer les différentes quantités d'intérêt,
-###                           par gcomputation, IPTW ou tmle
-
-int.ltmleMSM <- function(data = data,
-                         Q_formulas = Q_formulas,
-                         g_formulas = g_formulas,
-                         Anodes = Anodes,
-                         Lnodes = Lnodes,
-                         Ynodes = Ynodes,
-                         final.Ynodes = final.Ynodes,
-                         SL.library = list(Q="SL.glm",
-                                           g="SL.glm"),
-                         gcomp = gcomp,
-                         iptw.only = iptw.only,
-                         survivalOutcome = FALSE,
-                         variance.method = "ic",
-                         B = 2000,
-                         boot.seed = 12345) {
-  # regime=
-  # binary array: n x numAnodes x numRegimes of counterfactual treatment or a list of 'rule' functions
-  regimes.MSM <- array(NA, dim = c(nrow(data), 2, 4)) # 2 variables d'exposition (A1, A2), 4 régimes d'exposition (0,0) (1,0) (0,1) (1,1)
-  regimes.MSM[,,1] <- matrix(c(0,0), ncol = 2, nrow = nrow(data), byrow = TRUE) # exposé ni à A1, ni à A2
-  regimes.MSM[,,2] <- matrix(c(1,0), ncol = 2, nrow = nrow(data), byrow = TRUE) # exposé à A1 uniquement
-  regimes.MSM[,,3] <- matrix(c(0,1), ncol = 2, nrow = nrow(data), byrow = TRUE) # exposé à A2 uniquement
-  regimes.MSM[,,4] <- matrix(c(1,1), ncol = 2, nrow = nrow(data), byrow = TRUE) # exposé à A1 et à A2
-
-  # summary.measures = valeurs des coefficients du MSM associés à chaque régime
-  # array: num.regimes x num.summary.measures x num.final.Ynodes -
-  # measures summarizing the regimes that will be used on the right hand side of working.msm
-  # (baseline covariates may also be used in the right hand side of working.msm and do not need to be included in summary.measures)
-  summary.measures.reg <- array(NA, dim = c(4, 3, 1))
-  summary.measures.reg[,,1] <- matrix(c(0, 0, 0, # aucun effet ni de A1, ni de A2
-                                        1, 0, 0, # effet de A1 isolé
-                                        0, 1, 0, # effet de A2 isolé
-                                        1, 1, 1), # effet de A1 + A2 + A1:A2
-                                      ncol = 3, nrow = 4, byrow = TRUE)
-  colnames(summary.measures.reg) <- c("A1", "A2", "A1:A2")
-
-  if(gcomp == TRUE) {
-    # test length SL.library$Q
-    SL.library$Q <- ifelse(length(SL.library$Q) > 1, "SL.glm", SL.library$Q)
-
-    # simplify SL.library$g because g functions are useless with g-computation
-    SL.library$g <- "SL.mean"
-
-    iptw.only <- FALSE
-  }
-
-
-  ltmle_MSM <- ltmleMSM(data = data,
-                        Anodes = Anodes,
-                        Lnodes = Lnodes,
-                        Ynodes = Ynodes,
-                        Qform = Q_formulas,
-                        gform = g_formulas,
-                        #deterministic.g.function = det.g,
-                        regimes = regimes.MSM, # à la place de abar
-                        working.msm= "Y ~ A1 + A2 + A1:A2",
-                        summary.measures = summary.measures.reg,
-                        final.Ynodes = final.Ynodes,
-                        msm.weights = NULL,
-                        SL.library = SL.library,
-                        gcomp = gcomp,
-                        iptw.only = iptw.only,
-                        survivalOutcome = survivalOutcome,
-                        estimate.time = FALSE,
-                        variance.method = variance.method)
-
-  bootstrap.res <- data.frame("beta.Intercept" = rep(NA, B),
-                              "beta.A1" = rep(NA, B),
-                              "beta.A2" = rep(NA, B),
-                              "beta.A1A2" = rep(NA, B))
-
-  if(gcomp == TRUE) {
-    set.seed <- boot.seed
-
-    for (b in 1:B){
-      # sample the indices 1 to n with replacement
-      bootIndices <- sample(1:nrow(data), replace=T)
-      bootData <- data[bootIndices,]
-
-      if ( round(b/100, 0) == b/100 ) print(paste0("bootstrap number ",b))
-
-      boot_ltmle_MSM <- ltmleMSM(data = bootData,
-                                 Anodes = Anodes,
-                                 Lnodes = Lnodes,
-                                 Ynodes = Ynodes,
-                                 Qform = Q_formulas,
-                                 gform = g_formulas,
-                                 #deterministic.g.function = det.g,
-                                 regimes = regimes.MSM, # à la place de abar
-                                 working.msm= "Y ~ A1 + A2 + A1:A2",
-                                 summary.measures = summary.measures.reg,
-                                 final.Ynodes = final.Ynodes,
-                                 msm.weights = NULL,
-                                 SL.library = SL.library,
-                                 gcomp = gcomp,
-                                 iptw.only = iptw.only,
-                                 survivalOutcome = survivalOutcome,
-                                 estimate.time = FALSE,
-                                 variance.method = variance.method)
-
-      bootstrap.res$beta.Intercept[b] <- boot_ltmle_MSM$beta["(Intercept)"]
-      bootstrap.res$beta.A1[b] <- boot_ltmle_MSM$beta["A1"]
-      bootstrap.res$beta.A2[b] <- boot_ltmle_MSM$beta["A2"]
-      bootstrap.res$beta.A1A2[b] <- boot_ltmle_MSM$beta["A1:A2"]
-    }
-  }
-
-  return(list(ltmle_MSM = ltmle_MSM,
-              bootstrap.res = bootstrap.res))
-}
-
-
-### 4- summary.int()    pour enregistrer l'ensemble des estimations
-
-summary.int <- function(data = data,
-                        ltmle_MSM = ltmle_MSM,
-                        estimator = c("gcomp", "iptw", "tmle")) {
-
-  if(estimator == "gcomp") {
-    try(if(ltmle_MSM$ltmle_MSM$gcomp == FALSE)
-      stop("The ltmle function did not use the gcomp estimator, but the iptw +/- tmle estimator"))
-
-    beta <- ltmle_MSM$ltmle_MSM$beta
-  }
-
-  if(estimator == "iptw") {
-    try(if(ltmle_MSM$ltmle_MSM$gcomp == TRUE)
-      stop("The ltmle function used the gcomp estimator, iptw is not available"))
-
-    beta <- ltmle_MSM$ltmle_MSM$beta.iptw
-    IC <- ltmle_MSM$ltmle_MSM$IC.iptw
-  }
-
-  if(estimator == "tmle") {
-    try(if(ltmle_MSM$ltmle_MSM$gcomp == TRUE) stop("The ltmle function used the gcomp estimator, tmle is not available"))
-
-    beta <- ltmle_MSM$ltmle_MSM$beta
-    IC <- ltmle_MSM$ltmle_MSM$IC
-  }
-
-  # on va enregitrer l'ensemble des résultats pertinent dans une table de longueur k1 x k2
-  int.r <- matrix(NA,
-                  ncol = 34,
-                  nrow = nlevels(as.factor(data$A1)) * nlevels(as.factor(data$A2)))
-  int.r <- as.data.frame(int.r)
-  names(int.r) <- c("A1","A2","p","sd.p","p.lo","p.up",
-                    "RD.A1","sd.RD.A1","RD.A1.lo","RD.A1.up",
-                    "RD.A2","sd.RD.A2","RD.A2.lo","RD.A2.up",
-                    "RR.A1","sd.lnRR.A1","RR.A1.lo","RR.A1.up",
-                    "RR.A2","sd.lnRR.A2","RR.A2.lo","RR.A2.up",
-                    "a.INT", "sd.a.INT", "a.INT.lo", "a.INT.up","RERI","sd.lnRERI","RERI.lo","RERI.up",
-                    "m.INT", "sd.ln.m.INT", "m.INT.lo", "m.INT.up" )
-  int.r[,c("A1","A2")] <- expand.grid(c(0,1), c(0,1))
-
-  # on peut retrouver les IC95% par delta method
-  # A1 = 0 et A2 = 0
-  int.r$p[int.r$A1 == 0 & int.r$A2 == 0] <- plogis(beta["(Intercept)"])
-
-  # A1 = 1 et A2 = 0
-  int.r$p[int.r$A1 == 1 & int.r$A2 == 0] <- plogis(beta["(Intercept)"] +
-                                                     beta["A1"])
-
-  # A1 = 0 et A2 = 1
-  int.r$p[int.r$A1 == 0 & int.r$A2 == 1] <- plogis(beta["(Intercept)"] +
-                                                     beta["A2"])
-
-  # A1 = 1 et A2 = 1
-  int.r$p[int.r$A1 == 1 & int.r$A2 == 1] <- plogis(beta["(Intercept)"] +
-                                                     beta["A1"] +
-                                                     beta["A2"] +
-                                                     beta["A1:A2"])
-
-  # RD.A1.A2is0
-  int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]
-
-  # RD.A1.A2is1
-  int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]
-
-  # RD.A2.A1is0
-  int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]
-
-  # RD.A2.A1is1
-  int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]
-
-  # RR.A1.A2is0
-  int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) - log(int.r$p[int.r$A1 == 0 & int.r$A2 == 0]))
-
-  # RR.A1.A2is1
-  int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) - log(int.r$p[int.r$A1 == 0 & int.r$A2 == 1]))
-
-  # RR.A2.A1is0
-  int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) - log(int.r$p[int.r$A1 == 0 & int.r$A2 == 0]))
-
-  # RR.A2.A1is1
-  int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) - log(int.r$p[int.r$A1 == 1 & int.r$A2 == 0]))
-
-  # additive interaction
-  int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -
-    int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]
-
-  # RERI
-  int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -
-                                                         int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]) -
-                                                     log(int.r$p[int.r$A1 == 0 & int.r$A2 == 0]))
-
-  # multiplicative interaction
-  int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) - log(int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) -
-                                                      log(int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) + log(int.r$p[int.r$A1 == 0 & int.r$A2 == 0]))
-
-  ## IC95%
-  if(estimator == "iptw" | estimator == "tmle") {
-    # A1 = 0 et A2 = 0
-    grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),0,0,0)
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0] <- sqrt(v / nrow(data))
-
-    int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] -
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0]
-    int.r$p.up[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] +
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0]
-
-    # A1 = 1 et A2 = 0
-    grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]),0,0)
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0] <- sqrt(v / nrow(data))
-
-    int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0]
-    int.r$p.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] +
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0]
-
-    # A1 = 0 et A2 = 1
-    grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), 0,
-              int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), 0)
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1]
-    int.r$p.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1]
-
-    # A1 = 1 et A2 = 1
-    grad <- rep(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]), 4)
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1]
-    int.r$p.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1]
-
-    # RD.A1.A2is0
-    grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) -
-                int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]), 0, 0)
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0] <- sqrt(v / nrow(data))
-
-    int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -
-      qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0]
-    int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] +
-      qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0]
-
-    # RD.A1.A2is1
-    grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) )
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1]
-    int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1]
-
-    # RD.A2.A1is0
-    grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) -
-                int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]), 0,
-              int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]), 0 )
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$RD.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1]
-    int.r$RD.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1]
-
-    # RD.A2.A1is1
-    grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]))
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$RD.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1]
-    int.r$RD.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1]
-
-    # RR.A1.A2is0
-    grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 0] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0],
-              1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0], 0, 0)
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0] <- sqrt(v / nrow(data))
-
-    int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -
-                                                           qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0])
-    int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) +
-                                                           qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0])
-
-    # RR.A1.A2is1
-    grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],
-              1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],
-              int.r$p[int.r$A1 == 0 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],
-              1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1] )
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] -
-                                                               qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1]))
-    int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] +
-                                                               qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1]))
-
-    # RR.A2.A1is0
-    grad <- c(int.r$p[int.r$A1 == 0 & int.r$A2 == 0] - int.r$p[int.r$A1 == 0 & int.r$A2 == 1], 0,
-              1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1], 0 )
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$RR.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -
-                                                           qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1])
-    int.r$RR.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) +
-                                                           qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1])
-
-    # RR.A2.A1is1
-    grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 0] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 0] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],
-              1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],
-              1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1])
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$RR.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -
-                                                           qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1])
-    int.r$RR.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) +
-                                                           qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1])
-
-    # additive interaction
-    grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) -
-                int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) +
-                int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]),
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) )
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$a.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1]
-    int.r$a.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1]
-
-    # RERI
-    grad <- c((int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                 int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0]) -
-                 int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1]) +
-                 int.r$p[int.r$A1 == 0 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0])) /
-                (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -
-                   int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]) -
-                (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),
-              (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                 int.r$p[int.r$A1 == 1 & int.r$A2 == 0] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 0])) /
-                (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -
-                   int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),
-              (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1]) -
-                 int.r$p[int.r$A1 == 0 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 0 & int.r$A2 == 1])) /
-                (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -
-                   int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]),
-              (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] * (1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1])) /
-                (int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -
-                   int.r$p[int.r$A1 == 0 & int.r$A2 == 1] + int.r$p[int.r$A1 == 0 & int.r$A2 == 0]) )
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$RERI.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) -
-                                                          qnorm(0.975) * int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1])
-    int.r$RERI.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) +
-                                                          qnorm(0.975) * int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1])
-
-    # multiplicative interaction
-    grad <- c(int.r$p[int.r$A1 == 1 & int.r$A2 == 0] + int.r$p[int.r$A1 == 0 & int.r$A2 == 1] -
-                int.r$p[int.r$A1 == 1 & int.r$A2 == 1] - int.r$p[int.r$A1 == 0 & int.r$A2 == 0],
-              int.r$p[int.r$A1 == 1 & int.r$A2 == 0] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],
-              int.r$p[int.r$A1 == 0 & int.r$A2 == 1] - int.r$p[int.r$A1 == 1 & int.r$A2 == 1],
-              1 - int.r$p[int.r$A1 == 1 & int.r$A2 == 1])
-    v <- t(grad) %*% var(IC) %*% grad
-    int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1] <- sqrt(v / nrow(data))
-
-    int.r$m.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) -
-                                                           qnorm(0.975) * int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1])
-    int.r$m.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) +
-                                                           qnorm(0.975) * int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1])
-
-    bootstrap.res <- ltmle_MSM$bootstrap.res
-  }
-
-  if(estimator == "gcomp") {
-    ltmle_MSM$bootstrap.res$p.A1_0.A2_0 <- plogis(ltmle_MSM$bootstrap.res$beta.Intercept)
-    ltmle_MSM$bootstrap.res$p.A1_1.A2_0 <- plogis(ltmle_MSM$bootstrap.res$beta.Intercept +
-                                              ltmle_MSM$bootstrap.res$beta.A1)
-    ltmle_MSM$bootstrap.res$p.A1_0.A2_1 <- plogis(ltmle_MSM$bootstrap.res$beta.Intercept +
-                                              ltmle_MSM$bootstrap.res$beta.A2)
-    ltmle_MSM$bootstrap.res$p.A1_1.A2_1 <- plogis(ltmle_MSM$bootstrap.res$beta.Intercept +
-                                              ltmle_MSM$bootstrap.res$beta.A1 +
-                                              ltmle_MSM$bootstrap.res$beta.A2 +
-                                              ltmle_MSM$bootstrap.res$beta.A1A2)
-
-    ltmle_MSM$bootstrap.res$RD.A1.A2_0 <- ltmle_MSM$bootstrap.res$p.A1_1.A2_0 - ltmle_MSM$bootstrap.res$p.A1_0.A2_0
-    ltmle_MSM$bootstrap.res$RD.A1.A2_1 <- ltmle_MSM$bootstrap.res$p.A1_1.A2_1 - ltmle_MSM$bootstrap.res$p.A1_0.A2_1
-    ltmle_MSM$bootstrap.res$RD.A2.A1_0 <- ltmle_MSM$bootstrap.res$p.A1_0.A2_1 - ltmle_MSM$bootstrap.res$p.A1_0.A2_0
-    ltmle_MSM$bootstrap.res$RD.A2.A1_1 <- ltmle_MSM$bootstrap.res$p.A1_1.A2_1 - ltmle_MSM$bootstrap.res$p.A1_1.A2_0
-
-    ltmle_MSM$bootstrap.res$lnRR.A1.A2_0 <- log(ltmle_MSM$bootstrap.res$p.A1_1.A2_0 / ltmle_MSM$bootstrap.res$p.A1_0.A2_0)
-    ltmle_MSM$bootstrap.res$lnRR.A1.A2_1 <- log(ltmle_MSM$bootstrap.res$p.A1_1.A2_1 / ltmle_MSM$bootstrap.res$p.A1_0.A2_1)
-    ltmle_MSM$bootstrap.res$lnRR.A2.A1_0 <- log(ltmle_MSM$bootstrap.res$p.A1_0.A2_1 / ltmle_MSM$bootstrap.res$p.A1_0.A2_0)
-    ltmle_MSM$bootstrap.res$lnRR.A2.A1_1 <- log(ltmle_MSM$bootstrap.res$p.A1_1.A2_1 / ltmle_MSM$bootstrap.res$p.A1_1.A2_0)
-
-    ltmle_MSM$bootstrap.res$a.INT <- ltmle_MSM$bootstrap.res$p.A1_1.A2_1 -
-                                        ltmle_MSM$bootstrap.res$p.A1_1.A2_0 -
-                                        ltmle_MSM$bootstrap.res$p.A1_0.A2_1 +
-                                        ltmle_MSM$bootstrap.res$p.A1_0.A2_0
-
-    ltmle_MSM$bootstrap.res$lnRERI <- log((ltmle_MSM$bootstrap.res$p.A1_1.A2_1 -
-                                             ltmle_MSM$bootstrap.res$p.A1_1.A2_0 -
-                                             ltmle_MSM$bootstrap.res$p.A1_0.A2_1 +
-                                             ltmle_MSM$bootstrap.res$p.A1_0.A2_0) / ltmle_MSM$bootstrap.res$p.A1_0.A2_0)
-
-    ltmle_MSM$bootstrap.res$ln.m.INT <- log((ltmle_MSM$bootstrap.res$p.A1_1.A2_1 * ltmle_MSM$bootstrap.res$p.A1_0.A2_0) /
-                                              (ltmle_MSM$bootstrap.res$p.A1_1.A2_0 * ltmle_MSM$bootstrap.res$p.A1_0.A2_1))
-
-    # A1 = 0 et A2 = 0
-    int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0] <- sd(ltmle_MSM$bootstrap.res$p.A1_0.A2_0)
-    int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] -
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0]
-    int.r$p.up[int.r$A1 == 0 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 0] +
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 0]
-
-    # A1 = 1 et A2 = 0
-    int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0] <- sd(ltmle_MSM$bootstrap.res$p.A1_1.A2_0)
-    int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] -
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0]
-    int.r$p.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 0] +
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 0]
-
-    # A1 = 0 et A2 = 1
-    int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$p.A1_0.A2_1)
-    int.r$p.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1]
-    int.r$p.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 0 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 0 & int.r$A2 == 1]
-
-    # A1 = 1 et A2 = 1
-    int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$p.A1_1.A2_1)
-    int.r$p.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1]
-    int.r$p.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$p[int.r$A1 == 1 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.p[int.r$A1 == 1 & int.r$A2 == 1]
-
-    # RD.A1.A2is0
-    int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0] <- sd(ltmle_MSM$bootstrap.res$RD.A1.A2_0)
-    int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] -
-      qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0]
-    int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 0] +
-      qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 0]
-
-    # RD.A1.A2is1
-    int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$RD.A1.A2_1)
-    int.r$RD.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1]
-    int.r$RD.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A1[int.r$A1 == 1 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.RD.A1[int.r$A1 == 1 & int.r$A2 == 1]
-
-    # RD.A2.A1is0
-    int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$RD.A2.A1_0)
-    int.r$RD.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1]
-    int.r$RD.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 0 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 0 & int.r$A2 == 1]
-
-    # RD.A2.A1is1
-    int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$RD.A2.A1_1)
-    int.r$RD.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1]
-    int.r$RD.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$RD.A2[int.r$A1 == 1 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.RD.A2[int.r$A1 == 1 & int.r$A2 == 1]
-
-    # RR.A1.A2is0
-    int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0] <- sd(ltmle_MSM$bootstrap.res$lnRR.A1.A2_0)
-    int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) -
-                                                           qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0])
-    int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 0] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 0]) +
-                                                           qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 0])
-
-    # RR.A1.A2is1
-    int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$lnRR.A1.A2_1)
-    int.r$RR.A1.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] -
-                                                               qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1]))
-    int.r$RR.A1.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A1[int.r$A1 == 1 & int.r$A2 == 1] +
-                                                               qnorm(0.975) * int.r$sd.lnRR.A1[int.r$A1 == 1 & int.r$A2 == 1]))
-
-    # RR.A2.A1is0
-    int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$lnRR.A2.A1_0)
-    int.r$RR.A2.lo[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) -
-                                                           qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1])
-    int.r$RR.A2.up[int.r$A1 == 0 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 0 & int.r$A2 == 1]) +
-                                                           qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 0 & int.r$A2 == 1])
-
-    # RR.A2.A1is1
-    int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$lnRR.A2.A1_1)
-    int.r$RR.A2.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) -
-                                                           qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1])
-    int.r$RR.A2.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RR.A2[int.r$A1 == 1 & int.r$A2 == 1]) +
-                                                           qnorm(0.975) * int.r$sd.lnRR.A2[int.r$A1 == 1 & int.r$A2 == 1])
-
-    # additive interaction
-    int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$a.INT)
-    int.r$a.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] -
-      qnorm(0.975) * int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1]
-    int.r$a.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- int.r$a.INT[int.r$A1 == 1 & int.r$A2 == 1] +
-      qnorm(0.975) * int.r$sd.a.INT[int.r$A1 == 1 & int.r$A2 == 1]
-
-    # RERI
-    int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$lnRERI)
-    int.r$RERI.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) -
-                                                          qnorm(0.975) * int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1])
-    int.r$RERI.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$RERI[int.r$A1 == 1 & int.r$A2 == 1]) +
-                                                          qnorm(0.975) * int.r$sd.lnRERI[int.r$A1 == 1 & int.r$A2 == 1])
-
-    # multiplicative interaction
-    int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1] <- sd(ltmle_MSM$bootstrap.res$ln.m.INT)
-    int.r$m.INT.lo[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) -
-                                                           qnorm(0.975) * int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1])
-    int.r$m.INT.up[int.r$A1 == 1 & int.r$A2 == 1] <- exp(log(int.r$m.INT[int.r$A1 == 1 & int.r$A2 == 1]) +
-                                                           qnorm(0.975) * int.r$sd.ln.m.INT[int.r$A1 == 1 & int.r$A2 == 1])
-
-    bootstrap.res <- ltmle_MSM$bootstrap.res
-  }
-
-  return(list(int.r = int.r,
-              bootstrap.res = bootstrap.res))
-}
-### Obtention du MSM par la fonction ltmle, estimation par gcomp, iptw ou tmle
-# avec la fonction int.ltmleMSM()
-
-# on définit les arguments de la fonction ltmleMSM du package ltmle
-library(ltmle)
-library(SuperLearner)
-
-## arguments à renseigner
-Q_formulas = c(Y="Q.kplus1 ~ L1 + L2 + L3 + A1 * A2") # useful to add A1 * A2 interaction here
+```{r tmle, echo=TRUE, message=FALSE, warning=FALSE, cache=TRUE}
+# L'installation du package peut se faire depuis la commande 
+# devtools::install_github("benoitlepage/MargIntTmle")
+library(MargIntTmle)
+
+# le package 'MargIntTmle' repose sur les package 'ltmle' et 'SuperLearner'
+require(ltmle)
+require(SuperLearner)
+
+## Parmi les arguments nécessaires, il faut indiquer les fonctions Q et g
+# Fonction Q
+Q_formulas = c(Y="Q.kplus1 ~ A1 + A2 + A1 * A2 + L1 + L2 + L3")
+# Les deux fonctions g 
 g_formulas = c("A1 ~ L1 + L2",
-               "A2 ~ L1 + L3")
+               "A2 ~ L2 + L3")
 
-SL.library = list(Q=list("SL.glm", c("SL.glm", "screen.corP"),
-                         "SL.xgboost", "SL.rpartPrune", #"SL.randomForest",
-                         "SL.step.interaction", c("SL.step.interaction","screen.corP"),
-                         "SL.glmnet", "SL.stepAIC",
-                         "SL.mean"),
-                  g=list("SL.glm",  c("SL.glm", "screen.corP"),
-                         "SL.xgboost", "SL.rpartPrune", #"SL.randomForest",
-                         "SL.step.interaction", c("SL.step.interaction","screen.corP"),
-                         "SL.glmnet", "SL.stepAIC",
-                         "SL.mean"))
+## Choisir des librairies de machine learning disponibles dans le package 'SuperLearner':
+SL.library = list(Q=list("SL.glm"),g=list("SL.glm"))
 
-### estimation par IPTW et TMLE
-  interaction.ltmle <- int.ltmleMSM(data = df,
-                                  Q_formulas = Q_formulas,
-                                  g_formulas = g_formulas,
+## Utilisation de la fonction 'int.ltmleMSM()'
+# Cette fonction va estimer les paramètres du MSM soit par g-computation, 
+# soit par TMLE et IPTW
+
+# Pour obtenir une estimation des paramètres du MSM par TMLE et par IPTW, l'argument 
+# 'gcomp' doit égal à FALSE
+interaction.ltmle <- int.ltmleMSM(data = df,
+                                  Qform = Q_formulas,
+                                  gform = g_formulas,
                                   Anodes = c("A1", "A2"),
                                   Lnodes = c("L1", "L2", "L3"),
                                   Ynodes = c("Y"),
-                                  final.Ynodes = "Y",
                                   SL.library = SL.library,
-                                  gcomp = FALSE,            # si FALSE, fait tmle + IPTW
+                                  gcomp = FALSE, # pour l'estimation par TMLE et IPTW
                                   iptw.only = FALSE,
-                                  # si (gcomp = FALSE et iptw.only = TRUE), fait uniquement iptw
                                   survivalOutcome = FALSE,
                                   variance.method = "ic")
 
-### estimation par g-computation
-  # par défaut, il fait une régression logistique à partir de la formule Q_formulas
-  # si on veut faire un régression linéaire pour le modèle additif, on peut créer une fonction de SuperLearner
-  # à partir de la fonction SL.glm
-  SL.glm.gaussian <- function (Y, X, newX,
-                               family = "gaussian",
-                               # tout est comme SL.glm, sauf cette famille "gaussian"
-                               obsWeights, model = TRUE, ...) {
-  if (is.matrix(X)) {
-    X = as.data.frame(X)
-  }
-  fit.glm <- glm(Y ~ ., data = X, family = family, weights = obsWeights,
-                 model = model)
-  if (is.matrix(newX)) {
-    newX = as.data.frame(newX)
-  }
-  pred <- predict(fit.glm, newdata = newX, type = "response")
-  fit <- list(object = fit.glm)
-  class(fit) <- "SL.glm"
-  out <- list(pred = pred, fit = fit)
-  return(out)
-}
-environment(SL.glm.gaussian) <-asNamespace("SuperLearner")
-
+# Pour obtenir une estimation des paramètres du MSM par g-computation, l'argument
+# 'gcomp' doit être égal à TRUE. 
+# Les IC95% seront alors estimés par bootstrap, vous pouvez préciser le nombre 
+# d'échantillons bootstrap et donner une valeur de seed
 interaction.gcomp <- int.ltmleMSM(data = df,
-                                  Q_formulas = Q_formulas,
-                                  g_formulas = g_formulas,
+                                  Qform = Q_formulas,
+                                  gform = g_formulas,
                                   Anodes = c("A1", "A2"),
                                   Lnodes = c("L1", "L2", "L3"),
                                   Ynodes = c("Y"),
-                                  final.Ynodes = "Y",
-                                  # SL.library = SL.library,
-                                  SL.library = list(Q="SL.glm.gaussian", #
-                                                    g="SL.mean"),
-                                  gcomp = TRUE,            # si FALSE, fait tmle + IPTW
+                                  SL.library = SL.library,
+                                  gcomp = TRUE, # pour l'estimation par g-computation
                                   iptw.only = FALSE,
-                                  # si (gcomp = FALSE et iptw.only = TRUE), fait uniquement iptw
                                   survivalOutcome = FALSE,
                                   variance.method = "ic",
-                                  B = 1000, # nombre d'échantillons bootstrap
-                                  boot.seed = 54321) # seed pour l'échantillonnage bootstrap
+                                  B = 1000, # number of bootstrap samples
+                                  boot.seed = 42) # seed for bootstrap
 
+## La fonction 'estim.int.effects()' permet d'estimer les différentes quantités 
+## d'intérêt pour l'analyse d'interaction à partir du MSM estimé précédemment.
+# Les IC95% sont calculés par Delta méthode pour la TMLE et l'IPTW, et par 
+# bootstrap pour la g-computation.
 
-### 3) Calcul des paramètres utiles pour l'analyse de l'interaction
-    # avec la fonction summary.int()
+# pour obtenir les estimations par TMLE : 
+est.tmle <- estim.int.effects(interaction.ltmle, estimator = "tmle")
 
-    ### récupération des résultats tmle
-    summary.tmle <- summary.int(data = df,
-                                ltmle_MSM = interaction.ltmle,
-                                estimator = c("tmle"))
-    # summary.tmle$int.r
+# pour obtenir les estimations par IPTW : 
+est.iptw <- estim.int.effects(interaction.ltmle, estimator = "iptw")
 
-    ### récupération des résultats iptw
-    summary.iptw <- summary.int(data = df,
-                                ltmle_MSM = interaction.ltmle,
-                                estimator = c("iptw"))
-    # summary.iptw$int.r
+# pour obtenir les estimations par g-computation : 
+est.gcomp <- estim.int.effects(interaction.gcomp, estimator = "gcomp")
 
-    ### récupération des résultats gcomputation
-    summary.gcomp <- summary.int(data = df,
-                                ltmle_MSM = interaction.gcomp,
-                                estimator = c("gcomp"))
-    
-    
-    # summary.gcomp$int.r
-    # head(summary.gcomp$bootstrap.res)
-    # # vérifier la normalité des estimations bootstrap
-    #     bootstrap.est <- subset(summary.gcomp$bootstrap.res,
-    #                             select =
-    #                               c("p.A1_0.A2_0",
-    #                                 "p.A1_1.A2_0",
-    #                                 "p.A1_0.A2_1",
-    #                                 "p.A1_1.A2_1",
-    #                                 "RD.A1.A2_0",
-    #                                 "RD.A1.A2_1",
-    #                                 "RD.A2.A1_0",
-    #                                 "RD.A2.A1_1",
-    #                                 "lnRR.A1.A2_0",
-    #                                 "lnRR.A1.A2_1",
-    #                                 "lnRR.A2.A1_0",
-    #                                 "lnRR.A2.A1_1",
-    #                                 "a.INT",
-    #                                 "lnRERI",
-    #                                 "ln.m.INT"))
-    # par(mfrow = c(4,4))
-    # for(c in 1:ncol(bootstrap.est)) {
-    #   hist(bootstrap.est[,c], freq = FALSE, main = names(bootstrap.est)[c])
-    #   lines(density(bootstrap.est[,c]), col = 2, lwd = 3)
-    #   curve(1/sqrt(var(bootstrap.est[,c]) * 2 * pi) *  exp(-1/2*((x-mean(bootstrap.est[,c]))/sd(bootstrap.est[,c]))^2),
-    #         col = 1, lwd = 2, lty = 2, add = TRUE)
-    # par(mfrow = c(1,1))
-    # }
+## Les résultats peuvent ensuite être présentés sous forme de table, en suivant 
+## les recommandations de Knol et al. (2012) à l'aide de la fonction 'out.int.table()'
 
+# par exemple pour les estimations par TMLE : 
+table_inter <- out.int.table(int.r = est.tmle)
+table_inter$out.table
 
-
+# les mesures d'interaction sont disponible dans l'objet 
+table_inter$interaction.effects
 ```
 
 
-Au final, on a (présentation selon recommandation Knol et al. @knol_recommendations_2012):
+On peut également se servir du package `KableExtra` pour mettre en forme les tables (selon les recommandations Knol et al. @knol_recommendations_2012) :
 
-```{r t_tab, echo=FALSE, message=FALSE, warning=FALSE}
+Effets d'interaction estimés par TMLE : 
+```{r t_tab_tmle, echo=TRUE, message=FALSE, warning=FALSE}
+library(knitr)
+knitr::kable(table_inter$out.table,) %>%
+  kable_classic() %>%
+  add_footnote(c(table_inter$interaction.effects[1], 
+                 table_inter$interaction.effects[2], 
+                 table_inter$interaction.effects[3]),
+               escape = TRUE)
+```
 
-### 4) Mise en forme sous forme de table, selon les recommandations Knol et al.
-# avec la fonction out.int.table()
-################################################################################
-### 5- out.int.table()           pour obtenir une table présentant les résultats
+Résultats obtenus en appliquant l'estimation par IPTW : 
+```{r t_tab_iptw, echo=TRUE, message=FALSE, warning=FALSE}
+table_inter <- MargIntTmle::out.int.table(int.r = est.iptw)
+knitr::kable(table_inter$out.table,) %>%
+  kable_classic() %>%
+  add_footnote(c(table_inter$interaction.effects[1], 
+                 table_inter$interaction.effects[2], 
+                 table_inter$interaction.effects[3]),
+               escape = TRUE)
+```
 
-out.int.table <- function(int.r = int.r) {
-  ##  tableau des effets marginaux
-  out.table <- data.frame(c1 = rep("",4), c2 = rep("",4), c3 = rep("",4), c4 = rep("",4))
-  names(out.table) <- c("A2=0", "A2=1", "RD.A2|A1", "RR.A2|A1")
-  rownames(out.table) <- c("A1=0", "A1=1", "RD.A1|A2", "RR.A1|A2")
-  # p
-  out.table["A1=0","A2=0"] <- paste0("$p_{00}$=",round(int.r$p[which(int.r$A1==0 & int.r$A2==0)],
-                                                       digits = 3),
-                                     " [",
-                                     round(int.r$p.lo[which(int.r$A1==0 & int.r$A2==0)],
-                                           digits = 3),
-                                     ",",
-                                     round(int.r$p.up[which(int.r$A1==0 & int.r$A2==0)],
-                                           digits = 3),
-                                     "]")
-  out.table["A1=0","A2=1"] <- paste0("$p_{01}$=",round(int.r$p[which(int.r$A1==0 & int.r$A2==1)],
-                                                       digits = 3),
-                                     " [",
-                                     round(int.r$p.lo[which(int.r$A1==0 & int.r$A2==1)],
-                                           digits = 3),
-                                     ",",
-                                     round(int.r$p.up[which(int.r$A1==0 & int.r$A2==1)],
-                                           digits = 3),
-                                     "]")
-  out.table["A1=1","A2=0"] <- paste0("$p_{10}$=",round(int.r$p[which(int.r$A1==1 & int.r$A2==0)],
-                                                       digits = 3),
-                                     " [",
-                                     round(int.r$p.lo[which(int.r$A1==1 & int.r$A2==0)],
-                                           digits = 3),
-                                     ",",
-                                     round(int.r$p.up[which(int.r$A1==1 & int.r$A2==0)],
-                                           digits = 3),
-                                     "]")
-  out.table["A1=1","A2=1"] <- paste0("$p_{11}$=",round(int.r$p[which(int.r$A1==1 & int.r$A2==1)],
-                                                       digits = 3),
-                                     " [",
-                                     round(int.r$p.lo[which(int.r$A1==1 & int.r$A2==1)],
-                                           digits = 3),
-                                     ",",
-                                     round(int.r$p.up[which(int.r$A1==1 & int.r$A2==1)],
-                                           digits = 3),
-                                     "]")
-  # RD
-  out.table["A1=0","RD.A2|A1"] <- paste0(round(int.r$RD.A2[which(int.r$A1==0 & int.r$A2==1)],
-                                               digits = 3),
-                                         " [",
-                                         round(int.r$RD.A2.lo[which(int.r$A1==0 & int.r$A2==1)],
-                                               digits = 3),
-                                         ",",
-                                         round(int.r$RD.A2.up[which(int.r$A1==0 & int.r$A2==1)],
-                                               digits = 3),
-                                         "]")
-  out.table["A1=1","RD.A2|A1"] <- paste0(round(int.r$RD.A2[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 3),
-                                         " [",
-                                         round(int.r$RD.A2.lo[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 3),
-                                         ",",
-                                         round(int.r$RD.A2.up[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 3),
-                                         "]")
-  out.table["RD.A1|A2","A2=0"] <- paste0(round(int.r$RD.A1[which(int.r$A1==1 & int.r$A2==0)],
-                                               digits = 3),
-                                         " [",
-                                         round(int.r$RD.A1.lo[which(int.r$A1==1 & int.r$A2==0)],
-                                               digits = 3),
-                                         ",",
-                                         round(int.r$RD.A1.up[which(int.r$A1==1 & int.r$A2==0)],
-                                               digits = 3),
-                                         "]")
-  out.table["RD.A1|A2","A2=1"] <- paste0(round(int.r$RD.A1[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 3),
-                                         " [",
-                                         round(int.r$RD.A1.lo[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 3),
-                                         ",",
-                                         round(int.r$RD.A1.up[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 3),
-                                         "]")
-
-  # RR
-  out.table["A1=0","RR.A2|A1"] <- paste0(round(int.r$RR.A2[which(int.r$A1==0 & int.r$A2==1)],
-                                               digits = 2),
-                                         " [",
-                                         round(int.r$RR.A2.lo[which(int.r$A1==0 & int.r$A2==1)],
-                                               digits = 2),
-                                         ",",
-                                         round(int.r$RR.A2.up[which(int.r$A1==0 & int.r$A2==1)],
-                                               digits = 2),
-                                         "]")
-  out.table["A1=1","RR.A2|A1"] <- paste0(round(int.r$RR.A2[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 2),
-                                         " [",
-                                         round(int.r$RR.A2.lo[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 2),
-                                         ",",
-                                         round(int.r$RR.A2.up[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 2),
-                                         "]")
-  out.table["RR.A1|A2","A2=0"] <- paste0(round(int.r$RR.A1[which(int.r$A1==1 & int.r$A2==0)],
-                                               digits = 2),
-                                         " [",
-                                         round(int.r$RR.A1.lo[which(int.r$A1==1 & int.r$A2==0)],
-                                               digits = 2),
-                                         ",",
-                                         round(int.r$RR.A1.up[which(int.r$A1==1 & int.r$A2==0)],
-                                               digits = 2),
-                                         "]")
-  out.table["RR.A1|A2","A2=1"] <- paste0(round(int.r$RR.A1[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 2),
-                                         " [",
-                                         round(int.r$RR.A1.lo[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 2),
-                                         ",",
-                                         round(int.r$RR.A1.up[which(int.r$A1==1 & int.r$A2==1)],
-                                               digits = 2),
-                                         "]")
-  interaction.effects <- c(paste0("additive Interaction = ",
-                                  round(int.r$a.INT[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 3),
-                                  " [",
-                                  round(int.r$a.INT.lo[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 3),
-                                  ";",
-                                  round(int.r$a.INT.up[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 3),
-                                  "]"),
-                           paste0("RERI = ",
-                                  round(int.r$RERI[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 2),
-                                  " [",
-                                  round(int.r$RERI.lo[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 2),
-                                  ";",
-                                  round(int.r$RERI.up[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 2),
-                                  "]"),
-                           paste0("multiplicative Interaction = ",
-                                  round(int.r$m.INT[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 2),
-                                  " [",
-                                  round(int.r$m.INT.lo[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 2),
-                                  ";",
-                                  round(int.r$m.INT.up[which(int.r$A1==1 & int.r$A2==1)],
-                                        digits = 2),
-                                  "]"))
-
-  return(list(out.table = out.table,
-              interaction.effects = interaction.effects))
-}
-
+Résultats obtenus en appliquant l'estimation par g-computation : 
+```{r t_tab_gcomp, echo=TRUE, message=FALSE, warning=FALSE}
+table_inter <- MargIntTmle::out.int.table(int.r = est.gcomp)
+knitr::kable(table_inter$out.table,) %>%
+  kable_classic() %>%
+  add_footnote(c(table_inter$interaction.effects[1], 
+                 table_inter$interaction.effects[2], 
+                 table_inter$interaction.effects[3]),
+               escape = TRUE)
 ```
 
 
-### TMLE {-}
-
-```{r t_tmle, echo=FALSE, warning=FALSE, message=FALSE}
-### TMLE
-table.tmle <- out.int.table(summary.tmle$int.r)
-table.tmle
-# library(kableExtra)
-# kbl(table.tmle$out.table,
-#     caption = "Interaction effects estimated by TMLE") %>%
-#   kable_classic() %>%
-#   footnote(general = table.tmle$interaction.effects)
-```
-
-
-### IPTW {-}
-
-```{r t_iptw, echo=FALSE, warning=FALSE, message=FALSE}
-
-### IPTW
-table.iptw <- out.int.table(summary.iptw$int.r)
-table.iptw
-# kbl(table.iptw$out.table,
-#     caption = "Interaction effects estimated by IPTW") %>%
-#   kable_classic() %>%
-#   footnote(general = table.iptw$interaction.effects)
-
-```
-
-
-### G-computation {-}
-
-```{r t_ggcomp, echo=FALSE, warning=FALSE, message=FALSE}
-### G-COMP
-table.gcomp <- out.int.table(summary.gcomp$int.r)
-table.gcomp
-# kbl(table.gcomp$out.table,
-#     caption = "Interaction effects estimated by G-computation") %>%
-#   kable_classic() %>%
-#   footnote(general = table.gcomp$interaction.effects)
-
-```
 
 
